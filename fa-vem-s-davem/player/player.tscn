@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://c7prghrr5jkpt"]
+
+[ext_resource type="Script" uid="uid://hmv3owho7b80" path="res://player/Player.cs" id="1_onrkg"]
+[ext_resource type="Script" uid="uid://4t1psbvag258" path="res://player/PlayerSelectionManager.cs" id="2_i3pqv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_88b43"]
+
+[sub_resource type="Gradient" id="Gradient_61od6"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.018867925)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6mfv6"]
+gradient = SubResource("Gradient_61od6")
+fill_to = Vector2(0.8117647, 0.7294118)
+
+[node name="Player" type="CharacterBody2D" unique_id=459191564]
+script = ExtResource("1_onrkg")
+
+[node name="PlayerCollisionShape" type="CollisionShape2D" parent="." unique_id=578516349]
+shape = SubResource("RectangleShape2D_88b43")
+
+[node name="PlayerSprite" type="Sprite2D" parent="." unique_id=839699954]
+texture = SubResource("GradientTexture2D_6mfv6")
+
+[node name="PlayerSelectionManager" type="Node2D" parent="." unique_id=57593723]
+script = ExtResource("2_i3pqv")
