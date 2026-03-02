@@ -16,6 +16,7 @@ public partial class PlayerSelectionManager : Node2D
 	public override void _Ready()
 	{
 		owner = GetParent<Player>();
+		selection = owner.Selection;
 	}
 
 	/// Handle input - drag select box

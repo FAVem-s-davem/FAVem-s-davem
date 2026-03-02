@@ -25,3 +25,5 @@ texture = SubResource("GradientTexture2D_6mfv6")
 
 [node name="PlayerSelectionManager" type="Node2D" parent="." unique_id=57593723]
 script = ExtResource("2_i3pqv")
+
+[node name="PlayerCamera" type="Camera2D" parent="." unique_id=33933599]
