@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 project/assembly_name="FAVem-s-davem"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot_vim/plugin.cfg")
+
 [input]
 
 move_up={

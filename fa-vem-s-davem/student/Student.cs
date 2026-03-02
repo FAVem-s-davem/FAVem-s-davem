@@ -43,6 +43,9 @@ public partial class Student : CharacterBody2D, Selectable
 					inputDirection *= 1.5f;
 				}
 			}
+			else if (dist < this.Player.StopRing) {
+				inputDirection = -1.5f * (1 - dist / this.Player.StopRing) * toPlayer.Normalized();
+			}
 		}
 
 		if (inputDirection != Vector2.Zero)
