@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://jteykkbnrbis"]
+
+[ext_resource type="Script" uid="uid://dslxbpt0pyqgx" path="res://map/MapObject.cs" id="1_cu8al"]
+
+[node name="MapObject" type="StaticBody2D" unique_id=802786608]
+script = ExtResource("1_cu8al")
