@@ -4,7 +4,7 @@ using System;
 public partial class Student : CharacterBody2D, Selectable
 {
 	[Export] public float MaxSpeed = 100f;
-	[Export] public float Acceleration = 500f;
+	[Export] public float Acceleration = 800f;
 	[Export] public float Friction = 400f;
 	
 	public Player Player { get; set; }
@@ -47,7 +47,6 @@ public partial class Student : CharacterBody2D, Selectable
 				inputDirection = -1.5f * (1 - dist / this.Player.StopRing) * toPlayer.Normalized();
 			}
 		}
-
 		if (inputDirection != Vector2.Zero)
 		{
 			// Accelerate toward target velocity
@@ -64,8 +63,17 @@ public partial class Student : CharacterBody2D, Selectable
 				Friction * (float)delta
 			);
 		}
-
 		MoveAndSlide();
+		
+		for (int i = 0; i < GetSlideCollisionCount(); i++)
+		{
+			var collision = GetSlideCollision(i);
+		
+			if (collision.GetCollider() is CharacterBody2D body)
+			{
+				body.Velocity += -collision.GetNormal() * 20;
+			}
+		}
 	}
 	
 	/// Select student - set player property, change color
