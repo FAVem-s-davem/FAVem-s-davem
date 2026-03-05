@@ -119,9 +119,9 @@ jobs:
       - name: Prepare Release Directory
         run: |
           mkdir -p release_artifacts
-          cp release/windows/* release_artifacts/
-          cp release/linux/* release_artifacts/
-          cp release/mac/* release_artifacts/
+          cp -r release/windows/* release_artifacts/
+          cp -r release/linux/* release_artifacts/
+          cp -r release/mac/* release_artifacts/
         env:
           RELEASE_DIR: release_artifacts
 
