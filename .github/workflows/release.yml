@@ -6,7 +6,7 @@ on:
 env:
   GODOT_VERSION: 4.6.1
   EXPORT_NAME: favem-s-davem
-  PROJECT_PATH: fa-vem-s-davem
+  PROJECT_PATH: src
 
 jobs:
   export-windows:
