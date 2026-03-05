@@ -125,7 +125,7 @@ jobs:
         env:
           RELEASE_DIR: release_artifacts
 
-        # Publish draft release using softprops/action-gh-release
+      # Publish draft release using softprops/action-gh-release
       - name: Publish Draft Release
         uses: softprops/action-gh-release@v2
         with:
