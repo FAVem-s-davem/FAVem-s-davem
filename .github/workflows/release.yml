@@ -39,7 +39,7 @@ jobs:
 
   export-linux:
     name: Linux Export
-    runs-on: ubuntu-24.04  # Use 24.04 with godot 4
+    runs-on: ubuntu-24.04
     container:
       image: barichello/godot-ci:mono-4.6.1
     steps:
@@ -50,6 +50,8 @@ jobs:
       - name: Setup
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates/
+          mkdir -v -p ~/.config/
+          mv /root/.config/godot ~/.config/godot
           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable.mono ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable.mono
       - name: Linux Build
         run: |
@@ -65,7 +67,7 @@ jobs:
 
   export-mac:
     name: Mac Export
-    runs-on: ubuntu-24.04  # Use 24.04 with godot 4
+    runs-on: ubuntu-24.04
     container:
       image: barichello/godot-ci:mono-4.6.1
     steps:
@@ -76,6 +78,8 @@ jobs:
       - name: Setup
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates/
+          mkdir -v -p ~/.config/
+          mv /root/.config/godot ~/.config/godot
           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable.mono ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable.mono
       - name: Mac Build
         run: |
@@ -93,10 +97,11 @@ jobs:
     name: Create Draft Release & Upload Artifacts
     needs: [export-windows, export-linux, export-mac]
     runs-on: ubuntu-24.04
+    permissions:
+      contents: write # IMPORTANT: Required to push the release to your repository
     steps:
       - uses: actions/checkout@v4
 
-      # Download all artifacts from previous jobs
       - name: Download Windows Artifact
         uses: actions/download-artifact@v4
         with:
@@ -115,7 +120,6 @@ jobs:
           name: mac
           path: release/mac
 
-      # Combine all artifacts into one directory
       - name: Prepare Release Directory
         run: |
           mkdir -p release_artifacts
@@ -125,7 +129,6 @@ jobs:
         env:
           RELEASE_DIR: release_artifacts
 
-      # Publish draft release using softprops/action-gh-release
       - name: Publish Draft Release
         uses: softprops/action-gh-release@v2
         with:
