@@ -1,0 +1,25 @@
+CompileFlags:
+  Add:
+    - -Wall
+    - -Wextra
+    - -Wpedantic
+    - -std=c++20
+    - -Igodot-cpp/include
+    - -Igodot-cpp/gen
+    - -Igodot-cpp/gen/include
+
+Diagnostics:
+  ClangTidy: true
+  UnusedIncludes: Strict
+
+Completion:
+  AllScopes: true
+
+InlayHints:
+  Enabled: true
+
+HeaderInsertion:
+  Enabled: true
+
+Index:
+  Background: Build
