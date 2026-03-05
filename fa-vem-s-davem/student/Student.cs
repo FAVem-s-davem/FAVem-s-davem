@@ -1,88 +1,62 @@
 using Godot;
 using System;
 
-public partial class Student : CharacterBody2D, Selectable
+public partial class Student : RigidBody2D, Selectable
 {
-	[Export] public float MaxSpeed = 100f;
-	[Export] public float Acceleration = 800f;
-	[Export] public float Friction = 400f;
-	
+	[Export] public float MaxSpeed = 200f;
+	[Export] public float Acceleration = 1000f;
+	[Export] public float Friction = 200f;
+
 	public Player Player { get; set; }
-	
+
 	/// Mark student as selectable
 	public override void _Ready()
 	{
 		AddToGroup("selectable_units");
 	}
-	
+
 	/// Handle movement according to player position
 	public override void _PhysicsProcess(double delta)
-	{		
+	{
 		Vector2 inputDirection = Vector2.Zero;
-		
-		/*
-			Player too far - deselect itself
-			Player too close - stop moving
-			Player in range - move towards player, speed up when player is getting away
-		*/
-		
-		if (this.Player != null) {
+
+		if (this.Player != null)
+		{
 			Vector2 toPlayer = this.Player.GlobalPosition - this.GlobalPosition;
-			
 			float dist = toPlayer.Length();
-			
+
 			if (dist > this.Player.DeselectRing)
 			{
-				this.Deselect();
+				Deselect();
 			}
 			else if (dist > this.Player.StopRing)
 			{
 				inputDirection = toPlayer.Normalized();
+
 				if (dist > this.Player.CatchUpRing)
-				{
 					inputDirection *= 1.5f;
-				}
 			}
-			else if (dist < this.Player.StopRing) {
+			else if (dist < this.Player.StopRing)
+			{
 				inputDirection = -1.5f * (1 - dist / this.Player.StopRing) * toPlayer.Normalized();
 			}
 		}
-		if (inputDirection != Vector2.Zero)
-		{
-			// Accelerate toward target velocity
-			Velocity = Velocity.MoveToward(
-				inputDirection * MaxSpeed,
-				Acceleration * (float)delta
-			);
-		}
-		else
-		{
-			// Apply friction when no input
-			Velocity = Velocity.MoveToward(
-				Vector2.Zero,
-				Friction * (float)delta
-			);
-		}
-		MoveAndSlide();
-		
-		for (int i = 0; i < GetSlideCollisionCount(); i++)
-		{
-			var collision = GetSlideCollision(i);
-		
-			if (collision.GetCollider() is CharacterBody2D body)
-			{
-				body.Velocity += -collision.GetNormal() * 20;
-			}
-		}
+
+		Vector2 targetVelocity = inputDirection * MaxSpeed;
+
+		LinearVelocity = LinearVelocity.MoveToward(
+			targetVelocity,
+			Acceleration * (float)delta
+		);
 	}
-	
+
 	/// Select student - set player property, change color
 	public void Select(Player player)
 	{
 		this.Player = player;
 		this.Highlight();
 	}
-	
+
 	/// Deselect student - remove itself from selection, set player to null, change color
 	public void Deselect()
 	{
@@ -90,7 +64,7 @@ public partial class Student : CharacterBody2D, Selectable
 		this.Player = null;
 		this.UnHighlight();
 	}
-	
+
 	private void Highlight()
 	{
 		var sprite = this.GetNodeOrNull<Sprite2D>("StudentSprite");
