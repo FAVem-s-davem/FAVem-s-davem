@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://byqnr01wr3hsk" path="res://student/Student.cs" id="1_8bc1h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2qqqv"]
-size = Vector2(64, 64)
+size = Vector2(32, 32)
 
 [sub_resource type="Gradient" id="Gradient_we1jl"]
 interpolation_mode = 1
@@ -12,10 +12,13 @@ colors = PackedColorArray(1, 1, 0.96862745, 0.23529412, 1, 1, 1, 0.3137255)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_bnlnp"]
 gradient = SubResource("Gradient_we1jl")
+width = 32
+height = 32
 fill_to = Vector2(0.0882353, 0.0882353)
 
-[node name="Student" type="CharacterBody2D" unique_id=612496056]
-scale = Vector2(0.5, 0.5)
+[node name="Student" type="RigidBody2D" unique_id=612496056]
+gravity_scale = 0.0
+lock_rotation = true
 script = ExtResource("1_8bc1h")
 
 [node name="StudentCollisionShape" type="CollisionShape2D" parent="." unique_id=1412744717]

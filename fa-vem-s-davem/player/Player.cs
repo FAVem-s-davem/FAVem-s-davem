@@ -1,10 +1,10 @@
 using Godot;
 
-public partial class Player : CharacterBody2D
+public partial class Player : RigidBody2D
 {
 	[Export] public float MaxSpeed = 300f;
-	[Export] public float Acceleration = 800f;
-	[Export] public float Friction = 600f;
+	[Export] public float Acceleration = 500f;
+	[Export] public float Friction = 400f;
 
 	[Export] public float DeselectRing = 300f;
 	[Export] public float CatchUpRing = 150f;
@@ -22,7 +22,6 @@ public partial class Player : CharacterBody2D
 	/// Movement handler
 	public override void _PhysicsProcess(double delta)
 	{
-		// Get direction
 		Vector2 inputDirection = Input.GetVector(
 			"move_left",
 			"move_right",
@@ -30,23 +29,12 @@ public partial class Player : CharacterBody2D
             "move_down"
 		);
 
-		// Move according to direction
-		if (inputDirection != Vector2.Zero)
-		{
-			Velocity = Velocity.MoveToward(
-				inputDirection * MaxSpeed,
-				Acceleration * (float)delta
-			);
-		}
-		else
-		{
-			Velocity = Velocity.MoveToward(
-				Vector2.Zero,
-				Friction * (float)delta
-			);
-		}
+		Vector2 targetVelocity = inputDirection * MaxSpeed;
 
-		MoveAndSlide();
+		LinearVelocity = LinearVelocity.MoveToward(
+			targetVelocity,
+			Acceleration * (float)delta
+		);
 	}
 
 	/// Draw player - currently draws selection rings around the player
