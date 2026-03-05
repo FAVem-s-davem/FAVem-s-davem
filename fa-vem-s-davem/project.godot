@@ -21,7 +21,7 @@ project/assembly_name="FAVem-s-davem"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot_vim/plugin.cfg")
+enabled=PackedStringArray()
 
 [input]
 
@@ -53,3 +53,4 @@ move_right={
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+textures/vram_compression/import_etc2_astc=true
