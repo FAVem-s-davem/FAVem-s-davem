@@ -11,24 +11,26 @@ env:
 jobs:
   export-windows:
     name: Windows Export
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-24.04  # Use 24.04 with godot 4
     container:
       image: barichello/godot-ci:mono-4.6.1
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
           lfs: true
-      - name: Setup Godot
+      - name: Setup
         run: |
-          mkdir -p ~/.local/share/godot/export_templates/
-          mkdir -p ~/.config/
+          mkdir -v -p ~/.local/share/godot/export_templates/
+          mkdir -v -p ~/.config/
           mv /root/.config/godot ~/.config/godot
           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable.mono ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable.mono
-      - name: Build Windows
+      - name: Windows Build
         run: |
-          mkdir -p build/windows
+          mkdir -v -p build/windows
+          EXPORT_DIR="$(readlink -f build)"
           cd $PROJECT_PATH
-          godot --headless --verbose --export-release "Windows Desktop" "../../build/windows/$EXPORT_NAME.exe"
+          godot --headless --verbose --export-release "Windows Desktop" "$EXPORT_DIR/windows/$EXPORT_NAME.exe"
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
@@ -37,22 +39,24 @@ jobs:
 
   export-linux:
     name: Linux Export
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-24.04  # Use 24.04 with godot 4
     container:
       image: barichello/godot-ci:mono-4.6.1
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
           lfs: true
-      - name: Setup Godot
+      - name: Setup
         run: |
-          mkdir -p ~/.local/share/godot/export_templates/
+          mkdir -v -p ~/.local/share/godot/export_templates/
           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable.mono ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable.mono
-      - name: Build Linux
+      - name: Linux Build
         run: |
-          mkdir -p build/linux
+          mkdir -v -p build/linux
+          EXPORT_DIR="$(readlink -f build)"
           cd $PROJECT_PATH
-          godot --headless --verbose --export-release "Linux/X11" "../../build/linux/$EXPORT_NAME.x86_64"
+          godot --headless --verbose --export-release "Linux/X11" "$EXPORT_DIR/linux/$EXPORT_NAME.x86_64"
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
@@ -61,22 +65,24 @@ jobs:
 
   export-mac:
     name: Mac Export
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-24.04  # Use 24.04 with godot 4
     container:
       image: barichello/godot-ci:mono-4.6.1
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
           lfs: true
-      - name: Setup Godot
+      - name: Setup
         run: |
-          mkdir -p ~/.local/share/godot/export_templates/
+          mkdir -v -p ~/.local/share/godot/export_templates/
           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable.mono ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable.mono
-      - name: Build Mac
+      - name: Mac Build
         run: |
-          mkdir -p build/mac
+          mkdir -v -p build/mac
+          EXPORT_DIR="$(readlink -f build)"
           cd $PROJECT_PATH
-          godot --headless --verbose --export-release "macOS" "../../build/mac/$EXPORT_NAME.zip"
+          godot --headless --verbose --export-release "macOS" "$EXPORT_DIR/mac/$EXPORT_NAME.zip"
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
