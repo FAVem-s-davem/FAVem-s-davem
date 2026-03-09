@@ -1,7 +1,8 @@
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/godot.hpp>
 
-#include "player.hpp"
+#include "player/Player.hpp"
+#include "student/Student.hpp"
 
 using namespace godot;
 
@@ -11,6 +12,7 @@ void initialize_player_module(ModuleInitializationLevel level) {
     }
 
     ClassDB::register_class<Player>();
+    ClassDB::register_class<Student>();
 }
 
 void uninitialize_player_module(ModuleInitializationLevel level) {

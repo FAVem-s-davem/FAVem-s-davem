@@ -1,6 +1,8 @@
+# pyright: reportUndefinedVariable=false
+
 env = SConscript("godot-cpp/SConstruct")
 
-sources = Glob("src/*.cpp")
+sources = Glob("src/*.cpp") + Glob("src/*/*.cpp") + Glob("src/*/*/*.cpp")
 
 library = env.SharedLibrary(
     target="bin/player",
