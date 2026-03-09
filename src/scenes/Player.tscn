@@ -21,3 +21,5 @@ shape = SubResource("RectangleShape2D_porid")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1992893616]
 texture = SubResource("GradientTexture2D_5b12s")
+
+[node name="PlayerSelectionManager" type="PlayerSelectionManager" parent="." unique_id=1135093554]

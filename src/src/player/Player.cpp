@@ -1,4 +1,5 @@
 #include "Player.hpp"
+#include "SelectionManager.hpp"
 
 #include <godot_cpp/classes/input.hpp>
 #include <godot_cpp/core/class_db.hpp>
@@ -22,7 +23,7 @@ void Player::_bind_methods() {
 }
 
 void Player::_enter_tree() {
-    // SelectionManager creation would go here if implemented in C++
+    selection = new SelectionManager(this);
     set_physics_process(true);
 }
 
@@ -76,3 +77,5 @@ float Player::get_friction() const { return friction; }
 float Player::get_deselect_ring() { return deselect_ring; }
 float Player::get_catchup_ring() { return catchup_ring; }
 float Player::get_stop_ring() { return stop_ring; }
+
+SelectionManager *Player::get_selection() { return selection; }

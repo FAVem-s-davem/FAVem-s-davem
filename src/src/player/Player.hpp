@@ -6,6 +6,8 @@
 
 using namespace godot;
 
+class SelectionManager; // forward declaration
+
 class Player : public RigidBody2D {
     GDCLASS(Player, RigidBody2D);
 
@@ -17,6 +19,8 @@ class Player : public RigidBody2D {
     float deselect_ring = 300.0f;
     float catchup_ring = 150.0f;
     float stop_ring = 100.0f;
+
+    SelectionManager *selection = nullptr;
 
   protected:
     static void _bind_methods();
@@ -30,7 +34,6 @@ class Player : public RigidBody2D {
     void _draw() override;
     void _ready() override;
 
-    // getters/setters for exported variables
     void set_max_speed(float v);
     float get_max_speed() const;
 
@@ -43,4 +46,6 @@ class Player : public RigidBody2D {
     float get_deselect_ring();
     float get_catchup_ring();
     float get_stop_ring();
+
+    SelectionManager *get_selection();
 };

@@ -1,5 +1,7 @@
 #include "Student.hpp"
 
+#include "../player/SelectionManager.hpp"
+
 #include <godot_cpp/classes/scene_tree.hpp>
 #include <godot_cpp/variant/utility_functions.hpp>
 
@@ -58,7 +60,7 @@ void Student::Select(Player *p) {
 void Student::Deselect() {
 
     if (player != nullptr) {
-        // player->get_selection()->Deselect(this);
+        player->get_selection()->Deselect(this);
         player = nullptr;
     }
 
@@ -67,7 +69,7 @@ void Student::Deselect() {
 
 void Student::Highlight() {
 
-    auto *sprite = Object::cast_to<Sprite2D>(get_node_or_null("StudentSprite"));
+    auto *sprite = Object::cast_to<Sprite2D>(get_node_or_null("Sprite2D"));
 
     if (sprite != nullptr) {
         sprite->set_modulate(Color(1, 0.6, 0.6));
@@ -76,7 +78,7 @@ void Student::Highlight() {
 
 void Student::UnHighlight() {
 
-    auto *sprite = Object::cast_to<Sprite2D>(get_node_or_null("StudentSprite"));
+    auto *sprite = Object::cast_to<Sprite2D>(get_node_or_null("Sprite2D"));
 
     if (sprite != nullptr) {
         sprite->set_modulate(Color(1, 1, 1));
