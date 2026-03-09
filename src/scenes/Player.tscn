@@ -14,7 +14,7 @@ gradient = SubResource("Gradient_laulw")
 mass = 4.0
 gravity_scale = 0.0
 lock_rotation = true
-linear_velocity = Vector2(0, 33.333336)
+linear_velocity = Vector2(0, 16.666668)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2102845433]
 shape = SubResource("RectangleShape2D_porid")
@@ -23,3 +23,5 @@ shape = SubResource("RectangleShape2D_porid")
 texture = SubResource("GradientTexture2D_5b12s")
 
 [node name="PlayerSelectionManager" type="PlayerSelectionManager" parent="." unique_id=1135093554]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2046817666]

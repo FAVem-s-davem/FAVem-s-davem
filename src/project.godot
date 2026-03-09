@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="FAVem-s-davem"
-run/main_scene="uid://da5tg41gp4wt6"
+run/main_scene="uid://cqgga0p2qjpw1"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 

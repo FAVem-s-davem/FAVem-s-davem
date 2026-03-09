@@ -1,6 +1,8 @@
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/godot.hpp>
 
+#include "gameScene/GameScene.hpp"
+#include "map/MapObject.hpp"
 #include "player/Player.hpp"
 #include "player/PlayerSelectionManager.hpp"
 #include "player/SelectionManager.hpp"
@@ -16,6 +18,8 @@ void initialize_player_module(ModuleInitializationLevel level) {
     ClassDB::register_class<Player>();
     ClassDB::register_class<PlayerSelectionManager>();
     ClassDB::register_class<Student>();
+    ClassDB::register_class<MapObject>();
+    ClassDB::register_class<GameScene>();
 }
 
 void uninitialize_player_module(ModuleInitializationLevel level) {
