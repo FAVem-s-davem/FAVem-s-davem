@@ -12,8 +12,8 @@ class Player : public RigidBody2D {
     GDCLASS(Player, RigidBody2D);
 
   private:
-    float max_speed = 300.0f;
-    float acceleration = 500.0f;
+    float max_speed = 400.0f;
+    float acceleration = 700.0f;
     float friction = 400.0f;
 
     float deselect_ring = 300.0f;

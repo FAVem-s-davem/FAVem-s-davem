@@ -29,8 +29,8 @@ class Student : public RigidBody2D, public ISelectable {
     Player *player = nullptr;
 
     float max_speed = 200.0f;
-    float acceleration = 1000.0f;
-    float friction = 200.0f;
+    float acceleration = 500.0f;
+    float friction = 100.0f;
 
     void Highlight();
     void UnHighlight();
