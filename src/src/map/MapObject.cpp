@@ -10,24 +10,25 @@ void MapObject::_bind_methods() {
     ClassDB::bind_method(D_METHOD("Init", "polygon"), &MapObject::Init);
 }
 
-void MapObject::Init(const PackedVector2Array &poly) { polygon = poly; }
+void MapObject::Init(const String &poly) {
+    polygon = Polygon::from_svg_polygon(poly.utf8().get_data());
+}
 
 void MapObject::_ready() {
-    if (polygon.is_empty())
-        return;
 
     create_walls();
     queue_redraw();
 }
 
 void MapObject::create_walls() {
+    auto vertices = polygon.get_vertices();
 
-    int size = polygon.size();
+    int size = vertices.size();
 
     for (int i = 0; i < size; i++) {
 
-        Vector2 a = polygon[i];
-        Vector2 b = polygon[(i + 1) % size];
+        Vector2 a = vertices[i];
+        Vector2 b = vertices[(i + 1) % size];
 
         SegmentShape2D *shape = memnew(SegmentShape2D);
         shape->set_a(a);
@@ -40,15 +41,4 @@ void MapObject::create_walls() {
     }
 }
 
-void MapObject::_draw() {
-
-    if (polygon.is_empty())
-        return;
-
-    int size = polygon.size();
-
-    for (int i = 0; i < size; i++) {
-
-        draw_line(polygon[i], polygon[(i + 1) % size], Color(1, 0, 0), 5);
-    }
-}
+void MapObject::_draw() { polygon.draw(this); }

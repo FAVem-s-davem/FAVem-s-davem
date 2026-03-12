@@ -3,6 +3,8 @@
 #include <godot_cpp/classes/node2d.hpp>
 #include <godot_cpp/classes/packed_scene.hpp>
 #include <godot_cpp/variant/packed_vector2_array.hpp>
+#include <string>
+#include <vector>
 
 using namespace godot;
 
@@ -23,6 +25,7 @@ class GameScene : public Node2D {
   private:
     void spawn_player();
     void spawn_students(int count);
+    void spawn_map();
 
   public:
     void set_student_scene(const Ref<PackedScene> &scene);
