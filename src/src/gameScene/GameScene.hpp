@@ -23,8 +23,9 @@ class GameScene : public Node2D {
   private:
     void spawn_player();
     void spawn_students(int count);
-
+ 
   public:
+    void _input(const Ref<InputEvent> &event) override;
     void set_student_scene(const Ref<PackedScene> &scene);
     Ref<PackedScene> get_student_scene() const;
 

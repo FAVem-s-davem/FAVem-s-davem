@@ -10,3 +10,4 @@
 StudentScene = ExtResource("1_sugp2")
 PlayerScene = ExtResource("2_jyhfs")
 MapScene = ExtResource("3_tbgi4")
+position = Vector2(54, -158)

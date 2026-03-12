@@ -7,6 +7,8 @@
 
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/core/object.hpp>
+#include <godot_cpp/classes/input.hpp>
+#include <godot_cpp/classes/input_event_key.hpp>
 
 using namespace godot;
 
@@ -32,6 +34,18 @@ void GameScene::_bind_methods() {
     ADD_PROPERTY(
         PropertyInfo(Variant::OBJECT, "MapScene", PROPERTY_HINT_RESOURCE_TYPE, "PackedScene"),
         "set_map_scene", "get_map_scene");
+}
+
+void GameScene::_input(const Ref<InputEvent> &event){
+
+    Ref<InputEventKey> key_event = event;
+    if (key_event.is_valid() && key_event->is_pressed() && !key_event->is_echo() && key_event->get_keycode() == KEY_G) {
+        Node *node = student_scene->instantiate();
+        Student *student = Object::cast_to<Student>(node);
+
+        student->set_global_position(get_global_mouse_position());
+        add_child(student);
+    }
 }
 
 void GameScene::_ready() {
