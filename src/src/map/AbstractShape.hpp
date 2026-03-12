@@ -1,0 +1,3 @@
+class AbstractShape {
+  public:
+};
