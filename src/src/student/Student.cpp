@@ -2,10 +2,13 @@
 
 #include "../player/SelectionManager.hpp"
 
-#include <godot_cpp/classes/scene_tree.hpp>
-#include <godot_cpp/variant/utility_functions.hpp>
-
+#include <algorithm> // for std::find
+#include <godot_cpp/classes/dir_access.hpp>
 #include <godot_cpp/classes/kinematic_collision2d.hpp>
+#include <godot_cpp/classes/resource_loader.hpp>
+#include <godot_cpp/classes/scene_tree.hpp>
+#include <godot_cpp/classes/texture2d.hpp>
+#include <godot_cpp/variant/utility_functions.hpp>
 
 using namespace godot;
 
@@ -19,9 +22,54 @@ void Student::_bind_methods() {
     ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "max_speed"), "set_max_speed", "get_max_speed");
 }
 
-void Student::_ready() { 
+void Student::_ready() {
     set_motion_mode(MOTION_MODE_FLOATING);
-    add_to_group("selectable_units"); 
+    add_to_group("selectable_units");
+
+    // Assign random student icon, this whole block is made by ai to just scan the directory
+    // and assign a random icon to the student, this will be done differently in future
+    // and the student objects will be marked with what type they are etc
+    {
+
+        Ref<DirAccess> dir = DirAccess::open("res://assets/student_icons/");
+        if (dir != nullptr) {
+            dir->list_dir_begin();
+            String file_name = dir->get_next();
+            std::vector<String> valid_icons;
+
+            while (file_name != "") {
+                // We only look for standard imported texture ends, usually .png or .png.import in
+                // run-time
+                if (file_name.ends_with(".png") || file_name.ends_with(".png.import")) {
+                    String clean_name = file_name.replace(".import", "");
+                    if (std::find(valid_icons.begin(), valid_icons.end(), clean_name) ==
+                        valid_icons.end()) {
+                        valid_icons.push_back(clean_name);
+                    }
+                }
+                file_name = dir->get_next();
+            }
+
+            if (!valid_icons.empty()) {
+                int random_index = UtilityFunctions::randi() % valid_icons.size();
+                String chosen_file = valid_icons[random_index];
+
+                Ref<Texture2D> tex = ResourceLoader::get_singleton()->load(
+                    "res://assets/student_icons/" + chosen_file);
+
+                auto *sprite = Object::cast_to<Sprite2D>(get_node_or_null("Sprite2D"));
+                if (sprite != nullptr && tex.is_valid()) {
+                    sprite->set_texture(tex);
+
+                    // Assuming icons are larger, we scale them down to roughly match the old 32x32
+                    // gradient
+                    float scale_factor =
+                        32.0f / (float)std::max(tex->get_width(), tex->get_height());
+                    sprite->set_scale(Vector2(scale_factor, scale_factor));
+                }
+            }
+        }
+    }
 }
 
 void Student::_physics_process(double delta) {
