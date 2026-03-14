@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://btj2uvic5xmbn"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_porid"]
-size = Vector2(64, 64)
+[sub_resource type="CircleShape2D" id="CircleShape2D_5q5h1"]
+radius = 32.0
 
 [sub_resource type="Gradient" id="Gradient_laulw"]
 offsets = PackedFloat32Array(0)
@@ -11,12 +11,9 @@ colors = PackedColorArray(1, 1, 1, 1)
 gradient = SubResource("Gradient_laulw")
 
 [node name="Player" type="Player" unique_id=170738930]
-mass = 4.0
-gravity_scale = 0.0
-lock_rotation = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2102845433]
-shape = SubResource("RectangleShape2D_porid")
+shape = SubResource("CircleShape2D_5q5h1")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1992893616]
 texture = SubResource("GradientTexture2D_5b12s")

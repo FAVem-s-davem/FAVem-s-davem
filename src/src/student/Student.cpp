@@ -5,6 +5,8 @@
 #include <godot_cpp/classes/scene_tree.hpp>
 #include <godot_cpp/variant/utility_functions.hpp>
 
+#include <godot_cpp/classes/kinematic_collision2d.hpp>
+
 using namespace godot;
 
 Student::Student() {}
@@ -17,7 +19,10 @@ void Student::_bind_methods() {
     ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "max_speed"), "set_max_speed", "get_max_speed");
 }
 
-void Student::_ready() { add_to_group("selectable_units"); }
+void Student::_ready() { 
+    set_motion_mode(MOTION_MODE_FLOATING);
+    add_to_group("selectable_units"); 
+}
 
 void Student::_physics_process(double delta) {
 
@@ -45,11 +50,24 @@ void Student::_physics_process(double delta) {
 
     Vector2 target_velocity = input_direction * max_speed;
 
-    Vector2 velocity = get_linear_velocity();
+    Vector2 velocity = get_velocity();
 
     velocity = velocity.move_toward(target_velocity, acceleration * (float)delta);
 
-    set_linear_velocity(velocity);
+    set_velocity(velocity);
+    move_and_slide();
+
+    for (int i = 0; i < get_slide_collision_count(); i++) {
+        Ref<KinematicCollision2D> collision = get_slide_collision(i);
+        CharacterBody2D *collider = Object::cast_to<CharacterBody2D>(collision->get_collider());
+
+        if (collider != nullptr && collider->is_in_group("selectable_units")) {
+            Vector2 push_dir = -collision->get_normal();
+            // Softer push for students pushing other bodies
+            Vector2 their_velocity = collider->get_velocity();
+            collider->set_velocity(their_velocity.lerp(push_dir * 100.0f, 0.1f));
+        }
+    }
 }
 
 void Student::Select(Player *p) {

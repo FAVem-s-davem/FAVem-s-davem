@@ -3,14 +3,14 @@
 #include "../ISelectable.hpp"
 #include "../player/Player.hpp"
 
-#include <godot_cpp/classes/rigid_body2d.hpp>
+#include <godot_cpp/classes/character_body2d.hpp>
 #include <godot_cpp/classes/sprite2d.hpp>
 #include <godot_cpp/core/class_db.hpp>
 
 using namespace godot;
 
-class Student : public RigidBody2D, public ISelectable {
-    GDCLASS(Student, RigidBody2D);
+class Student : public CharacterBody2D, public ISelectable {
+    GDCLASS(Student, CharacterBody2D);
 
   public:
     Student();
@@ -36,6 +36,7 @@ class Student : public RigidBody2D, public ISelectable {
     void UnHighlight();
 
   public:
+
     void set_max_speed(float v);
     float get_max_speed() const;
 

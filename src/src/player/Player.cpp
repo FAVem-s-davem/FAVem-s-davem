@@ -6,6 +6,8 @@
 #include <godot_cpp/variant/utility_functions.hpp>
 #include <godot_cpp/variant/vector2.hpp>
 
+#include <godot_cpp/classes/kinematic_collision2d.hpp>
+
 using namespace godot;
 
 Player::Player() {}
@@ -28,6 +30,7 @@ void Player::_enter_tree() {
 }
 
 void Player::_ready() {
+    set_motion_mode(MOTION_MODE_FLOATING);
     set_physics_process(true);
     UtilityFunctions::print("Player ready");
 }
@@ -49,11 +52,24 @@ void Player::_physics_process(double delta) {
     dir = dir.normalized();
 
     Vector2 target_velocity = dir * max_speed;
-    Vector2 velocity = get_linear_velocity();
+    Vector2 velocity = get_velocity();
 
     velocity = velocity.move_toward(target_velocity, acceleration * (float)delta);
 
-    set_linear_velocity(velocity);
+    set_velocity(velocity);
+    move_and_slide();
+
+    for (int i = 0; i < get_slide_collision_count(); i++) {
+        Ref<KinematicCollision2D> collision = get_slide_collision(i);
+        CharacterBody2D *collider = Object::cast_to<CharacterBody2D>(collision->get_collider());
+
+        if (collider != nullptr && collider->is_in_group("selectable_units")) {
+            Vector2 push_dir = -collision->get_normal();
+            // Give them a gentle, bounded push in the direction instead of continuously adding force
+            Vector2 their_velocity = collider->get_velocity();
+            collider->set_velocity(their_velocity.lerp(push_dir * 200.0f, 0.2f));
+        }
+    }
 }
 
 void Player::_draw() {

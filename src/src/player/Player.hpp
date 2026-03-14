@@ -1,15 +1,15 @@
 #pragma once
 
 #include <godot_cpp/classes/input.hpp>
-#include <godot_cpp/classes/rigid_body2d.hpp>
+#include <godot_cpp/classes/character_body2d.hpp>
 #include <godot_cpp/variant/vector2.hpp>
 
 using namespace godot;
 
 class SelectionManager; // forward declaration
 
-class Player : public RigidBody2D {
-    GDCLASS(Player, RigidBody2D);
+class Player : public CharacterBody2D {
+    GDCLASS(Player, CharacterBody2D);
 
   private:
     float max_speed = 400.0f;
