@@ -8,84 +8,119 @@ on:
 env:
   GODOT_VERSION: 4.6
   EXPORT_NAME: favem-s-davem
+  PROJECT_PATH: ./src
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
+  export-windows:
+    name: Windows Export
+    runs-on: ubuntu-24.04  # Use 24.04 with godot 4
     container:
       image: barichello/godot-ci:4.6
-
-    strategy:
-      matrix:
-        platform: [windows, linux, macos, web]
-
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Prepare build directories
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Setup
         run: |
-          mkdir -p build/windows
-          mkdir -p build/linux
-          mkdir -p build/macos
-          mkdir -p build/web
-
-      - name: Export project
+          mkdir -v -p ~/.local/share/godot/export_templates/
+          mkdir -v -p ~/.config/
+          mv /root/.config/godot ~/.config/godot
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+      - name: Windows Build
         run: |
-          case "${{ matrix.platform }}" in
-            windows)
-              godot --headless --export-release "Windows Desktop" build/windows/${EXPORT_NAME}.exe
-              ;;
-            linux)
-              godot --headless --export-release "Linux" build/linux/${EXPORT_NAME}.x86_64
-              ;;
-            macos)
-              godot --headless --export-release "macOS" build/macos/${EXPORT_NAME}.app
-              ;;
-            web)
-              godot --headless --export-release "Web" build/web/index.html
-              ;;
-          esac
-
-      - name: Zip build
-        run: |
-          cd build/${{ matrix.platform }}
-          zip -r ../${{ matrix.platform }}.zip .
-
-      - name: Upload artifacts
+          mkdir -v -p build/windows
+          EXPORT_DIR="$(readlink -f build)"
+          cd $PROJECT_PATH
+          godot --headless --verbose --export-release "Windows Desktop" "$EXPORT_DIR/windows/$EXPORT_NAME.exe"
+      - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.platform }}
-          path: |
-            build/${{ matrix.platform }}
-            build/${{ matrix.platform }}.zip
+          name: windows
+          path: build/windows
 
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-
+  export-linux:
+    name: Linux Export
+    runs-on: ubuntu-24.04  # Use 24.04 with godot 4
+    container:
+      image: barichello/godot-ci:4.6
     steps:
-      - name: Download artifacts
-        uses: actions/download-artifact@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          path: build
-
-      - name: Create Draft Release
-        uses: softprops/action-gh-release@v2
+          lfs: true
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/export_templates/
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+      - name: Linux Build
+        run: |
+          mkdir -v -p build/linux
+          EXPORT_DIR="$(readlink -f build)"
+          cd $PROJECT_PATH
+          godot --headless --verbose --export-release "Linux" "$EXPORT_DIR/linux/$EXPORT_NAME.x86_64"
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
         with:
-          draft: true
-          files: build/**/*
+          name: linux
+          path: build/linux
 
-      - name: Install Butler
+  export-web:
+    name: Web Export
+    runs-on: ubuntu-24.04  # Use 24.04 with godot 4
+    container:
+      image: barichello/godot-ci:4.6
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Setup
         run: |
-          curl -L https://broth.itch.ovh/butler/linux-amd64/head/butler -o butler
-          chmod +x butler
+          mkdir -v -p ~/.local/share/godot/export_templates/
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+      - name: Web Build
+        run: |
+          mkdir -v -p build/web
+          EXPORT_DIR="$(readlink -f build)"
+          cd $PROJECT_PATH
+          godot --headless --verbose --export-release "Web" "$EXPORT_DIR/web/index.html"
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: web
+          path: build/web
+      - name: Install rsync 📚
+        run: |
+          apt-get update && apt-get install -y rsync
+      - name: Deploy to GitHub Pages 🚀
+        uses: JamesIves/github-pages-deploy-action@releases/v4
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: build/web # The folder the action should deploy.
 
-      - name: Upload to itch.io
-        env:
-          BUTLER_API_KEY: ${{ secrets.ITCHIO_TOKEN }}
+  export-mac:
+    name: Mac Export
+    runs-on: ubuntu-24.04  # Use 24.04 with godot 4
+    container:
+      image: barichello/godot-ci:4.6
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Setup
         run: |
-          ./butler push build/windows favem-s-davem/favem-s-davem:windows
-          ./butler push build/linux favem-s-davem/favem-s-davem:linux
-          ./butler push build/macos favem-s-davem/favem-s-davem:mac
-          ./butler push build/web favem-s-davem/favem-s-davem:web
+          mkdir -v -p ~/.local/share/godot/export_templates/
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+      - name: Mac Build
+        run: |
+          mkdir -v -p build/mac
+          EXPORT_DIR="$(readlink -f build)"
+          cd $PROJECT_PATH
+          godot --headless --verbose --export-release "macOS" "$EXPORT_DIR/mac/$EXPORT_NAME.zip"
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: mac
+          path: build/mac
