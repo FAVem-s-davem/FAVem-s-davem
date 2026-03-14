@@ -1,0 +1,81 @@
+name: Build & Export
+
+on:
+  push:
+    tags:
+      - "*"
+
+env:
+  GODOT_VERSION: 4.6
+  EXPORT_NAME: favem-s-davem
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    container:
+      image: barichello/godot-ci:${{ env.GODOT_VERSION }}
+
+    strategy:
+      matrix:
+        platform: [windows, linux, macos, web]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create build dir
+        run: |
+          case "${{ matrix.platform }}" in
+            windows)
+              godot --headless --export-release "Windows Desktop" build/windows/${EXPORT_NAME}.exe
+              ;;
+            linux)
+              godot --headless --export-release "Linux" build/linux/${EXPORT_NAME}.x86_64
+              ;;
+            macos)
+              godot --headless --export-release "macOS" build/macos/${EXPORT_NAME}.app
+              ;;
+            web)
+              godot --headless --export-release "Web" build/web/index.html
+              ;;
+          esac
+
+      - name: Zip build
+        run: |
+          cd build/${{ matrix.platform }}
+          zip -r ../${{ matrix.platform }}.zip .
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.platform }}
+          path: build/${{ matrix.platform }}
+                build/${{ matrix.platform }}.zip
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: build
+
+      - name: Create Draft Release
+        uses: softprops/action-gh-release@v2
+        with:
+          draft: true
+          files: build/**/*
+
+      - name: Install Butler
+        run: |
+          curl -L https://broth.itch.ovh/butler/linux-amd64/head/butler -o butler
+          chmod +x butler
+
+      - name: Upload to itch.io
+        env:
+          BUTLER_API_KEY: ${{ secrets.ITCHIO_TOKEN }}
+        run: |
+          ./butler push build/windows favem-s-davem/favem-s-davem:windows
+          ./butler push build/linux favem-s-davem/favem-s-davem:linux
+          ./butler push build/macos favem-s-davem/favem-s-davem:mac
+          ./butler push build/web favem-s-davem/favem-s-davem:web
