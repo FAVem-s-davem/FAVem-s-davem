@@ -8,7 +8,6 @@
    version="1.1"
    id="svg1"
    inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
-   sodipodi:docname="inf_01.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -25,9 +24,9 @@
      inkscape:document-units="mm"
      inkscape:clip-to-page="false"
      showguides="false"
-     inkscape:zoom="9.0083194"
-     inkscape:cx="36.022257"
-     inkscape:cy="43.903861"
+     inkscape:zoom="12.739687"
+     inkscape:cx="37.795276"
+     inkscape:cy="36.303873"
      inkscape:window-width="2057"
      inkscape:window-height="1214"
      inkscape:window-x="0"
@@ -41,7 +40,7 @@
      inkscape:groupmode="layer"
      id="layer1">
     <rect
-       style="fill:#ffcc00;stroke-width:0.464384"
+       style="fill:#00aa00;stroke-width:0.464384"
        id="rect1"
        width="20"
        height="20"
@@ -49,16 +48,12 @@
        y="5.5511151e-16"
        rx="0"
        ry="0" />
-    <text
-       xml:space="preserve"
-       style="font-size:15.875px;writing-mode:lr-tb;direction:ltr;fill:#000000;stroke-width:1.32291"
-       x="1.8402655"
-       y="14.413249"
-       id="text1"><tspan
-         sodipodi:role="line"
-         style="stroke-width:1.32291;fill:#000000"
-         x="1.8402655"
-         y="14.413249"
-         id="tspan2">{;}</tspan></text>
+    <rect
+       style="fill:#00aa00;stroke:#005500;stroke-width:1.064;stroke-dasharray:none"
+       id="rect2"
+       width="11.736423"
+       height="11.736423"
+       x="4.1317887"
+       y="4.1317887" />
   </g>
 </svg>

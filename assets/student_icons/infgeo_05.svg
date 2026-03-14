@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="20mm"
+   height="20mm"
+   viewBox="0 0 20 20"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
+   sodipodi:docname="infgeo_04.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="true"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     inkscape:clip-to-page="false"
+     showguides="false"
+     inkscape:zoom="11.313709"
+     inkscape:cx="36.371805"
+     inkscape:cy="38.846679"
+     inkscape:window-width="2057"
+     inkscape:window-height="1214"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0.38713733 : 13.930933 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="18.034533 : 16.581335 : 1"
+       inkscape:persp3d-origin="10 : 6.6666667 : 1"
+       id="perspective5" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="display:inline;fill:#00d400;stroke:#00d400;stroke-width:0;stroke-dasharray:none"
+       id="rect32"
+       width="20"
+       height="20"
+       x="6.3837824e-16"
+       y="-1.9058829e-16" />
+    <circle
+       style="fill:#ffcc00;stroke-width:0"
+       id="path1"
+       cx="9.9613428"
+       cy="6.9833622"
+       r="4.39252" />
+    <circle
+       style="fill:#00d400;stroke-width:0"
+       id="path3"
+       cx="9.974164"
+       cy="6.7234988"
+       r="1.8124214" />
+    <path
+       style="fill:none;stroke-width:0.5;stroke-dasharray:none;stroke:#008000"
+       d="m 0,17.796809 c 1.3797789,-1.590253 1.9176588,-2.970032 3.5079125,-3.203893 1.5902537,-0.233861 3.7219389,2.172243 6.4797209,1.191359 2.7577816,-0.980884 2.3368326,-3.062246 4.6286686,-3.459809 2.291836,-0.397564 3.203894,0.748355 3.484526,1.894273 C 18.381461,15.364657 20,20 20,20 v 0 0"
+       id="path4" />
+    <path
+       id="path2"
+       style="fill:#ffcc00;stroke-width:0"
+       inkscape:transform-center-x="0.0030057428"
+       inkscape:transform-center-y="1.0709725"
+       transform="translate(-0.01837744,1.4899731)"
+       d="M 10.006011,14.294302 6.2780197,7.8580549 13.686673,7.849813 Z"
+       sodipodi:nodetypes="cccc" />
+  </g>
+</svg>

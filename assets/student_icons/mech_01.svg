@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="20mm"
+   height="20mm"
+   viewBox="0 0 20 20"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
+   sodipodi:docname="infgeo_04.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="true"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     inkscape:clip-to-page="false"
+     showguides="false"
+     inkscape:zoom="11.313709"
+     inkscape:cx="36.371805"
+     inkscape:cy="39.907339"
+     inkscape:window-width="2057"
+     inkscape:window-height="1214"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0.38713733 : 13.930933 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="18.034533 : 16.581335 : 1"
+       inkscape:persp3d-origin="10 : 6.6666667 : 1"
+       id="perspective5" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="display:inline;fill:#00aad4;stroke:#00d400;stroke-width:0;stroke-dasharray:none"
+       id="rect32"
+       width="20"
+       height="20"
+       x="1.7763568e-15"
+       y="1.7763568e-15" />
+    <circle
+       style="fill:#0044aa;stroke:#008000;stroke-width:0;stroke-dasharray:none"
+       id="path13"
+       cx="10"
+       cy="10"
+       r="4.638474" />
+    <path
+       id="path14"
+       style="fill:#0044aa;stroke:#008000;stroke-width:0;stroke-dasharray:none"
+       d="M 9.0542277 3.7238037 A 6.3468728 6.3468728 0 0 0 8.5452148 3.8219889 C 8.3089457 4.4323469 8.4290147 5.9844277 8.0346517 6.187736 C 7.6402887 6.3910443 6.4457641 5.3927885 5.8115316 5.2312052 A 6.3468728 6.3468728 0 0 0 5.4363607 5.5893229 C 5.5675829 6.2305255 6.5077638 7.4710919 6.2859212 7.8553345 C 6.0640787 8.239577 4.5193789 8.0457667 3.8984701 8.2527262 A 6.3468728 6.3468728 0 0 0 3.7759969 8.7570882 C 4.2330483 9.2255581 5.6948188 9.7608458 5.7159302 10.204028 C 5.7370416 10.647211 4.3326922 11.319458 3.9222412 11.829252 A 6.3468728 6.3468728 0 0 0 4.0922567 12.319145 C 4.7300267 12.466146 6.249217 12.126195 6.5065796 12.48761 C 6.7639422 12.849025 5.945805 14.173646 5.8761271 14.824418 A 6.3468728 6.3468728 0 0 0 6.2838542 15.145329 C 6.8998553 14.92419 7.9943022 13.816674 8.4062052 13.981576 C 8.8181083 14.146477 8.8457596 15.703276 9.1389771 16.288411 A 6.3468728 6.3468728 0 0 0 9.6552246 16.337504 C 10.053881 15.818435 10.376076 14.295504 10.811743 14.211536 C 11.24741 14.127568 12.112177 15.421906 12.675195 15.755627 A 6.3468728 6.3468728 0 0 0 13.136149 15.517916 C 13.19089 14.865717 12.638306 13.410287 12.959416 13.10411 C 13.280526 12.797932 14.708305 13.419211 15.36237 13.395565 A 6.3468728 6.3468728 0 0 0 15.621785 12.94598 C 15.315231 12.36772 14.063525 11.442392 14.168127 11.011214 C 14.27273 10.580036 15.809355 10.330521 16.346806 9.957015 A 6.3468728 6.3468728 0 0 0 16.322001 9.4392171 C 15.75148 9.1184899 14.198004 9.0166908 14.052889 8.597408 C 13.907774 8.1781253 15.065662 7.1377158 15.315861 6.5329346 A 6.3468728 6.3468728 0 0 0 15.015104 6.1102214 C 14.361753 6.1488553 13.000184 6.9028039 12.651424 6.628536 C 12.302664 6.354268 12.714169 4.8530877 12.597681 4.2090454 A 6.3468728 6.3468728 0 0 0 12.116056 4.0162923 C 11.58731 4.4020214 10.84931 5.7725745 10.407633 5.7303996 C 9.9659574 5.6882246 9.5004195 4.2026281 9.0542277 3.7238037 z " />
+    <circle
+       style="fill:#00aad4;stroke:none;stroke-width:0;stroke-dasharray:none"
+       id="path15"
+       cx="10"
+       cy="10"
+       r="2.4647827" />
+  </g>
+</svg>
