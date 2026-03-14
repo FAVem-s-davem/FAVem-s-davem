@@ -3,12 +3,18 @@
 #include "../map/MapObject.hpp"
 #include "../player/Player.hpp"
 #include "../student/Student.hpp"
+#include "godot_cpp/classes/file_access.hpp"
 #include "godot_cpp/variant/utility_functions.hpp"
+#include "godot_cpp/variant/vector2.hpp"
 
+#include <fstream>
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/core/object.hpp>
 #include <godot_cpp/classes/input.hpp>
 #include <godot_cpp/classes/input_event_key.hpp>
+#include <regex>
+#include <string>
+#include <vector>
 
 using namespace godot;
 
@@ -34,6 +40,30 @@ void GameScene::_bind_methods() {
     ADD_PROPERTY(
         PropertyInfo(Variant::OBJECT, "MapScene", PROPERTY_HINT_RESOURCE_TYPE, "PackedScene"),
         "set_map_scene", "get_map_scene");
+}
+
+std::vector<std::string> get_svg_polygons(const String &path) {
+
+    std::vector<std::string> polygons;
+
+    Ref<FileAccess> file = FileAccess::open(path, FileAccess::READ);
+    if (file.is_null()) {
+        UtilityFunctions::print("null svg");
+        return polygons;
+    }
+
+    String svg = file->get_as_text();
+    std::string svg_str = svg.utf8().get_data();
+
+    std::regex polygon_regex(R"(<polygon[^>]*(?:\/>|>[\s\S]*?<\/polygon>))");
+
+    std::sregex_iterator it(svg_str.begin(), svg_str.end(), polygon_regex);
+    std::sregex_iterator end;
+
+    for (; it != end; ++it)
+        polygons.push_back(it->str());
+
+    return polygons;
 }
 
 void GameScene::_input(const Ref<InputEvent> &event){
@@ -67,6 +97,9 @@ void GameScene::_ready() {
 
     spawn_students(10);
     spawn_player();
+    spawn_map();
+
+    /*
 
     Node *node = map_scene->instantiate();
     MapObject *map = Object::cast_to<MapObject>(node);
@@ -105,6 +138,7 @@ void GameScene::_ready() {
 
     map2->Init(poly2);
     add_child(map2);
+    */
 }
 
 void GameScene::spawn_player() {
@@ -137,6 +171,27 @@ void GameScene::spawn_students(int count) {
             Vector2(UtilityFunctions::randf_range(0, 1100), UtilityFunctions::randf_range(0, 600)));
 
         add_child(student);
+    }
+}
+
+void GameScene::spawn_map() {
+
+    auto polygons = get_svg_polygons("res://assets/test.svg");
+
+    UtilityFunctions::print(polygons.size());
+
+    for (const auto &poly : polygons) {
+
+        Node *node = map_scene->instantiate();
+        MapObject *map = Object::cast_to<MapObject>(node);
+
+        if (!map) {
+            UtilityFunctions::print("MapScene root is not MapObject");
+            return;
+        }
+
+        map->Init(poly.c_str());
+        add_child(map);
     }
 }
 
