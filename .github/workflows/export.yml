@@ -60,6 +60,8 @@ jobs:
           apt-get install -y scons build-essential
           cd src
           scons platform=linux target=template_release
+          ls bin
+          cp bin/*.so bin/libplayer.so
       - name: Linux Build
         run: |
           mkdir -v -p build/linux
