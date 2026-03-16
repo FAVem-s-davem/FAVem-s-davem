@@ -58,7 +58,9 @@ jobs:
         run: |
           apt-get update
           apt-get install -y scons build-essential
-          # cd src/player
+          pwd
+          cd src
+          pwd
           scons platform=linux target=release
       - name: Linux Build
         run: |
