@@ -54,7 +54,7 @@ jobs:
       - name: Import Assets
         run: |
           # this may fix error?
-          godot --headless --path ${{ env.PROJECT_PATH }} --editor --quit-after 10
+          godot --headless --display-driver dummy --path ${{ env.PROJECT_PATH }} --editor --quit-after 10
 
       - name: Export Project
         run: |
