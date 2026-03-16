@@ -60,13 +60,14 @@ jobs:
           apt-get install -y scons build-essential
           cd src
           # scons -C godot-cpp platform=linux target=template_release generate_bindings=yes
+          scons platform=linux target=editor dev_build=no
           scons platform=linux target=template_release dev_build=no
       - name: Linux Build
         run: |
           mkdir -v -p build/linux
           EXPORT_DIR="$(readlink -f build)"
           cd $PROJECT_PATH
-          godot --headless --quit --verbose --export-release "Linux" "$EXPORT_DIR/linux/$EXPORT_NAME.x86_64"
+          godot --headless --verbose --export-release "Linux" "$EXPORT_DIR/linux/$EXPORT_NAME.x86_64"
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
