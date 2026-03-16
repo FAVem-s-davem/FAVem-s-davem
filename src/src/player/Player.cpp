@@ -10,8 +10,8 @@
 
 using namespace godot;
 
-Player::Player() {}
-Player::~Player() {}
+Player::Player() = default;
+Player::~Player() = default;
 
 void Player::_bind_methods() {
 
