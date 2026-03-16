@@ -49,6 +49,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           lfs: true
+          submodules: recursive
       - name: Setup
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates/
@@ -57,7 +58,7 @@ jobs:
         run: |
           apt-get update
           apt-get install -y scons build-essential
-          cd src/player
+          # cd src/player
           scons platform=linux target=release
       - name: Linux Build
         run: |
