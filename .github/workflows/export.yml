@@ -51,6 +51,11 @@ jobs:
           # for the final binary
           scons platform=linux target=template_release dev_build=no
 
+      - name: Import Assets
+        run: |
+          # this may fix error?
+          godot --headless --path ${{ env.PROJECT_PATH }} --editor --quit-after 10
+
       - name: Export Project
         run: |
           mkdir -p build/linux
