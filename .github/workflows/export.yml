@@ -59,6 +59,7 @@ jobs:
           apt-get update
           apt-get install -y scons build-essential
           cd src
+          scons -C godot-cpp platform=linux target=template_release generate_bindings=yes
           scons platform=linux target=template_release
       - name: Linux Build
         run: |
