@@ -3,7 +3,7 @@ CompileFlags:
     - -Wall
     - -Wextra
     - -Wpedantic
-    - -std=c++20
+    - -std=c++17
     - -Igodot-cpp/include
     - -Igodot-cpp/gen
     - -Igodot-cpp/gen/include
