@@ -58,10 +58,8 @@ jobs:
         run: |
           apt-get update
           apt-get install -y scons build-essential
-          pwd
           cd src
-          pwd
-          scons platform=linux target=release
+          scons platform=linux target=template_release
       - name: Linux Build
         run: |
           mkdir -v -p build/linux
