@@ -1,4 +1,4 @@
-name: Build & Export Linux (Modern)
+name: Build & Export Linux
 
 on:
   push:
@@ -33,10 +33,15 @@ jobs:
           sudo apt-get install -y scons build-essential
 
       - name: SCons Cache
-        uses: 288-io/scons-cache-action@v1
+        uses: actions/cache@v5
         with:
-          path: ${{ env.PROJECT_PATH }}/.sconsign.dblite
-          key: ${{ runner.os }}-scons-${{ hashFiles('**/SConstruct') }}
+          path: |
+            ${{ env.PROJECT_PATH }}/.sconsign.dblite
+            ${{ env.PROJECT_PATH }}/godot-cpp/gen/
+            ${{ env.PROJECT_PATH }}/bin/
+          key: ${{ runner.os }}-scons-${{ hashFiles('src/SConstruct', 'src/src/**') }}
+          restore-keys: |
+            ${{ runner.os }}-scons-
 
       - name: Build GDExtension Libraries
         working-directory: ${{ env.PROJECT_PATH }}
