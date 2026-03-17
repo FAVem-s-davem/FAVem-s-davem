@@ -62,7 +62,9 @@ jobs:
 
       - name: Build GDExtension
         working-directory: src
-        run: scons platform=${{ matrix.platform }} target=template_release --cache-conf=force --cache-dir=${{ github.workspace }}/.scons_cache
+        run: scons platform=${{ matrix.platform }} target=template_release --cache-force
+        env:
+          SCONS_CACHE_DIR: ${{ github.workspace }}/.scons_cache
 
       - name: Upload Library Artifact
         uses: actions/upload-artifact@v7
