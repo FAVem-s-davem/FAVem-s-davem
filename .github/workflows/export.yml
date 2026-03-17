@@ -24,6 +24,11 @@ jobs:
           godot-version: '4.5-stable'
           godot-cpp-path: './src/godot-cpp'
 
+      - name: Install Build Essentials
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y scons build-essential
+
       - name: Build GDExtension
         run: |
           scons platform=${{ matrix.platform }} target=template_release
