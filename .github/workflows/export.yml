@@ -20,7 +20,7 @@ jobs:
       - name: setup & build GDExtension
         uses: NodotProject/godot-cpp-builds@v1
         with:
-          godot-version: '4.6.1-stable'
+          godot-version: '4.5-stable'
           godot-cpp-path: './src/godot-cpp'
 
       - name: export game
