@@ -3,6 +3,7 @@
 #include "godot_cpp/variant/color.hpp"
 #include "godot_cpp/variant/vector2.hpp"
 #include <regex>
+#include <sstream>
 #include <utility>
 #include <vector>
 
