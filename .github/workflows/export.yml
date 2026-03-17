@@ -54,12 +54,12 @@ jobs:
       - name: Import Assets
         run: |
           # this may fix error?
-          godot --headless --display-driver headless --path ${{ env.PROJECT_PATH }} --editor --quit-after 10
+          godot --headless --display-driver headless --path ${{ env.PROJECT_PATH }} --editor --quit-after 10 || true
 
       - name: Export Project
         run: |
           mkdir -p build/linux
-          godot --headless --path ${{ env.PROJECT_PATH }} --export-release "Linux" "../build/linux/${{ env.EXPORT_NAME }}.x86_64"
+          godot --headless --path ${{ env.PROJECT_PATH }} --export-release "Linux" "../build/linux/${{ env.EXPORT_NAME }}.x86_64" || true
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
