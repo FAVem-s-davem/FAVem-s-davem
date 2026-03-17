@@ -32,10 +32,21 @@ jobs:
         run: |
           sudo apt-get install -y g++-mingw-w64
 
-      - name: Setup Emscripten (For Web)
-        uses: emscripten-core/setup-emsdk@v3
+      - name: Setup emsdk
+        uses: mymindstorm/setup-emsdk@v14
         with:
           version: 3.1.64
+          actions-cache-folder: 'emsdk-cache'
+
+      - name: Verify Emcc
+        run: emcc -v
+
+      - name: Emcc Cache
+        uses: actions/cache@v5
+        with:
+          path: |
+            'emsdk-cache'
+          key: 3.1.64-${{ runner.os }}
 
       - name: SCons Cache
         uses: actions/cache@v5
