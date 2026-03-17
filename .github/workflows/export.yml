@@ -32,7 +32,8 @@ jobs:
           path: |
             ${{ github.workspace }}/.scons_cache
             src/godot-cpp/gen/
-          key: ${{ runner.os }}-${{ matrix.platform }}-scons-${{ hashFiles('src/SConstruct', 'src/src/**') }}
+            src/godot-cpp/bin/
+          key: ${{ runner.os }}-${{ matrix.platform }}-scons-${{ hashFiles('src/SConstruct', 'src/src/**', 'src/godot-cpp/SConstruct') }}
           restore-keys: |
             ${{ runner.os }}-${{ matrix.platform }}-scons-
 
