@@ -149,7 +149,7 @@ jobs:
         env:
           BUTLER_API_KEY: ${{ secrets.ITCHIO_TOKEN }}
         run: |
-          ./butler push out/Linux.zip favem-s-davem/favem-s-davem:linux --userversion=${{ github.ref_name }}
-          ./butler push out/Windows.Desktop.zip favem-s-davem/favem-s-davem:windows --userversion=${{ github.ref_name }}
-          ./butler push out/Web.zip favem-s-davem/favem-s-davem:web --userversion=${{ github.ref_name }}
-          ./butler push out/macOS.zip favem-s-davem/favem-s-davem:macos --userversion=${{ github.ref_name }}
+          ./butler push out/Linux.zip favem-s-davem/favem-s-davem:linux --userversion=${{ github.ref_name }} || true
+          ./butler push out/Windows.Desktop.zip favem-s-davem/favem-s-davem:windows --userversion=${{ github.ref_name }} || true
+          ./butler push out/Web.zip favem-s-davem/favem-s-davem:web --userversion=${{ github.ref_name }} || true
+          ./butler push out/macOS.zip favem-s-davem/favem-s-davem:macos --userversion=${{ github.ref_name }} || true
