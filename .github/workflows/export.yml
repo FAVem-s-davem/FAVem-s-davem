@@ -23,6 +23,29 @@ jobs:
           godot-version: '4.5-stable'
           godot-cpp-path: './src/godot-cpp'
 
+      - name: Install Build Essentials
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y scons build-essential
+
+      - name: SCons Cache
+        uses: actions/cache@v5
+        with:
+          path: |
+            ${{ env.PROJECT_PATH }}/.sconsign.dblite
+            ${{ env.PROJECT_PATH }}/godot-cpp/gen/
+            ${{ env.PROJECT_PATH }}/bin/
+          key: ${{ runner.os }}-scons-${{ hashFiles('src/SConstruct', 'src/src/**') }}
+          restore-keys: |
+            ${{ runner.os }}-scons-
+
+      - name: Compile Our Code
+        working-directory: src
+        run: |
+          scons platform=linux target=template_release || true
+
+          cp bin/libplayer.linux.template_release.x86_64.so bin/libplayer.so || true
+
       - name: export game
         id: export
 
