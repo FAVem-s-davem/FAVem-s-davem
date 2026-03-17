@@ -1,0 +1,156 @@
+name: Build & Export
+
+on:
+  push:
+    tags: ["*"]
+
+jobs:
+  build-libs:
+    name: Build Lib (${{ matrix.platform }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: linux
+            os: ubuntu-latest
+          - platform: windows
+            os: ubuntu-latest
+          - platform: web
+            os: ubuntu-latest
+          - platform: macos
+            os: macos-latest
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: recursive
+
+      - name: SCons cache
+        uses: actions/cache@v5
+        with:
+          path: |
+            ${{ github.workspace }}/.scons_cache
+            src/godot-cpp/gen/
+            src/godot-cpp/bin/
+          key: ${{ runner.os }}-${{ matrix.platform }}-scons-${{ hashFiles('src/SConstruct', 'src/src/**', 'src/godot-cpp/SConstruct') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.platform }}-scons-
+
+      - name: Install SCons (except MacOS)
+        if: matrix.platform != 'macos'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y scons build-essential
+
+      - name: Install SCons (MacOS)
+        if: matrix.platform == 'macos'
+        run: |
+          brew install scons
+
+      - name: Install Win Compiler
+        if: matrix.platform == 'windows'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y g++-mingw-w64
+
+      - name: Setup emsdk (Web only)
+        if: matrix.platform == 'web'
+        uses: mymindstorm/setup-emsdk@v14
+        with:
+          version: 3.1.64
+          actions-cache-folder: 'emsdk-cache'
+
+      - name: Build GDExtension
+        working-directory: src
+        run: scons platform=${{ matrix.platform }} target=template_release --cache-force
+        env:
+          SCONS_CACHE_DIR: ${{ github.workspace }}/.scons_cache
+
+      - name: Upload Library Artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: lib-${{ matrix.platform }}
+          path: src/bin/
+
+  export-game:
+    name: Export Game
+    needs: build-libs
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: recursive
+
+      # prevent re-downloadnig godot & its templates
+      - name: Godot download cache
+        uses: actions/cache@v5
+        with:
+          path: |
+            ~/.local/share/godot/
+          key: godot-4.6.1-stable-templates
+
+      - name: Download All Libs
+        uses: actions/download-artifact@v8
+        with:
+          path: src/bin/
+          pattern: lib-*
+          merge-multiple: true
+
+      - name: Verify All Libs Present
+        run: ls -R src/bin/
+
+      - name: Godot Export
+        id: export
+        uses: firebelley/godot-export@v7.0.0
+        with:
+          godot_executable_download_url: https://github.com/godotengine/godot/releases/download/4.6.1-stable/Godot_v4.6.1-stable_linux.x86_64.zip
+          godot_export_templates_download_url: https://github.com/godotengine/godot/releases/download/4.6.1-stable/Godot_v4.6.1-stable_export_templates.tpz
+          relative_project_path: ./src/
+          archive_output: true
+          cache: true
+
+      - name: Upload zipped artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: exported-zips
+          path: ${{ steps.export.outputs.archive_directory }}/*.zip
+
+  deploy:
+    name: Deploy to GitHub and Itch
+    needs: export-game
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download zips
+        uses: actions/download-artifact@v8
+        with:
+          name: exported-zips
+          path: out/
+
+      - name: Github Release
+        uses: ncipollo/release-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ github.ref_name }}
+          draft: true
+          artifacts: out/*.zip
+
+      - name: Install Butler
+        run: |
+          curl -L -o butler.zip https://broth.itch.zone/butler/linux-amd64/LATEST/archive/default
+          unzip butler.zip
+          chmod +x butler
+          ./butler -V
+
+      - name: Deploy to Itch.io
+        env:
+          BUTLER_API_KEY: ${{ secrets.ITCHIO_TOKEN }}
+        run: |
+          ./butler push out/Linux.zip favem-s-davem/favem-s-davem:linux --userversion=${{ github.ref_name }} || true
+          ./butler push out/Windows\ Desktop.zip favem-s-davem/favem-s-davem:windows --userversion=${{ github.ref_name }} || true
+          ./butler push out/Web.zip favem-s-davem/favem-s-davem:web --userversion=${{ github.ref_name }} || true
+          ./butler push out/macOS.zip favem-s-davem/favem-s-davem:macos --userversion=${{ github.ref_name }} || true

@@ -2,10 +2,14 @@
 
 env = SConscript("godot-cpp/SConstruct")
 
+# creates a suffix, eg. ".linux.template_release.x86_64"
+suffix = ".{}.{}.{}".format(env["platform"], env["target"], env["arch"])
+
 sources = Glob("src/*.cpp") + Glob("src/*/*.cpp") + Glob("src/*/*/*.cpp")
 
 library = env.SharedLibrary(
-    target="bin/player",
+    # use these suffixes
+    target="bin/libplayer{}{}".format(suffix, env["SHLIBSUFFIX"]),
     source=sources,
 )
 
