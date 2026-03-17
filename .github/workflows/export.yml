@@ -44,8 +44,6 @@ jobs:
         run: |
           scons platform=linux target=template_release || true
 
-          cp bin/libplayer.linux.template_release.x86_64.so bin/libplayer.so || true
-
       - name: export game
         id: export
 
