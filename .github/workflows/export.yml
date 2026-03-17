@@ -131,7 +131,7 @@ jobs:
           path: out/
 
       - name: Github Release
-        uses: ncipollo/release-action@v1.18.0
+        uses: ncipollo/release-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.ref_name }}
