@@ -26,11 +26,22 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Install Linux/Win Dependencies
-        if: matrix.platform == 'linux' || matrix.platform == 'windows'
+      - name: Install SCons (except MacOS)
+        if: matrix.platform != 'macos'
         run: |
           sudo apt-get update
-          sudo apt-get install -y scons build-essential g++-mingw-w64
+          sudo apt-get install -y scons build-essential
+
+      - name: Install SConst (MacOS)
+        if: matrix.platform == 'macos'
+        run: |
+          brew install scons
+
+      - name: Install Win Compiler
+        if: matrix.platform == 'windows'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y g++-mingw-w64
 
       - name: Setup emsdk (Web only)
         if: matrix.platform == 'web'
