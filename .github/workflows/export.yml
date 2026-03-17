@@ -14,47 +14,19 @@ jobs:
     name: Linux Export
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
-          lfs: true
           submodules: recursive
 
-      - name: Setup Godot
-        uses: chickensoft-games/setup-godot@v2
+      - name: Download godot-cpp Builds
+        uses: NodotProject/godot-cpp-builds@v1
         with:
-          version: ${{ env.GODOT_VERSION }}
-          use-dotnet: false
-          include-templates: true
+          godot-version: '4.6-stable'
+          godot-cpp-path: './src/godot-cpp'
 
-      - name: Install Build Essentials
+      - name: Build GDExtension
         run: |
-          sudo apt-get update
-          sudo apt-get install -y scons build-essential
-
-      - name: SCons Cache
-        uses: actions/cache@v5
-        with:
-          path: |
-            ${{ env.PROJECT_PATH }}/.sconsign.dblite
-            ${{ env.PROJECT_PATH }}/godot-cpp/gen/
-            ${{ env.PROJECT_PATH }}/bin/
-          key: ${{ runner.os }}-scons-${{ hashFiles('src/SConstruct', 'src/src/**') }}
-          restore-keys: |
-            ${{ runner.os }}-scons-
-
-      - name: Build GDExtension Libraries
-        working-directory: ${{ env.PROJECT_PATH }}
-        run: |
-          # godot can now "see" classes during export
-          scons platform=linux target=editor dev_build=no
-          # for the final binary
-          scons platform=linux target=template_release dev_build=no
-
-      - name: Import Assets
-        run: |
-          # this may fix error?
-          godot --headless --display-driver headless --path ${{ env.PROJECT_PATH }} --editor --quit-after 10 || true
+          scons platform=${{ matrix.platform }} target=template_release
 
       - name: Export Project
         run: |
