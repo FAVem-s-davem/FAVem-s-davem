@@ -59,7 +59,6 @@ jobs:
           name: lib-${{ matrix.platform }}
           path: src/bin/
 
-  # JOB 2: Collect all libs and run the Godot Export
   export-game:
     name: Export Game
     needs: build-libs
@@ -71,7 +70,6 @@ jobs:
         with:
           submodules: recursive
 
-      # Download ALL libraries from the previous job into src/bin/
       - name: Download All Libs
         uses: actions/download-artifact@v8
         with:
@@ -90,11 +88,46 @@ jobs:
           godot_export_templates_download_url: https://github.com/godotengine/godot/releases/download/4.6.1-stable/Godot_v4.6.1-stable_export_templates.tpz
           relative_project_path: ./src/
           archive_output: true
+          cache: true
 
-      - name: Create Release
+      - name: Upload zipped artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: exported-zips
+          path: ${{ steps.export.outputs.archive_directory }}/*.zip
+
+  deploy:
+    name: Deploy to GitHub and Itch
+    needs: export-game
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download zips
+        uses: actions/download-artifact@v8
+        with:
+          name: exported-zips
+          path: out/
+
+      - name: Github Release
         uses: ncipollo/release-action@v1.18.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.ref_name }}
           draft: true
-          artifacts: ${{ steps.export.outputs.archive_directory }}/*
+          artifacts: out/*.zip
+
+      - name: Install Butler
+        run: |
+          curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
+          unzip butler.zip
+          chmod +x butler
+          ./butler -V
+
+      - name: Deploy to Itch.io
+        env:
+          BUTLER_API_KEY: ${{ secrets.ITCHIO_TOKEN }}
+        run: |
+          ./butler push out/Linux.zip favem-s-davem/favem-s-davem:linux --project-version ${{ github.ref_name }}
+          ./butler push out/Windows.Desktop.zip favem-s-davem/favem-s-davem:windows --project-version ${{ github.ref_name }}
+          ./butler push out/Web.zip favem-s-davem/favem-s-davem:web --project-version ${{ github.ref_name }}
