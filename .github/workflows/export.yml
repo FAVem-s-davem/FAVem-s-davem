@@ -5,73 +5,74 @@ on:
     tags: ["*"]
 
 jobs:
-  export_game:
-    name: Export Game
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
+  build-libs:
+    name: Build Lib (${{ matrix.platform }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: linux
+            os: ubuntu-latest
+          - platform: windows
+            os: ubuntu-latest
+          - platform: web
+            os: ubuntu-latest
+          - platform: macos
+            os: macos-latest
 
     steps:
-      - name: checkout
-        uses: actions/checkout@v6
+      - uses: actions/checkout@v6
         with:
           submodules: recursive
 
-      - name: setup & build GDExtension
-        uses: NodotProject/godot-cpp-builds@v1
-        with:
-          godot-version: '4.5-stable'
-          godot-cpp-path: './src/godot-cpp'
-
-      - name: Install Build Essentials
+      - name: Install Linux/Win Dependencies
+        if: matrix.platform == 'linux' || matrix.platform == 'windows'
         run: |
           sudo apt-get update
-          sudo apt-get install -y scons build-essential
+          sudo apt-get install -y scons build-essential g++-mingw-w64
 
-      - name: Install Windows compiler
-        run: |
-          sudo apt-get install -y g++-mingw-w64
-
-      - name: Setup emsdk
+      - name: Setup emsdk (Web only)
+        if: matrix.platform == 'web'
         uses: mymindstorm/setup-emsdk@v14
         with:
           version: 3.1.64
-          actions-cache-folder: 'emsdk-cache'
 
-      - name: Verify Emcc
-        run: emcc -v
-
-      - name: Emcc Cache
-        uses: actions/cache@v5
-        with:
-          path: |
-            'emsdk-cache'
-          key: 3.1.64-${{ runner.os }}
-
-      - name: SCons Cache
-        uses: actions/cache@v5
-        with:
-          path: |
-            ${{ env.PROJECT_PATH }}/.sconsign.dblite
-            ${{ env.PROJECT_PATH }}/godot-cpp/gen/
-            ${{ env.PROJECT_PATH }}/bin/
-          key: ${{ runner.os }}-scons-${{ hashFiles('src/SConstruct', 'src/src/**') }}
-          restore-keys: |
-            ${{ runner.os }}-scons-
-
-      - name: Compile to three platforms
+      - name: Build GDExtension
         working-directory: src
-        run: |
-          scons platform=linux target=template_release || true
-          scons platform=windows target=template_release || true
-          scons platform=web target=template_release || true
+        run: scons platform=${{ matrix.platform }} target=template_release
 
-      - name: Verify Binaries
+      - name: Upload Library Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: lib-${{ matrix.platform }}
+          path: src/bin/
+
+  # JOB 2: Collect all libs and run the Godot Export
+  export-game:
+    name: Export Game
+    needs: build-libs
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      # Download ALL libraries from the previous job into src/bin/
+      - name: Download All Libs
+        uses: actions/download-artifact@v4
+        with:
+          path: src/bin/
+          pattern: lib-*
+          merge-multiple: true
+
+      - name: Verify All Libs Present
         run: ls -R src/bin/
 
-      - name: export game
+      - name: Godot Export
         id: export
-
         uses: firebelley/godot-export@v7.0.0
         with:
           godot_executable_download_url: https://github.com/godotengine/godot/releases/download/4.6.1-stable/Godot_v4.6.1-stable_linux.x86_64.zip
@@ -79,11 +80,10 @@ jobs:
           relative_project_path: ./src/
           archive_output: true
 
-      - name: create release
+      - name: Create Release
         uses: ncipollo/release-action@v1.18.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          generateReleaseNotes: false
-          draft: true
           tag: ${{ github.ref_name }}
+          draft: true
           artifacts: ${{ steps.export.outputs.archive_directory }}/*
