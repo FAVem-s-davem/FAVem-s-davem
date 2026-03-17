@@ -131,3 +131,4 @@ jobs:
           ./butler push out/Linux.zip favem-s-davem/favem-s-davem:linux --project-version ${{ github.ref_name }}
           ./butler push out/Windows.Desktop.zip favem-s-davem/favem-s-davem:windows --project-version ${{ github.ref_name }}
           ./butler push out/Web.zip favem-s-davem/favem-s-davem:web --project-version ${{ github.ref_name }}
+          ./butler push out/macOS.zip favem-s-davem/favem-s-davem:macos --project-version ${{ github.ref_name }}
