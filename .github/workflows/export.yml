@@ -28,6 +28,15 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y scons build-essential
 
+      - name: Install Windows compiler
+        run: |
+          sudo apt-get install -y g++-mingw-w64
+
+      - name: Setup Emscripten (For Web)
+        uses: emscripten-core/setup-emsdk@v3
+        with:
+          version: 3.1.64
+
       - name: SCons Cache
         uses: actions/cache@v5
         with:
@@ -39,10 +48,15 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-scons-
 
-      - name: Compile Our Code
+      - name: Compile to three platforms
         working-directory: src
         run: |
           scons platform=linux target=template_release || true
+          scons platform=windows target=template_release || true
+          scons platform=web target=template_release || true
+
+      - name: Verify Binaries
+        run: ls -R src/bin/
 
       - name: export game
         id: export
