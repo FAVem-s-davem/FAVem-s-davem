@@ -13,8 +13,8 @@ class Player : public CharacterBody2D {
 
   private:
     float max_speed = 400.0f;
-    float acceleration = 700.0f;
-    float friction = 400.0f;
+    float acceleration = 2000.0f;
+    float friction = 800.0f;
 
     float deselect_ring = 300.0f;
     float catchup_ring = 150.0f;
