@@ -178,7 +178,7 @@ void GameScene::spawn_map() {
 
     auto polygons = get_svg_polygons("res://assets/test.svg");
 
-    UtilityFunctions::print(polygons.size());
+    // UtilityFunctions::print(polygons.size());
 
     for (const auto &poly : polygons) {
 
