@@ -22,7 +22,6 @@ func _ready() -> void:
 		push_error("MapScene not assigned")
 		return
 	
-	spawn_player()
 	spawn_students(10)
 	spawn_map()
 
