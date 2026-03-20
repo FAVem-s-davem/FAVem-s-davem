@@ -1,5 +1,8 @@
 [gd_scene format=3 uid="uid://btj2uvic5xmbn"]
 
+[ext_resource type="Script" uid="uid://bldg46c3bd861" path="res://scripts/player/player.gd" id="1_p0vlq"]
+[ext_resource type="Script" uid="uid://bpymyrp2ec0im" path="res://scripts/player/player_selection_manager.gd" id="2_v6fml"]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_5q5h1"]
 radius = 32.0
 
@@ -10,7 +13,9 @@ colors = PackedColorArray(1, 1, 1, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_5b12s"]
 gradient = SubResource("Gradient_laulw")
 
-[node name="Player" type="Player" unique_id=170738930]
+[node name="Player" type="CharacterBody2D" unique_id=214270766]
+motion_mode = 1
+script = ExtResource("1_p0vlq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2102845433]
 shape = SubResource("CircleShape2D_5q5h1")
@@ -18,7 +23,8 @@ shape = SubResource("CircleShape2D_5q5h1")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1992893616]
 texture = SubResource("GradientTexture2D_5b12s")
 
-[node name="PlayerSelectionManager" type="PlayerSelectionManager" parent="." unique_id=1135093554]
-
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2046817666]
 position_smoothing_enabled = true
+
+[node name="PlayerSelectionManager" type="Node2D" parent="." unique_id=952871996]
+script = ExtResource("2_v6fml")

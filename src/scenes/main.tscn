@@ -1,13 +1,9 @@
 [gd_scene format=3 uid="uid://cqgga0p2qjpw1"]
 
-[ext_resource type="PackedScene" uid="uid://diy00ma6eq0rv" path="res://scenes/Student.tscn" id="1_sugp2"]
-[ext_resource type="PackedScene" uid="uid://btj2uvic5xmbn" path="res://scenes/Player.tscn" id="2_jyhfs"]
-[ext_resource type="PackedScene" uid="uid://cxm0sjjjwv4wo" path="res://scenes/MapObject.tscn" id="3_tbgi4"]
+[ext_resource type="Script" uid="uid://bqngw0mvpsuf5" path="res://scripts/scenes/game_scene.gd" id="4_jyhfs"]
 
 [node name="Main" type="Node2D" unique_id=1180620180]
 
-[node name="GameScene" type="GameScene" parent="." unique_id=1181446971]
-StudentScene = ExtResource("1_sugp2")
-PlayerScene = ExtResource("2_jyhfs")
-MapScene = ExtResource("3_tbgi4")
+[node name="GameScene" type="Node2D" parent="." unique_id=1408850278]
 position = Vector2(54, -158)
+script = ExtResource("4_jyhfs")

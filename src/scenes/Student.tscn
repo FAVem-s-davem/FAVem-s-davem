@@ -1,21 +1,18 @@
 [gd_scene format=3 uid="uid://diy00ma6eq0rv"]
 
-[sub_resource type="Gradient" id="Gradient_y1qym"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_74cq7"]
-gradient = SubResource("Gradient_y1qym")
-width = 32
-height = 32
+[ext_resource type="Script" uid="uid://dnp0u5g7qwdid" path="res://scripts/student/student.gd" id="1_r5ah2"]
+[ext_resource type="Texture2D" uid="uid://igg4xlsxghdj" path="res://assets/student_icons/inf_01.png" id="2_wjxc8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_y1qym"]
 radius = 16.0
 
-[node name="Student" type="Student" unique_id=863021946]
+[node name="Student" type="CharacterBody2D" unique_id=2101057550]
+motion_mode = 1
+script = ExtResource("1_r5ah2")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1482542912]
-texture = SubResource("GradientTexture2D_74cq7")
+scale = Vector2(0.06779661, 0.06779661)
+texture = ExtResource("2_wjxc8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=787611412]
 shape = SubResource("CircleShape2D_y1qym")

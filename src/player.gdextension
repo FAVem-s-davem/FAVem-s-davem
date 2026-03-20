@@ -5,9 +5,10 @@ compatibility_minimum = "4.1"
 
 [libraries]
 
-linux.debug.x86_64 = "res://bin/libplayer.so"
+# Disabled for GDScript rewrite
+# linux.debug.x86_64 = "res://bin/libplayer.so"
 
-linux.release.x86_64 = "res://bin/libplayer.linux.template_release.x86_64.so"
-windows.release.x86_64 = "res://bin/libplayer.windows.template_release.x86_64.dll"
-web.release.wasm32 = "res://bin/libplayer.web.template_release.wasm32.wasm"
-macos.release.universal = "res://bin/libplayer.macos.template_release.universal.dylib"
+# linux.release.x86_64 = "res://bin/libplayer.linux.template_release.x86_64.so"
+# windows.release.x86_64 = "res://bin/libplayer.windows.template_release.x86_64.dll"
+# web.release.wasm32 = "res://bin/libplayer.web.template_release.wasm32.wasm"
+# macos.release.universal = "res://bin/libplayer.macos.template_release.universal.dylib"
