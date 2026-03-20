@@ -85,8 +85,8 @@ func spawn_map() -> void:
 			push_error("MapScene root is not valid")
 			return
 		
-		# TODO: Initialize map object with polygon data
-		# map_obj.init(poly_string)
+		# Initialize map object with polygon data
+		map_obj.init(poly_string)
 		add_child(map_obj)
 
 

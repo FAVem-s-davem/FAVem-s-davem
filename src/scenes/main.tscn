@@ -5,5 +5,5 @@
 [node name="Main" type="Node2D" unique_id=1180620180]
 
 [node name="GameScene" type="Node2D" parent="." unique_id=1408850278]
-position = Vector2(54, -158)
+position = Vector2(167, 195)
 script = ExtResource("4_jyhfs")
