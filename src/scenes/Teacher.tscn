@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://cdo4jhapjlm2y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_txnfh"]
+size = Vector2(48, 48)
+
+[sub_resource type="Gradient" id="Gradient_txnfh"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dkyc7"]
+gradient = SubResource("Gradient_txnfh")
+width = 48
+height = 48
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_txnfh"]
+radius = 64.0
+
+[node name="Teacher" type="Teacher" unique_id=245657399]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=947423228]
+shape = SubResource("RectangleShape2D_txnfh")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=701555292]
+texture = SubResource("GradientTexture2D_dkyc7")
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=768088697]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=776555446]
+shape = SubResource("CircleShape2D_txnfh")

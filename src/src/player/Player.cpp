@@ -65,7 +65,8 @@ void Player::_physics_process(double delta) {
 
         if (collider != nullptr && collider->is_in_group("selectable_units")) {
             Vector2 push_dir = -collision->get_normal();
-            // Give them a gentle, bounded push in the direction instead of continuously adding force
+            // Give them a gentle, bounded push in the direction instead of continuously adding
+            // force
             Vector2 their_velocity = collider->get_velocity();
             collider->set_velocity(their_velocity.lerp(push_dir * 200.0f, 0.2f));
         }
@@ -76,7 +77,7 @@ void Player::_draw() {
 
     Vector2 center = Vector2(0, 0);
 
-    draw_circle(center, deselect_ring, Color(0.3, 0.3, 0.3), false, 1.0);
+    draw_circle(center, deselect_ring, Color(0.7, 0.7, 0.7), false, 1.0);
     draw_circle(center, catchup_ring, Color(0.3, 0.3, 0.3), false, 1.0);
     draw_circle(center, stop_ring, Color(0.3, 0.3, 0.3), false, 1.0);
 }
