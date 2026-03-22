@@ -1,12 +1,14 @@
 #include "Student.hpp"
 
 #include "../player/SelectionManager.hpp"
+#include "StudentTypes.hpp"
 
 #include <algorithm> // for std::find
 #include <godot_cpp/classes/dir_access.hpp>
 #include <godot_cpp/classes/kinematic_collision2d.hpp>
 #include <godot_cpp/classes/resource_loader.hpp>
 #include <godot_cpp/classes/scene_tree.hpp>
+#include <godot_cpp/classes/sprite2d.hpp>
 #include <godot_cpp/classes/texture2d.hpp>
 #include <godot_cpp/variant/utility_functions.hpp>
 
@@ -25,10 +27,14 @@ void Student::_bind_methods() {
 void Student::_ready() {
     set_motion_mode(MOTION_MODE_FLOATING);
     add_to_group("selectable_units");
+    add_to_group("students");
+
+    type = static_cast<StudentTypes>(UtilityFunctions::randi() % STUDENT_TYPE_COUNT);
 
     // Assign random student icon, this whole block is made by ai to just scan the directory
     // and assign a random icon to the student, this will be done differently in future
     // and the student objects will be marked with what type they are etc
+    /*
     {
 
         Ref<DirAccess> dir = DirAccess::open("res://assets/student_icons/");
@@ -68,6 +74,28 @@ void Student::_ready() {
                     sprite->set_scale(Vector2(scale_factor, scale_factor));
                 }
             }
+        }
+    }
+    */
+
+    {
+        String type_name = StudentTypeToString(type);
+
+        String path = "res://assets/student_icons/" + type_name + ".png";
+
+        Ref<Texture2D> tex = ResourceLoader::get_singleton()->load(path);
+
+        Node *node = get_node_or_null("Sprite2D");
+        Sprite2D *sprite = Object::cast_to<Sprite2D>(node);
+
+        if (sprite && tex.is_valid()) {
+            sprite->set_texture(tex);
+
+            float target_size = 32.0f;
+            float max_dim = std::max(tex->get_width(), tex->get_height());
+            float scale = target_size / max_dim;
+
+            sprite->set_scale(Vector2(scale, scale));
         }
     }
 }

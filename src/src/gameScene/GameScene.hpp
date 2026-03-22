@@ -15,6 +15,7 @@ class GameScene : public Node2D {
     Ref<PackedScene> student_scene;
     Ref<PackedScene> player_scene;
     Ref<PackedScene> map_scene;
+    Ref<PackedScene> teacher_scene;
 
   protected:
     static void _bind_methods();
@@ -26,6 +27,7 @@ class GameScene : public Node2D {
     void spawn_player();
     void spawn_students(int count);
     void spawn_map();
+    void spawn_teacher();
 
   public:
     // spawning students on keypress
@@ -39,4 +41,7 @@ class GameScene : public Node2D {
 
     void set_map_scene(const Ref<PackedScene> &scene);
     Ref<PackedScene> get_map_scene() const;
+
+    void set_teacher_scene(const Ref<PackedScene> &scene);
+    Ref<PackedScene> get_teacher_scene() const;
 };

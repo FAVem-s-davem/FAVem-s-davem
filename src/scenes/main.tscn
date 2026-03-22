@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://diy00ma6eq0rv" path="res://scenes/Student.tscn" id="1_sugp2"]
 [ext_resource type="PackedScene" uid="uid://btj2uvic5xmbn" path="res://scenes/Player.tscn" id="2_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://cxm0sjjjwv4wo" path="res://scenes/MapObject.tscn" id="3_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://cdo4jhapjlm2y" path="res://scenes/Teacher.tscn" id="4_jyhfs"]
 
 [node name="Main" type="Node2D" unique_id=1180620180]
 
@@ -10,4 +11,5 @@
 StudentScene = ExtResource("1_sugp2")
 PlayerScene = ExtResource("2_jyhfs")
 MapScene = ExtResource("3_tbgi4")
+TeacherScene = ExtResource("4_jyhfs")
 position = Vector2(54, -158)
