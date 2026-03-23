@@ -2,6 +2,7 @@
 
 #include "../ISelectable.hpp"
 #include "../player/Player.hpp"
+#include "StudentTypes.hpp"
 
 #include <godot_cpp/classes/character_body2d.hpp>
 #include <godot_cpp/classes/sprite2d.hpp>
@@ -15,6 +16,8 @@ class Student : public CharacterBody2D, public ISelectable {
   public:
     Student();
     ~Student();
+
+    StudentTypes type;
 
     void _ready() override;
     void _physics_process(double delta) override;
@@ -36,7 +39,6 @@ class Student : public CharacterBody2D, public ISelectable {
     void UnHighlight();
 
   public:
-
     void set_max_speed(float v);
     float get_max_speed() const;
 

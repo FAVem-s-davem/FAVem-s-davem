@@ -3,15 +3,16 @@
 #include "../map/MapObject.hpp"
 #include "../player/Player.hpp"
 #include "../student/Student.hpp"
+#include "../teacher/Teacher.hpp"
 #include "godot_cpp/classes/file_access.hpp"
 #include "godot_cpp/variant/utility_functions.hpp"
 #include "godot_cpp/variant/vector2.hpp"
 
 #include <fstream>
-#include <godot_cpp/core/class_db.hpp>
-#include <godot_cpp/core/object.hpp>
 #include <godot_cpp/classes/input.hpp>
 #include <godot_cpp/classes/input_event_key.hpp>
+#include <godot_cpp/core/class_db.hpp>
+#include <godot_cpp/core/object.hpp>
 #include <regex>
 #include <string>
 #include <vector>
@@ -29,6 +30,9 @@ void GameScene::_bind_methods() {
     ClassDB::bind_method(D_METHOD("set_map_scene", "scene"), &GameScene::set_map_scene);
     ClassDB::bind_method(D_METHOD("get_map_scene"), &GameScene::get_map_scene);
 
+    ClassDB::bind_method(D_METHOD("set_teacher_scene", "scene"), &GameScene::set_teacher_scene);
+    ClassDB::bind_method(D_METHOD("get_teacher_scene"), &GameScene::get_teacher_scene);
+
     ADD_PROPERTY(
         PropertyInfo(Variant::OBJECT, "StudentScene", PROPERTY_HINT_RESOURCE_TYPE, "PackedScene"),
         "set_student_scene", "get_student_scene");
@@ -40,6 +44,10 @@ void GameScene::_bind_methods() {
     ADD_PROPERTY(
         PropertyInfo(Variant::OBJECT, "MapScene", PROPERTY_HINT_RESOURCE_TYPE, "PackedScene"),
         "set_map_scene", "get_map_scene");
+
+    ADD_PROPERTY(
+        PropertyInfo(Variant::OBJECT, "TeacherScene", PROPERTY_HINT_RESOURCE_TYPE, "PackedScene"),
+        "set_teacher_scene", "get_teacher_scene");
 }
 
 std::vector<std::string> get_svg_polygons(const String &path) {
@@ -66,10 +74,11 @@ std::vector<std::string> get_svg_polygons(const String &path) {
     return polygons;
 }
 
-void GameScene::_input(const Ref<InputEvent> &event){
+void GameScene::_input(const Ref<InputEvent> &event) {
 
     Ref<InputEventKey> key_event = event;
-    if (key_event.is_valid() && key_event->is_pressed() && !key_event->is_echo() && key_event->get_keycode() == KEY_G) {
+    if (key_event.is_valid() && key_event->is_pressed() && !key_event->is_echo() &&
+        key_event->get_keycode() == KEY_G) {
         Node *node = student_scene->instantiate();
         Student *student = Object::cast_to<Student>(node);
 
@@ -98,6 +107,8 @@ void GameScene::_ready() {
     spawn_students(10);
     spawn_player();
     spawn_map();
+
+    spawn_teacher();
 
     /*
 
@@ -195,6 +206,19 @@ void GameScene::spawn_map() {
     }
 }
 
+void GameScene::spawn_teacher() {
+    Node *node = teacher_scene->instantiate();
+    Teacher *teacher = Object::cast_to<Teacher>(node);
+
+    if (!teacher) {
+        UtilityFunctions::print("PlayerScene root is not Player");
+        return;
+    }
+
+    teacher->set_global_position(Vector2(200, 200));
+    add_child(teacher);
+}
+
 void GameScene::set_student_scene(const Ref<PackedScene> &scene) { student_scene = scene; }
 Ref<PackedScene> GameScene::get_student_scene() const { return student_scene; }
 
@@ -203,3 +227,6 @@ Ref<PackedScene> GameScene::get_player_scene() const { return player_scene; }
 
 void GameScene::set_map_scene(const Ref<PackedScene> &scene) { map_scene = scene; }
 Ref<PackedScene> GameScene::get_map_scene() const { return map_scene; }
+
+void GameScene::set_teacher_scene(const Ref<PackedScene> &scene) { teacher_scene = scene; }
+Ref<PackedScene> GameScene::get_teacher_scene() const { return teacher_scene; }

@@ -7,6 +7,7 @@
 #include "player/PlayerSelectionManager.hpp"
 #include "player/SelectionManager.hpp"
 #include "student/Student.hpp"
+#include "teacher/Teacher.hpp"
 
 using namespace godot;
 
@@ -20,6 +21,7 @@ void initialize_player_module(ModuleInitializationLevel level) {
     ClassDB::register_class<Student>();
     ClassDB::register_class<MapObject>();
     ClassDB::register_class<GameScene>();
+    ClassDB::register_class<Teacher>();
 }
 
 void uninitialize_player_module(ModuleInitializationLevel level) {

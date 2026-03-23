@@ -1,88 +1,19 @@
-name: Build & Export
+name: Export & Deploy
 
 on:
   push:
     tags: ["*"]
 
 jobs:
-  build-libs:
-    name: Build Lib (${{ matrix.platform }})
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - platform: linux
-            os: ubuntu-latest
-          - platform: windows
-            os: ubuntu-latest
-          - platform: web
-            os: ubuntu-latest
-          - platform: macos
-            os: macos-latest
-
-    steps:
-      - uses: actions/checkout@v6
-        with:
-          submodules: recursive
-
-      - name: SCons cache
-        uses: actions/cache@v5
-        with:
-          path: |
-            ${{ github.workspace }}/.scons_cache
-            src/godot-cpp/gen/
-            src/godot-cpp/bin/
-          key: ${{ runner.os }}-${{ matrix.platform }}-scons-${{ hashFiles('src/SConstruct', 'src/src/**', 'src/godot-cpp/SConstruct') }}
-          restore-keys: |
-            ${{ runner.os }}-${{ matrix.platform }}-scons-
-
-      - name: Install SCons (except MacOS)
-        if: matrix.platform != 'macos'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y scons build-essential
-
-      - name: Install SCons (MacOS)
-        if: matrix.platform == 'macos'
-        run: |
-          brew install scons
-
-      - name: Install Win Compiler
-        if: matrix.platform == 'windows'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y g++-mingw-w64
-
-      - name: Setup emsdk (Web only)
-        if: matrix.platform == 'web'
-        uses: mymindstorm/setup-emsdk@v14
-        with:
-          version: 3.1.64
-          actions-cache-folder: 'emsdk-cache'
-
-      - name: Build GDExtension
-        working-directory: src
-        run: scons platform=${{ matrix.platform }} target=template_release --cache-force
-        env:
-          SCONS_CACHE_DIR: ${{ github.workspace }}/.scons_cache
-
-      - name: Upload Library Artifact
-        uses: actions/upload-artifact@v7
-        with:
-          name: lib-${{ matrix.platform }}
-          path: src/bin/
-
-  export-game:
+  export:
     name: Export Game
-    needs: build-libs
     runs-on: ubuntu-latest
     permissions:
       contents: write
+
     steps:
-      - uses: actions/checkout@v6
-        with:
-          submodules: recursive
+      - name: Checkout
+        uses: actions/checkout@v6
 
       # prevent re-downloadnig godot & its templates
       - name: Godot download cache
@@ -91,16 +22,6 @@ jobs:
           path: |
             ~/.local/share/godot/
           key: godot-4.6.1-stable-templates
-
-      - name: Download All Libs
-        uses: actions/download-artifact@v8
-        with:
-          path: src/bin/
-          pattern: lib-*
-          merge-multiple: true
-
-      - name: Verify All Libs Present
-        run: ls -R src/bin/
 
       - name: Godot Export
         id: export
@@ -120,10 +41,11 @@ jobs:
 
   deploy:
     name: Deploy to GitHub and Itch
-    needs: export-game
+    needs: export
     runs-on: ubuntu-latest
     permissions:
       contents: write
+
     steps:
       - name: Download zips
         uses: actions/download-artifact@v8
@@ -136,7 +58,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.ref_name }}
-          draft: true
+          draft: false
           artifacts: out/*.zip
 
       - name: Install Butler

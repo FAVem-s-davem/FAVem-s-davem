@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://oi27fw7cttoa"]
+
+[ext_resource type="Script" uid="uid://b1ooivriqh81t" path="res://scripts/teacher/teacher.gd" id="1_dkyc7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6mak4"]
+size = Vector2(32, 32)
+
+[sub_resource type="Gradient" id="Gradient_605c1"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_f4cdj"]
+gradient = SubResource("Gradient_605c1")
+width = 32
+height = 32
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nfilu"]
+radius = 64.0
+
+[node name="Teacher" type="CharacterBody2D" unique_id=1120646296]
+script = ExtResource("1_dkyc7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2009204484]
+shape = SubResource("RectangleShape2D_6mak4")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=320188640]
+texture = SubResource("GradientTexture2D_f4cdj")
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=1873055604]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=1600143147]
+shape = SubResource("CircleShape2D_nfilu")
