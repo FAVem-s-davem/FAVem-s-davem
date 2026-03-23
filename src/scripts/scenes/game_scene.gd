@@ -5,6 +5,8 @@ extends Node2D
 @export var student_scene: PackedScene = preload("res://scenes/Student.tscn")
 @export var player_scene: PackedScene = preload("res://scenes/Player.tscn")
 @export var map_scene: PackedScene = preload("res://scenes/MapObject.tscn")
+@export var teacher_scene: PackedScene = preload("res://scenes/Teacher.tscn")
+
 
 var player: Node2D
 
@@ -24,6 +26,7 @@ func _ready() -> void:
 	
 	spawn_students(10)
 	spawn_map()
+	spawn_teacher()
 
 
 func _input(event: InputEvent) -> void:
@@ -67,6 +70,22 @@ func spawn_player() -> void:
 	
 	player.global_position = Vector2(100, 100)
 	add_child(player)
+
+
+## Spawn teacher
+func spawn_teacher() -> void:
+	if teacher_scene == null:
+		push_error("TeacherScene not assigned")
+		return
+	
+	var teacher = teacher_scene.instantiate()
+	if teacher == null:
+		push_error("TeacherScene root is not a valid Node2D")
+		return
+	
+	teacher.global_position = Vector2(200, 200)
+	add_child(teacher)
+
 
 
 ## Spawn map objects from SVG file
