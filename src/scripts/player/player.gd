@@ -30,13 +30,13 @@ func _physics_process(delta: float) -> void:
 	var dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	
 	# WASD controls instead of arrow keys
-	if Input.is_key_pressed(KEY_W):
+	if Input.is_action_pressed("Player_Go_Up"):
 		dir.y -= 1
-	if Input.is_key_pressed(KEY_S):
+	if Input.is_action_pressed("Player_Go_Down"):
 		dir.y += 1
-	if Input.is_key_pressed(KEY_A):
+	if Input.is_action_pressed("Player_Go_Left"):
 		dir.x -= 1
-	if Input.is_key_pressed(KEY_D):
+	if Input.is_action_pressed("Player_Go_Right"):
 		dir.x += 1
 	
 	dir = dir.normalized()
