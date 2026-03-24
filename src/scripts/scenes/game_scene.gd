@@ -93,19 +93,29 @@ func spawn_map() -> void:
 	if map_scene == null:
 		push_error("MapScene not assigned")
 		return
+
+	var file = FileAccess.open("res://assets/favka/PUDORYSY_FAV-2.svg", FileAccess.READ)
+	if file == null:
+		push_warning("Could not open SVG file" )
+		return 
 	
-	var polygons = _get_svg_polygons("res://assets/test.svg")
-	print("Loaded %d polygons from SVG" % polygons.size())
+	var svg_text = file.get_as_text()
+
+	var map_node := SvgMapCollider.new()
+	add_child(map_node)
+	map_node.init_from_svg(svg_text)
+	# var polygons = _get_svg_polygons("res://assets/favka/PUDORYSY_FAV-2.svg")
+	# print("Loaded %d polygons from SVG" % polygons.size())
 	
-	for poly_string in polygons:
-		var map_obj = map_scene.instantiate()
-		if map_obj == null:
-			push_error("MapScene root is not valid")
-			return
-		
-		# Initialize map object with polygon data
-		map_obj.init(poly_string)
-		add_child(map_obj)
+	# for poly_string in polygons:
+	# 	var map_obj = map_scene.instantiate()
+	# 	if map_obj == null:
+	# 		push_error("MapScene root is not valid")
+	# 		return
+	#
+	# 	# Initialize map object with polygon data
+	# 	map_obj.init(poly_string)
+	# 	add_child(map_obj)
 
 
 ## Extract polygon tags from SVG file

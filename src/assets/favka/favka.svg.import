@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hbc6vf4jglab"
-path="res://.godot/imported/test.svg-689185d65599d06cb921948f33195eb0.ctex"
+uid="uid://c6u04twu25j7a"
+path="res://.godot/imported/favka.svg-0f7c37e602a921d9b2fc709aefa5288d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/test.svg"
-dest_files=["res://.godot/imported/test.svg-689185d65599d06cb921948f33195eb0.ctex"]
+source_file="res://assets/favka/favka.svg"
+dest_files=["res://.godot/imported/favka.svg-0f7c37e602a921d9b2fc709aefa5288d.ctex"]
 
 [params]
 
