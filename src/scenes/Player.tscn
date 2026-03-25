@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bldg46c3bd861" path="res://scripts/player/player.gd" id="1_p0vlq"]
 [ext_resource type="Script" uid="uid://bpymyrp2ec0im" path="res://scripts/player/player_selection_manager.gd" id="2_v6fml"]
+[ext_resource type="Script" uid="uid://bdhw5mn8ju37t" path="res://scripts/player/cursor_follow_manager.gd" id="3_3li8b"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5q5h1"]
 radius = 32.0
@@ -29,3 +30,6 @@ position_smoothing_enabled = true
 
 [node name="PlayerSelectionManager" type="Node2D" parent="." unique_id=952871996]
 script = ExtResource("2_v6fml")
+
+[node name="CursorFollowManager" type="Node2D" parent="." unique_id=1078068304]
+script = ExtResource("3_3li8b")

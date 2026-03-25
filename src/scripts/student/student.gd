@@ -12,6 +12,8 @@ signal deselected
 var student_type: StudentTypes.Type
 
 var player: Node2D = null
+var target_position: Vector2 = Vector2.ZERO
+var has_target: bool = false
 
 
 func _ready() -> void:
@@ -35,38 +37,62 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	var input_direction = Vector2.ZERO
 	
-	if player != null:
-		var to_player = player.global_position - global_position
-		var dist = to_player.length()
-		
-		# Outside deselect ring - deselect self
-		if dist > player.get_deselect_ring():
-			deselected.emit()
-		# Outside stop ring - move toward player
-		elif dist > player.get_stop_ring():
-			input_direction = to_player.normalized()
-			
-			# Boost speed if outside catchup ring
-			if dist > player.get_catchup_ring():
-				input_direction *= 1.5
-		# Inside stop ring - back away from player
-		elif dist < player.get_stop_ring():
-			input_direction = -1.5 * (1.0 - dist / player.get_stop_ring()) * to_player.normalized()
+	# Prioritize cursor target over player following
+	if has_target:
+		input_direction = _get_target_direction()
+	elif player != null:
+		input_direction = _get_player_direction()
 	
 	# Apply velocity with acceleration
 	var target_velocity = input_direction * max_speed
 	velocity = velocity.move_toward(target_velocity, acceleration * delta)
 	
 	move_and_slide()
+	_handle_collisions()
+
+
+func _get_target_direction() -> Vector2:
+	var to_target = target_position - global_position
+	var dist_to_target = to_target.length()
 	
-	# Handle collisions with other bodies
+	if dist_to_target > 10.0:
+		return to_target.normalized()
+	else:
+		has_target = false
+		return Vector2.ZERO
+
+
+func _get_player_direction() -> Vector2:
+	var to_player = player.global_position - global_position
+	var dist = to_player.length()
+	
+	# Outside deselect ring - deselect self
+	if dist > player.get_deselect_ring():
+		deselected.emit()
+		return Vector2.ZERO
+	
+	# Outside stop ring - move toward player
+	if dist > player.get_stop_ring():
+		var direction = to_player.normalized()
+		# Boost speed if outside catchup ring
+		if dist > player.get_catchup_ring():
+			direction *= 1.5
+		return direction
+	
+	# Inside stop ring - back away from player
+	if dist < player.get_stop_ring():
+		return -1.5 * (1.0 - dist / player.get_stop_ring()) * to_player.normalized()
+	
+	return Vector2.ZERO
+
+
+func _handle_collisions() -> void:
 	for i in range(get_slide_collision_count()):
 		var collision = get_slide_collision(i)
 		var collider = collision.get_collider()
 		
 		if collider != null and collider is CharacterBody2D and collider.is_in_group("selectable_units"):
 			var push_dir = -collision.get_normal()
-			# Softer push between students
 			var their_velocity = collider.velocity
 			collider.velocity = their_velocity.lerp(push_dir * 100.0, 0.1)
 
@@ -84,6 +110,15 @@ func _on_deselected() -> void:
 		player = null
 	
 	_unhighlight()
+
+
+func move_toward_target(pos: Vector2) -> void:
+	target_position = pos
+	has_target = true
+
+
+func clear_target() -> void:
+	has_target = false
 
 
 ## Highlight the student with a reddish tint
