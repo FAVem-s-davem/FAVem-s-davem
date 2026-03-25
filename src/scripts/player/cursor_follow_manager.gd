@@ -1,6 +1,6 @@
 ## Manages cursor following for students within detection range
 ## When player holds right-click, students in the detection area follow the cursor.
-## Students automatically stop following when released or moved out of range.
+## Only works if the cursor area overlaps with the player's influence area.
 extends Node2D
 
 class_name CursorFollowManager
@@ -9,9 +9,11 @@ var detection_area: Area2D
 var students_following: Array[Node2D] = []
 var cursor_pos: Vector2 = Vector2.ZERO
 var detection_radius: float = 100.0
+var player: Node2D
 
 
 func _ready() -> void:
+	player = get_parent()
 	_setup_detection_area()
 
 
@@ -41,6 +43,11 @@ func _process(_delta: float) -> void:
 
 ## Updates targets for students in range and removes those who left
 func _update_following_students() -> void:
+	# Only allow cursor following if cursor is within player's influence
+	if not _is_cursor_in_player_area():
+		_stop_all_following_students()
+		return
+	
 	var nearby_students = detection_area.get_overlapping_bodies()
 	
 	# Update target for all students in range
@@ -55,6 +62,15 @@ func _update_following_students() -> void:
 	for student in out_of_range:
 		student.clear_target()
 		students_following.erase(student)
+
+
+## Checks if cursor detection area overlaps with player's influence area
+func _is_cursor_in_player_area() -> bool:
+	if player == null:
+		return false
+	var dist = cursor_pos.distance_to(player.global_position)
+	# Areas overlap if distance <= sum of their radii
+	return dist <= (player.get_deselect_ring() + detection_radius)
 
 
 ## Returns students that are too far from cursor or deleted
@@ -76,4 +92,3 @@ func _stop_all_following_students() -> void:
 		if is_instance_valid(student):
 			student.clear_target()
 	students_following.clear()
-
