@@ -1,11 +1,11 @@
 extends CharacterBody2D
 
-@export var range: float = 64.0
+@export var range: float = 200.0
 
 var quest: Quest = Quest.new()
+var spawner: Spawner
 
 var detection_area: Area2D
-
 
 func _ready() -> void:
 	detection_area = get_node_or_null("DetectionArea") as Area2D
@@ -58,4 +58,4 @@ func _on_body_entered(body: Node2D) -> void:
 
 
 func _draw() -> void:
-	draw_circle(Vector2.ZERO, range, Color(0.9, 0.9, 0.9), false, 1.0)
+	draw_circle(Vector2.ZERO, range, Color(0.9, 0.9, 0.9), false, 2.0)

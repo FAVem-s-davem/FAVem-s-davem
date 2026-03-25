@@ -1,4 +1,6 @@
 <svg height="700" viewBox="0 0 700 700" width="700" xmlns="http://www.w3.org/2000/svg">
   <polygon fill="none" points="0,0 700,0 700,200 500,200 500,500 700,500 700,700 0,700" stroke="#ff0000" stroke-width="10"></polygon>
   <polygon fill="none" points="600,600 600,500 500,500 500,600" stroke="#00ff00" stroke-width="2"></polygon>
+  <polygon fill="red" points="700,0 600,0 600,100 700,100" stroke="#00ff00" stroke-width="2"></polygon>
+  <polygon fill="blue" points="0,700 100,700 100,600" stroke="#00ff00" stroke-width="2"></polygon>
 </svg>

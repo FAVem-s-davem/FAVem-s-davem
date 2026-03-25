@@ -24,6 +24,7 @@ shape = SubResource("CircleShape2D_5q5h1")
 texture = SubResource("GradientTexture2D_5b12s")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2046817666]
+zoom = Vector2(0.5, 0.5)
 position_smoothing_enabled = true
 
 [node name="PlayerSelectionManager" type="Node2D" parent="." unique_id=952871996]

@@ -65,9 +65,9 @@ func _draw() -> void:
 	var center = Vector2.ZERO
 	
 	# Draw selection rings
-	draw_circle(center, deselect_ring, Color(0.3, 0.3, 0.3), false, 1.0)
+	draw_circle(center, deselect_ring, Color(0.9, 0.9, 0.9), false, 2.0)
 	draw_circle(center, catchup_ring, Color(0.3, 0.3, 0.3), false, 1.0)
-	draw_circle(center, stop_ring, Color(0.3, 0.3, 0.3), false, 1.0)
+	draw_circle(center, stop_ring, Color(0.3, 0.3, 0.3), false, 2.0)
 
 
 # Getters for student reference
