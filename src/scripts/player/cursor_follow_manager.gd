@@ -66,6 +66,17 @@ func _process(_delta: float) -> void:
 		_update_following_students()
 	else:
 		_stop_all_following_students()
+	
+	queue_redraw()
+
+
+func _draw() -> void:
+	# Convert global cursor position to local coordinates for drawing
+	var local_cursor = to_local(cursor_pos)
+	
+	# Draw detection area as a light circle around cursor
+	var color = Color(0.7, 0.7, 1.0, 0.3)  # Light blue, semi-transparent
+	draw_circle(local_cursor, detection_radius, color)
 
 
 ## Updates targets for students in range and removes those who left
