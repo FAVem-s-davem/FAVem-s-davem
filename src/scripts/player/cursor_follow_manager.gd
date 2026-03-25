@@ -10,11 +10,15 @@ var students_following: Array[Node2D] = []
 var cursor_pos: Vector2 = Vector2.ZERO
 var detection_radius: float = 100.0
 var player: Node2D
+var radius_step: float = 10.0  # How much to change per scroll
+var min_radius: float = 50.0
+var max_radius: float = 300.0
 
 
 func _ready() -> void:
 	player = get_parent()
 	_setup_detection_area()
+	set_process_input(true)
 
 
 ## Creates a circular Area2D for detecting nearby students
@@ -28,6 +32,29 @@ func _setup_detection_area() -> void:
 	circle_shape.radius = detection_radius
 	collision_shape.shape = circle_shape
 	detection_area.add_child(collision_shape)
+
+
+func _input(event: InputEvent) -> void:
+	var scroll_event = event as InputEventMouseButton
+	if scroll_event == null:
+		return
+	
+	# Scroll up - increase radius
+	if scroll_event.button_index == MOUSE_BUTTON_WHEEL_UP and scroll_event.pressed:
+		_change_detection_radius(radius_step)
+	# Scroll down - decrease radius
+	elif scroll_event.button_index == MOUSE_BUTTON_WHEEL_DOWN and scroll_event.pressed:
+		_change_detection_radius(-radius_step)
+
+
+## Updates the detection radius and visual area
+func _change_detection_radius(delta: float) -> void:
+	detection_radius = clamp(detection_radius + delta, min_radius, max_radius)
+	
+	# Update the collision shape
+	var collision_shape = detection_area.get_child(0) as CollisionShape2D
+	if collision_shape != null and collision_shape.shape is CircleShape2D:
+		(collision_shape.shape as CircleShape2D).radius = detection_radius
 
 
 ## Main loop: updates detection area and handles student following
