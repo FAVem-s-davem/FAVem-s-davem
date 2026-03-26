@@ -11,6 +11,8 @@ class_name GameScene
 
 @export var teacher_respawn_delay: float = 3.0
 
+@export_file("*.svg") var svg_path: String = "res://assets/fav2.svg"
+
 
 var player: Node2D
 var student_spawners: Array[Spawner] = []
@@ -33,7 +35,7 @@ func _ready() -> void:
 		push_error("MapScene not assigned")
 		return
 	
-	var polygons = get_svg_polygons_by_fill("res://assets/fav2.svg")
+	var polygons = get_svg_polygons_by_fill(svg_path)
 	
 	#spawn_students(10)
 	spawn_map(polygons.get("none", []))
