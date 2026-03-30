@@ -21,8 +21,13 @@ var student_spawners: Array[Spawner] = []
 var free_teacher_spawners: Dictionary = {}
 var occupied_teacher_spawners: Dictionary = {}
 
+var input: InputHandler
+
 
 func _ready() -> void:
+	input = InputHandler.new()
+	add_child(input)
+	
 	if student_scene == null:
 		push_error("StudentScene not assigned")
 		return
