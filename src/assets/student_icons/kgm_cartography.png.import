@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6jgpgvs21eyn"
-path="res://.godot/imported/inf_05.png-8ec41b3edf47cd601bd5cd3536a91ad5.ctex"
+uid="uid://c465bkb6o8l1s"
+path="res://.godot/imported/kgm_cartography.png-11506cc6a7c1468ceb4a32689faa37ed.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/student_icons/inf_05.png"
-dest_files=["res://.godot/imported/inf_05.png-8ec41b3edf47cd601bd5cd3536a91ad5.ctex"]
+source_file="res://assets/student_icons/kgm_cartography.png"
+dest_files=["res://.godot/imported/kgm_cartography.png-11506cc6a7c1468ceb4a32689faa37ed.ctex"]
 
 [params]
 

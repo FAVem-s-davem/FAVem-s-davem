@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8dsdcu2gxhje"
-path="res://.godot/imported/math_03.png-8cb07ee6ca31779dc518945919c62e17.ctex"
+uid="uid://ck332bf4qsjfa"
+path="res://.godot/imported/kgm_geodet.png-21701581e490f90cc5c1e1f8500ed206.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/student_icons/math_03.png"
-dest_files=["res://.godot/imported/math_03.png-8cb07ee6ca31779dc518945919c62e17.ctex"]
+source_file="res://assets/student_icons/kgm_geodet.png"
+dest_files=["res://.godot/imported/kgm_geodet.png-21701581e490f90cc5c1e1f8500ed206.ctex"]
 
 [params]
 

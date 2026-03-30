@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dyhki1yso4743"
-path="res://.godot/imported/inf_03.png-e98270c54e09f09bcd84fed2165c1a9a.ctex"
+uid="uid://ycu28msp03oo"
+path="res://.godot/imported/kme_biomech.png-5ddf760179976bc0b6a2cc42b8ec6b4a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/student_icons/inf_03.png"
-dest_files=["res://.godot/imported/inf_03.png-e98270c54e09f09bcd84fed2165c1a9a.ctex"]
+source_file="res://assets/student_icons/kme_biomech.png"
+dest_files=["res://.godot/imported/kme_biomech.png-5ddf760179976bc0b6a2cc42b8ec6b4a.ctex"]
 
 [params]
 
