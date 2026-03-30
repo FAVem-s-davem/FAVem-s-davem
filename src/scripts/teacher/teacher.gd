@@ -38,24 +38,47 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 	student.set_meta("collected", true)
 
-	var type: int = student.student_type
+	var dept: int = student.dept
+	var spec: int = student.spec
 
-	if quest.counts[type] > 0:
-		quest.counts[type] -= 1
-
-		print("Collected type ", type, " remaining: ", quest.counts[type])
-
-		student.deselected.emit()
-		student.queue_free()
-	else:
-		print("Type not needed!")
+	# Try to register student
+	if not quest.register_student(dept, spec):
+		print("Student not needed!")
 		return
+
+	print("Accepted: ",
+		StudentTypes.dept_name_to_string(dept), " / ",
+		StudentTypes.spec_name_to_string(spec)
+	)
+
+	student.deselected.emit()
+	student.queue_free()
 
 	# Check completion
 	if quest.is_complete():
 		print("Quest complete!")
 		queue_free()
+	queue_redraw()
 
 
 func _draw() -> void:
+	# Draw detection radius
 	draw_circle(Vector2.ZERO, range, Color(0.9, 0.9, 0.9), false, 2.0)
+
+	# Draw quest text
+	var text := quest.get_description()
+
+	if text == "":
+		return
+
+	var font := ThemeDB.fallback_font
+	var font_size := 16
+
+	var text_size := font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)
+
+	var pos := Vector2(
+		-text_size.x / 2,
+		-range - 10
+	)
+
+	draw_string(font, pos, text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, Color.WHITE)

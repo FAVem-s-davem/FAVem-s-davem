@@ -9,7 +9,8 @@ signal deselected
 @export var acceleration: float = 500.0
 @export var friction: float = 100.0
 
-var student_type: StudentTypes.Type
+var dept: StudentTypes.DeptName
+var spec: StudentTypes.SpecName
 
 var player: Node2D = null
 var target_position: Vector2 = Vector2.ZERO
@@ -27,7 +28,7 @@ func _ready() -> void:
 	
 	# Assign random type and correct icon
 	_assign_random_type()
-	print(StudentTypes.student_type_to_string(student_type))
+	#print(StudentTypes.student_type_to_string(student_type))
 	_load_icon_by_type()
 	
 	# Load a random student icon
@@ -136,13 +137,18 @@ func _unhighlight() -> void:
 		
 
 func _assign_random_type() -> void:
-	var values = StudentTypes.Type.values()
-	student_type = values[randi() % values.size()]
+	var depts = StudentTypes.DeptName.values()
+	dept = depts[randi() % depts.size()]
+	
+	var specs = StudentTypes.get_specs_from_dept(dept)
+	spec = specs[randi() % specs.size()]
 
 
 func _load_icon_by_type() -> void:
-	var type_name: String = StudentTypes.student_type_to_string(student_type)
-	var path := "res://assets/student_icons/%s_01.png" % type_name
+	var dept_name: String = StudentTypes.dept_name_to_string(dept)
+	var spec_name: String = StudentTypes.spec_name_to_string(spec)
+
+	var path := "res://assets/student_icons/%s_%s.png" % [dept_name, spec_name]
 	print(path)
 
 	var tex: Texture2D = load(path)
