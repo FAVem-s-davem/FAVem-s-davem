@@ -2,6 +2,8 @@
 ## Handles movement input and manages selected units
 extends CharacterBody2D
 
+class_name Player
+
 @export var max_speed: float = 400.0
 @export var acceleration: float = 2000.0
 @export var friction: float = 800.0

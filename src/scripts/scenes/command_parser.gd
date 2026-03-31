@@ -21,41 +21,6 @@ var arg1: String = ""
 var arg2: String = ""
 var marker: int = -1
 
-var OPS = {
-	# marker commands (special, no args)
-	"m": {
-		"type": "set_marker",
-		"needs_marker": true,
-		"takes_args": false
-	},
-	"g": {
-		"type": "goto_marker",
-		"needs_marker": true,
-		"takes_args": false
-	},
-
-	# generic object operations
-	"a": {
-		"type": "select_students",
-		"needs_marker": false,
-		"takes_args": true
-	},
-	"A": {
-		"type": "append_students",
-		"needs_marker": false,
-		"takes_args": true
-	},
-	"d": {
-		"type": "deselect_students",
-		"needs_marker": false,
-		"takes_args": true
-	},
-	"D": {
-		"type": "deselect_all_students",
-		"needs_marker": false,
-		"takes_args": true
-	}
-}
 
 # =========================
 # Public API
@@ -112,12 +77,17 @@ func feed(key: String) -> Dictionary:
 # =========================
 
 func _handle_idle(key):
-	if key in OPS:
+	if key in Command.OPS:
 		op = key
-
-		if not OPS[key]["takes_args"]:
-			# m / g → go straight to marker
+		
+		var op_data = Command.OPS[key]
+		
+		if op_data.get("mode", "") == "single_arg":
+			state = State.READING_ARG1
+		
+		elif not op_data.get("takes_args", true):
 			state = State.READING_MARKER
+		
 		else:
 			state = State.READING_OP
 
@@ -152,18 +122,27 @@ func _handle_count(key):
 
 
 func _handle_arg1(key):
-	# not used (handled inline)
+	if _is_letter(key):
+		arg1 = key
+		return _after_arg1()
+
 	return _invalid()
 
 
 func _after_arg1():
+	var op_data = Command.OPS.get(op, {})
+	
+	# 🔥 NEW: single arg commands
+	if op_data.get("mode", "") == "single_arg":
+		return _complete()
+
+	# existing logic
 	if _is_upper(arg1):
 		if _needs_marker():
 			state = State.READING_MARKER
 			return { "status": "incomplete" }
 		else:
 			return _complete()
-
 	else:
 		state = State.READING_ARG2
 		return { "status": "incomplete" }
@@ -193,26 +172,28 @@ func _handle_marker(key):
 # =========================
 # Helpers
 # =========================
-
 func _complete():
 	print("COMPLETE")
-	var cmd = {
-		"op": op,
-		"count": _get_count(),
-		"arg1": arg1,
-		"arg2": arg2,
-		"marker": marker
-	}
 
-	# 🔽 DEBUG PRINT (this is your "command handler" moment)
-	print("COMMAND EXECUTED -> ", cmd)
+
+	var op_type = Command.OP_KEY_TO_TYPE.get(op, Command.OpType.SELECT)
+
+	var cmd = Command.new(
+		op_type,
+		_get_count(),
+		arg1,
+		arg2,
+		marker
+	)
+
+	print("COMMAND EXECUTED -> ", cmd.as_string())
 
 	reset()
 
 	return {
 		"status": "complete",
 		"command": cmd
-		}
+	}
 
 
 func _invalid():
@@ -221,11 +202,11 @@ func _invalid():
 
 
 func _get_count() -> int:
-	return 1 if count_str == "" else int(count_str)
+	return -1 if count_str == "" else int(count_str)
 
 
 func _needs_marker() -> bool:
-	return OPS.get(op, {}).get("needs_marker", false)
+	return Command.OPS.get(op, {}).get("needs_marker", false)
 	
 func _is_upper(c: String) -> bool:
 	return c == c.to_upper() and c != c.to_lower()

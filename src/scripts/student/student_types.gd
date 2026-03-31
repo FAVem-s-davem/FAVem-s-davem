@@ -56,6 +56,24 @@ const DEPT_TO_SPECS := {
 	],
 }
 
+static var DeptShortcuts = {
+	DeptName.KMA: "a",
+	DeptName.KIV: "i",
+	DeptName.KME: "e",
+	DeptName.KGM: "g",
+}
+
+static var SpecShortcuts = {
+	SpecName.CALCULUS: "c",
+	SpecName.GEOMETRY: "g",
+	SpecName.GRAPHICS: "g",
+	SpecName.DATABASE: "d",
+	SpecName.MATERIALS: "m",
+	SpecName.BIOMECH: "b",
+	SpecName.GEODET: "g",
+	SpecName.CARTOGRAPHY: "c"
+}
+
 static func dept_name_to_string(dept: int) -> String:
 	if dept >= 0 and dept < DEPT_NAME_STRINGS.size():
 		return DEPT_NAME_STRINGS[dept]
