@@ -3,16 +3,16 @@
 extends Node
 class_name SelectionManager
 
-var owner_player: Node2D
-var selected: Array[Node2D] = []
+var owner_player: Player
+var selected: Array[Student] = []
 
 
-func _init(player: Node2D) -> void:
+func _init(player: Player) -> void:
 	owner_player = player
 
 
 ## Select a list of students, deselecting any previously selected
-func select(students: Array[Node2D]) -> void:
+func select(students: Array[Student]) -> void:
 	clear()
 	
 	for student in students:
@@ -26,7 +26,7 @@ func select(students: Array[Node2D]) -> void:
 
 
 ## Add students to selection without clearing existing
-func add(students: Array[Node2D]) -> void:
+func add(students: Array[Student]) -> void:
 	for student in students:
 		if student == null:
 			continue
@@ -54,11 +54,11 @@ func clear() -> void:
 
 
 ## Remove specific student from selection
-func deselect(student: Node2D) -> void:
+func deselect(student: Student) -> void:
 	if student in selected:
 		selected.erase(student)
 
 
 ## Get all currently selected students
-func get_selected() -> Array[Node2D]:
+func get_selected() -> Array[Student]:
 	return selected

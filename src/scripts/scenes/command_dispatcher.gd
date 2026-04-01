@@ -26,9 +26,12 @@ func process_command(command: Command):
 
 		Command.OpType.SELECT:
 			print("Select students:", command)
+			parent.player.select_by_type(command.arg1, command.arg2, command.count, false)
 
 		Command.OpType.APPEND:
 			print("Append students:", command)
+			parent.player.select_by_type(command.arg1, command.arg2, command.count, true)
+
 
 		Command.OpType.DESELECT:
 			print("Deselect students:", command)

@@ -21,7 +21,7 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	var mb = event as InputEventMouseButton
-	
+	"""
 	if mb != null:
 		if mb.button_index == MOUSE_BUTTON_LEFT:
 			if mb.pressed:
@@ -48,7 +48,7 @@ func _input(event: InputEvent) -> void:
 						selection.select(units)
 				
 				queue_redraw()
-	
+	"""
 	var mm = event as InputEventMouseMotion
 	
 	if mm != null and dragging:

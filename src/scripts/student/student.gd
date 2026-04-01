@@ -2,10 +2,12 @@
 ## Responds to player selection and follows the player within defined ranges
 extends CharacterBody2D
 
+class_name Student
+
 signal selected(player: Node2D)
 signal deselected
 
-@export var max_speed: float = 200.0
+@export var max_speed: float = 400.0
 @export var acceleration: float = 500.0
 @export var friction: float = 100.0
 

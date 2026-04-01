@@ -92,25 +92,14 @@ func has_marker() -> bool:
 	return marker != -1
 	
 
-func _parse_arg_1(arg1) -> StudentTypes.DeptName:
-	for key in StudentTypes.DeptShortcuts:
-		if StudentTypes.DeptShortcuts[key] == arg1.to_lower():
-			return key
-	return -1
 
-func _parse_arg_2(arg1, arg2) -> StudentTypes.SpecName:
-	var dept = _parse_arg_1(arg1)
-	for spec in StudentTypes.get_specs_from_dept(dept):
-		if StudentTypes.SpecShortcuts[spec] == arg2.to_lower():
-			return spec
-	return -1
 
 func debug_string() -> String:
 	return "CMD %s | count=%d | arg1=%s | arg2=%s | marker=%d" % [
 		op_type,
 		count,
-		StudentTypes.dept_name_to_string(_parse_arg_1(arg1)),
-		StudentTypes.spec_name_to_string(_parse_arg_2(arg1, arg2)),
+		StudentTypes.dept_name_to_string(StudentTypes.parse_dept(arg1)),
+		StudentTypes.spec_name_to_string(StudentTypes.parse_spec(arg1, arg2)),
 		marker
 	]
 	

@@ -88,3 +88,16 @@ static func get_specs_from_dept(dept: int) -> Array:
 	if DEPT_TO_SPECS.has(dept):
 		return DEPT_TO_SPECS[dept]
 	return []
+
+static func parse_dept(dept: String) -> StudentTypes.DeptName:
+	for key in StudentTypes.DeptShortcuts:
+		if StudentTypes.DeptShortcuts[key] == dept.to_lower():
+			return key
+	return -1
+
+static func parse_spec(dept: String, spec: String) -> StudentTypes.SpecName:
+	var deptVal = parse_dept(dept)
+	for specVal in StudentTypes.get_specs_from_dept(deptVal):
+		if StudentTypes.SpecShortcuts[specVal] == spec.to_lower():
+			return specVal
+	return -1
