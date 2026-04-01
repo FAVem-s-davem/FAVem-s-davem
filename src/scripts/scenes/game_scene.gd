@@ -15,7 +15,9 @@ class_name GameScene
 
 var markers: Array = []
 
-var player: Node2D
+var navigation_manager: NavigationManager
+
+var player: Player
 var student_spawners: Array[Spawner] = []
 
 # Dictionary used as set
@@ -38,6 +40,9 @@ func _ready() -> void:
 	for i in range(10):
 		markers.append(null)
 	
+	navigation_manager = NavigationManager.new()
+	add_child(navigation_manager)
+	
 	if student_scene == null:
 		push_error("StudentScene not assigned")
 		return
@@ -54,6 +59,8 @@ func _ready() -> void:
 	
 	#spawn_students(10)
 	spawn_map(polygons.get("none", []))
+	navigation_manager.bake_navigation()
+	
 	spawn_player(polygons.get("green", []))
 	#spawn_teacher()
 	spawn_student_spawners(polygons.get("red", []))
@@ -157,6 +164,7 @@ func spawn_player(polygons: Array) -> void:
 		push_error("PlayerScene root is not a valid Node2D")
 		return
 	
+	player.parent = self
 	spawner.queue_free()
 
 
@@ -192,7 +200,7 @@ func spawn_map(polygons: Array) -> void:
 			return
 		
 		# Initialize map object with polygon data
-		map_obj.init(poly_string)
+		map_obj.init(poly_string, navigation_manager)
 		add_child(map_obj)
 		
 		

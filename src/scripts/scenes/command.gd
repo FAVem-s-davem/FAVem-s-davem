@@ -8,7 +8,8 @@ enum OpType {
 	SELECT,
 	APPEND,
 	DESELECT,
-	DESELECT_ALL
+	DESELECT_ALL,
+	SEND,
 }
 
 static var OP_KEY_TO_TYPE = {
@@ -20,6 +21,7 @@ static var OP_KEY_TO_TYPE = {
 	"A": Command.OpType.APPEND,
 	"d": Command.OpType.DESELECT,
 	"D": Command.OpType.DESELECT_ALL,
+	"s": Command.OpType.SEND,
 }
 
 static var OPS = {
@@ -62,8 +64,13 @@ static var OPS = {
 	"D": {
 		"type": "deselect_all_students",
 		"needs_marker": false,
+		"takes_args": false
+	},
+	"s": {
+		"type": "send_students",
+		"needs_marker": true,
 		"takes_args": true
-	}
+	},
 }
 
 var op_type: OpType

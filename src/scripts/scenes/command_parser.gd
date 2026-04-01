@@ -82,6 +82,9 @@ func _handle_idle(key):
 		
 		var op_data = Command.OPS[key]
 		
+		if Command.OP_KEY_TO_TYPE[key] == Command.OpType.DESELECT_ALL:
+			return _complete()
+		
 		if op_data.get("mode", "") == "single_arg":
 			state = State.READING_ARG1
 		

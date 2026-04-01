@@ -18,11 +18,19 @@ var player: Node2D = null
 var target_position: Vector2 = Vector2.ZERO
 var has_target: bool = false
 
+@onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
+
 
 func _ready() -> void:
 	set_motion_mode(CharacterBody2D.MOTION_MODE_FLOATING)
 	add_to_group("selectable_units")
 	add_to_group("collectable")
+	
+	nav_agent.radius = 30.0
+	nav_agent.path_desired_distance = 200.0
+	nav_agent.target_desired_distance = 40.0
+	nav_agent.avoidance_enabled = true
+	nav_agent.velocity_computed.connect(_on_velocity_computed)
 	
 	# Connect to selection signals
 	selected.connect(_on_selected)
@@ -36,33 +44,42 @@ func _ready() -> void:
 	# Load a random student icon
 	#_load_random_icon()
 
+func _on_velocity_computed(safe_velocity: Vector2) -> void:
+	velocity = safe_velocity
+
 
 func _physics_process(delta: float) -> void:
 	var input_direction = Vector2.ZERO
 	
-	# Prioritize cursor target over player following
 	if has_target:
 		input_direction = _get_target_direction()
 	elif player != null:
 		input_direction = _get_player_direction()
 	
-	# Apply velocity with acceleration
 	var target_velocity = input_direction * max_speed
 	velocity = velocity.move_toward(target_velocity, acceleration * delta)
 	
+	var desired_velocity = velocity.move_toward(target_velocity, acceleration * delta)
+
+	nav_agent.set_velocity(desired_velocity)
+
 	move_and_slide()
+	
 	_handle_collisions()
 
 
 func _get_target_direction() -> Vector2:
-	var to_target = target_position - global_position
-	var dist_to_target = to_target.length()
-	
-	if dist_to_target > 10.0:
-		return to_target.normalized()
-	else:
+	if nav_agent.is_navigation_finished():
 		has_target = false
 		return Vector2.ZERO
+	
+	var next_point: Vector2 = nav_agent.get_next_path_position()
+	var direction = next_point - global_position
+	
+	if direction.length() < 5.0:
+		return Vector2.ZERO
+	
+	return direction.normalized()
 
 
 func _get_player_direction() -> Vector2:
@@ -103,6 +120,7 @@ func _handle_collisions() -> void:
 ## Called when this student is selected
 func _on_selected(p: Node2D) -> void:
 	player = p
+	has_target = false
 	_highlight()
 
 
@@ -116,7 +134,7 @@ func _on_deselected() -> void:
 
 
 func move_toward_target(pos: Vector2) -> void:
-	target_position = pos
+	nav_agent.target_position = pos
 	has_target = true
 
 

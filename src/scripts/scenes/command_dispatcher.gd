@@ -35,15 +35,20 @@ func process_command(command: Command):
 
 		Command.OpType.DESELECT:
 			print("Deselect students:", command)
+			parent.player.deselect_by_type(command.arg1, command.arg2, command.count)
 
 		Command.OpType.DESELECT_ALL:
 			print("Deselect ALL students")
+			parent.player.get_selection().clear()
 		
 		Command.OpType.RECORD_MACRO:
 			handle_macro_record(command.arg1)
 			
 		Command.OpType.RUN_MACRO:
 			handle_macro_run(command.arg1)
+			
+		Command.OpType.SEND:
+			parent.player.send_students(command.arg1, command.arg2, command.count, command.marker)
 		
 
 func handle_macro_record(key: String):
