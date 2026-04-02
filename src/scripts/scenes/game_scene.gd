@@ -11,16 +11,38 @@ class_name GameScene
 
 @export var teacher_respawn_delay: float = 3.0
 
+@export_file("*.svg") var svg_path: String = "res://assets/fav2.svg"
 
-var player: Node2D
+var markers: Array = []
+
+var navigation_manager: NavigationManager
+
+var player: Player
 var student_spawners: Array[Spawner] = []
 
 # Dictionary used as set
 var free_teacher_spawners: Dictionary = {}
 var occupied_teacher_spawners: Dictionary = {}
 
+var input: InputHandler
+var parser: CommandParser
+var dispatcher: CommandDispatcher
+
 
 func _ready() -> void:
+	parser = CommandParser.new()
+	
+	dispatcher = CommandDispatcher.new(self)
+	
+	input = InputHandler.new(self)
+	add_child(input)
+	
+	for i in range(10):
+		markers.append(null)
+	
+	navigation_manager = NavigationManager.new()
+	add_child(navigation_manager)
+	
 	if student_scene == null:
 		push_error("StudentScene not assigned")
 		return
@@ -33,10 +55,12 @@ func _ready() -> void:
 		push_error("MapScene not assigned")
 		return
 	
-	var polygons = get_svg_polygons_by_fill("res://assets/fav2.svg")
+	var polygons = get_svg_polygons_by_fill(svg_path)
 	
 	#spawn_students(10)
 	spawn_map(polygons.get("none", []))
+	navigation_manager.bake_navigation()
+	
 	spawn_player(polygons.get("green", []))
 	#spawn_teacher()
 	spawn_student_spawners(polygons.get("red", []))
@@ -66,6 +90,42 @@ func _input(event: InputEvent) -> void:
 			spawn_student_by_spawner()
 		if event.keycode == KEY_T:
 			spawn_teacher_by_spawner()
+			
+
+func _draw():
+	# --- existing marker drawing ---
+	for i in range(markers.size()):
+		var pos = markers[i]
+		if pos == null:
+			continue
+		
+		var local_pos = to_local(pos)
+		draw_circle(local_pos, 12.0, Color.BLUE)
+
+		var font = ThemeDB.fallback_font
+		var font_size = 14
+		
+		var text = str(i)
+		var text_size = font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)
+		draw_string(font, local_pos - text_size / 2, text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, Color.WHITE)
+
+	# --- 🔥 NEW: draw input buffer ---
+	var buffer_text = input.input_buffer
+	
+	if buffer_text != "":
+		var font = ThemeDB.fallback_font
+		var font_size = 24
+		
+		var padding = 10
+		var pos = player.global_position + Vector2(0, 100)
+		
+		# optional background
+		var text_size = font.get_string_size(buffer_text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)
+		var rect = Rect2(pos - Vector2(5, 25), text_size + Vector2(10, 10))
+		
+		draw_rect(rect, Color(0, 0, 0, 0.6))
+		
+		draw_string(font, pos, buffer_text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, Color.WHITE)
 
 
 ## Spawn a single student at the given position
@@ -104,6 +164,7 @@ func spawn_player(polygons: Array) -> void:
 		push_error("PlayerScene root is not a valid Node2D")
 		return
 	
+	player.parent = self
 	spawner.queue_free()
 
 
@@ -139,7 +200,7 @@ func spawn_map(polygons: Array) -> void:
 			return
 		
 		# Initialize map object with polygon data
-		map_obj.init(poly_string)
+		map_obj.init(poly_string, navigation_manager)
 		add_child(map_obj)
 		
 		
@@ -278,3 +339,13 @@ func parse_polygon_points(tag: String) -> PackedVector2Array:
 		points.append(Vector2(x, y))
 
 	return points
+
+
+func create_marker(number: int):
+	print("Create marker ", number, " at ", player.global_position)
+	markers[number] = player.global_position
+	queue_redraw()
+
+func send_player_to_marker(number: int):
+	if markers[number] != null:
+		player.global_position = markers[number]

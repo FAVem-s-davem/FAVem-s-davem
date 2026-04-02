@@ -12,7 +12,7 @@ func _ready() -> void:
 
 
 ## Initialize this map object with SVG polygon string
-func init(polygon_string: String) -> void:
+func init(polygon_string: String, nav_manager: NavigationManager) -> void:
 	# Parse the SVG polygon
 	polygon_data = Polygon.from_svg_polygon(polygon_string)
 	
@@ -22,6 +22,12 @@ func init(polygon_string: String) -> void:
 	
 	# Set up collision walls from individual segments
 	_create_walls()
+	
+	if nav_manager.outer_boundary == null:
+		nav_manager.set_walkable_area(polygon_data.vertices)
+	else:
+		nav_manager.add_obstacle(polygon_data.vertices)
+
 	queue_redraw()
 
 

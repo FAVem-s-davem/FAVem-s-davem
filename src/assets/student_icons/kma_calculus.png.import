@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ycu28msp03oo"
-path="res://.godot/imported/mech_04.png-3bfbb2c05559bca0ba65fd014502c55b.ctex"
+uid="uid://b0oh0h42j1gil"
+path="res://.godot/imported/kma_calculus.png-2e2050a00464d419222357e7c00adc3a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/student_icons/mech_04.png"
-dest_files=["res://.godot/imported/mech_04.png-3bfbb2c05559bca0ba65fd014502c55b.ctex"]
+source_file="res://assets/student_icons/kma_calculus.png"
+dest_files=["res://.godot/imported/kma_calculus.png-2e2050a00464d419222357e7c00adc3a.ctex"]
 
 [params]
 

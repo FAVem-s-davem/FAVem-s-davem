@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ck332bf4qsjfa"
-path="res://.godot/imported/geo_01.png-9bba6d31bd77e59881814efa7ec1f960.ctex"
+uid="uid://8dsdcu2gxhje"
+path="res://.godot/imported/kma_geometry.png-a052362b8c57f980d97a1d58bab45131.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/student_icons/geo_01.png"
-dest_files=["res://.godot/imported/geo_01.png-9bba6d31bd77e59881814efa7ec1f960.ctex"]
+source_file="res://assets/student_icons/kma_geometry.png"
+dest_files=["res://.godot/imported/kma_geometry.png-a052362b8c57f980d97a1d58bab45131.ctex"]
 
 [params]
 
