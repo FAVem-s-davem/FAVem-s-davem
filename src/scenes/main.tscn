@@ -2,7 +2,13 @@
 
 [ext_resource type="Material" uid="uid://dyyy63r0efmfn" path="res://assets/blueprint_bg.png" id="1_sugp2"]
 [ext_resource type="Texture2D" uid="uid://dc1kks7gsymcg" path="res://assets/blueprint_bg.svg" id="3_jyhfs"]
+[ext_resource type="Shader" uid="uid://d20gs1xumbkij" path="res://assets/shaders/blur_ahader.gdshader" id="3_tbgi4"]
 [ext_resource type="Script" uid="uid://bqngw0mvpsuf5" path="res://scripts/scenes/game_scene.gd" id="4_jyhfs"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jyhfs"]
+shader = ExtResource("3_tbgi4")
+shader_parameter/blur_amount = 1.570000074575
+shader_parameter/tint = Color(0.62763566, 0.6276353, 0.62763536, 1)
 
 [node name="Main" type="Node2D" unique_id=1180620180]
 material = ExtResource("1_sugp2")
@@ -10,11 +16,15 @@ material = ExtResource("1_sugp2")
 [node name="GameScene" type="Node2D" parent="." unique_id=1408850278]
 script = ExtResource("4_jyhfs")
 
-[node name="Background" type="Node2D" parent="." unique_id=2127156716]
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=1919133619]
+scroll_scale = Vector2(0.5, 0.5)
 
-[node name="TextureRect" type="TextureRect" parent="Background" unique_id=14168221]
+[node name="Background" type="Node2D" parent="Parallax2D" unique_id=2127156716]
+
+[node name="TextureRect" type="TextureRect" parent="Parallax2D/Background" unique_id=14168221]
 modulate = Color(0.50140655, 0.5014065, 0.5014065, 1)
 z_index = -4096
+material = SubResource("ShaderMaterial_jyhfs")
 offset_left = -148416.0
 offset_top = -94321.0
 offset_right = 167149.0
