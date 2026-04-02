@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://btj2uvic5xmbn"]
 
 [ext_resource type="Script" uid="uid://bldg46c3bd861" path="res://scripts/player/player.gd" id="1_p0vlq"]
+[ext_resource type="Script" uid="uid://q3fl7egnbdk7" path="res://scripts/player/camera_zoom_manager.gd" id="2_mdl7e"]
 [ext_resource type="Script" uid="uid://bpymyrp2ec0im" path="res://scripts/player/player_selection_manager.gd" id="2_v6fml"]
 [ext_resource type="Script" uid="uid://bdhw5mn8ju37t" path="res://scripts/player/cursor_follow_manager.gd" id="3_3li8b"]
 
@@ -25,8 +26,9 @@ shape = SubResource("CircleShape2D_5q5h1")
 texture = SubResource("GradientTexture2D_5b12s")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2046817666]
-zoom = Vector2(0.5, 0.5)
+zoom = Vector2(0.7, 0.7)
 position_smoothing_enabled = true
+script = ExtResource("2_mdl7e")
 
 [node name="PlayerSelectionManager" type="Node2D" parent="." unique_id=952871996]
 script = ExtResource("2_v6fml")
