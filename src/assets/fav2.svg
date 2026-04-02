@@ -1,6 +1,6 @@
 <svg height="3000" viewBox="0 0 3000 3000" width="3000" xmlns="http://www.w3.org/2000/svg">
   <polygon fill="none" points="0,0 600,0 600,600 750,600 750,450 900,450 900,600 1050,600 1050,0 1650,0 1650,1050 1050,1050 1500,1500 2400,1500 2400,2700 1500,2700 1500,1800 1350,1950 1350,2400 750,2400 750,1950 1110,1950 1050,1350 600,1350 600,1950 0,1950" stroke="#000000" stroke-width="16"></polygon>
-  <polygon fill="none" points="300,900 600,900 600,1050 300,1050" stroke="red" stroke-width="4"></polygon>
+  <polygon fill="none" points="300,900 600,900 600,1050 300,1050" stroke="#000000" stroke-width="8"></polygon>
   <polygon fill="red" points="30,750 270,750 270,1200 30,1200"></polygon>
   <polygon fill="red" points="750,750 750,450 900,450 900,750"></polygon>
   <polygon fill="blue" points="0,0 600,0 600,600 0,600"></polygon>

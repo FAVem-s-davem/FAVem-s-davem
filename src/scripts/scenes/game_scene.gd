@@ -82,6 +82,7 @@ func _ready() -> void:
 func _on_student_spawn_timer() -> void:
 	spawn_student_by_spawner()
 
+"""
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.is_echo():
 		if event.keycode == KEY_G:
@@ -90,6 +91,7 @@ func _input(event: InputEvent) -> void:
 			spawn_student_by_spawner()
 		if event.keycode == KEY_T:
 			spawn_teacher_by_spawner()
+			"""
 			
 
 func _draw():

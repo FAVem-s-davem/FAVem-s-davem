@@ -6,7 +6,7 @@ signal command_executed(command)
 
 var input_buffer := ""
 var buffer_timer := 0.0
-var buffer_timeout := 0.7
+var buffer_timeout := 2.0
 var parser: CommandParser
 var parent: GameScene
 

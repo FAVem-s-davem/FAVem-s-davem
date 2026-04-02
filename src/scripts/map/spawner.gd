@@ -46,6 +46,7 @@ func get_polygon_bounds(poly: PackedVector2Array) -> Rect2:
 		Vector2(max_x - min_x, max_y - min_y)
 	)
 
+"""
 # 🎨 DRAWING
 func _draw():
 	if polygon.is_empty():
@@ -59,3 +60,4 @@ func _draw():
 		var a = polygon[i]
 		var b = polygon[(i + 1) % polygon.size()]
 		draw_line(a, b, Color(0, 1, 0), 2)
+		"""
