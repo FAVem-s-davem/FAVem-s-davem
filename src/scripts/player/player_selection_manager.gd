@@ -2,7 +2,7 @@
 ## Draw a box to select multiple units
 extends Node2D
 
-var player: Node2D
+var player: Player
 var selection: SelectionManager
 
 var dragging: bool = false
@@ -21,7 +21,7 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	var mb = event as InputEventMouseButton
-	
+	"""
 	if mb != null:
 		if mb.button_index == MOUSE_BUTTON_LEFT:
 			if mb.pressed:
@@ -36,7 +36,7 @@ func _input(event: InputEvent) -> void:
 				rect = rect.abs()
 				
 				# Get all students in the rect
-				var units = _get_units_inside(rect)
+				var units = _get_units_inside(player.global_position, player.deselect_ring)
 				
 				# Check if shift is pressed for additive selection
 				var shift_pressed = Input.is_key_pressed(KEY_SHIFT)
@@ -48,7 +48,7 @@ func _input(event: InputEvent) -> void:
 						selection.select(units)
 				
 				queue_redraw()
-	
+	"""
 	var mm = event as InputEventMouseMotion
 	
 	if mm != null and dragging:
@@ -71,17 +71,16 @@ func _draw() -> void:
 
 
 ## Get all selectable units within the given rectangle
-func _get_units_inside(rect: Rect2) -> Array[Node2D]:
+func _get_units_inside(center: Vector2, radius: float) -> Array[Node2D]:
 	var units: Array[Node2D] = []
 	
-	# Get the scene tree
-	var scene_tree = get_tree()
-	var all_nodes = scene_tree.get_nodes_in_group("selectable_units")
+	var all_nodes = get_tree().get_nodes_in_group("selectable_units")
 	
 	for node in all_nodes:
 		if node is Node2D:
 			var global_pos = node.global_position
-			if rect.has_point(global_pos):
+			
+			if global_pos.distance_to(center) <= radius:
 				units.append(node)
 	
 	return units

@@ -2,6 +2,8 @@
 ## Handles movement input and manages selected units
 extends CharacterBody2D
 
+class_name Player
+
 @export var max_speed: float = 400.0
 @export var acceleration: float = 2000.0
 @export var friction: float = 800.0
@@ -13,6 +15,7 @@ extends CharacterBody2D
 
 var selection: SelectionManager
 
+var parent: GameScene
 
 func _enter_tree() -> void:
 	selection = SelectionManager.new(self)
@@ -85,3 +88,86 @@ func get_stop_ring() -> float:
 
 func get_selection() -> SelectionManager:
 	return selection
+	
+	
+## Get all selectable units within the given rectangle
+func _get_units_inside() -> Array[Student]:
+	var units: Array[Student] = []
+	
+	var all_nodes = get_tree().get_nodes_in_group("selectable_units")
+	
+	for node in all_nodes:
+		if node is Student:
+			var global_pos = node.global_position
+			
+			if global_pos.distance_to(self.global_position) <= deselect_ring:
+				units.append(node)
+	
+	return units
+
+func select_by_type(dept: String, spec: String, count: int, append: bool):
+	var deptValue = StudentTypes.parse_dept(dept)
+	var students = _get_units_inside()
+	var specValue = null if spec == "" else StudentTypes.parse_spec(dept, spec)
+	var to_select: Array[Student] = []
+	
+	if not append:
+		selection.clear()
+	
+	for student in students:
+		if student.dept == deptValue and (specValue == null or student.spec == specValue):
+			to_select.append(student)
+			
+	if count != -1:
+		to_select = to_select.slice(0, count)
+		
+	if append:
+		selection.add(to_select)
+	else:
+		selection.select(to_select)
+		
+	print("selected: ", selection.get_selected().size())
+	
+
+func deselect_by_type(dept: String, spec: String, count: int):
+	var deptValue = StudentTypes.parse_dept(dept)
+	var students = selection.get_selected()
+	var specValue = null if spec == "" else StudentTypes.parse_spec(dept, spec)
+	var to_deselect: Array[Student] = []
+	
+	
+	for student in students:
+		if student.dept == deptValue and (specValue == null or student.spec == specValue):
+			to_deselect.append(student)
+			
+	if count != -1:
+		to_deselect = to_deselect.slice(0, count)
+		
+	for student in to_deselect:
+		selection.deselect(student)
+		
+	print("selected: ", selection.get_selected().size())
+	
+	
+func send_students(dept: String, spec: String, count: int, marker: int):
+	if parent.markers[marker] == null:
+		return
+		
+	var deptValue = StudentTypes.parse_dept(dept)
+	var students = selection.get_selected()
+	var specValue = null if spec == "" else StudentTypes.parse_spec(dept, spec)
+	var to_deselect: Array[Student] = []
+	
+	
+	for student in students:
+		if student.dept == deptValue and (specValue == null or student.spec == specValue):
+			to_deselect.append(student)
+			
+	if count != -1:
+		to_deselect = to_deselect.slice(0, count)
+		
+	for student in to_deselect:
+		selection.deselect(student)
+		student.move_toward_target(parent.markers[marker])
+		
+	print("selected: ", selection.get_selected().size())

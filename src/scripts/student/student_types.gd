@@ -56,6 +56,24 @@ const DEPT_TO_SPECS := {
 	],
 }
 
+static var DeptShortcuts = {
+	DeptName.KMA: "a",
+	DeptName.KIV: "i",
+	DeptName.KME: "e",
+	DeptName.KGM: "g",
+}
+
+static var SpecShortcuts = {
+	SpecName.CALCULUS: "c",
+	SpecName.GEOMETRY: "g",
+	SpecName.GRAPHICS: "g",
+	SpecName.DATABASE: "d",
+	SpecName.MATERIALS: "m",
+	SpecName.BIOMECH: "b",
+	SpecName.GEODET: "g",
+	SpecName.CARTOGRAPHY: "c"
+}
+
 static func dept_name_to_string(dept: int) -> String:
 	if dept >= 0 and dept < DEPT_NAME_STRINGS.size():
 		return DEPT_NAME_STRINGS[dept]
@@ -70,3 +88,16 @@ static func get_specs_from_dept(dept: int) -> Array:
 	if DEPT_TO_SPECS.has(dept):
 		return DEPT_TO_SPECS[dept]
 	return []
+
+static func parse_dept(dept: String) -> StudentTypes.DeptName:
+	for key in StudentTypes.DeptShortcuts:
+		if StudentTypes.DeptShortcuts[key] == dept.to_lower():
+			return key
+	return -1
+
+static func parse_spec(dept: String, spec: String) -> StudentTypes.SpecName:
+	var deptVal = parse_dept(dept)
+	for specVal in StudentTypes.get_specs_from_dept(deptVal):
+		if StudentTypes.SpecShortcuts[specVal] == spec.to_lower():
+			return specVal
+	return -1

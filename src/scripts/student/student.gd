@@ -2,12 +2,14 @@
 ## Responds to player selection and follows the player within defined ranges
 extends CharacterBody2D
 
+class_name Student
+
 signal selected(player: Node2D)
 signal deselected
 
-@export var max_speed: float = 200.0
-@export var acceleration: float = 500.0
-@export var friction: float = 100.0
+@export var max_speed: float = 400.0
+@export var acceleration: float = 1000.0
+@export var friction: float = 1000.0
 
 var dept: StudentTypes.DeptName
 var spec: StudentTypes.SpecName
@@ -16,11 +18,17 @@ var player: Node2D = null
 var target_position: Vector2 = Vector2.ZERO
 var has_target: bool = false
 
+@onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
+
 
 func _ready() -> void:
 	set_motion_mode(CharacterBody2D.MOTION_MODE_FLOATING)
 	add_to_group("selectable_units")
 	add_to_group("collectable")
+	
+	nav_agent.radius = 25.0
+	nav_agent.path_desired_distance = 1000.0
+	nav_agent.target_desired_distance = 40.0
 	
 	# Connect to selection signals
 	selected.connect(_on_selected)
@@ -34,57 +42,64 @@ func _ready() -> void:
 	# Load a random student icon
 	#_load_random_icon()
 
-
 func _physics_process(delta: float) -> void:
 	var input_direction = Vector2.ZERO
 	
-	# Prioritize cursor target over player following
-	if has_target:
-		input_direction = _get_target_direction()
-	elif player != null:
+	if player != null:
 		input_direction = _get_player_direction()
+	elif has_target:
+		input_direction = _get_target_direction()
 	
-	# Apply velocity with acceleration
 	var target_velocity = input_direction * max_speed
-	velocity = velocity.move_toward(target_velocity, acceleration * delta)
+	
+	if input_direction == Vector2.ZERO:
+		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
+	else:
+		velocity = velocity.move_toward(target_velocity, acceleration * delta)
 	
 	move_and_slide()
 	_handle_collisions()
 
 
 func _get_target_direction() -> Vector2:
-	var to_target = target_position - global_position
-	var dist_to_target = to_target.length()
-	
-	if dist_to_target > 10.0:
-		return to_target.normalized()
-	else:
+	if nav_agent.is_navigation_finished():
 		has_target = false
 		return Vector2.ZERO
+	
+	var next_point: Vector2 = nav_agent.get_next_path_position()
+	return (next_point - global_position).normalized()
 
 
 func _get_player_direction() -> Vector2:
+	if player == null:
+		return Vector2.ZERO
+	
 	var to_player = player.global_position - global_position
 	var dist = to_player.length()
 	
-	# Outside deselect ring - deselect self
+	# Immediate deselect
 	if dist > player.get_deselect_ring():
 		deselected.emit()
+		clear_target()
 		return Vector2.ZERO
 	
-	# Outside stop ring - move toward player
-	if dist > player.get_stop_ring():
-		var direction = to_player.normalized()
-		# Boost speed if outside catchup ring
-		if dist > player.get_catchup_ring():
-			direction *= 1.5
-		return direction
+	# STOP zone
+	if dist <= player.get_stop_ring():
+		clear_target()
+		return Vector2.ZERO
 	
-	# Inside stop ring - back away from player
-	if dist < player.get_stop_ring():
-		return -1.5 * (1.0 - dist / player.get_stop_ring()) * to_player.normalized()
+	# FOLLOW
+	var stop_dist = player.get_stop_ring()
+
+	# Direction from player → student
+	var dir = (global_position - player.global_position).normalized()
+
+	# Target point on the ring
+	var target_pos = player.global_position + dir * stop_dist
+
+	nav_agent.target_position = target_pos
 	
-	return Vector2.ZERO
+	return _get_target_direction()
 
 
 func _handle_collisions() -> void:
@@ -101,6 +116,7 @@ func _handle_collisions() -> void:
 ## Called when this student is selected
 func _on_selected(p: Node2D) -> void:
 	player = p
+	clear_target()
 	_highlight()
 
 
@@ -108,18 +124,21 @@ func _on_selected(p: Node2D) -> void:
 func _on_deselected() -> void:
 	if player != null:
 		player.get_selection().deselect(self)
-		player = null
 	
+	player = null
+	clear_target()
 	_unhighlight()
 
 
 func move_toward_target(pos: Vector2) -> void:
-	target_position = pos
+	player = null  # 👈 THIS IS CRITICAL
+	nav_agent.target_position = pos
 	has_target = true
 
 
 func clear_target() -> void:
 	has_target = false
+	nav_agent.target_position = global_position
 
 
 ## Highlight the student with a reddish tint
