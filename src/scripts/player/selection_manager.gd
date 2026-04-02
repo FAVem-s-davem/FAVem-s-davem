@@ -57,6 +57,9 @@ func clear() -> void:
 func deselect(student: Student) -> void:
 	if student in selected:
 		selected.erase(student)
+		
+		if student.has_signal("deselected"):
+			student.deselected.emit()
 
 
 ## Get all currently selected students
