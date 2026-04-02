@@ -16,6 +16,7 @@ var max_radius: float = 300.0
 
 
 func _ready() -> void:
+	queue_free()
 	player = get_parent()
 	_setup_detection_area()
 	set_process_input(true)
