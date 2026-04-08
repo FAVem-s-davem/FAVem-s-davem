@@ -69,6 +69,8 @@ func _process(delta):
 func clear_buffer():
 	input_buffer = ""
 	parent.queue_redraw()
+	parser.reset()
+	
 
 func reset_parser():
 	parser.reset()
