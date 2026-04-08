@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://7fgmuaau0mtu" path="res://scripts/scenes/gui/menu.gd" id="1_yqeox"]
 [ext_resource type="PackedScene" uid="uid://b6cb54hrx1884" path="res://scenes/gui/about.tscn" id="2_cav3j"]
+[ext_resource type="PackedScene" uid="uid://cvmtu2i7recfl" path="res://scenes/gui/settings.tscn" id="3_uak7f"]
 
 [node name="Menu" type="Control" unique_id=278537481]
 layout_mode = 3
@@ -49,5 +50,9 @@ layout_mode = 2
 text = "QUIT"
 
 [node name="About" parent="." unique_id=271891995 instance=ExtResource("2_cav3j")]
+visible = false
+layout_mode = 0
+
+[node name="Settings" parent="." unique_id=1896592881 instance=ExtResource("3_uak7f")]
 visible = false
 layout_mode = 0
