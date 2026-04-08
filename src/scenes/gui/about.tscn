@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://b6cb54hrx1884"]
+
+[node name="About" type="Control" unique_id=271891995]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="." unique_id=1634521411]
+layout_mode = 0
+offset_left = 509.0
+offset_top = 109.0
+offset_right = 591.0
+offset_bottom = 132.0
+text = "About text
+
+Fav, logo
+
+Hejdula
+Ladim
+Voky
+Mr.ellen"
+
+[node name="Back" type="Button" parent="." unique_id=1732487796]
+layout_mode = 0
+offset_left = 432.0
+offset_top = 378.0
+offset_right = 720.0
+offset_bottom = 409.0
+text = "BACK"
