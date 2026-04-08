@@ -12,7 +12,7 @@ func _ready():
 	$MainMenu/VBoxContainer/Quit.pressed.connect(_on_quit_pressed)
 
 	$About/Back.pressed.connect(_on_back_pressed)
-	$Settings/Back.pressed.connect(_on_back_pressed)
+	$Settings/VBoxContainer/Back.pressed.connect(_on_back_pressed)
 
 func _on_quit_pressed():
 	get_tree().quit()
@@ -27,7 +27,7 @@ func _on_settings_pressed():
 	$MainMenu.visible = false
 	$Settings.visible = true
 	await get_tree().process_frame
-	$Settings/Back.grab_focus()
+	$Settings/VBoxContainer/Back.grab_focus()
 
 func _on_back_pressed():
 	$About.visible = false
