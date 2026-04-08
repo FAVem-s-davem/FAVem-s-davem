@@ -25,6 +25,7 @@ func _input(event):
 		# in case esc pressed from about menu
 		$Menu/MainMenu.visible = true
 		$Menu/About.visible = false
+		$Menu/Settings.visible = false
 		
 		get_node("/root/Main/GameScene").visible = false
 		get_tree().paused = true
