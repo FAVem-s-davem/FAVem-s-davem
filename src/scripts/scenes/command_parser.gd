@@ -9,6 +9,9 @@ enum State {
 	READING_MARKER
 }
 
+signal actions_updated(actions: Dictionary)
+signal buffer_updated(buffer: String)
+
 var state = State.IDLE
 
 # buffer for keylogger
@@ -34,6 +37,7 @@ func reset():
 	arg1 = ""
 	arg2 = ""
 	marker = -1
+	emit_signal("actions_updated", get_available_actions())
 
 
 func is_idle() -> bool:
@@ -69,7 +73,10 @@ func feed(key: String) -> Dictionary:
 
 	# 🔥 ALWAYS print after processing
 	print("STATE:", state)
-	print("ACTIONS:", get_available_actions())
+	var actions = get_available_actions()
+	print("ACTIONS:", actions)
+	emit_signal("actions_updated", actions)
+	emit_signal("buffer_updated", get_buffer_string())
 
 	return result
 

@@ -26,6 +26,9 @@ func set_hints(new_hints: Dictionary):
 func clear_hints():
 	hints.clear()
 	_update_display()
+	
+func update_actions(new_hints: Dictionary):
+	set_hints(new_hints)
 
 # Update the visual display of all hints
 func _update_display():
