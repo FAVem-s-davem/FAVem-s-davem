@@ -1,8 +1,29 @@
 [gd_scene format=3 uid="uid://cqgga0p2qjpw1"]
 
+[ext_resource type="Script" uid="uid://b0ftyr0dy57u7" path="res://scripts/scenes/gui/ui_control.gd" id="2_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://40vcm5law3oe" path="res://scenes/gui/HUD.tscn" id="2_sugp2"]
+[ext_resource type="PackedScene" uid="uid://cnk2kwqnsjwma" path="res://scenes/gui/menu.tscn" id="3_jyhfs"]
 [ext_resource type="Script" uid="uid://bqngw0mvpsuf5" path="res://scripts/scenes/game_scene.gd" id="4_jyhfs"]
 
 [node name="Main" type="Node2D" unique_id=1180620180]
 
 [node name="GameScene" type="Node2D" parent="." unique_id=1408850278]
 script = ExtResource("4_jyhfs")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=525051515]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=28516827]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_jyhfs")
+
+[node name="Menu" parent="CanvasLayer/Control" unique_id=278537481 instance=ExtResource("3_jyhfs")]
+layout_mode = 1
+
+[node name="Hud" parent="CanvasLayer/Control" unique_id=217947933 instance=ExtResource("2_sugp2")]
+visible = false
+layout_mode = 1

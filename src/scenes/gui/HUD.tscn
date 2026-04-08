@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://40vcm5law3oe"]
+
+[node name="Hud" type="Control" unique_id=217947933]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="." unique_id=58811232]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 22.0
+offset_right = 217.0
+offset_bottom = 214.0
+text = "possible future ui stuff"
+autowrap_mode = 2
