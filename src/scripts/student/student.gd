@@ -143,14 +143,14 @@ func clear_target() -> void:
 
 ## Highlight the student with a reddish tint
 func _highlight() -> void:
-	var sprite = get_node_or_null("Sprite2D")
+	var sprite = get_node_or_null("mask/Sprite2D")
 	if sprite != null and sprite is Sprite2D:
 		sprite.modulate = Color(1.0, 0.6, 0.6)
 
 
 ## Reset student to normal color
 func _unhighlight() -> void:
-	var sprite = get_node_or_null("Sprite2D")
+	var sprite = get_node_or_null("mask/Sprite2D")
 	if sprite != null and sprite is Sprite2D:
 		sprite.modulate = Color(1.0, 1.0, 1.0)
 		
@@ -175,9 +175,12 @@ func _load_icon_by_type() -> void:
 		push_warning("Failed to load texture: " + path)
 		return
 
-	var sprite := get_node_or_null("Sprite2D") as Sprite2D
+	var sprite := get_node_or_null("mask/Sprite2D") as Sprite2D
 	if sprite:
 		sprite.texture = tex
+
+	sprite = get_node_or_null("mask") as Sprite2D
+	if sprite:
 
 		var target_size := 32.0
 		var max_dim := maxf(tex.get_width(), tex.get_height())
@@ -211,7 +214,7 @@ func _load_random_icon() -> void:
 	var chosen_file = valid_icons[randi() % valid_icons.size()]
 	var tex = load("res://assets/student_icons/" + chosen_file)
 	
-	var sprite = get_node_or_null("Sprite2D")
+	var sprite = get_node_or_null("mask/Sprite2D")
 	if sprite != null and sprite is Sprite2D and tex != null:
 		sprite.texture = tex
 		# Scale to roughly 32x32
