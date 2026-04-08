@@ -5,6 +5,7 @@
 [ext_resource type="Shader" uid="uid://d20gs1xumbkij" path="res://assets/shaders/blur_ahader.gdshader" id="3_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://40vcm5law3oe" path="res://scenes/HUD.tscn" id="2_sugp2"]
 [ext_resource type="PackedScene" uid="uid://cnk2kwqnsjwma" path="res://scenes/menu.tscn" id="3_jyhfs"]
+[ext_resource type="Script" uid="uid://b0ftyr0dy57u7" path="res://scripts/scenes/gui/ui_control.gd" id="2_jyhfs"]
 [ext_resource type="Script" uid="uid://bqngw0mvpsuf5" path="res://scripts/scenes/game_scene.gd" id="4_jyhfs"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jyhfs"]
@@ -42,9 +43,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Hud" parent="CanvasLayer/Control" unique_id=217947933 instance=ExtResource("2_sugp2")]
-layout_mode = 0
+script = ExtResource("2_jyhfs")
 
 [node name="Menu" parent="CanvasLayer/Control" unique_id=278537481 instance=ExtResource("3_jyhfs")]
+layout_mode = 1
+
+[node name="Hud" parent="CanvasLayer/Control" unique_id=217947933 instance=ExtResource("2_sugp2")]
+visible = false
 layout_mode = 1
