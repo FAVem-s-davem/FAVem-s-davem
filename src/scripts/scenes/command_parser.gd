@@ -44,32 +44,34 @@ func get_buffer_string() -> String:
 	return "".join(buffer)
 
 func feed(key: String) -> Dictionary:
-	# returns:
-	# { "status": "incomplete" | "complete" | "invalid", "command": {...} }
-
 	buffer.append(key)
 
-	match state:
+	var result: Dictionary
 
+	match state:
 		State.IDLE:
-			return _handle_idle(key)
+			result = _handle_idle(key)
 
 		State.READING_OP:
-			return _handle_after_op(key)
+			result = _handle_after_op(key)
 
 		State.READING_COUNT:
-			return _handle_count(key)
+			result = _handle_count(key)
 
 		State.READING_ARG1:
-			return _handle_arg1(key)
+			result = _handle_arg1(key)
 
 		State.READING_ARG2:
-			return _handle_arg2(key)
+			result = _handle_arg2(key)
 
 		State.READING_MARKER:
-			return _handle_marker(key)
+			result = _handle_marker(key)
 
-	return { "status": "invalid" }
+	# 🔥 ALWAYS print after processing
+	print("STATE:", state)
+	print("ACTIONS:", get_available_actions())
+
+	return result
 
 
 # =========================
@@ -220,3 +222,91 @@ func _is_lower(c: String) -> bool:
 
 func _is_letter(k: String) -> bool:
 	return k.length() == 1 and k.is_valid_identifier()
+
+# =================== Hints ========================
+
+func get_available_actions() -> Dictionary:
+	var result := {}
+	
+	match state:
+
+		State.IDLE:
+			return _actions_idle()
+
+		State.READING_OP:
+			return _actions_after_op()
+
+		State.READING_COUNT:
+			return _actions_after_count()
+
+		State.READING_ARG1:
+			return _actions_arg1()
+
+		State.READING_ARG2:
+			return _actions_arg2()
+
+		State.READING_MARKER:
+			return _actions_marker()
+
+	print(result)
+	return result
+	
+func _actions_after_op() -> Dictionary:
+	var result := {}
+	
+	result["0-9"] = "Set count"
+	
+	# uppercase = "all"
+	for dept in StudentTypes.DeptShortcuts:
+		var key = StudentTypes.DeptShortcuts[dept]
+		var name = StudentTypes.dept_name_to_string(dept)
+		
+		result[key.to_upper()] = "Select ALL " + name
+		result[key] = "Select from " + name
+	
+	return result
+	
+func _actions_after_count() -> Dictionary:
+	return _actions_after_op()
+	
+func _actions_arg2() -> Dictionary:
+	var result := {}
+	
+	var dept = StudentTypes.parse_dept(arg1)
+	
+	for spec in StudentTypes.get_specs_from_dept(dept):
+		var key = StudentTypes.SpecShortcuts[spec]
+		var name = StudentTypes.spec_name_to_string(spec)
+		
+		result[key] = name
+	
+	return result
+	
+func _actions_marker() -> Dictionary:
+	var result := {}
+	
+	for i in range(10):
+		result[str(i)] = "Marker " + str(i)
+	
+	return result
+	
+func _actions_arg1() -> Dictionary:
+	var result := {}
+	
+	var op_data = Command.OPS.get(op, {})
+	
+	if op_data.get("mode") == "single_arg":
+		for c in "abcdefghijklmnopqrstuvwxyz":
+			result[c] = "Register " + c
+		return result
+	
+	# fallback
+	return _actions_after_op()
+	
+func _actions_idle() -> Dictionary:
+	var result := {}
+	
+	for key in Command.OPS:
+		result[key] = Command.OPS[key].get("type", "")
+	
+	return result
