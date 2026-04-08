@@ -14,7 +14,7 @@ enum OpType {
 
 static var OP_KEY_TO_TYPE = {
 	"q": Command.OpType.RECORD_MACRO,
-	"w": Command.OpType.RUN_MACRO,
+	"@": Command.OpType.RUN_MACRO,
 	"m": Command.OpType.SET_MARKER,
 	"g": Command.OpType.GOTO_MARKER,
 	"a": Command.OpType.SELECT,
@@ -29,7 +29,7 @@ static var OPS = {
 		"type": "record_macro",
 		"mode": "single_arg",
 	},
-	"w": {
+	"@": {
 		"type": "run_macro",
 		"mode": "single_arg",
 	},

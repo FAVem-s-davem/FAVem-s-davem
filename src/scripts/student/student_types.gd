@@ -57,19 +57,23 @@ const DEPT_TO_SPECS := {
 }
 
 static var DeptShortcuts = {
-	DeptName.KMA: "a",
+	DeptName.KMA: "m",
 	DeptName.KIV: "i",
 	DeptName.KME: "e",
 	DeptName.KGM: "g",
 }
 
 static var SpecShortcuts = {
+	# kma
 	SpecName.CALCULUS: "c",
 	SpecName.GEOMETRY: "g",
+	# kiv
 	SpecName.GRAPHICS: "g",
 	SpecName.DATABASE: "d",
+	# kme
 	SpecName.MATERIALS: "m",
 	SpecName.BIOMECH: "b",
+	# kgm
 	SpecName.GEODET: "g",
 	SpecName.CARTOGRAPHY: "c"
 }
