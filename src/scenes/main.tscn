@@ -3,6 +3,9 @@
 [ext_resource type="Material" uid="uid://dyyy63r0efmfn" path="res://assets/blueprint_bg.png" id="1_sugp2"]
 [ext_resource type="Texture2D" uid="uid://dc1kks7gsymcg" path="res://assets/blueprint_bg.svg" id="3_jyhfs"]
 [ext_resource type="Shader" uid="uid://d20gs1xumbkij" path="res://assets/shaders/blur_ahader.gdshader" id="3_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://40vcm5law3oe" path="res://scenes/HUD.tscn" id="2_sugp2"]
+[ext_resource type="PackedScene" uid="uid://cnk2kwqnsjwma" path="res://scenes/menu.tscn" id="3_jyhfs"]
+[ext_resource type="Script" uid="uid://b0ftyr0dy57u7" path="res://scripts/scenes/gui/ui_control.gd" id="2_jyhfs"]
 [ext_resource type="Script" uid="uid://bqngw0mvpsuf5" path="res://scripts/scenes/game_scene.gd" id="4_jyhfs"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jyhfs"]
@@ -31,3 +34,20 @@ offset_right = 167149.0
 offset_bottom = 122378.0
 texture = ExtResource("3_jyhfs")
 stretch_mode = 1
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=525051515]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=28516827]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_jyhfs")
+
+[node name="Menu" parent="CanvasLayer/Control" unique_id=278537481 instance=ExtResource("3_jyhfs")]
+layout_mode = 1
+
+[node name="Hud" parent="CanvasLayer/Control" unique_id=217947933 instance=ExtResource("2_sugp2")]
+visible = false
+layout_mode = 1
