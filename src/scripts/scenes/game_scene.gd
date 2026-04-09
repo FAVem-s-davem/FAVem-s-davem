@@ -116,7 +116,6 @@ func _find_spawners_recursive(node: Node) -> Array[Spawner]:
 func _on_student_spawn_timer() -> void:
 	spawn_student_by_spawner()
 
-"""
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.is_echo():
 		if event.keycode == KEY_G:
@@ -125,8 +124,6 @@ func _input(event: InputEvent) -> void:
 			spawn_student_by_spawner()
 		if event.keycode == KEY_T:
 			spawn_teacher_by_spawner()
-			"""
-			
 
 func _draw():
 	# --- existing marker drawing ---
@@ -227,7 +224,7 @@ func spawn_teacher_by_spawner() -> void:
 
 	spawned.spawner = spawner
 
-	# 🔥 important: listen for removal
+	# important: listen for removal
 	spawned.tree_exited.connect(_on_teacher_removed.bind(spawner))
 
 	occupied_teacher_spawners[spawner] = spawned
