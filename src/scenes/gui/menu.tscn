@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://7fgmuaau0mtu" path="res://scripts/scenes/gui/menu.gd" id="1_yqeox"]
 [ext_resource type="PackedScene" uid="uid://b6cb54hrx1884" path="res://scenes/gui/about.tscn" id="2_cav3j"]
 [ext_resource type="PackedScene" uid="uid://cvmtu2i7recfl" path="res://scenes/gui/settings.tscn" id="3_uak7f"]
+[ext_resource type="Texture2D" uid="uid://hbc6vf4jglab" path="res://assets/test.svg" id="4_01a0p"]
 
 [node name="Menu" type="Control" unique_id=278537481]
 layout_mode = 3
@@ -61,3 +62,13 @@ grow_vertical = 1
 [node name="Settings" parent="." unique_id=1896592881 instance=ExtResource("3_uak7f")]
 visible = false
 layout_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=706392951]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_01a0p")
