@@ -42,5 +42,7 @@ func _update_display():
 		var label = Label.new()
 		label.text = "[ %s ]: %s" % [key, hints[key]]
 		label.autowrap_mode = TextServer.AUTOWRAP_WORD
+		label.add_theme_font_size_override("font_size", 16)
+
 		panel.add_child(label)
 		add_child(panel)

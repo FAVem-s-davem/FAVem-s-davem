@@ -13,11 +13,10 @@ grow_vertical = 2
 
 [node name="HintMenu" type="VBoxContainer" parent="." unique_id=429231294]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
+anchor_left = 0.78
+anchor_top = 0.0
 anchor_right = 1.0
-offset_left = -200.0
-offset_bottom = 335.0
+anchor_bottom = 0.6
 grow_horizontal = 0
 script = ExtResource("1_55e23")
 
@@ -29,11 +28,11 @@ autowrap_mode = 2
 
 [node name="CommandBuffer" type="HBoxContainer" parent="." unique_id=1108330777]
 layout_mode = 1
-anchors_preset = 2
+anchor_left = 0.0
 anchor_top = 1.0
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -40.0
-offset_right = 40.0
+offset_top = -60.0
 grow_vertical = 0
 alignment = 1
 script = ExtResource("2_hukx1")

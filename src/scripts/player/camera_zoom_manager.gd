@@ -1,11 +1,11 @@
 extends Camera2D
 
-const DEFAULT_ZOOM: float = 0.7
-const ZOOM_STEP: float = 0.1
-const ZOOM_MIN: float = 0.3
-const ZOOM_MAX: float = 2.0
+const DEFAULT_ZOOM: float = 0.15
+const ZOOM_STEP: float = 0.02
+const ZOOM_MIN: float = 0.04
+const ZOOM_MAX: float = 0.5
 const ZOOM_SPEED: float = 10.0
-const HOLD_SPEED: float = 0.5  # jak rychle se posouvá target při držení
+const HOLD_SPEED: float = 0.05  # jak rychle se posouvá target při držení
 
 @export var camera_zoom: float = DEFAULT_ZOOM
 var target_zoom: float = DEFAULT_ZOOM

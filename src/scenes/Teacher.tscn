@@ -4,10 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://bkxbi5f37axw4" path="res://assets/teacher1.svg" id="2_6mak4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6mak4"]
-size = Vector2(32, 32)
+size = Vector2(352, 352)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nfilu"]
-radius = 64.0
+radius = 704.0
 
 [node name="Teacher" type="CharacterBody2D" unique_id=1120646296]
 script = ExtResource("1_dkyc7")

@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
-@export var range: float = 200.0
+@export var range: float = 2200.0
+
+const QUEST_TEXT_OFFSET: float = 110.0
 
 var quest: Quest = Quest.new()
 var spawner: Spawner
@@ -63,7 +65,7 @@ func _on_body_entered(body: Node2D) -> void:
 
 func _draw() -> void:
 	# Draw detection radius
-	draw_circle(Vector2.ZERO, range, Color(0.9, 0.9, 0.9), false, 2.0)
+	draw_circle(Vector2.ZERO, range, Color(0.9, 0.9, 0.9), false, 8.0, true)
 
 	# Draw quest text
 	var text := quest.get_description()
@@ -72,13 +74,13 @@ func _draw() -> void:
 		return
 
 	var font := ThemeDB.fallback_font
-	var font_size := 16
+	var font_size := 176
 
 	var text_size := font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)
 
 	var pos := Vector2(
 		-text_size.x / 2,
-		-range - 10
+		-range - QUEST_TEXT_OFFSET
 	)
 
 	draw_string(font, pos, text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, Color.WHITE)

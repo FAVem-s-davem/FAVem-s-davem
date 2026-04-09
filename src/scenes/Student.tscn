@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://igg4xlsxghdj" path="res://assets/student_icons/inf_01.png" id="2_wjxc8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_y1qym"]
-radius = 16.0
+radius = 176.0
 
 [node name="Student" type="CharacterBody2D" unique_id=2101057550]
 motion_mode = 1
