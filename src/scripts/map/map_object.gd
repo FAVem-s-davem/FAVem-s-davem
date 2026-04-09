@@ -12,16 +12,20 @@ func _ready() -> void:
 
 
 ## Initialize this map object with SVG polygon string
-func init(polygon_string: String, nav_manager: NavigationManager) -> void:
+func init(polygon_string: String, nav_manager: NavigationManager, world_scale: float = 1.0) -> void:
 	polygon_data = Polygon.from_svg_polygon(polygon_string)
-	
+
 	if polygon_data == null or polygon_data.vertices.is_empty():
 		push_warning("Failed to parse polygon from SVG")
 		return
-	
+
+	for i in range(polygon_data.vertices.size()):
+		polygon_data.vertices[i] *= world_scale
+	polygon_data.pen_width *= world_scale
+
 	_create_walls()
-	
-	var margin := 50.0
+
+	var margin := 50.0 * world_scale
 	
 	var verts := polygon_data.vertices.duplicate()
 

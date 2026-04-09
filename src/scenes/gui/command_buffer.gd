@@ -19,10 +19,12 @@ func _process(delta: float) -> void:
 func _update_dislpay():
 	for child in get_children():
 		child.queue_free()
-	
+
 	var panel = PanelContainer.new()
 	var label = Label.new()
 	label.text = buffer
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD
+	label.add_theme_font_size_override("font_size", 20)
+
 	panel.add_child(label)
 	add_child(panel)

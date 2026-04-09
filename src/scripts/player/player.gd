@@ -4,14 +4,16 @@ extends CharacterBody2D
 
 class_name Player
 
-@export var max_speed: float = 400.0
-@export var acceleration: float = 2000.0
-@export var friction: float = 800.0
+@export var max_speed: float = 4400.0
+@export var acceleration: float = 22000.0
+@export var friction: float = 8800.0
 
 # Ring distances for student behavior
-@export var deselect_ring: float = 300.0
-@export var catchup_ring: float = 150.0
-@export var stop_ring: float = 100.0
+@export var deselect_ring: float = 3300.0
+@export var catchup_ring: float = 1650.0
+@export var stop_ring: float = 1100.0
+
+const COLLISION_PUSH_FORCE: float = 2200.0
 
 var selection: SelectionManager
 
@@ -59,7 +61,7 @@ func _physics_process(delta: float) -> void:
 			var push_dir = -collision.get_normal()
 			# Gentle push for units we collide with
 			var their_velocity = collider.velocity
-			collider.velocity = their_velocity.lerp(push_dir * 200.0, 0.2)
+			collider.velocity = their_velocity.lerp(push_dir * COLLISION_PUSH_FORCE, 0.2)
 	
 	queue_redraw()
 
@@ -68,9 +70,9 @@ func _draw() -> void:
 	var center = Vector2.ZERO
 	
 	# Draw selection rings
-	draw_circle(center, deselect_ring, Color(0.9, 0.9, 0.9), false, 2.0)
-	draw_circle(center, catchup_ring, Color(0.3, 0.3, 0.3), false, 1.0)
-	draw_circle(center, stop_ring, Color(0.3, 0.3, 0.3), false, 2.0)
+	draw_circle(center, deselect_ring, Color(0.9, 0.9, 0.9), false, 8.0, true)
+	draw_circle(center, catchup_ring, Color(0.3, 0.3, 0.3), false, 4.0, true)
+	draw_circle(center, stop_ring, Color(0.3, 0.3, 0.3), false, 8.0, true)
 
 
 # Getters for student reference
