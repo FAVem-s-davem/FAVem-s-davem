@@ -5,7 +5,7 @@ class_name NavigationManager
 var nav_region := NavigationRegion2D.new()
 var nav_poly := NavigationPolygon.new()
 
-var outer_boundary: PackedVector2Array
+var outer_boundary = null
 var obstacles: Array[PackedVector2Array] = []
 
 func set_walkable_area(vertices: Array):

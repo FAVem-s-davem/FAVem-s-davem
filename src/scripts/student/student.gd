@@ -8,7 +8,7 @@ signal selected(player: Node2D)
 signal deselected
 
 @export var max_speed: float = 400.0
-@export var acceleration: float = 1000.0
+@export var acceleration: float = 8.0
 @export var friction: float = 1000.0
 
 var dept: StudentTypes.DeptName
