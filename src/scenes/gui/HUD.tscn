@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://40vcm5law3oe"]
 
 [ext_resource type="Script" uid="uid://mhu2crqmqoh3" path="res://scripts/scenes/gui/hint_menu.gd" id="1_55e23"]
+[ext_resource type="Script" uid="uid://by3t1bpqrdd38" path="res://scenes/gui/command_buffer.gd" id="2_hukx1"]
 
 [node name="Hud" type="Control" unique_id=217947933]
 layout_mode = 3
@@ -25,3 +26,13 @@ custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 text = "possible future ui stuff"
 autowrap_mode = 2
+
+[node name="CommandBuffer" type="HBoxContainer" parent="." unique_id=1108330777]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+script = ExtResource("2_hukx1")

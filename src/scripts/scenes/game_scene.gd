@@ -14,6 +14,8 @@ class_name GameScene
 @export_file("*.svg") var svg_path: String = "res://assets/fav2.svg"
 
 @onready var hint_menu = $"../CanvasLayer/Control/Hud/HintMenu"
+@onready var command_buffer = $"../CanvasLayer/Control/Hud/CommandBuffer"
+
 
 var markers: Array = []
 
@@ -35,7 +37,9 @@ func _ready() -> void:
 	parser = CommandParser.new()
 	
 	parser.actions_updated.connect(hint_menu.update_actions)
-	#parser.buffer_updated.connect(hint_menu.update_buffer) # optional
+	parser.buffer_updated.connect(command_buffer.update_buffer) # optional
+	
+	parser.reset()
 	
 	dispatcher = CommandDispatcher.new(self)
 	

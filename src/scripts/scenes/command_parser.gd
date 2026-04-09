@@ -38,6 +38,8 @@ func reset():
 	arg2 = ""
 	marker = -1
 	emit_signal("actions_updated", get_available_actions())
+	emit_signal("buffer_updated", get_buffer_string())
+
 
 
 func is_idle() -> bool:
