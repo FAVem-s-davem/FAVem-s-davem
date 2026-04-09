@@ -8,7 +8,7 @@ signal selected(player: Node2D)
 signal deselected
 
 @export var max_speed: float = 400.0
-@export var acceleration: float = 8.0
+@export var acceleration: float = 1000.0
 @export var friction: float = 1000.0
 
 var dept: StudentTypes.DeptName
@@ -27,7 +27,7 @@ func _ready() -> void:
 	add_to_group("collectable")
 	
 	nav_agent.radius = 25.0
-	nav_agent.path_desired_distance = 1000.0
+	nav_agent.path_desired_distance = 8.0
 	nav_agent.target_desired_distance = 40.0
 	
 	# Connect to selection signals
