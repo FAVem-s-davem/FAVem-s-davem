@@ -20,14 +20,18 @@ func _input(event):
 
 		var is_letter = keycode >= KEY_A and keycode <= KEY_Z
 		var is_number = keycode >= KEY_0 and keycode <= KEY_9
+		var is_at = char(event.unicode) == "@"
 
-		if not (is_letter or is_number):
+		if not (is_letter or is_number or is_at):
 			return
 
 		var key = OS.get_keycode_string(keycode)
 
 		if is_letter:
 			key = key.to_upper() if event.shift_pressed else key.to_lower()
+		if is_at:
+			key = "@" if event.shift_pressed else "2"
+			
 
 		# movement (optional later)
 		if parser.is_idle() and key in ["h", "j", "k", "l"]:
