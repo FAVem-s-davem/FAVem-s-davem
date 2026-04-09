@@ -13,23 +13,52 @@ func _ready() -> void:
 
 ## Initialize this map object with SVG polygon string
 func init(polygon_string: String, nav_manager: NavigationManager) -> void:
-	# Parse the SVG polygon
 	polygon_data = Polygon.from_svg_polygon(polygon_string)
 	
 	if polygon_data == null or polygon_data.vertices.is_empty():
 		push_warning("Failed to parse polygon from SVG")
 		return
 	
-	# Set up collision walls from individual segments
 	_create_walls()
 	
+	var margin := 50.0
+	
+	var verts := polygon_data.vertices.duplicate()
+
 	if nav_manager.outer_boundary == null:
-		nav_manager.set_walkable_area(polygon_data.vertices)
+		# Outer MUST be clockwise
+		verts = ensure_clockwise(verts)
+		
+		# Then shrink inward
+		var shrunk = offset_polygon(verts, -margin)
+		nav_manager.set_walkable_area(shrunk)
 	else:
-		nav_manager.add_obstacle(polygon_data.vertices)
+		# Obstacles MUST be counter-clockwise
+		verts = ensure_counter_clockwise(verts)
+		
+		# Then expand outward
+		var expanded = offset_polygon(verts, -margin)
+		nav_manager.add_obstacle(expanded)
 
 	queue_redraw()
 
+func is_clockwise(poly: PackedVector2Array) -> bool:
+	var sum := 0.0
+	for i in range(poly.size()):
+		var a = poly[i]
+		var b = poly[(i + 1) % poly.size()]
+		sum += (b.x - a.x) * (b.y + a.y)
+	return sum > 0.0
+
+func ensure_clockwise(poly: PackedVector2Array) -> PackedVector2Array:
+	if not is_clockwise(poly):
+		poly.reverse()
+	return poly
+	
+func ensure_counter_clockwise(poly: PackedVector2Array) -> PackedVector2Array:
+	if is_clockwise(poly):
+		poly.reverse()
+	return poly
 
 ## Create collision walls from polygon vertices using segment shapes
 ## This matches the C++ behavior of creating SegmentShape2D for each edge
@@ -71,3 +100,27 @@ func _draw() -> void:
 		var start = vertices[i]
 		var end = vertices[(i + 1) % size]
 		draw_line(start, end, polygon_data.color, polygon_data.pen_width)
+
+func offset_polygon(poly: PackedVector2Array, amount: float) -> PackedVector2Array:
+	var result = PackedVector2Array()
+	var count = poly.size()
+	
+	if count < 3:
+		return poly
+	
+	for i in range(count):
+		var prev = poly[(i - 1 + count) % count]
+		var curr = poly[i]
+		var next = poly[(i + 1) % count]
+		
+		var dir1 = (curr - prev).normalized()
+		var dir2 = (next - curr).normalized()
+		
+		var normal1 = Vector2(-dir1.y, dir1.x)
+		var normal2 = Vector2(-dir2.y, dir2.x)
+		
+		var avg_normal = (normal1 + normal2).normalized()
+		
+		result.append(curr + avg_normal * amount)
+	
+	return result

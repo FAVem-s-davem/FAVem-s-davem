@@ -1,19 +1,13 @@
 [gd_scene format=3 uid="uid://btj2uvic5xmbn"]
 
 [ext_resource type="Script" uid="uid://bldg46c3bd861" path="res://scripts/player/player.gd" id="1_p0vlq"]
-[ext_resource type="Script" uid="uid://q3fl7egnbdk7" path="res://scripts/player/camera_zoom_manager.gd" id="2_mdl7e"]
+[ext_resource type="Script" path="res://scripts/player/camera_zoom_manager.gd" id="2_mdl7e"]
+[ext_resource type="Texture2D" uid="uid://bgomiys3umtnb" path="res://assets/Player.svg" id="2_qu4a1"]
 [ext_resource type="Script" uid="uid://bpymyrp2ec0im" path="res://scripts/player/player_selection_manager.gd" id="2_v6fml"]
 [ext_resource type="Script" uid="uid://bdhw5mn8ju37t" path="res://scripts/player/cursor_follow_manager.gd" id="3_3li8b"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5q5h1"]
 radius = 32.0
-
-[sub_resource type="Gradient" id="Gradient_laulw"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_5b12s"]
-gradient = SubResource("Gradient_laulw")
 
 [node name="Player" type="CharacterBody2D" unique_id=214270766]
 motion_mode = 1
@@ -23,7 +17,7 @@ script = ExtResource("1_p0vlq")
 shape = SubResource("CircleShape2D_5q5h1")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1992893616]
-texture = SubResource("GradientTexture2D_5b12s")
+texture = ExtResource("2_qu4a1")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2046817666]
 zoom = Vector2(0.7, 0.7)
