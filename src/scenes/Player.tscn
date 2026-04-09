@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://bdhw5mn8ju37t" path="res://scripts/player/cursor_follow_manager.gd" id="3_3li8b"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5q5h1"]
-radius = 32.0
+radius = 352.0
 
 [node name="Player" type="CharacterBody2D" unique_id=214270766]
 motion_mode = 1
@@ -20,7 +20,7 @@ shape = SubResource("CircleShape2D_5q5h1")
 texture = ExtResource("2_qu4a1")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2046817666]
-zoom = Vector2(0.7, 0.7)
+zoom = Vector2(0.15, 0.15)
 position_smoothing_enabled = true
 script = ExtResource("2_mdl7e")
 

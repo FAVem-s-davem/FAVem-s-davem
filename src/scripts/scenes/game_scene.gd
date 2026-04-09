@@ -4,6 +4,12 @@ extends Node2D
 
 class_name GameScene
 
+const WORLD_SCALE: float = 11.0
+const MARKER_RADIUS: float = 132.0
+const MARKER_FONT_SIZE: int = 154
+const BUFFER_FONT_SIZE: int = 264
+const BUFFER_TEXT_OFFSET: float = 1100.0
+
 @export var student_scene: PackedScene = preload("res://scenes/Student.tscn")
 @export var player_scene: PackedScene = preload("res://scenes/Player.tscn")
 @export var map_scene: PackedScene = preload("res://scenes/MapObject.tscn")
@@ -111,10 +117,10 @@ func _draw():
 			continue
 		
 		var local_pos = to_local(pos)
-		draw_circle(local_pos, 12.0, Color.BLUE)
+		draw_circle(local_pos, MARKER_RADIUS, Color.BLUE)
 
 		var font = ThemeDB.fallback_font
-		var font_size = 14
+		var font_size = MARKER_FONT_SIZE
 		
 		var text = str(i)
 		var text_size = font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)
@@ -125,17 +131,17 @@ func _draw():
 	
 	if buffer_text != "":
 		var font = ThemeDB.fallback_font
-		var font_size = 24
-		
-		var padding = 10
-		var pos = player.global_position + Vector2(0, 100)
-		
-		# optional background
+		var font_size = BUFFER_FONT_SIZE
+
+		var padding = 50
+		var pos = player.global_position + Vector2(0, BUFFER_TEXT_OFFSET)
+
 		var text_size = font.get_string_size(buffer_text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)
-		var rect = Rect2(pos - Vector2(5, 25), text_size + Vector2(10, 10))
-		
+		var ascent = font.get_ascent(font_size)
+		var rect = Rect2(pos - Vector2(padding / 2.0, ascent + padding / 2.0), text_size + Vector2(padding, padding))
+
 		draw_rect(rect, Color(0, 0, 0, 0.6))
-		
+
 		draw_string(font, pos, buffer_text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, Color.WHITE)
 
 
@@ -211,7 +217,7 @@ func spawn_map(polygons: Array) -> void:
 			return
 		
 		# Initialize map object with polygon data
-		map_obj.init(poly_string, navigation_manager)
+		map_obj.init(poly_string, navigation_manager, WORLD_SCALE)
 		add_child(map_obj)
 		
 		
@@ -347,7 +353,7 @@ func parse_polygon_points(tag: String) -> PackedVector2Array:
 		var x = float(coords[0])
 		var y = float(coords[1])
 
-		points.append(Vector2(x, y))
+		points.append(Vector2(x, y) * WORLD_SCALE)
 
 	return points
 

@@ -7,9 +7,15 @@ class_name Student
 signal selected(player: Node2D)
 signal deselected
 
-@export var max_speed: float = 400.0
-@export var acceleration: float = 1000.0
-@export var friction: float = 1000.0
+@export var max_speed: float = 4400.0
+@export var acceleration: float = 11000.0
+@export var friction: float = 11000.0
+
+const SPRITE_SIZE: float = 352.0
+const NAV_RADIUS: float = 275.0
+const NAV_PATH_DISTANCE: float = 88.0
+const NAV_TARGET_DISTANCE: float = 440.0
+const COLLISION_PUSH_FORCE: float = 1100.0
 
 var dept: StudentTypes.DeptName
 var spec: StudentTypes.SpecName
@@ -26,9 +32,9 @@ func _ready() -> void:
 	add_to_group("selectable_units")
 	add_to_group("collectable")
 	
-	nav_agent.radius = 25.0
-	nav_agent.path_desired_distance = 8.0
-	nav_agent.target_desired_distance = 40.0
+	nav_agent.radius = NAV_RADIUS
+	nav_agent.path_desired_distance = NAV_PATH_DISTANCE
+	nav_agent.target_desired_distance = NAV_TARGET_DISTANCE
 	
 	# Connect to selection signals
 	selected.connect(_on_selected)
@@ -110,7 +116,7 @@ func _handle_collisions() -> void:
 		if collider != null and collider is CharacterBody2D and collider.is_in_group("selectable_units"):
 			var push_dir = -collision.get_normal()
 			var their_velocity = collider.velocity
-			collider.velocity = their_velocity.lerp(push_dir * 100.0, 0.1)
+			collider.velocity = their_velocity.lerp(push_dir * COLLISION_PUSH_FORCE, 0.1)
 
 
 ## Called when this student is selected
@@ -182,9 +188,8 @@ func _load_icon_by_type() -> void:
 	sprite = get_node_or_null("mask") as Sprite2D
 	if sprite:
 
-		var target_size := 32.0
 		var max_dim := maxf(tex.get_width(), tex.get_height())
-		var scale_factor := target_size / max_dim
+		var scale_factor := SPRITE_SIZE / max_dim
 
 		sprite.scale = Vector2(scale_factor, scale_factor)
 
@@ -218,5 +223,5 @@ func _load_random_icon() -> void:
 	if sprite != null and sprite is Sprite2D and tex != null:
 		sprite.texture = tex
 		# Scale to roughly 32x32
-		var scale_factor = 32.0 / maxf(tex.get_width(), tex.get_height())
+		var scale_factor = SPRITE_SIZE / maxf(tex.get_width(), tex.get_height())
 		sprite.scale = Vector2(scale_factor, scale_factor)
