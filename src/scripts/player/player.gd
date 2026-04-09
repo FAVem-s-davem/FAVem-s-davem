@@ -14,10 +14,23 @@ class_name Player
 @export var stop_ring: float = 1100.0
 
 const COLLISION_PUSH_FORCE: float = 2200.0
+const TRAIL_STIFFNESS: float = 12.0  # spring stiffness
+const TRAIL_DAMPING: float = 7.0     # spring damping
+const TRAIL_SCALE: float = 0.02      # how far arms trail relative to velocity
 
 var selection: SelectionManager
-
 var parent: GameScene
+
+var arm_l_rest: Vector2
+var arm_r_rest: Vector2
+var arm_l_pos: Vector2
+var arm_r_pos: Vector2
+var arm_l_vel: Vector2 = Vector2.ZERO
+var arm_r_vel: Vector2 = Vector2.ZERO
+
+@onready var rig: Node2D = $Rig
+@onready var arm_l: Node2D = $Rig/ArmL
+@onready var arm_r: Node2D = $Rig/ArmR
 
 func _enter_tree() -> void:
 	selection = SelectionManager.new(self)
@@ -27,6 +40,10 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	set_motion_mode(CharacterBody2D.MOTION_MODE_FLOATING)
 	set_physics_process(true)
+	arm_l_rest = arm_l.position
+	arm_r_rest = arm_r.position
+	arm_l_pos = arm_l_rest
+	arm_r_pos = arm_r_rest
 	print("Player ready")
 
 
@@ -51,7 +68,9 @@ func _physics_process(delta: float) -> void:
 	velocity = velocity.move_toward(target_velocity, acceleration * delta)
 	
 	move_and_slide()
-	
+
+	_update_rig(delta)
+
 	# Handle collisions with selectable units
 	for i in range(get_slide_collision_count()):
 		var collision = get_slide_collision(i)
@@ -64,6 +83,27 @@ func _physics_process(delta: float) -> void:
 			collider.velocity = their_velocity.lerp(push_dir * COLLISION_PUSH_FORCE, 0.2)
 	
 	queue_redraw()
+
+
+func _update_rig(delta: float) -> void:
+	# Arms trail opposite to movement direction
+	var trail := -velocity * TRAIL_SCALE
+	var target_l := arm_l_rest + trail
+	var target_r := arm_r_rest + trail
+
+	# Spring physics for ArmL
+	var force_l := (target_l - arm_l_pos) * TRAIL_STIFFNESS
+	arm_l_vel += force_l * delta
+	arm_l_vel -= arm_l_vel * TRAIL_DAMPING * delta
+	arm_l_pos += arm_l_vel * delta
+	arm_l.position = arm_l_pos
+
+	# Spring physics for ArmR
+	var force_r := (target_r - arm_r_pos) * TRAIL_STIFFNESS
+	arm_r_vel += force_r * delta
+	arm_r_vel -= arm_r_vel * TRAIL_DAMPING * delta
+	arm_r_pos += arm_r_vel * delta
+	arm_r.position = arm_r_pos
 
 
 func _draw() -> void:

@@ -5,7 +5,7 @@ const ZOOM_STEP: float = 0.02
 const ZOOM_MIN: float = 0.04
 const ZOOM_MAX: float = 0.5
 const ZOOM_SPEED: float = 10.0
-const HOLD_SPEED: float = 0.05  # jak rychle se posouvá target při držení
+const HOLD_SPEED: float = 0.05  # how fast the target zoom changes while holding
 
 @export var camera_zoom: float = DEFAULT_ZOOM
 var target_zoom: float = DEFAULT_ZOOM
