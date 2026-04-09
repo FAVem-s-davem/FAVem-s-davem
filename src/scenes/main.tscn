@@ -1,18 +1,13 @@
 [gd_scene format=3 uid="uid://cqgga0p2qjpw1"]
 
 [ext_resource type="Script" uid="uid://b0ftyr0dy57u7" path="res://scripts/scenes/gui/ui_control.gd" id="2_jyhfs"]
-[ext_resource type="Texture2D" uid="uid://y6koxk1n1xq1" path="res://assets/fav/PUDORYSY_FAV-3.svg" id="2_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://40vcm5law3oe" path="res://scenes/gui/HUD.tscn" id="2_sugp2"]
+[ext_resource type="PackedScene" uid="uid://ydgdwwiseo4w" path="res://scenes/map.tscn" id="2_tipki"]
 [ext_resource type="Texture2D" uid="uid://dc1kks7gsymcg" path="res://assets/blueprint_bg.svg" id="3_jyhfs"]
 [ext_resource type="Shader" uid="uid://d20gs1xumbkij" path="res://assets/shaders/blur_ahader.gdshader" id="3_tbgi4"]
 [ext_resource type="Script" uid="uid://bqngw0mvpsuf5" path="res://scripts/scenes/game_scene.gd" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://cnk2kwqnsjwma" path="res://scenes/gui/menu.tscn" id="5_tefeu"]
 [ext_resource type="PackedScene" uid="uid://btj2uvic5xmbn" path="res://scenes/Player.tscn" id="8_tipki"]
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_tipki"]
-vertices = PackedVector2Array(71470.18, 105118, 65354.65, 105181.86, 67683.29, 95293.44, 81087.2, 84132.19, 27930.93, 97366.65, 4333, 101608.04, 4345.992, 67847.01, 11549.82, 67860.02, 27699.922, 67724.44, 11588.18, 65715.84, 11664.922, 63214.92, 8415.203, 65766.83, 8465.797, 63240.92, 40343.547, 33405.9, 47372.89, 32010.797, 48250.85, 37084.523, 45071.563, 60198.96, 11683.094, 61099.89, 6131.008, 61159.89, 6160.9766, 34326.04, 13231.93, 34355.953, 13201.9375, 39274.117, 34497.07, 54988.89, 39090, 54939.1, 39090, 61350.11, 34545.07, 61456.047, 20855.063, 39183.883, 20825.063, 34236.04, 27804.96, 34265.953, 27714.969, 61420.953, 54661.344, 30964.156, 61526.89, 29761.57, 66251.38, 56360.83, 60910.094, 57274.89, 55402.35, 35874.22, 39166, 68659.49, 39166, 70703.96, 34314.79, 70685.03, 34258.797, 68081.52, 50926.492, 93229.96, 49675.65, 86490.03, 65623.83, 83564.55, 61332.203, 59291.54, 64381.89, 58749.6, 64827.406, 61269.93, 61746.344, 61826.953, 49768.313, 71472.55, 56008.297, 74039.95, 62131.977, 63909.633, 67428.77, 62941.492, 68819.56, 68026.38, 61404.938, 76962.31, 89443.07, 88516.62, 84557.65, 106223.03, 77914.84, 105418.03, 85395.38, 86708.89, 76325.06, 80174.24, 65811.18, 82318.58, 73994.18, 77600.26, 65377.344, 80481.03, 72050.45, 74840.23, 64592.75, 79262.57, 70798, 72458.37, 63448.07, 78180.98, 43248.5, 69580.31)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 4, 7, 9, 10), PackedInt32Array(9, 11, 12, 10), PackedInt32Array(13, 14, 15, 16), PackedInt32Array(17, 18, 19, 20, 21), PackedInt32Array(22, 23, 24, 25), PackedInt32Array(26, 27, 28, 29), PackedInt32Array(30, 31, 32, 33, 34), PackedInt32Array(24, 35, 36, 37, 38, 25), PackedInt32Array(2, 39, 40, 41, 3), PackedInt32Array(42, 43, 44, 45), PackedInt32Array(10, 17, 21, 26, 29, 8), PackedInt32Array(46, 16, 15, 34, 33, 42, 45, 47), PackedInt32Array(48, 49, 50, 51, 47), PackedInt32Array(8, 29, 25, 38), PackedInt32Array(52, 53, 54, 55), PackedInt32Array(3, 55, 54, 0), PackedInt32Array(56, 3, 41, 57), PackedInt32Array(58, 56, 57, 59), PackedInt32Array(60, 58, 59, 61), PackedInt32Array(62, 60, 61, 63), PackedInt32Array(35, 24, 16, 64), PackedInt32Array(46, 64, 16), PackedInt32Array(47, 45, 48), PackedInt32Array(51, 50, 62, 63)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(34535, 61446, 27725, 61411, 27815, 34256, 20815, 34226, 20845, 39174, 13212, 39264, 13242, 34346, 6151, 34316, 6121, 61170, 11673, 61110, 11655, 63205, 8456, 63231, 8405, 65777, 11578, 65726, 11540, 67850, 4336, 67837, 4323, 101620, 27941, 97375, 27710, 67735, 34249, 68091, 34305, 70695, 39176, 70714, 39176, 68672, 43246, 69590, 49765, 71482, 56004, 74049, 61400, 76971, 63442, 78189, 64585, 79269, 65368, 80485, 65801, 82319, 65615, 83556, 49664, 86482, 50918, 93239, 67671, 95302, 65342, 105192, 71470, 105128, 77914, 105428, 84565, 106234, 89455, 88511, 85400, 86700, 81093, 84124, 76332, 80167, 74002, 77594, 72059, 74835, 70807, 72454, 68829, 68023, 67436, 62930, 62140, 63898, 61758, 61835, 64839, 61278, 64390, 58738, 61340, 59280, 60922, 57283, 66263, 56369, 61535, 29750, 54650, 30956, 55391, 35866, 48259, 37073, 47381, 31999, 40332, 33398, 45060, 60191, 39100, 61338, 39100, 54929, 34487, 54979)])
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jyhfs"]
 shader = ExtResource("3_tbgi4")
@@ -24,22 +19,7 @@ shader_parameter/tint = Color(0.62763566, 0.6276353, 0.62763536, 1)
 [node name="GameScene" type="Node2D" parent="." unique_id=1408850278]
 script = ExtResource("4_jyhfs")
 
-[node name="Map" type="Node2D" parent="GameScene" unique_id=1825093023]
-
-[node name="MapVisual" type="TextureRect" parent="GameScene/Map" unique_id=1448218114]
-offset_right = 95955.0
-offset_bottom = 135727.31
-texture = ExtResource("2_o6xl0")
-metadata/_edit_lock_ = true
-
-[node name="Areas" type="Node2D" parent="GameScene/Map" unique_id=710925373]
-
-[node name="NavRegion" type="NavigationRegion2D" parent="GameScene/Map/Areas" unique_id=722241935]
-navigation_polygon = SubResource("NavigationPolygon_tipki")
-
-[node name="Rooms" type="Node2D" parent="GameScene/Map/Areas" unique_id=979880710]
-
-[node name="Spawners" type="Node2D" parent="GameScene/Map/Areas" unique_id=114322349]
+[node name="Map" parent="GameScene" unique_id=2120066609 instance=ExtResource("2_tipki")]
 
 [node name="Player" parent="GameScene" unique_id=214270766 instance=ExtResource("8_tipki")]
 position = Vector2(36908, 64709)
