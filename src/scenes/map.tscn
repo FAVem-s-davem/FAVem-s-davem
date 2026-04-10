@@ -19,6 +19,7 @@ metadata/_edit_lock_ = true
 [node name="Areas" type="Node2D" parent="." unique_id=1798918764]
 
 [node name="NavRegion" type="NavigationRegion2D" parent="Areas" unique_id=729228779]
+visible = false
 navigation_polygon = SubResource("NavigationPolygon_4xfga")
 
 [node name="Polygon2D" type="Polygon2D" parent="Areas/NavRegion" unique_id=1569642283]
@@ -67,11 +68,11 @@ visible = false
 polygon = PackedVector2Array(74161, 82178, 74351, 82379, 73863, 82855, 74748, 83778, 74612, 83886, 74021, 83278, 72306, 89492, 72583, 89568, 73961, 87332, 75312, 85704, 75893, 85113, 75247, 84499, 75356, 84407, 76099, 85156, 74591, 86713, 73581, 88190, 72762, 89677, 71749, 92154, 71337, 93879, 71102, 96724, 71303, 99338, 71775, 101278, 70560, 101671, 70543, 101435, 71495, 101147, 71023, 98988, 70892, 97144, 70927, 95667, 70665, 95623, 68981, 101837, 69711, 101665, 69764, 101809, 68969, 102026, 68785, 102735, 68555, 102807, 68352, 102164, 73628, 82673)
 
 [node name="Rooms" type="Node2D" parent="Areas" unique_id=1632413633]
-visible = false
 
 [node name="Spawners" type="Node2D" parent="Areas" unique_id=1235513280]
 
 [node name="Coliders" type="StaticBody2D" parent="." unique_id=1297963751]
+visible = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Coliders" unique_id=510508357]
 build_mode = 1
