@@ -18,7 +18,6 @@ shader_parameter/tint = Color(0.62763566, 0.6276353, 0.62763536, 1)
 
 [node name="GameScene" type="Node2D" parent="." unique_id=1408850278]
 script = ExtResource("4_jyhfs")
-player_path = NodePath("")
 
 [node name="Map" parent="GameScene" unique_id=2120066609 instance=ExtResource("2_tipki")]
 
