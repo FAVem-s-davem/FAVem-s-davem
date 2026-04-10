@@ -10,15 +10,8 @@ const BUFFER_FONT_SIZE: int = 264
 const BUFFER_TEXT_OFFSET: float = 1100.0
 
 @export var student_scene: PackedScene = preload("res://scenes/Student.tscn")
-@export var teacher_scene: PackedScene = preload("res://scenes/Teacher.tscn")
-
-@export var teacher_respawn_delay: float = 3.0
-@export var student_spawn_interval: float = 2.0
-@export var auto_spawn_students: bool = true
-@export var fill_all_teacher_spawners_on_start: bool = true
 
 @export_node_path("Player") var player_path: NodePath = NodePath("Player")
-@export_node_path("Node2D") var spawners_root_path: NodePath = NodePath("Map/Areas/Spawners")
 
 @onready var hint_menu = $"../CanvasLayer/Control/Hud/HintMenu"
 @onready var command_buffer = $"../CanvasLayer/Control/Hud/CommandBuffer"
@@ -27,11 +20,6 @@ const BUFFER_TEXT_OFFSET: float = 1100.0
 var markers: Array = []
 
 var player: Player
-var student_spawners: Array[Spawner] = []
-
-# Dictionary used as set
-var free_teacher_spawners: Dictionary = {}
-var occupied_teacher_spawners: Dictionary = {}
 
 var input: InputHandler
 var parser: CommandParser
@@ -55,19 +43,6 @@ func _ready() -> void:
 		markers[i] = null
 
 	_resolve_player()
-	_collect_spawners_from_scene()
-
-	if fill_all_teacher_spawners_on_start:
-		while free_teacher_spawners.size() > 0:
-			spawn_teacher_by_spawner()
-
-	if auto_spawn_students:
-		var timer := Timer.new()
-		timer.wait_time = student_spawn_interval
-		timer.autostart = true
-		timer.one_shot = false
-		timer.timeout.connect(_on_student_spawn_timer)
-		add_child(timer)
 
 
 func _resolve_player() -> void:
@@ -78,52 +53,10 @@ func _resolve_player() -> void:
 	player.parent = self
 
 
-func _collect_spawners_from_scene() -> void:
-	student_spawners.clear()
-	free_teacher_spawners.clear()
-	occupied_teacher_spawners.clear()
-
-	var root := get_node_or_null(spawners_root_path)
-	if root == null:
-		push_warning("Spawners root not found at path: %s" % spawners_root_path)
-		return
-
-	var all_spawners := _find_spawners_recursive(root)
-	for spawner in all_spawners:
-		if spawner.scene == null:
-			push_warning("Spawner '%s' has no scene assigned, skipping" % spawner.name)
-			continue
-
-		if student_scene != null and spawner.scene == student_scene:
-			student_spawners.append(spawner)
-			continue
-
-		if teacher_scene != null and spawner.scene == teacher_scene:
-			free_teacher_spawners[spawner] = null
-
-
-func _find_spawners_recursive(node: Node) -> Array[Spawner]:
-	var result: Array[Spawner] = []
-
-	for child in node.get_children():
-		if child is Spawner:
-			result.append(child as Spawner)
-
-		result.append_array(_find_spawners_recursive(child))
-
-	return result
-	
-func _on_student_spawn_timer() -> void:
-	spawn_student_by_spawner()
-
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.is_echo():
 		if event.keycode == KEY_G:
 			spawn_student_at(get_global_mouse_position())
-		if event.keycode == KEY_P:
-			spawn_student_by_spawner()
-		if event.keycode == KEY_T:
-			spawn_teacher_by_spawner()
 
 func _draw():
 	# --- existing marker drawing ---
@@ -178,77 +111,11 @@ func spawn_student_at(position: Vector2) -> void:
 	student.global_position = position
 	add_child(student)
 
-
 ## Spawn multiple students at random positions
 func spawn_students(count: int) -> void:
 	for i in range(count):
 		var random_pos = Vector2(randf_range(0, 1100), randf_range(0, 600))
 		spawn_student_at(random_pos)
-
-
-## Spawn teacher
-func spawn_teacher() -> void:
-	if teacher_scene == null:
-		push_error("TeacherScene not assigned")
-		return
-	
-	var teacher = teacher_scene.instantiate()
-	if teacher == null:
-		push_error("TeacherScene root is not a valid Node2D")
-		return
-	
-	teacher.global_position = Vector2(200, 200)
-	add_child(teacher)
-
-func spawn_student_by_spawner() -> void:
-	# remove invalid spawners
-	student_spawners = student_spawners.filter(func(s): return is_instance_valid(s))
-
-	if student_spawners.is_empty():
-		return
-
-	var spawner = student_spawners.pick_random()
-	spawner.spawn()
-	
-func spawn_teacher_by_spawner() -> void:
-	if free_teacher_spawners.is_empty():
-		print("No free teacher spawners")
-		return
-
-	var spawner = free_teacher_spawners.keys().pick_random()
-	free_teacher_spawners.erase(spawner)
-
-	var spawned = spawner.spawn()
-	if spawned == null:
-		return
-
-	spawned.spawner = spawner
-
-	# important: listen for removal
-	spawned.tree_exited.connect(_on_teacher_removed.bind(spawner))
-
-	occupied_teacher_spawners[spawner] = spawned
-
-func respawn_teacher_with_delay() -> void:
-	var tree := get_tree()
-	if tree == null:
-		return
-
-	await tree.create_timer(teacher_respawn_delay).timeout
-
-	if not is_inside_tree():
-		return
-
-	spawn_teacher_by_spawner()
-
-func _on_teacher_removed(spawner: Spawner) -> void:
-	if occupied_teacher_spawners.has(spawner):
-		occupied_teacher_spawners.erase(spawner)
-
-	free_teacher_spawners[spawner] = null
-
-	call_deferred("respawn_teacher_with_delay")
-
 
 func create_marker(number: int):
 	print("Create marker ", number, " at ", player.global_position)
