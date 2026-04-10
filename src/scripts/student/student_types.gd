@@ -34,35 +34,35 @@ static var TypeShortcuts := {
 }
 
 static var TYPE_INFOS: Array[StudentTypeInfo] = [
-	# inf* (includes inf_ and infgeo_)
+	# inf_* only (non-mixed)
 	StudentTypeInfo.new(Type.INF, 1, "res://assets/student_icons/inf_01.png"),
 	StudentTypeInfo.new(Type.INF, 2, "res://assets/student_icons/inf_02.png"),
-	StudentTypeInfo.new(Type.INF, 3, "res://assets/student_icons/inf_04.png"),
-	StudentTypeInfo.new(Type.INF, 4, "res://assets/student_icons/inf_06.png"),
-	StudentTypeInfo.new(Type.INF, 5, "res://assets/student_icons/infgeo_01.png"),
-	StudentTypeInfo.new(Type.INF, 6, "res://assets/student_icons/infgeo_02.png"),
+	StudentTypeInfo.new(Type.INF, 3, "res://assets/student_icons/inf_03.svg"),
+	StudentTypeInfo.new(Type.INF, 4, "res://assets/student_icons/inf_04.png"),
+	StudentTypeInfo.new(Type.INF, 5, "res://assets/student_icons/inf_05.svg"),
+	StudentTypeInfo.new(Type.INF, 6, "res://assets/student_icons/inf_06.png"),
 
-	# math_* (only 01/02 png available)
+	# math_* only (non-mixed)
 	StudentTypeInfo.new(Type.MATH, 1, "res://assets/student_icons/math_01.png"),
 	StudentTypeInfo.new(Type.MATH, 2, "res://assets/student_icons/math_02.png"),
-	StudentTypeInfo.new(Type.MATH, 3, "res://icon.svg"),
-	StudentTypeInfo.new(Type.MATH, 4, "res://icon.svg"),
+	StudentTypeInfo.new(Type.MATH, 3, "res://assets/student_icons/math_03.svg"),
+	StudentTypeInfo.new(Type.MATH, 4, "res://assets/student_icons/math_04.svg"),
 	StudentTypeInfo.new(Type.MATH, 5, "res://icon.svg"),
 	StudentTypeInfo.new(Type.MATH, 6, "res://icon.svg"),
 
-	# geo* (includes geo_ and geomech_)
-	StudentTypeInfo.new(Type.GEO, 1, "res://assets/student_icons/geomech_01.png"),
+	# geo_* only (non-mixed)
+	StudentTypeInfo.new(Type.GEO, 1, "res://assets/student_icons/geo_01.svg"),
 	StudentTypeInfo.new(Type.GEO, 2, "res://assets/student_icons/geo_02.png"),
 	StudentTypeInfo.new(Type.GEO, 3, "res://assets/student_icons/geo_03.png"),
-	StudentTypeInfo.new(Type.GEO, 4, "res://icon.svg"),
+	StudentTypeInfo.new(Type.GEO, 4, "res://assets/student_icons/geo_04.svg"),
 	StudentTypeInfo.new(Type.GEO, 5, "res://icon.svg"),
 	StudentTypeInfo.new(Type.GEO, 6, "res://icon.svg"),
 
-	# mech_* (only 02/03 png available)
-	StudentTypeInfo.new(Type.MECH, 1, "res://icon.svg"),
+	# mech_* only (non-mixed)
+	StudentTypeInfo.new(Type.MECH, 1, "res://assets/student_icons/mech_01.svg"),
 	StudentTypeInfo.new(Type.MECH, 2, "res://assets/student_icons/mech_02.png"),
 	StudentTypeInfo.new(Type.MECH, 3, "res://assets/student_icons/mech_03.png"),
-	StudentTypeInfo.new(Type.MECH, 4, "res://icon.svg"),
+	StudentTypeInfo.new(Type.MECH, 4, "res://assets/student_icons/mech_04.svg"),
 	StudentTypeInfo.new(Type.MECH, 5, "res://icon.svg"),
 	StudentTypeInfo.new(Type.MECH, 6, "res://icon.svg"),
 ]
