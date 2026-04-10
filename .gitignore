@@ -1,2 +1,3 @@
 # Just ingoring my MAC folder metadata
 **/.DS_Store
+.vscode/settings.json
