@@ -23,8 +23,9 @@ const NAV_PATH_DISTANCE: float = 88.0
 const NAV_TARGET_DISTANCE: float = 440.0
 const COLLISION_PUSH_FORCE: float = 1100.0
 
-var dept: StudentTypes.DeptName
-var spec: StudentTypes.SpecName
+var student_type: int = -1
+var type_number: int = -1
+var type_info: StudentTypes.StudentTypeInfo = null
 
 var player: Node2D = null
 var target_position: Vector2 = Vector2.ZERO
@@ -220,19 +221,18 @@ func _unhighlight() -> void:
 		
 
 func _assign_random_type() -> void:
-	var depts = StudentTypes.DeptName.values()
-	dept = depts[randi() % depts.size()]
-	
-	var specs = StudentTypes.get_specs_from_dept(dept)
-	spec = specs[randi() % specs.size()]
+	var types = StudentTypes.Type.values()
+	student_type = types[randi() % types.size()]
+	type_number = StudentTypes.TYPE_NUMBERS[randi() % StudentTypes.TYPE_NUMBERS.size()]
+	type_info = StudentTypes.get_type_info(student_type, type_number)
 
 
 func _load_icon_by_type() -> void:
-	var dept_name: String = StudentTypes.dept_name_to_string(dept)
-	var spec_name: String = StudentTypes.spec_name_to_string(spec)
+	if type_info == null:
+		push_warning("Student type info missing for type=%s number=%s" % [student_type, type_number])
+		return
 
-	var path := "res://assets/student_icons/%s_%s.png" % [dept_name, spec_name]
-	print(path)
+	var path := type_info.icon_path
 
 	var tex: Texture2D = load(path)
 	if tex == null:
