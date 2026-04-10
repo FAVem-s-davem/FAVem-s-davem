@@ -15,6 +15,7 @@ script = ExtResource("1_r5ah2")
 shape = SubResource("CircleShape2D_y1qym")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=855337507]
+debug_enabled = true
 
 [node name="mask" type="Sprite2D" parent="." unique_id=1757458573]
 clip_children = 1

@@ -1,31 +1,30 @@
 ## Main game scene manager
-## Spawns and manages player, students, and map objects
+## Uses editor-placed player + spawners and handles runtime spawning/commands
 extends Node2D
 
 class_name GameScene
 
-const WORLD_SCALE: float = 11.0
 const MARKER_RADIUS: float = 132.0
 const MARKER_FONT_SIZE: int = 154
 const BUFFER_FONT_SIZE: int = 264
 const BUFFER_TEXT_OFFSET: float = 1100.0
 
 @export var student_scene: PackedScene = preload("res://scenes/Student.tscn")
-@export var player_scene: PackedScene = preload("res://scenes/Player.tscn")
-@export var map_scene: PackedScene = preload("res://scenes/MapObject.tscn")
 @export var teacher_scene: PackedScene = preload("res://scenes/Teacher.tscn")
 
 @export var teacher_respawn_delay: float = 3.0
+@export var student_spawn_interval: float = 2.0
+@export var auto_spawn_students: bool = true
+@export var fill_all_teacher_spawners_on_start: bool = true
 
-@export_file("*.svg") var svg_path: String = "res://assets/fav2.svg"
+@export_node_path("Player") var player_path: NodePath = NodePath("Player")
+@export_node_path("Node2D") var spawners_root_path: NodePath = NodePath("Map/Areas/Spawners")
 
 @onready var hint_menu = $"../CanvasLayer/Control/Hud/HintMenu"
 @onready var command_buffer = $"../CanvasLayer/Control/Hud/CommandBuffer"
 
 
 var markers: Array = []
-
-var navigation_manager: NavigationManager
 
 var player: Player
 var student_spawners: Array[Spawner] = []
@@ -41,63 +40,82 @@ var dispatcher: CommandDispatcher
 
 func _ready() -> void:
 	parser = CommandParser.new()
-	
+
 	parser.actions_updated.connect(hint_menu.update_actions)
-	parser.buffer_updated.connect(command_buffer.update_buffer) # optional
-	
+	parser.buffer_updated.connect(command_buffer.update_buffer)
 	parser.reset()
-	
+
 	dispatcher = CommandDispatcher.new(self)
-	
+
 	input = InputHandler.new(self)
 	add_child(input)
-	
-	for i in range(10):
-		markers.append(null)
-	
-	navigation_manager = NavigationManager.new()
-	add_child(navigation_manager)
-	
-	if student_scene == null:
-		push_error("StudentScene not assigned")
-		return
-	
-	if player_scene == null:
-		push_error("PlayerScene not assigned")
-		return
-	
-	if map_scene == null:
-		push_error("MapScene not assigned")
-		return
-	
-	var polygons = get_svg_polygons_by_fill(svg_path)
-	
-	#spawn_students(10)
-	spawn_map(polygons.get("none", []))
-	navigation_manager.bake_navigation()
-	
-	spawn_player(polygons.get("green", []))
-	#spawn_teacher()
-	spawn_student_spawners(polygons.get("red", []))
 
-	spawn_teacher_spawners(polygons.get("blue", []))
-	
-	while free_teacher_spawners.size() > 0:
-		spawn_teacher_by_spawner()
-		
-	var timer := Timer.new()
-	timer.wait_time = 2.0  # spawn every 2 seconds
-	timer.autostart = true
-	timer.one_shot = false
+	markers.resize(10)
+	for i in range(markers.size()):
+		markers[i] = null
 
-	timer.timeout.connect(_on_student_spawn_timer)
+	_resolve_player()
+	_collect_spawners_from_scene()
 
-	add_child(timer)
+	if fill_all_teacher_spawners_on_start:
+		while free_teacher_spawners.size() > 0:
+			spawn_teacher_by_spawner()
+
+	if auto_spawn_students:
+		var timer := Timer.new()
+		timer.wait_time = student_spawn_interval
+		timer.autostart = true
+		timer.one_shot = false
+		timer.timeout.connect(_on_student_spawn_timer)
+		add_child(timer)
+
+
+func _resolve_player() -> void:
+	player = get_node_or_null(player_path) as Player
+	if player == null:
+		push_error("Player not found at path: %s" % player_path)
+		return
+	player.parent = self
+
+
+func _collect_spawners_from_scene() -> void:
+	student_spawners.clear()
+	free_teacher_spawners.clear()
+	occupied_teacher_spawners.clear()
+
+	var root := get_node_or_null(spawners_root_path)
+	if root == null:
+		push_warning("Spawners root not found at path: %s" % spawners_root_path)
+		return
+
+	var all_spawners := _find_spawners_recursive(root)
+	for spawner in all_spawners:
+		if spawner.scene == null:
+			push_warning("Spawner '%s' has no scene assigned, skipping" % spawner.name)
+			continue
+
+		if student_scene != null and spawner.scene == student_scene:
+			student_spawners.append(spawner)
+			continue
+
+		if teacher_scene != null and spawner.scene == teacher_scene:
+			free_teacher_spawners[spawner] = null
+
+
+func _find_spawners_recursive(node: Node) -> Array[Spawner]:
+	var result: Array[Spawner] = []
+
+	for child in node.get_children():
+		if child is Spawner:
+			result.append(child as Spawner)
+
+		result.append_array(_find_spawners_recursive(child))
+
+	return result
 	
 func _on_student_spawn_timer() -> void:
 	spawn_student_by_spawner()
 
-"""
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.is_echo():
 		if event.keycode == KEY_G:
@@ -106,8 +124,6 @@ func _input(event: InputEvent) -> void:
 			spawn_student_by_spawner()
 		if event.keycode == KEY_T:
 			spawn_teacher_by_spawner()
-			"""
-			
 
 func _draw():
 	# --- existing marker drawing ---
@@ -126,7 +142,10 @@ func _draw():
 		var text_size = font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)
 		draw_string(font, local_pos - text_size / 2, text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, Color.WHITE)
 
-	# --- 🔥 NEW: draw input buffer ---
+	if input == null or player == null:
+		return
+
+	# --- draw input buffer ---
 	var buffer_text = input.input_buffer
 	
 	if buffer_text != "":
@@ -167,24 +186,6 @@ func spawn_students(count: int) -> void:
 		spawn_student_at(random_pos)
 
 
-## Spawn the player
-func spawn_player(polygons: Array) -> void:
-	if player_scene == null:
-		push_error("PlayerScene not assigned")
-		return
-	var spawner = Spawner.new()
-	spawner.scene = player_scene
-	spawner.setup(parse_polygon_points(polygons[0]))
-	add_child(spawner)
-	player = spawner.spawn()
-	if player == null:
-		push_error("PlayerScene root is not a valid Node2D")
-		return
-	
-	player.parent = self
-	spawner.queue_free()
-
-
 ## Spawn teacher
 func spawn_teacher() -> void:
 	if teacher_scene == null:
@@ -199,44 +200,6 @@ func spawn_teacher() -> void:
 	teacher.global_position = Vector2(200, 200)
 	add_child(teacher)
 
-
-
-## Spawn map objects from SVG file
-func spawn_map(polygons: Array) -> void:
-	if map_scene == null:
-		push_error("MapScene not assigned")
-		return
-	
-
-	print("Loaded %d polygons from SVG" % polygons.size())
-	
-	for poly_string in polygons:
-		var map_obj = map_scene.instantiate()
-		if map_obj == null:
-			push_error("MapScene root is not valid")
-			return
-		
-		# Initialize map object with polygon data
-		map_obj.init(poly_string, navigation_manager, WORLD_SCALE)
-		add_child(map_obj)
-		
-		
-func spawn_student_spawners(polygons: Array) -> void:
-	for polygon in polygons:
-		var spawner = Spawner.new()
-		spawner.scene = student_scene
-		spawner.setup(parse_polygon_points(polygon))
-		student_spawners.append(spawner)
-		add_child(spawner)
-		
-func spawn_teacher_spawners(polygons: Array) -> void:
-	for polygon in polygons:
-		var spawner = Spawner.new()
-		spawner.scene = teacher_scene
-		spawner.setup(parse_polygon_points(polygon))
-		free_teacher_spawners[spawner] = null
-		add_child(spawner)
-	
 func spawn_student_by_spawner() -> void:
 	# remove invalid spawners
 	student_spawners = student_spawners.filter(func(s): return is_instance_valid(s))
@@ -261,7 +224,7 @@ func spawn_teacher_by_spawner() -> void:
 
 	spawned.spawner = spawner
 
-	# 🔥 important: listen for removal
+	# important: listen for removal
 	spawned.tree_exited.connect(_on_teacher_removed.bind(spawner))
 
 	occupied_teacher_spawners[spawner] = spawned
@@ -286,77 +249,6 @@ func _on_teacher_removed(spawner: Spawner) -> void:
 
 	call_deferred("respawn_teacher_with_delay")
 
-## Extract polygon tags from SVG file
-func get_svg_polygons_by_fill(path: String) -> Dictionary:
-	var result := {}
-
-	var file = FileAccess.open(path, FileAccess.READ)
-	if file == null:
-		push_warning("Could not open SVG file: %s" % path)
-		return result
-
-	var svg_text = file.get_as_text()
-
-	var regex = RegEx.new()
-	regex.compile(r"<polygon[^>]*>")
-
-	var matches = regex.search_all(svg_text)
-
-	for match in matches:
-		var polygon_tag = match.get_string()
-
-		var fill = extract_fill(polygon_tag)
-
-		# Normalize fill (optional but useful)
-		if fill == "":
-			fill = "none"
-
-		if not result.has(fill):
-			result[fill] = []
-
-		result[fill].append(polygon_tag)
-
-	return result
-	
-func extract_fill(tag: String) -> String:
-	var regex = RegEx.new()
-	regex.compile(r'fill="([^"]*)"')
-
-	var match = regex.search(tag)
-	if match:
-		return match.get_string(1).to_lower()
-
-	return "" # no fill found
-
-
-func parse_polygon_points(tag: String) -> PackedVector2Array:
-	var regex = RegEx.new()
-	regex.compile(r'points="([^"]*)"')
-
-	var match = regex.search(tag)
-	if match == null:
-		return PackedVector2Array()
-
-	var points_str = match.get_string(1)
-	var points = PackedVector2Array()
-
-	var pairs = points_str.split(" ")
-
-	for pair in pairs:
-		if pair.strip_edges() == "":
-			continue
-
-		var coords = pair.split(",")
-		if coords.size() != 2:
-			continue
-
-		var x = float(coords[0])
-		var y = float(coords[1])
-
-		points.append(Vector2(x, y) * WORLD_SCALE)
-
-	return points
-
 
 func create_marker(number: int):
 	print("Create marker ", number, " at ", player.global_position)
@@ -364,5 +256,7 @@ func create_marker(number: int):
 	queue_redraw()
 
 func send_player_to_marker(number: int):
-	if markers[number] != null:
+	if number < 0 or number >= markers.size():
+		return
+	if markers[number] != null and player != null:
 		player.global_position = markers[number]

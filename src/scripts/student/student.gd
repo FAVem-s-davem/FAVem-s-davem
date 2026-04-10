@@ -10,6 +10,12 @@ signal deselected
 @export var max_speed: float = 4400.0
 @export var acceleration: float = 11000.0
 @export var friction: float = 11000.0
+@export var idle_speed: float = 300.0
+@export var idle_acceleration: float = 1500.0
+@export var idle_friction: float = 1000.0
+@export var idle_wander_radius: float = 1650.0
+@export var idle_wait_min: float = 0.7
+@export var idle_wait_max: float = 2.0
 
 const SPRITE_SIZE: float = 352.0
 const NAV_RADIUS: float = 275.0
@@ -23,6 +29,9 @@ var spec: StudentTypes.SpecName
 var player: Node2D = null
 var target_position: Vector2 = Vector2.ZERO
 var has_target: bool = false
+var is_idle_target: bool = false
+var idle_anchor_position: Vector2 = Vector2.ZERO
+var idle_wait_timer: float = 0.0
 
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 
@@ -31,6 +40,7 @@ func _ready() -> void:
 	set_motion_mode(CharacterBody2D.MOTION_MODE_FLOATING)
 	add_to_group("selectable_units")
 	add_to_group("collectable")
+	idle_anchor_position = global_position
 	
 	nav_agent.radius = NAV_RADIUS
 	nav_agent.path_desired_distance = NAV_PATH_DISTANCE
@@ -50,26 +60,70 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	var input_direction = Vector2.ZERO
+	var active_speed = max_speed
+	var active_acceleration = acceleration
+	var active_friction = friction
 	
 	if player != null:
 		input_direction = _get_player_direction()
-	elif has_target:
+	elif has_target and not is_idle_target:
 		input_direction = _get_target_direction()
+	else:
+		input_direction = _get_idle_direction(delta)
+		active_speed = idle_speed
+		active_acceleration = idle_acceleration
+		active_friction = idle_friction
 	
-	var target_velocity = input_direction * max_speed
+	var target_velocity = input_direction * active_speed
 	
 	if input_direction == Vector2.ZERO:
-		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
+		velocity = velocity.move_toward(Vector2.ZERO, active_friction * delta)
 	else:
-		velocity = velocity.move_toward(target_velocity, acceleration * delta)
+		velocity = velocity.move_toward(target_velocity, active_acceleration * delta)
 	
 	move_and_slide()
 	_handle_collisions()
 
 
+func _get_idle_direction(delta: float) -> Vector2:
+	if idle_wait_timer > 0.0:
+		idle_wait_timer -= delta
+		return Vector2.ZERO
+
+	if not has_target:
+		_set_idle_target()
+
+	if not has_target or nav_agent.is_navigation_finished():
+		has_target = false
+		is_idle_target = false
+		idle_wait_timer = randf_range(idle_wait_min, idle_wait_max)
+		return Vector2.ZERO
+
+	var next_point: Vector2 = nav_agent.get_next_path_position()
+	return (next_point - global_position).normalized()
+
+
+func _set_idle_target() -> void:
+	for i in range(8):
+		var angle = randf() * TAU
+		var dist = randf_range(idle_wander_radius * 0.25, idle_wander_radius)
+		var candidate = idle_anchor_position + Vector2.RIGHT.rotated(angle) * dist
+
+		nav_agent.target_position = candidate
+		has_target = true
+		is_idle_target = true
+
+		if not nav_agent.is_navigation_finished():
+			return
+
+	has_target = false
+	is_idle_target = false
+
+
 func _get_target_direction() -> Vector2:
 	if nav_agent.is_navigation_finished():
 		has_target = false
+		is_idle_target = false
 		return Vector2.ZERO
 	
 	var next_point: Vector2 = nav_agent.get_next_path_position()
@@ -138,12 +192,16 @@ func _on_deselected() -> void:
 
 func move_toward_target(pos: Vector2) -> void:
 	player = null  # 👈 THIS IS CRITICAL
+	idle_anchor_position = pos
+	idle_wait_timer = 0.0
 	nav_agent.target_position = pos
 	has_target = true
+	is_idle_target = false
 
 
 func clear_target() -> void:
 	has_target = false
+	is_idle_target = false
 	nav_agent.target_position = global_position
 
 
