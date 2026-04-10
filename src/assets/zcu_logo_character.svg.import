@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://y6koxk1n1xq1"
-path="res://.godot/imported/PUDORYSY_FAV-3.svg-265d96c3c7290b4076dcd41175ee6d54.ctex"
+uid="uid://dqg4n2i7c8cqm"
+path="res://.godot/imported/zcu_logo_character.svg-0dc7b25cd08fd6c4788f787b4e417873.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/fav/PUDORYSY_FAV-3.svg"
-dest_files=["res://.godot/imported/PUDORYSY_FAV-3.svg-265d96c3c7290b4076dcd41175ee6d54.ctex"]
+source_file="res://assets/zcu_logo_character.svg"
+dest_files=["res://.godot/imported/zcu_logo_character.svg-0dc7b25cd08fd6c4788f787b4e417873.ctex"]
 
 [params]
 
@@ -38,6 +38,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=2.0
+svg/scale=4.0
 editor/scale_with_editor_scale=false
 editor/convert_colors_with_editor_theme=false
