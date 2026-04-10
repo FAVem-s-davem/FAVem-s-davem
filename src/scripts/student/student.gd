@@ -36,11 +36,9 @@ var idle_wait_timer: float = 0.0
 
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 
-
 func _ready() -> void:
 	set_motion_mode(CharacterBody2D.MOTION_MODE_FLOATING)
 	add_to_group("selectable_units")
-	add_to_group("collectable")
 	idle_anchor_position = global_position
 	
 	nav_agent.radius = NAV_RADIUS

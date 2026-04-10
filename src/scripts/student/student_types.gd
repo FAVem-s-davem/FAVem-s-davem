@@ -34,7 +34,7 @@ static var TypeShortcuts := {
 }
 
 static var TYPE_INFOS: Array[StudentTypeInfo] = [
-	# inf_* only (non-mixed)
+	# inf
 	StudentTypeInfo.new(Type.INF, 1, "res://assets/student_icons/inf_01.png"),
 	StudentTypeInfo.new(Type.INF, 2, "res://assets/student_icons/inf_02.png"),
 	StudentTypeInfo.new(Type.INF, 3, "res://assets/student_icons/inf_03.svg"),
@@ -42,7 +42,7 @@ static var TYPE_INFOS: Array[StudentTypeInfo] = [
 	StudentTypeInfo.new(Type.INF, 5, "res://assets/student_icons/inf_05.svg"),
 	StudentTypeInfo.new(Type.INF, 6, "res://assets/student_icons/inf_06.png"),
 
-	# math_* only (non-mixed)
+	# math
 	StudentTypeInfo.new(Type.MATH, 1, "res://assets/student_icons/math_01.png"),
 	StudentTypeInfo.new(Type.MATH, 2, "res://assets/student_icons/math_02.png"),
 	StudentTypeInfo.new(Type.MATH, 3, "res://assets/student_icons/math_03.svg"),
@@ -50,7 +50,7 @@ static var TYPE_INFOS: Array[StudentTypeInfo] = [
 	StudentTypeInfo.new(Type.MATH, 5, "res://icon.svg"),
 	StudentTypeInfo.new(Type.MATH, 6, "res://icon.svg"),
 
-	# geo_* only (non-mixed)
+	# geo
 	StudentTypeInfo.new(Type.GEO, 1, "res://assets/student_icons/geo_01.svg"),
 	StudentTypeInfo.new(Type.GEO, 2, "res://assets/student_icons/geo_02.png"),
 	StudentTypeInfo.new(Type.GEO, 3, "res://assets/student_icons/geo_03.png"),
@@ -58,7 +58,7 @@ static var TYPE_INFOS: Array[StudentTypeInfo] = [
 	StudentTypeInfo.new(Type.GEO, 5, "res://icon.svg"),
 	StudentTypeInfo.new(Type.GEO, 6, "res://icon.svg"),
 
-	# mech_* only (non-mixed)
+	# mech
 	StudentTypeInfo.new(Type.MECH, 1, "res://assets/student_icons/mech_01.svg"),
 	StudentTypeInfo.new(Type.MECH, 2, "res://assets/student_icons/mech_02.png"),
 	StudentTypeInfo.new(Type.MECH, 3, "res://assets/student_icons/mech_03.png"),
@@ -82,23 +82,12 @@ static func get_numbers_for_type(_student_type: int) -> Array[int]:
 	return TYPE_NUMBERS.duplicate()
 
 static func parse_type(type_text: String) -> int:
-	if type_text == "":
-		return -1
-
-	var normalized := type_text.to_lower()
 	for key in TypeShortcuts:
-		if TypeShortcuts[key] == normalized:
+		if TypeShortcuts[key] == type_text.to_lower():
 			return key
-
-	for i in range(TYPE_NAME_STRINGS.size()):
-		if TYPE_NAME_STRINGS[i] == normalized:
-			return i
-
 	return -1
 
 static func parse_type_number(number: String) -> int:
-	if number == "":
-		return -1
 	if not number.is_valid_int():
 		return -1
 
