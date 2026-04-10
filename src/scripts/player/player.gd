@@ -9,7 +9,8 @@ class_name Player
 @export var friction: float = 8800.0
 
 # Ring distances for student behavior
-@export var deselect_ring: float = 3300.0
+@export var select_ring: float = 3300.0
+@export var deselect_ring: float = 6600.0
 @export var catchup_ring: float = 1650.0
 @export var stop_ring: float = 1100.0
 
@@ -70,12 +71,17 @@ func _draw() -> void:
 	var center = Vector2.ZERO
 	
 	# Draw selection rings
+	draw_circle(center, select_ring, Color(0.6, 0.9, 1.0), false, 6.0, true)
 	draw_circle(center, deselect_ring, Color(0.9, 0.9, 0.9), false, 8.0, true)
 	draw_circle(center, catchup_ring, Color(0.3, 0.3, 0.3), false, 4.0, true)
 	draw_circle(center, stop_ring, Color(0.3, 0.3, 0.3), false, 8.0, true)
 
 
 # Getters for student reference
+func get_select_ring() -> float:
+	return select_ring
+
+
 func get_deselect_ring() -> float:
 	return deselect_ring
 
@@ -102,7 +108,7 @@ func _get_units_inside() -> Array[Student]:
 		if node is Student:
 			var global_pos = node.global_position
 			
-			if global_pos.distance_to(self.global_position) <= deselect_ring:
+			if global_pos.distance_to(self.global_position) <= select_ring:
 				units.append(node)
 	
 	return units

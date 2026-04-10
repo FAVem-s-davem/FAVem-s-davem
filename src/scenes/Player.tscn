@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bldg46c3bd861" path="res://scripts/player/player.gd" id="1_p0vlq"]
 [ext_resource type="Script" path="res://scripts/player/camera_zoom_manager.gd" id="2_mdl7e"]
 [ext_resource type="Script" uid="uid://bpymyrp2ec0im" path="res://scripts/player/player_selection_manager.gd" id="2_v6fml"]
-[ext_resource type="Script" path="res://scripts/player/cursor_follow_manager.gd" id="3_3li8b"]
+[ext_resource type="Script" uid="uid://bdhw5mn8ju37t" path="res://scripts/player/cursor_follow_manager.gd" id="3_3li8b"]
 [ext_resource type="Texture2D" uid="uid://inwc0t3ppk1v" path="res://assets/student_icons/geo_03.png" id="5_cw2d6"]
 [ext_resource type="Texture2D" uid="uid://dqg4n2i7c8cqm" path="res://assets/zcu_logo_character.svg" id="5_qu4a1"]
 
@@ -13,7 +13,6 @@ radius = 250.0
 [node name="Player" type="CharacterBody2D" unique_id=214270766]
 motion_mode = 1
 script = ExtResource("1_p0vlq")
-deselect_ring = 3600.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2102845433]
 shape = SubResource("CircleShape2D_5q5h1")

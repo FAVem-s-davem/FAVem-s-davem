@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://ydgdwwiseo4w"]
+[gd_scene format=3 uid="uid://bm3h87a5n7kle"]
 
 [ext_resource type="Texture2D" uid="uid://y6koxk1n1xq1" path="res://assets/fav/PUDORYSY_FAV-3.svg" id="1_4xfga"]
 
@@ -19,7 +19,6 @@ metadata/_edit_lock_ = true
 [node name="Areas" type="Node2D" parent="." unique_id=1798918764]
 
 [node name="NavRegion" type="NavigationRegion2D" parent="Areas" unique_id=729228779]
-visible = false
 navigation_polygon = SubResource("NavigationPolygon_4xfga")
 
 [node name="Polygon2D" type="Polygon2D" parent="Areas/NavRegion" unique_id=1569642283]
