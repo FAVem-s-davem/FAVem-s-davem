@@ -188,6 +188,9 @@ func _on_deselected() -> void:
 		player.get_selection().deselect(self)
 	
 	player = null
+	# Use current position as new idle anchor after being dropped.
+	idle_anchor_position = global_position
+	idle_wait_timer = 0.0
 	clear_target()
 	_unhighlight()
 

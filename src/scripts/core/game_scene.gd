@@ -62,6 +62,7 @@ func _resolve_player() -> void:
 	if player == null:
 		push_error("Player not found at path: %s" % player_path)
 		return
+	player.parent = self
 
 func _resolve_rooms() -> void:
 	rooms.clear()
