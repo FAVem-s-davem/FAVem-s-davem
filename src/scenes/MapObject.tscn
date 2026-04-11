@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://cxm0sjjjwv4wo"]
-
-[ext_resource type="Script" uid="uid://c1cgfa6wa12i4" path="res://scripts/map/map_object.gd" id="1_bi31g"]
-
-[node name="MapObject" type="StaticBody2D" unique_id=1027172796]
-script = ExtResource("1_bi31g")

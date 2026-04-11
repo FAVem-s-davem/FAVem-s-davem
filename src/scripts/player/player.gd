@@ -4,6 +4,8 @@ extends CharacterBody2D
 
 class_name Player
 
+const StudentTypesDb = preload("res://scripts/student/student_types.gd")
+
 @export var max_speed: float = 3000.0
 @export var acceleration: float = 22000.0
 @export var friction: float = 8800.0
@@ -113,17 +115,17 @@ func _get_units_inside() -> Array[Student]:
 	
 	return units
 
-func select_by_type(dept: String, spec: String, count: int, append: bool):
-	var deptValue = StudentTypes.parse_dept(dept)
+func select_by_type(type_name: String, type_number: String, count: int, append: bool):
+	var type_value = StudentTypesDb.parse_type(type_name)
 	var students = _get_units_inside()
-	var specValue = null if spec == "" else StudentTypes.parse_spec(dept, spec)
+	var type_number_value = StudentTypesDb.parse_type_number(type_number)
 	var to_select: Array[Student] = []
 	
 	if not append:
 		selection.clear()
 	
 	for student in students:
-		if student.dept == deptValue and (specValue == null or student.spec == specValue):
+		if student.student_type == type_value and (type_number_value == -1 or student.type_number == type_number_value):
 			to_select.append(student)
 			
 	if count != -1:
@@ -137,15 +139,15 @@ func select_by_type(dept: String, spec: String, count: int, append: bool):
 	print("selected: ", selection.get_selected().size())
 	
 
-func deselect_by_type(dept: String, spec: String, count: int):
-	var deptValue = StudentTypes.parse_dept(dept)
+func deselect_by_type(type_name: String, type_number: String, count: int):
+	var type_value = StudentTypesDb.parse_type(type_name)
 	var students = selection.get_selected()
-	var specValue = null if spec == "" else StudentTypes.parse_spec(dept, spec)
+	var type_number_value = StudentTypesDb.parse_type_number(type_number)
 	var to_deselect: Array[Student] = []
 	
 	
 	for student in students:
-		if student.dept == deptValue and (specValue == null or student.spec == specValue):
+		if student.student_type == type_value and (type_number_value == -1 or student.type_number == type_number_value):
 			to_deselect.append(student)
 			
 	if count != -1:
@@ -157,18 +159,18 @@ func deselect_by_type(dept: String, spec: String, count: int):
 	print("selected: ", selection.get_selected().size())
 	
 	
-func send_students(dept: String, spec: String, count: int, marker: int):
+func send_students(type_name: String, type_number: String, count: int, marker: int):
 	if parent.markers[marker] == null:
 		return
 		
-	var deptValue = StudentTypes.parse_dept(dept)
+	var type_value = StudentTypesDb.parse_type(type_name)
 	var students = selection.get_selected()
-	var specValue = null if spec == "" else StudentTypes.parse_spec(dept, spec)
+	var type_number_value = StudentTypesDb.parse_type_number(type_number)
 	var to_deselect: Array[Student] = []
 	
 	
 	for student in students:
-		if student.dept == deptValue and (specValue == null or student.spec == specValue):
+		if student.student_type == type_value and (type_number_value == -1 or student.type_number == type_number_value):
 			to_deselect.append(student)
 			
 	if count != -1:

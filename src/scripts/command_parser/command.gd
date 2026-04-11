@@ -1,5 +1,7 @@
 class_name Command
 
+const StudentTypesDb = preload("res://scripts/student/student_types.gd")
+
 enum OpType {
 	RECORD_MACRO,
 	RUN_MACRO,
@@ -102,11 +104,17 @@ func has_marker() -> bool:
 
 
 func debug_string() -> String:
+	var type_label := StudentTypesDb.type_name_to_string(StudentTypesDb.parse_type(arg1))
+	var number_value := StudentTypesDb.parse_type_number(arg2)
+	var number_label := "all"
+	if number_value != -1:
+		number_label = str(number_value)
+
 	return "CMD %s | count=%d | arg1=%s | arg2=%s | marker=%d" % [
 		op_type,
 		count,
-		StudentTypes.dept_name_to_string(StudentTypes.parse_dept(arg1)),
-		StudentTypes.spec_name_to_string(StudentTypes.parse_spec(arg1, arg2)),
+		type_label,
+		number_label,
 		marker
 	]
 	

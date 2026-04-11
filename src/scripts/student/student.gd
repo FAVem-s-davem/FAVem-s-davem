@@ -23,8 +23,9 @@ const NAV_PATH_DISTANCE: float = 88.0
 const NAV_TARGET_DISTANCE: float = 440.0
 const COLLISION_PUSH_FORCE: float = 1100.0
 
-var dept: StudentTypes.DeptName
-var spec: StudentTypes.SpecName
+var student_type: int = -1
+var type_number: int = -1
+var type_info: StudentTypes.StudentTypeInfo = null
 
 var player: Node2D = null
 var target_position: Vector2 = Vector2.ZERO
@@ -35,11 +36,9 @@ var idle_wait_timer: float = 0.0
 
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 
-
 func _ready() -> void:
 	set_motion_mode(CharacterBody2D.MOTION_MODE_FLOATING)
 	add_to_group("selectable_units")
-	add_to_group("collectable")
 	idle_anchor_position = global_position
 	
 	nav_agent.radius = NAV_RADIUS
@@ -50,8 +49,11 @@ func _ready() -> void:
 	selected.connect(_on_selected)
 	deselected.connect(_on_deselected)
 	
-	# Assign random type and correct icon
-	_assign_random_type()
+	# Keep preassigned type (from spawner/quests), otherwise assign random.
+	if student_type < 0:
+		_assign_random_type()
+	elif type_info == null:
+		_set_type_info(student_type, type_number)
 	#print(StudentTypes.student_type_to_string(student_type))
 	_load_icon_by_type()
 	
@@ -220,19 +222,40 @@ func _unhighlight() -> void:
 		
 
 func _assign_random_type() -> void:
-	var depts = StudentTypes.DeptName.values()
-	dept = depts[randi() % depts.size()]
-	
-	var specs = StudentTypes.get_specs_from_dept(dept)
-	spec = specs[randi() % specs.size()]
+	var types = StudentTypes.Type.values()
+	student_type = types[randi() % types.size()]
+	type_number = StudentTypes.TYPE_NUMBERS[randi() % StudentTypes.TYPE_NUMBERS.size()]
+	type_info = StudentTypes.get_type_info(student_type, type_number)
+
+
+# Sets student type explicitly (used by quest spawning).
+func set_student_type(new_type: int, new_number: int = -1) -> void:
+	if new_number <= 0:
+		new_number = StudentTypes.TYPE_NUMBERS[randi() % StudentTypes.TYPE_NUMBERS.size()]
+
+	_set_type_info(new_type, new_number)
+
+	if is_inside_tree():
+		_load_icon_by_type()
+
+
+func _set_type_info(new_type: int, new_number: int) -> void:
+	student_type = new_type
+	type_number = new_number
+	type_info = StudentTypes.get_type_info(student_type, type_number)
+
+	if type_info == null:
+		# Fallback to first number for this type.
+		type_number = 1
+		type_info = StudentTypes.get_type_info(student_type, type_number)
 
 
 func _load_icon_by_type() -> void:
-	var dept_name: String = StudentTypes.dept_name_to_string(dept)
-	var spec_name: String = StudentTypes.spec_name_to_string(spec)
+	if type_info == null:
+		push_warning("Student type info missing for type=%s number=%s" % [student_type, type_number])
+		return
 
-	var path := "res://assets/student_icons/%s_%s.png" % [dept_name, spec_name]
-	print(path)
+	var path := type_info.icon_path
 
 	var tex: Texture2D = load(path)
 	if tex == null:

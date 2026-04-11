@@ -1,5 +1,7 @@
 class_name CommandParser
 
+const StudentTypesDb = preload("res://scripts/student/student_types.gd")
+
 enum State {
 	IDLE,
 	READING_OP,
@@ -163,7 +165,7 @@ func _after_arg1():
 
 
 func _handle_arg2(key):
-	if _is_letter(key):
+	if _is_type_number(key):
 		arg2 = key
 
 		if _needs_marker():
@@ -232,6 +234,9 @@ func _is_lower(c: String) -> bool:
 func _is_letter(k: String) -> bool:
 	return k.length() == 1 and k.is_valid_identifier()
 
+func _is_type_number(k: String) -> bool:
+	return k.length() == 1 and k.is_valid_int() and int(k) >= 1 and int(k) <= 6
+
 # =================== Hints ========================
 
 func get_available_actions() -> Dictionary:
@@ -265,10 +270,10 @@ func _actions_after_op() -> Dictionary:
 	
 	result["0-9"] = "Set count"
 	
-	# uppercase = "all"
-	for dept in StudentTypes.DeptShortcuts:
-		var key = StudentTypes.DeptShortcuts[dept]
-		var name = StudentTypes.dept_name_to_string(dept)
+	# uppercase = all type numbers for the type
+	for student_type in StudentTypesDb.TypeShortcuts:
+		var key = StudentTypesDb.TypeShortcuts[student_type]
+		var name = StudentTypesDb.type_name_to_string(student_type)
 		
 		result[key.to_upper()] = "Select ALL " + name
 		result[key] = "Select from " + name
@@ -281,11 +286,11 @@ func _actions_after_count() -> Dictionary:
 func _actions_arg2() -> Dictionary:
 	var result := {}
 	
-	var dept = StudentTypes.parse_dept(arg1)
+	var student_type = StudentTypesDb.parse_type(arg1)
 	
-	for spec in StudentTypes.get_specs_from_dept(dept):
-		var key = StudentTypes.SpecShortcuts[spec]
-		var name = StudentTypes.spec_name_to_string(spec)
+	for type_number in StudentTypesDb.get_numbers_for_type(student_type):
+		var key = str(type_number)
+		var name = "Type " + key
 		
 		result[key] = name
 	

@@ -1,107 +1,104 @@
 class_name StudentTypes
 
-enum DeptName {
-	KMA,
-	KIV,
-	KME,
-	KGM,
+enum Type {
+	INF,
+	MATH,
+	GEO,
+	MECH,
 }
 
-enum SpecName {
-	CALCULUS,
-	GEOMETRY,
-	GRAPHICS,
-	DATABASE,
-	MATERIALS,
-	BIOMECH,
-	GEODET,
-	CARTOGRAPHY,	
+class StudentTypeInfo:
+	var student_type: int
+	var number: int
+	var icon_path: String
+
+	func _init(_student_type: int, _number: int, _icon_path: String):
+		student_type = _student_type
+		number = _number
+		icon_path = _icon_path
+
+const TYPE_NAME_STRINGS := ["inf", "math", "geo", "mech"]
+const TYPE_COLORS := [
+	Color(0.95, 0.85, 0.35), # inf -> yellow
+	Color(1.0, 0.55, 0.2),   # math -> orange
+	Color(0.35, 0.85, 0.45), # geo -> green
+	Color(0.35, 0.55, 0.96), # mech -> blue
+]
+const TYPE_NUMBERS: Array[int] = [1, 2, 3, 4, 5, 6]
+
+static var TypeShortcuts := {
+	Type.INF: "i",
+	Type.MATH: "m",
+	Type.GEO: "g",
+	Type.MECH: "e",
 }
 
-const DEPT_NAME_STRINGS := [
-	"kma",
-	"kiv",
-	"kme",
-	"kgm",
+static var TYPE_INFOS: Array[StudentTypeInfo] = [
+	# inf
+	StudentTypeInfo.new(Type.INF, 1, "res://assets/student_icons/inf_01.png"),
+	StudentTypeInfo.new(Type.INF, 2, "res://assets/student_icons/inf_02.png"),
+	StudentTypeInfo.new(Type.INF, 3, "res://assets/student_icons/inf_03.svg"),
+	StudentTypeInfo.new(Type.INF, 4, "res://assets/student_icons/inf_04.png"),
+	StudentTypeInfo.new(Type.INF, 5, "res://assets/student_icons/inf_05.svg"),
+	StudentTypeInfo.new(Type.INF, 6, "res://assets/student_icons/inf_06.png"),
+
+	# math
+	StudentTypeInfo.new(Type.MATH, 1, "res://assets/student_icons/math_01.png"),
+	StudentTypeInfo.new(Type.MATH, 2, "res://assets/student_icons/math_02.png"),
+	StudentTypeInfo.new(Type.MATH, 3, "res://assets/student_icons/math_03.svg"),
+	StudentTypeInfo.new(Type.MATH, 4, "res://assets/student_icons/math_04.svg"),
+	StudentTypeInfo.new(Type.MATH, 5, "res://icon.svg"),
+	StudentTypeInfo.new(Type.MATH, 6, "res://icon.svg"),
+
+	# geo
+	StudentTypeInfo.new(Type.GEO, 1, "res://assets/student_icons/geo_01.svg"),
+	StudentTypeInfo.new(Type.GEO, 2, "res://assets/student_icons/geo_02.png"),
+	StudentTypeInfo.new(Type.GEO, 3, "res://assets/student_icons/geo_03.png"),
+	StudentTypeInfo.new(Type.GEO, 4, "res://assets/student_icons/geo_04.svg"),
+	StudentTypeInfo.new(Type.GEO, 5, "res://icon.svg"),
+	StudentTypeInfo.new(Type.GEO, 6, "res://icon.svg"),
+
+	# mech
+	StudentTypeInfo.new(Type.MECH, 1, "res://assets/student_icons/mech_01.svg"),
+	StudentTypeInfo.new(Type.MECH, 2, "res://assets/student_icons/mech_02.png"),
+	StudentTypeInfo.new(Type.MECH, 3, "res://assets/student_icons/mech_03.png"),
+	StudentTypeInfo.new(Type.MECH, 4, "res://assets/student_icons/mech_04.svg"),
+	StudentTypeInfo.new(Type.MECH, 5, "res://icon.svg"),
+	StudentTypeInfo.new(Type.MECH, 6, "res://icon.svg"),
 ]
 
-const SPEC_NAME_STRINGS := [
-	"calculus",
-	"geometry",
-	"graphics",
-	"database",
-	"materials",
-	"biomech",
-	"geodet",
-	"cartography",
-]
-
-# Mapping department -> list of specializations
-const DEPT_TO_SPECS := {
-	DeptName.KMA: [
-		SpecName.CALCULUS,
-		SpecName.GEOMETRY,
-	],
-	DeptName.KIV: [
-		SpecName.GRAPHICS,
-		SpecName.DATABASE,
-	],
-	DeptName.KME: [
-		SpecName.MATERIALS,
-		SpecName.BIOMECH,
-	],
-	DeptName.KGM: [
-		SpecName.GEODET,
-		SpecName.CARTOGRAPHY,
-	],
-}
-
-static var DeptShortcuts = {
-	DeptName.KMA: "m",
-	DeptName.KIV: "i",
-	DeptName.KME: "e",
-	DeptName.KGM: "g",
-}
-
-static var SpecShortcuts = {
-	# kma
-	SpecName.CALCULUS: "c",
-	SpecName.GEOMETRY: "g",
-	# kiv
-	SpecName.GRAPHICS: "g",
-	SpecName.DATABASE: "d",
-	# kme
-	SpecName.MATERIALS: "m",
-	SpecName.BIOMECH: "b",
-	# kgm
-	SpecName.GEODET: "g",
-	SpecName.CARTOGRAPHY: "c"
-}
-
-static func dept_name_to_string(dept: int) -> String:
-	if dept >= 0 and dept < DEPT_NAME_STRINGS.size():
-		return DEPT_NAME_STRINGS[dept]
+static func type_name_to_string(student_type: int) -> String:
+	if student_type >= 0 and student_type < TYPE_NAME_STRINGS.size():
+		return TYPE_NAME_STRINGS[student_type]
 	return "unknown"
 
-static func spec_name_to_string(spec: int) -> String:
-	if spec >= 0 and spec < SPEC_NAME_STRINGS.size():
-		return SPEC_NAME_STRINGS[spec]
-	return "unknown"
+static func type_color(student_type: int) -> Color:
+	if student_type >= 0 and student_type < TYPE_COLORS.size():
+		return TYPE_COLORS[student_type]
+	return Color.WHITE
 
-static func get_specs_from_dept(dept: int) -> Array:
-	if DEPT_TO_SPECS.has(dept):
-		return DEPT_TO_SPECS[dept]
-	return []
 
-static func parse_dept(dept: String) -> StudentTypes.DeptName:
-	for key in StudentTypes.DeptShortcuts:
-		if StudentTypes.DeptShortcuts[key] == dept.to_lower():
+static func get_numbers_for_type(_student_type: int) -> Array[int]:
+	return TYPE_NUMBERS.duplicate()
+
+static func parse_type(type_text: String) -> int:
+	for key in TypeShortcuts:
+		if TypeShortcuts[key] == type_text.to_lower():
 			return key
 	return -1
 
-static func parse_spec(dept: String, spec: String) -> StudentTypes.SpecName:
-	var deptVal = parse_dept(dept)
-	for specVal in StudentTypes.get_specs_from_dept(deptVal):
-		if StudentTypes.SpecShortcuts[specVal] == spec.to_lower():
-			return specVal
-	return -1
+static func parse_type_number(number: String) -> int:
+	if not number.is_valid_int():
+		return -1
+
+	var parsed := int(number)
+	if parsed < 1 or parsed > 6:
+		return -1
+
+	return parsed
+
+static func get_type_info(student_type: int, type_number: int) -> StudentTypeInfo:
+	for info in TYPE_INFOS:
+		if info.student_type == student_type and info.number == type_number:
+			return info
+	return null
