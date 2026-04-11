@@ -1,7 +1,6 @@
 extends Area2D
 class_name Room
 
-@export var room_number: int = -1
 @export var room_size: int = -1
 
 # Emits when assigned quest state changes for this room.
@@ -63,4 +62,18 @@ func _recheck_assigned_quest() -> void:
 	assigned_quest.set_completed(now_completed)
 
 	if was_completed != now_completed:
+		var type_name := StudentTypes.type_name_to_string(assigned_quest.required_student_type)
+		if now_completed:
+			print("[Quest] COMPLETED in room '%s': type=%s, count=%d" % [
+				name,
+				type_name,
+				assigned_quest.required_count
+			])
+		else:
+			print("[Quest] INVALIDATED in room '%s': type=%s, count=%d" % [
+				name,
+				type_name,
+				assigned_quest.required_count
+			])
+
 		quest_state_changed.emit(self, assigned_quest, now_completed)
