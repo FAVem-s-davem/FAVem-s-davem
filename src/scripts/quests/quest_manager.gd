@@ -42,6 +42,7 @@ func initialize_for_rooms(rooms: Array[Room]) -> void:
 		timetables.append(timetable)
 
 	print("QuestManager: Initialized %d timetable(s)" % timetables.size())
+	_print_quests_by_room()
 
 
 # Assigns the next (or specific) quest for a timetable/room index.
@@ -73,3 +74,24 @@ func _generate_default_quests(timetable, room: Room) -> void:
 		var required_count: int = randi_range(1, max(1, max_count_for_room))
 		var quest = QuestScript.new(required_type, required_count)
 		timetable.add_quest(quest)
+
+
+# Prints all quests grouped by room.
+func _print_quests_by_room() -> void:
+	for timetable in timetables:
+		var room: Room = timetable.room
+		if room == null:
+			print("[Quests] <no room assigned>")
+			continue
+
+		print("[Quests] Room '%s'" % [room.name])
+
+		for i in range(timetable.quests.size()):
+			var quest = timetable.quests[i]
+			var type_name := StudentTypes.type_name_to_string(quest.required_student_type)
+			print("  - Q%d: type=%s, count=%d, completed=%s" % [
+				i,
+				type_name,
+				quest.required_count,
+				str(quest.is_completed)
+			])
