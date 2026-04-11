@@ -13,6 +13,7 @@ const BUFFER_TEXT_OFFSET: float = 1100.0
 
 @export_node_path("Player") var player_path: NodePath = NodePath("Player")
 @export_node_path() var room_path: NodePath = NodePath("Map/Areas/Rooms")
+@export_node_path() var spawner_path: NodePath = NodePath("Map/Areas/Spawners")
 
 @onready var hint_menu = $"../CanvasLayer/Control/Hud/HintMenu"
 @onready var command_buffer = $"../CanvasLayer/Control/Hud/CommandBuffer"
@@ -23,6 +24,7 @@ var player: Player
 var quest_manager
 
 var rooms: Array[Room] = []
+var spawners: Array[Spawner] = []
 
 var markers: Array = []
 var input: InputHandler
@@ -52,6 +54,7 @@ func _initialize_input_parser() -> void:
 func _resolve_nodes() -> void:
 	_resolve_player()
 	_resolve_rooms()
+	_resolve_spawners()
 	_resolve_quest_manager()
 
 func _resolve_player() -> void:
@@ -76,6 +79,22 @@ func _resolve_rooms() -> void:
 	print("Loaded %d room(s)" % rooms.size())
 
 
+func _resolve_spawners() -> void:
+	spawners.clear()
+
+	var spawners_root := get_node_or_null(spawner_path)
+	if spawners_root == null:
+		push_warning("Spawners root not found at path: %s" % spawner_path)
+		return
+
+	for child in spawners_root.get_children():
+		var spawner := child as Spawner
+		if spawner != null:
+			spawners.append(spawner)
+
+	print("Loaded %d spawner(s)" % spawners.size())
+
+
 func _resolve_quest_manager() -> void:
 	quest_manager = get_node_or_null("QuestManager")
 
@@ -85,6 +104,30 @@ func _resolve_quest_manager() -> void:
 		add_child(quest_manager)
 
 	quest_manager.initialize_for_rooms(rooms)
+	spawn_students_for_active_quests()
+
+
+# Spawns students based on active quests across all available spawners.
+func spawn_students_for_active_quests() -> void:
+	if quest_manager == null:
+		push_warning("GameScene: QuestManager not ready")
+		return
+
+	if spawners.is_empty():
+		push_warning("GameScene: No spawners available for quest spawning")
+		return
+
+	var spawner_index := 0
+
+	for timetable in quest_manager.timetables:
+		var quest = timetable.get_active_quest()
+		if quest == null:
+			continue
+
+		for _i in range(quest.required_count):
+			var spawner := spawners[spawner_index % spawners.size()]
+			spawner.spawn_student(quest.required_student_type)
+			spawner_index += 1
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.is_echo():

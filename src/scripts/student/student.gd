@@ -49,8 +49,11 @@ func _ready() -> void:
 	selected.connect(_on_selected)
 	deselected.connect(_on_deselected)
 	
-	# Assign random type and correct icon
-	_assign_random_type()
+	# Keep preassigned type (from spawner/quests), otherwise assign random.
+	if student_type < 0:
+		_assign_random_type()
+	elif type_info == null:
+		_set_type_info(student_type, type_number)
 	#print(StudentTypes.student_type_to_string(student_type))
 	_load_icon_by_type()
 	
@@ -223,6 +226,28 @@ func _assign_random_type() -> void:
 	student_type = types[randi() % types.size()]
 	type_number = StudentTypes.TYPE_NUMBERS[randi() % StudentTypes.TYPE_NUMBERS.size()]
 	type_info = StudentTypes.get_type_info(student_type, type_number)
+
+
+# Sets student type explicitly (used by quest spawning).
+func set_student_type(new_type: int, new_number: int = -1) -> void:
+	if new_number <= 0:
+		new_number = StudentTypes.TYPE_NUMBERS[randi() % StudentTypes.TYPE_NUMBERS.size()]
+
+	_set_type_info(new_type, new_number)
+
+	if is_inside_tree():
+		_load_icon_by_type()
+
+
+func _set_type_info(new_type: int, new_number: int) -> void:
+	student_type = new_type
+	type_number = new_number
+	type_info = StudentTypes.get_type_info(student_type, type_number)
+
+	if type_info == null:
+		# Fallback to first number for this type.
+		type_number = 1
+		type_info = StudentTypes.get_type_info(student_type, type_number)
 
 
 func _load_icon_by_type() -> void:
