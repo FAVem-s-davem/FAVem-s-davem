@@ -42,15 +42,15 @@ func _ready() -> void:
 	for i in range(markers.size()):
 		markers[i] = null
 
-	_resolve_player()
+	_resolve_nodes()
 
 
-func _resolve_player() -> void:
+func _resolve_nodes() -> void:
 	player = get_node_or_null(player_path) as Player
 	if player == null:
 		push_error("Player not found at path: %s" % player_path)
 		return
-	player.parent = self
+	
 
 
 func _input(event: InputEvent) -> void:
@@ -98,7 +98,7 @@ func _draw():
 
 
 ## Spawn a single student at the given position
-func spawn_student_at(position: Vector2) -> void:
+func spawn_student_at(position_arg: Vector2) -> void:
 	if student_scene == null:
 		push_error("StudentScene not assigned")
 		return
@@ -108,7 +108,7 @@ func spawn_student_at(position: Vector2) -> void:
 		push_error("StudentScene root is not a valid Node2D")
 		return
 	
-	student.global_position = position
+	student.global_position = position_arg
 	add_child(student)
 
 ## Spawn multiple students at random positions
