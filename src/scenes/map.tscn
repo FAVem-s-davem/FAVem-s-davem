@@ -73,7 +73,7 @@ polygon = PackedVector2Array(74161, 82178, 74351, 82379, 73863, 82855, 74748, 83
 [node name="A203" type="Area2D" parent="Areas/Rooms" unique_id=1408496100]
 collision_layer = 2
 script = ExtResource("2_paxxb")
-room_number = 3
+room_size = 2
 metadata/_custom_type_script = "uid://ca45jaiqace5r"
 
 [node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="Areas/Rooms/A203" unique_id=1652238053]
@@ -83,6 +83,7 @@ polygon = PackedVector2Array(60339, 53769, 60908, 57009, 65960, 56104, 65391, 52
 [node name="A204" type="Area2D" parent="Areas/Rooms" unique_id=460322998]
 collision_layer = 2
 script = ExtResource("2_paxxb")
+room_size = 2
 metadata/_custom_type_script = "uid://ca45jaiqace5r"
 
 [node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="Areas/Rooms/A204" unique_id=1681026617]
@@ -92,6 +93,7 @@ polygon = PackedVector2Array(65236, 52472, 64815, 49994, 59845, 50813, 60294, 53
 [node name="A205" type="Area2D" parent="Areas/Rooms" unique_id=1247604573]
 collision_layer = 2
 script = ExtResource("2_paxxb")
+room_size = 2
 metadata/_custom_type_script = "uid://ca45jaiqace5r"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/A205" unique_id=2029009047]
@@ -101,6 +103,7 @@ polygon = PackedVector2Array(60339, 53769, 60908, 57009, 65960, 56104, 65391, 52
 [node name="A206" type="Area2D" parent="Areas/Rooms" unique_id=65381322]
 collision_layer = 2
 script = ExtResource("2_paxxb")
+room_size = 2
 metadata/_custom_type_script = "uid://ca45jaiqace5r"
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Areas/Rooms/A206" unique_id=1960488392]
@@ -110,6 +113,7 @@ polygon = PackedVector2Array(65236, 52472, 64815, 49994, 59845, 50813, 60294, 53
 [node name="A207" type="Area2D" parent="Areas/Rooms" unique_id=1361414396]
 collision_layer = 2
 script = ExtResource("2_paxxb")
+room_size = 2
 metadata/_custom_type_script = "uid://ca45jaiqace5r"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/A207" unique_id=1067803904]
@@ -119,6 +123,7 @@ polygon = PackedVector2Array(60339, 53769, 60908, 57009, 65960, 56104, 65391, 52
 [node name="A208" type="Area2D" parent="Areas/Rooms" unique_id=2111615222]
 collision_layer = 2
 script = ExtResource("2_paxxb")
+room_size = 2
 metadata/_custom_type_script = "uid://ca45jaiqace5r"
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Areas/Rooms/A208" unique_id=1028831157]
@@ -128,6 +133,7 @@ polygon = PackedVector2Array(65236, 52472, 64815, 49994, 59845, 50813, 60294, 53
 [node name="A209" type="Area2D" parent="Areas/Rooms" unique_id=1487818944]
 collision_layer = 2
 script = ExtResource("2_paxxb")
+room_size = 3
 metadata/_custom_type_script = "uid://ca45jaiqace5r"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/A209" unique_id=1604309121]
@@ -135,6 +141,7 @@ polygon = PackedVector2Array(40648, 33736, 41818, 39993, 46800, 39128, 46236, 35
 
 [node name="A210" type="Area2D" parent="Areas/Rooms" unique_id=155379166]
 script = ExtResource("2_paxxb")
+room_size = 3
 metadata/_custom_type_script = "uid://ca45jaiqace5r"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/A210" unique_id=97004074]
@@ -165,6 +172,7 @@ polygon = PackedVector2Array(53659, 45191, 54643, 51105, 57734, 50581, 56610, 44
 [node name="A224" type="Area2D" parent="Areas/Rooms" unique_id=1387840695]
 collision_layer = 2
 script = ExtResource("2_paxxb")
+room_size = 3
 metadata/_custom_type_script = "uid://ca45jaiqace5r"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/A224" unique_id=973211469]
