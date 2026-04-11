@@ -12,21 +12,27 @@ const BUFFER_TEXT_OFFSET: float = 1100.0
 @export var student_scene: PackedScene = preload("res://scenes/Student.tscn")
 
 @export_node_path("Player") var player_path: NodePath = NodePath("Player")
+@export_node_path() var room_path: NodePath = NodePath("Map/Map/Areas/Rooms")
 
 @onready var hint_menu = $"../CanvasLayer/Control/Hud/HintMenu"
 @onready var command_buffer = $"../CanvasLayer/Control/Hud/CommandBuffer"
 
 
-var markers: Array = []
-
 var player: Player
 
+var rooms: Array[Room] = []
+
+var markers: Array = []
 var input: InputHandler
 var parser: CommandParser
 var dispatcher: CommandDispatcher
 
 
 func _ready() -> void:
+	_initialize_input_parser()
+	_resolve_nodes()
+
+func _initialize_input_parser() -> void:
 	parser = CommandParser.new()
 
 	parser.actions_updated.connect(hint_menu.update_actions)
@@ -35,21 +41,39 @@ func _ready() -> void:
 
 	dispatcher = CommandDispatcher.new(self)
 
-	input = InputHandler.new(self)
-	add_child(input)
-
 	markers.resize(10)
 	for i in range(markers.size()):
 		markers[i] = null
 
-	_resolve_nodes()
+	input = InputHandler.new(self)
+	add_child(input)
 
 
 func _resolve_nodes() -> void:
+	_resolve_player()
+	_resolve_rooms()
+
+
+func _resolve_player() -> void:
 	player = get_node_or_null(player_path) as Player
 	if player == null:
 		push_error("Player not found at path: %s" % player_path)
 		return
+
+func _resolve_rooms() -> void:
+	rooms.clear()
+
+	var rooms_root := get_node_or_null(room_path)
+	if rooms_root == null:
+		push_error("Rooms root not found at path: %s" % room_path)
+		return
+
+	for child in rooms_root.get_children():
+		var room := child as Room
+		if room != null:
+			rooms.append(room)
+
+	print("Loaded %d room(s)" % rooms.size())
 	
 
 
