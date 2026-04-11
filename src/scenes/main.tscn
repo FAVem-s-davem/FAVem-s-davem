@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://bqngw0mvpsuf5" path="res://scripts/scenes/game_scene.gd" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://cnk2kwqnsjwma" path="res://scenes/gui/menu.tscn" id="5_tefeu"]
 [ext_resource type="PackedScene" uid="uid://btj2uvic5xmbn" path="res://scenes/Player.tscn" id="8_tipki"]
+[ext_resource type="PackedScene" path="res://scenes/Student.tscn" id="9_student"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jyhfs"]
 shader = ExtResource("3_tbgi4")
@@ -18,8 +19,8 @@ shader_parameter/tint = Color(0.62763566, 0.6276353, 0.62763536, 1)
 
 [node name="GameScene" type="Node2D" parent="." unique_id=1408850278]
 script = ExtResource("4_jyhfs")
-student_scene = null
-player_path = null
+student_scene = ExtResource("9_student")
+player_path = NodePath("Player")
 
 [node name="Map" parent="GameScene" unique_id=2120066609 instance=ExtResource("2_tipki")]
 

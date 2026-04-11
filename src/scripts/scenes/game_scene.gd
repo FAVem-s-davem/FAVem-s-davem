@@ -12,13 +12,15 @@ const BUFFER_TEXT_OFFSET: float = 1100.0
 @export var student_scene: PackedScene = preload("res://scenes/Student.tscn")
 
 @export_node_path("Player") var player_path: NodePath = NodePath("Player")
-@export_node_path() var room_path: NodePath = NodePath("Map/Map/Areas/Rooms")
+@export_node_path() var room_path: NodePath = NodePath("Map/Areas/Rooms")
 
 @onready var hint_menu = $"../CanvasLayer/Control/Hud/HintMenu"
 @onready var command_buffer = $"../CanvasLayer/Control/Hud/CommandBuffer"
 
+const QuestManagerScript = preload("res://scripts/quests/quest_manager.gd")
 
 var player: Player
+var quest_manager
 
 var rooms: Array[Room] = []
 
@@ -26,7 +28,6 @@ var markers: Array = []
 var input: InputHandler
 var parser: CommandParser
 var dispatcher: CommandDispatcher
-
 
 func _ready() -> void:
 	_initialize_input_parser()
@@ -48,11 +49,10 @@ func _initialize_input_parser() -> void:
 	input = InputHandler.new(self)
 	add_child(input)
 
-
 func _resolve_nodes() -> void:
 	_resolve_player()
 	_resolve_rooms()
-
+	_resolve_quest_manager()
 
 func _resolve_player() -> void:
 	player = get_node_or_null(player_path) as Player
@@ -74,8 +74,17 @@ func _resolve_rooms() -> void:
 			rooms.append(room)
 
 	print("Loaded %d room(s)" % rooms.size())
-	
 
+
+func _resolve_quest_manager() -> void:
+	quest_manager = get_node_or_null("QuestManager")
+
+	if quest_manager == null:
+		quest_manager = QuestManagerScript.new()
+		quest_manager.name = "QuestManager"
+		add_child(quest_manager)
+
+	quest_manager.initialize_for_rooms(rooms)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.is_echo():
@@ -119,7 +128,6 @@ func _draw():
 		draw_rect(rect, Color(0, 0, 0, 0.6))
 
 		draw_string(font, pos, buffer_text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, Color.WHITE)
-
 
 ## Spawn a single student at the given position
 func spawn_student_at(position_arg: Vector2) -> void:
