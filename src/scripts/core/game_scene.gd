@@ -22,6 +22,7 @@ const QuestManagerScript = preload("res://scripts/quests/quest_manager.gd")
 
 var player: Player
 var quest_manager
+var game_loop_manager: GameLoopManager
 
 var rooms: Array[Room] = []
 var spawners: Array[Spawner] = []
@@ -33,7 +34,11 @@ var dispatcher: CommandDispatcher
 
 func _ready() -> void:
 	_initialize_input_parser()
-	_resolve_nodes()
+	_resolve_player()
+	_resolve_rooms()
+	_resolve_spawners()
+	_resolve_quest_manager()
+	_resolve_game_loop_manager()
 
 func _initialize_input_parser() -> void:
 	parser = CommandParser.new()
@@ -51,11 +56,6 @@ func _initialize_input_parser() -> void:
 	input = InputHandler.new(self)
 	add_child(input)
 
-func _resolve_nodes() -> void:
-	_resolve_player()
-	_resolve_rooms()
-	_resolve_spawners()
-	_resolve_quest_manager()
 
 func _resolve_player() -> void:
 	player = get_node_or_null(player_path) as Player
@@ -104,7 +104,15 @@ func _resolve_quest_manager() -> void:
 		add_child(quest_manager)
 
 	quest_manager.initialize_for_rooms(rooms)
-	spawn_students_for_active_quests()
+
+
+func _resolve_game_loop_manager() -> void:
+	game_loop_manager = get_node_or_null("GameLoopManager") as GameLoopManager
+	if game_loop_manager == null:
+		push_warning("GameLoopManager child is missing on GameScene")
+		return
+
+	game_loop_manager.initialize(self)
 
 
 # Spawns students based on active quests across all available spawners.

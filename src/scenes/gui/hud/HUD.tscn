@@ -41,3 +41,16 @@ script = ExtResource("2_hukx1")
 
 [node name="QuestBoard" parent="." unique_id=1970252661 instance=ExtResource("3_vxsoq")]
 layout_mode = 0
+
+[node name="GamePhase" type="Label" parent="." unique_id=1689789340]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.18039216, 0.17254902, 1)
+theme_override_font_sizes/font_size = 32
+text = "Game phase"

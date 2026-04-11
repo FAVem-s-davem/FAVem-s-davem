@@ -15,6 +15,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_yqeox")
 
+[node name="GameEnd" parent="." unique_id=679309592 instance=ExtResource("5_26ofl")]
+layout_mode = 1
+
 [node name="MainMenu" type="Control" parent="." unique_id=569082259]
 layout_mode = 1
 anchors_preset = 15
@@ -76,6 +79,3 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("4_01a0p")
-
-[node name="GameEnd" parent="." unique_id=679309592 instance=ExtResource("5_26ofl")]
-layout_mode = 0

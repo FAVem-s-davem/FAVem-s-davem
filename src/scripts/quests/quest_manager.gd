@@ -34,7 +34,6 @@ func initialize_for_rooms(rooms: Array[Room]) -> void:
 		timetable.assign_room(room)
 
 		_generate_default_quests(timetable, room)
-		timetable.assign_quest(0)
 
 		timetables.append(timetable)
 
