@@ -13,6 +13,7 @@ func _ready():
 	$MainMenu/VBoxContainer/About.pressed.connect(_on_about_pressed)
 	$MainMenu/VBoxContainer/Quit.pressed.connect(_on_quit_pressed)
 	$MainMenu/VBoxContainer/Restart.pressed.connect(_on_restart_pressed)
+	$GameEnd/BackToMenu.pressed.connect(_on_restart_pressed)
 
 	$About/Back.pressed.connect(_on_back_pressed)
 	$Settings/VBoxContainer/Back.pressed.connect(_on_back_pressed)
