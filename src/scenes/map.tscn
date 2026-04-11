@@ -667,6 +667,46 @@ metadata/_custom_type_script = "uid://bm7mejoyqqg4p"
 position = Vector2(-24594, 5700)
 polygon = PackedVector2Array(33284, 57753, 33313, 59855, 35722, 59864, 35722, 57772)
 
+[node name="Spawner3" type="Area2D" parent="Areas/Spawners" unique_id=63139303]
+script = ExtResource("3_gldc4")
+metadata/_custom_type_script = "uid://bm7mejoyqqg4p"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Spawners/Spawner3" unique_id=887099108]
+position = Vector2(-19264, 5008)
+polygon = PackedVector2Array(33284, 57753, 33235, 61088, 39931, 61051, 39893, 57759)
+
+[node name="Spawner4" type="Area2D" parent="Areas/Spawners" unique_id=525887056]
+script = ExtResource("3_gldc4")
+metadata/_custom_type_script = "uid://bm7mejoyqqg4p"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Spawners/Spawner4" unique_id=725110774]
+position = Vector2(1371, 9350)
+polygon = PackedVector2Array(33221, 58662, 33235, 61088, 35159, 61042, 35125, 58696)
+
+[node name="Spawner5" type="Area2D" parent="Areas/Spawners" unique_id=1574341388]
+script = ExtResource("3_gldc4")
+metadata/_custom_type_script = "uid://bm7mejoyqqg4p"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Spawners/Spawner5" unique_id=1597596577]
+position = Vector2(3768, 9333)
+polygon = PackedVector2Array(33221, 58662, 33235, 61088, 35159, 61042, 35125, 58696)
+
+[node name="Spawner6" type="Area2D" parent="Areas/Spawners" unique_id=1993895943]
+script = ExtResource("3_gldc4")
+metadata/_custom_type_script = "uid://bm7mejoyqqg4p"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Spawners/Spawner6" unique_id=1908878529]
+position = Vector2(29181, 191)
+polygon = PackedVector2Array(32640, 59232, 33041, 61257, 35379, 60890, 35048, 58779)
+
+[node name="Spawner7" type="Area2D" parent="Areas/Spawners" unique_id=1714247648]
+script = ExtResource("3_gldc4")
+metadata/_custom_type_script = "uid://bm7mejoyqqg4p"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Spawners/Spawner7" unique_id=748141630]
+position = Vector2(19741, 1412)
+polygon = PackedVector2Array(32640, 59232, 33198, 62182, 39733, 60987, 39148, 57994)
+
 [node name="Coliders" type="StaticBody2D" parent="." unique_id=1297963751]
 visible = false
 collision_layer = 4

@@ -22,7 +22,7 @@ script = ExtResource("4_jyhfs")
 [node name="Map" parent="GameScene" unique_id=2120066609 instance=ExtResource("2_tipki")]
 
 [node name="Player" parent="GameScene" unique_id=214270766 instance=ExtResource("8_tipki")]
-position = Vector2(18298, 64615)
+position = Vector2(24151, 64484)
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=1919133619]
 scroll_scale = Vector2(0.98, 0.98)

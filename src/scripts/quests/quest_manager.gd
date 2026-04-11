@@ -10,9 +10,6 @@ const TimetableScript = preload("res://scripts/quests/timetable.gd")
 # Maximum quests in each timetable.
 @export var quests_in_timetable: int = 3
 
-# Optional upper bound for generated student count per quest.
-@export var max_students_per_quest: int = 4
-
 # All managed timetables.
 var timetables: Array = []
 
@@ -64,14 +61,11 @@ func get_active_quest(timetable_index: int):
 # Creates starter quests for a timetable.
 func _generate_default_quests(timetable, room: Room) -> void:
 	var type_values: Array = StudentTypes.Type.values()
-	var max_count_for_room := max_students_per_quest
-
-	if room.room_size > 0:
-		max_count_for_room = min(max_students_per_quest, room.room_size)
 
 	for _i in range(quests_in_timetable):
 		var required_type: int = type_values[randi() % type_values.size()]
-		var required_count: int = randi_range(1, max(1, max_count_for_room))
+		var required_count: int = randi_range(1, 4 * room.room_size)
+    
 		var quest = QuestScript.new(required_type, required_count)
 		timetable.add_quest(quest)
 
