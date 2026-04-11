@@ -41,6 +41,11 @@ alignment = 1
 layout_mode = 2
 text = "START"
 
+[node name="Restart" type="Button" parent="MainMenu/VBoxContainer" unique_id=909223411]
+visible = false
+layout_mode = 2
+text = "RESTART"
+
 [node name="Settings" type="Button" parent="MainMenu/VBoxContainer" unique_id=16790211]
 layout_mode = 2
 text = "SETTINGS"
@@ -55,12 +60,7 @@ text = "QUIT"
 
 [node name="About" parent="." unique_id=271891995 instance=ExtResource("2_cav3j")]
 visible = false
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
+layout_mode = 1
 
 [node name="Settings" parent="." unique_id=1896592881 instance=ExtResource("3_uak7f")]
 visible = false
