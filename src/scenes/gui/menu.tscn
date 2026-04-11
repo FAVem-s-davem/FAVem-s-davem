@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://b6cb54hrx1884" path="res://scenes/gui/about.tscn" id="2_cav3j"]
 [ext_resource type="PackedScene" uid="uid://cvmtu2i7recfl" path="res://scenes/gui/settings.tscn" id="3_uak7f"]
 [ext_resource type="Texture2D" uid="uid://hbc6vf4jglab" path="res://assets/test.svg" id="4_01a0p"]
+[ext_resource type="PackedScene" uid="uid://c5u8u2sh8hjww" path="res://scenes/gui/game_end.tscn" id="5_26ofl"]
 
 [node name="Menu" type="Control" unique_id=278537481]
 layout_mode = 3
@@ -13,6 +14,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_yqeox")
+
+[node name="GameEnd" parent="." unique_id=679309592 instance=ExtResource("5_26ofl")]
+layout_mode = 1
 
 [node name="MainMenu" type="Control" parent="." unique_id=569082259]
 layout_mode = 1
@@ -41,6 +45,11 @@ alignment = 1
 layout_mode = 2
 text = "START"
 
+[node name="Restart" type="Button" parent="MainMenu/VBoxContainer" unique_id=909223411]
+visible = false
+layout_mode = 2
+text = "RESTART"
+
 [node name="Settings" type="Button" parent="MainMenu/VBoxContainer" unique_id=16790211]
 layout_mode = 2
 text = "SETTINGS"
@@ -55,12 +64,7 @@ text = "QUIT"
 
 [node name="About" parent="." unique_id=271891995 instance=ExtResource("2_cav3j")]
 visible = false
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
+layout_mode = 1
 
 [node name="Settings" parent="." unique_id=1896592881 instance=ExtResource("3_uak7f")]
 visible = false

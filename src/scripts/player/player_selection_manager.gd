@@ -36,7 +36,7 @@ func _input(event: InputEvent) -> void:
 				rect = rect.abs()
 				
 				# Get all students in the rect
-				var units = _get_units_inside(player.global_position, player.deselect_ring)
+				var units = _get_units_inside(player.global_position, player.select_ring)
 				
 				# Check if shift is pressed for additive selection
 				var shift_pressed = Input.is_key_pressed(KEY_SHIFT)

@@ -1,0 +1,104 @@
+[gd_scene format=3 uid="uid://c5u8u2sh8hjww"]
+
+[ext_resource type="Theme" uid="uid://vulwh1ht8keu" path="res://assets/font_theme.tres" id="1_0o0s4"]
+
+[node name="GameEnd" type="Control" unique_id=679309592]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="." unique_id=456165767]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -198.0
+offset_top = -11.5
+offset_right = 198.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_0o0s4")
+text = "Day ended, you helped students find their class"
+
+[node name="BackToMenu" type="Button" parent="." unique_id=462446380]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -71.0
+offset_top = 60.0
+offset_right = 71.0
+offset_bottom = 113.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_0o0s4")
+text = "BACK TO MENU"
+
+[node name="Panel" type="PanelContainer" parent="." unique_id=225283222]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -176.0
+offset_top = -96.0
+offset_right = 176.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=773768860]
+layout_mode = 2
+theme = ExtResource("1_0o0s4")
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer" unique_id=1006411475]
+layout_mode = 2
+text = "Day ended"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="PanelContainer" parent="Panel/VBoxContainer" unique_id=855070730]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Panel" unique_id=1859568426]
+layout_mode = 2
+
+[node name="Results" type="VBoxContainer" parent="Panel/VBoxContainer/Panel/HBoxContainer" unique_id=1516815417]
+layout_mode = 2
+
+[node name="CompletedLabel" type="Label" parent="Panel/VBoxContainer/Panel/HBoxContainer/Results" unique_id=1451419586]
+layout_mode = 2
+text = "Quests completed:"
+
+[node name="FailedLabel" type="Label" parent="Panel/VBoxContainer/Panel/HBoxContainer/Results" unique_id=1166401703]
+layout_mode = 2
+text = "Quests failed:"
+
+[node name="Label2" type="Label" parent="Panel/VBoxContainer/Panel/HBoxContainer/Results" unique_id=1584211418]
+layout_mode = 2
+text = "Students found class:"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/Panel/HBoxContainer" unique_id=1144563948]
+layout_mode = 2
+
+[node name="CompletedNumber" type="Label" parent="Panel/VBoxContainer/Panel/HBoxContainer/VBoxContainer" unique_id=119038282]
+layout_mode = 2
+text = "5"
+
+[node name="FailedNumber" type="Label" parent="Panel/VBoxContainer/Panel/HBoxContainer/VBoxContainer" unique_id=267422148]
+layout_mode = 2
+text = "5"
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/Panel/HBoxContainer/VBoxContainer" unique_id=342818536]
+layout_mode = 2

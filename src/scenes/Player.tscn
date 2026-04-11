@@ -2,22 +2,20 @@
 
 [ext_resource type="Script" uid="uid://bldg46c3bd861" path="res://scripts/player/player.gd" id="1_p0vlq"]
 [ext_resource type="Script" path="res://scripts/player/camera_zoom_manager.gd" id="2_mdl7e"]
-[ext_resource type="Texture2D" uid="uid://bgomiys3umtnb" path="res://assets/Player.svg" id="2_qu4a1"]
 [ext_resource type="Script" uid="uid://bpymyrp2ec0im" path="res://scripts/player/player_selection_manager.gd" id="2_v6fml"]
-[ext_resource type="Script" uid="uid://bdhw5mn8ju37t" path="res://scripts/player/cursor_follow_manager.gd" id="3_3li8b"]
+[ext_resource type="Texture2D" uid="uid://inwc0t3ppk1v" path="res://assets/student_icons/geo_03.png" id="5_cw2d6"]
+[ext_resource type="Texture2D" uid="uid://dqg4n2i7c8cqm" path="res://assets/zcu_logo_character.svg" id="5_qu4a1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5q5h1"]
-radius = 352.0
+radius = 250.0
 
 [node name="Player" type="CharacterBody2D" unique_id=214270766]
+collision_mask = 7
 motion_mode = 1
 script = ExtResource("1_p0vlq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2102845433]
 shape = SubResource("CircleShape2D_5q5h1")
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1992893616]
-texture = ExtResource("2_qu4a1")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2046817666]
 zoom = Vector2(0.15, 0.15)
@@ -27,5 +25,11 @@ script = ExtResource("2_mdl7e")
 [node name="PlayerSelectionManager" type="Node2D" parent="." unique_id=952871996]
 script = ExtResource("2_v6fml")
 
-[node name="CursorFollowManager" type="Node2D" parent="." unique_id=1078068304]
-script = ExtResource("3_3li8b")
+[node name="mask" type="Sprite2D" parent="." unique_id=408406704]
+clip_children = 1
+scale = Vector2(1.06, 1.06)
+texture = ExtResource("5_cw2d6")
+
+[node name="Sprite2D2" type="Sprite2D" parent="mask" unique_id=1992893616]
+scale = Vector2(4, 4)
+texture = ExtResource("5_qu4a1")

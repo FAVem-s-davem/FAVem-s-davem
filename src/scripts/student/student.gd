@@ -10,6 +10,12 @@ signal deselected
 @export var max_speed: float = 4400.0
 @export var acceleration: float = 11000.0
 @export var friction: float = 11000.0
+@export var idle_speed: float = 300.0
+@export var idle_acceleration: float = 1500.0
+@export var idle_friction: float = 1000.0
+@export var idle_wander_radius: float = 1650.0
+@export var idle_wait_min: float = 0.7
+@export var idle_wait_max: float = 2.0
 
 const SPRITE_SIZE: float = 352.0
 const NAV_RADIUS: float = 275.0
@@ -17,20 +23,23 @@ const NAV_PATH_DISTANCE: float = 88.0
 const NAV_TARGET_DISTANCE: float = 440.0
 const COLLISION_PUSH_FORCE: float = 1100.0
 
-var dept: StudentTypes.DeptName
-var spec: StudentTypes.SpecName
+var student_type: int = -1
+var type_number: int = -1
+var type_info: StudentTypes.StudentTypeInfo = null
 
 var player: Node2D = null
 var target_position: Vector2 = Vector2.ZERO
 var has_target: bool = false
+var is_idle_target: bool = false
+var idle_anchor_position: Vector2 = Vector2.ZERO
+var idle_wait_timer: float = 0.0
 
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
-
 
 func _ready() -> void:
 	set_motion_mode(CharacterBody2D.MOTION_MODE_FLOATING)
 	add_to_group("selectable_units")
-	add_to_group("collectable")
+	idle_anchor_position = global_position
 	
 	nav_agent.radius = NAV_RADIUS
 	nav_agent.path_desired_distance = NAV_PATH_DISTANCE
@@ -40,8 +49,11 @@ func _ready() -> void:
 	selected.connect(_on_selected)
 	deselected.connect(_on_deselected)
 	
-	# Assign random type and correct icon
-	_assign_random_type()
+	# Keep preassigned type (from spawner/quests), otherwise assign random.
+	if student_type < 0:
+		_assign_random_type()
+	elif type_info == null:
+		_set_type_info(student_type, type_number)
 	#print(StudentTypes.student_type_to_string(student_type))
 	_load_icon_by_type()
 	
@@ -50,26 +62,70 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	var input_direction = Vector2.ZERO
+	var active_speed = max_speed
+	var active_acceleration = acceleration
+	var active_friction = friction
 	
 	if player != null:
 		input_direction = _get_player_direction()
-	elif has_target:
+	elif has_target and not is_idle_target:
 		input_direction = _get_target_direction()
+	else:
+		input_direction = _get_idle_direction(delta)
+		active_speed = idle_speed
+		active_acceleration = idle_acceleration
+		active_friction = idle_friction
 	
-	var target_velocity = input_direction * max_speed
+	var target_velocity = input_direction * active_speed
 	
 	if input_direction == Vector2.ZERO:
-		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
+		velocity = velocity.move_toward(Vector2.ZERO, active_friction * delta)
 	else:
-		velocity = velocity.move_toward(target_velocity, acceleration * delta)
+		velocity = velocity.move_toward(target_velocity, active_acceleration * delta)
 	
 	move_and_slide()
 	_handle_collisions()
 
 
+func _get_idle_direction(delta: float) -> Vector2:
+	if idle_wait_timer > 0.0:
+		idle_wait_timer -= delta
+		return Vector2.ZERO
+
+	if not has_target:
+		_set_idle_target()
+
+	if not has_target or nav_agent.is_navigation_finished():
+		has_target = false
+		is_idle_target = false
+		idle_wait_timer = randf_range(idle_wait_min, idle_wait_max)
+		return Vector2.ZERO
+
+	var next_point: Vector2 = nav_agent.get_next_path_position()
+	return (next_point - global_position).normalized()
+
+
+func _set_idle_target() -> void:
+	for i in range(8):
+		var angle = randf() * TAU
+		var dist = randf_range(idle_wander_radius * 0.25, idle_wander_radius)
+		var candidate = idle_anchor_position + Vector2.RIGHT.rotated(angle) * dist
+
+		nav_agent.target_position = candidate
+		has_target = true
+		is_idle_target = true
+
+		if not nav_agent.is_navigation_finished():
+			return
+
+	has_target = false
+	is_idle_target = false
+
+
 func _get_target_direction() -> Vector2:
 	if nav_agent.is_navigation_finished():
 		has_target = false
+		is_idle_target = false
 		return Vector2.ZERO
 	
 	var next_point: Vector2 = nav_agent.get_next_path_position()
@@ -132,18 +188,25 @@ func _on_deselected() -> void:
 		player.get_selection().deselect(self)
 	
 	player = null
+	# Use current position as new idle anchor after being dropped.
+	idle_anchor_position = global_position
+	idle_wait_timer = 0.0
 	clear_target()
 	_unhighlight()
 
 
 func move_toward_target(pos: Vector2) -> void:
 	player = null  # 👈 THIS IS CRITICAL
+	idle_anchor_position = pos
+	idle_wait_timer = 0.0
 	nav_agent.target_position = pos
 	has_target = true
+	is_idle_target = false
 
 
 func clear_target() -> void:
 	has_target = false
+	is_idle_target = false
 	nav_agent.target_position = global_position
 
 
@@ -162,19 +225,40 @@ func _unhighlight() -> void:
 		
 
 func _assign_random_type() -> void:
-	var depts = StudentTypes.DeptName.values()
-	dept = depts[randi() % depts.size()]
-	
-	var specs = StudentTypes.get_specs_from_dept(dept)
-	spec = specs[randi() % specs.size()]
+	var types = StudentTypes.Type.values()
+	student_type = types[randi() % types.size()]
+	type_number = StudentTypes.TYPE_NUMBERS[randi() % StudentTypes.TYPE_NUMBERS.size()]
+	type_info = StudentTypes.get_type_info(student_type, type_number)
+
+
+# Sets student type explicitly (used by quest spawning).
+func set_student_type(new_type: int, new_number: int = -1) -> void:
+	if new_number <= 0:
+		new_number = StudentTypes.TYPE_NUMBERS[randi() % StudentTypes.TYPE_NUMBERS.size()]
+
+	_set_type_info(new_type, new_number)
+
+	if is_inside_tree():
+		_load_icon_by_type()
+
+
+func _set_type_info(new_type: int, new_number: int) -> void:
+	student_type = new_type
+	type_number = new_number
+	type_info = StudentTypes.get_type_info(student_type, type_number)
+
+	if type_info == null:
+		# Fallback to first number for this type.
+		type_number = 1
+		type_info = StudentTypes.get_type_info(student_type, type_number)
 
 
 func _load_icon_by_type() -> void:
-	var dept_name: String = StudentTypes.dept_name_to_string(dept)
-	var spec_name: String = StudentTypes.spec_name_to_string(spec)
+	if type_info == null:
+		push_warning("Student type info missing for type=%s number=%s" % [student_type, type_number])
+		return
 
-	var path := "res://assets/student_icons/%s_%s.png" % [dept_name, spec_name]
-	print(path)
+	var path := type_info.icon_path
 
 	var tex: Texture2D = load(path)
 	if tex == null:

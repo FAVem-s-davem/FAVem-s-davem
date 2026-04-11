@@ -4,12 +4,15 @@ extends CharacterBody2D
 
 class_name Player
 
-@export var max_speed: float = 4400.0
+const StudentTypesDb = preload("res://scripts/student/student_types.gd")
+
+@export var max_speed: float = 3000.0
 @export var acceleration: float = 22000.0
 @export var friction: float = 8800.0
 
 # Ring distances for student behavior
-@export var deselect_ring: float = 3300.0
+@export var select_ring: float = 3300.0
+@export var deselect_ring: float = 6600.0
 @export var catchup_ring: float = 1650.0
 @export var stop_ring: float = 1100.0
 
@@ -70,12 +73,17 @@ func _draw() -> void:
 	var center = Vector2.ZERO
 	
 	# Draw selection rings
+	draw_circle(center, select_ring, Color(0.6, 0.9, 1.0), false, 6.0, true)
 	draw_circle(center, deselect_ring, Color(0.9, 0.9, 0.9), false, 8.0, true)
 	draw_circle(center, catchup_ring, Color(0.3, 0.3, 0.3), false, 4.0, true)
 	draw_circle(center, stop_ring, Color(0.3, 0.3, 0.3), false, 8.0, true)
 
 
 # Getters for student reference
+func get_select_ring() -> float:
+	return select_ring
+
+
 func get_deselect_ring() -> float:
 	return deselect_ring
 
@@ -102,22 +110,22 @@ func _get_units_inside() -> Array[Student]:
 		if node is Student:
 			var global_pos = node.global_position
 			
-			if global_pos.distance_to(self.global_position) <= deselect_ring:
+			if global_pos.distance_to(self.global_position) <= select_ring:
 				units.append(node)
 	
 	return units
 
-func select_by_type(dept: String, spec: String, count: int, append: bool):
-	var deptValue = StudentTypes.parse_dept(dept)
+func select_by_type(type_name: String, type_number: String, count: int, append: bool):
+	var type_value = StudentTypesDb.parse_type(type_name)
 	var students = _get_units_inside()
-	var specValue = null if spec == "" else StudentTypes.parse_spec(dept, spec)
+	var type_number_value = StudentTypesDb.parse_type_number(type_number)
 	var to_select: Array[Student] = []
 	
 	if not append:
 		selection.clear()
 	
 	for student in students:
-		if student.dept == deptValue and (specValue == null or student.spec == specValue):
+		if student.student_type == type_value and (type_number_value == -1 or student.type_number == type_number_value):
 			to_select.append(student)
 			
 	if count != -1:
@@ -131,15 +139,15 @@ func select_by_type(dept: String, spec: String, count: int, append: bool):
 	print("selected: ", selection.get_selected().size())
 	
 
-func deselect_by_type(dept: String, spec: String, count: int):
-	var deptValue = StudentTypes.parse_dept(dept)
+func deselect_by_type(type_name: String, type_number: String, count: int):
+	var type_value = StudentTypesDb.parse_type(type_name)
 	var students = selection.get_selected()
-	var specValue = null if spec == "" else StudentTypes.parse_spec(dept, spec)
+	var type_number_value = StudentTypesDb.parse_type_number(type_number)
 	var to_deselect: Array[Student] = []
 	
 	
 	for student in students:
-		if student.dept == deptValue and (specValue == null or student.spec == specValue):
+		if student.student_type == type_value and (type_number_value == -1 or student.type_number == type_number_value):
 			to_deselect.append(student)
 			
 	if count != -1:
@@ -151,18 +159,18 @@ func deselect_by_type(dept: String, spec: String, count: int):
 	print("selected: ", selection.get_selected().size())
 	
 	
-func send_students(dept: String, spec: String, count: int, marker: int):
+func send_students(type_name: String, type_number: String, count: int, marker: int):
 	if parent.markers[marker] == null:
 		return
 		
-	var deptValue = StudentTypes.parse_dept(dept)
+	var type_value = StudentTypesDb.parse_type(type_name)
 	var students = selection.get_selected()
-	var specValue = null if spec == "" else StudentTypes.parse_spec(dept, spec)
+	var type_number_value = StudentTypesDb.parse_type_number(type_number)
 	var to_deselect: Array[Student] = []
 	
 	
 	for student in students:
-		if student.dept == deptValue and (specValue == null or student.spec == specValue):
+		if student.student_type == type_value and (type_number_value == -1 or student.type_number == type_number_value):
 			to_deselect.append(student)
 			
 	if count != -1:
