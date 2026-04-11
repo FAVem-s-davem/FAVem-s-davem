@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cxc7xxoixo0db"]
+
+[node name="RoomNamePanel" type="PanelContainer" unique_id=1080840302]
+
+[node name="Label" type="Label" parent="." unique_id=1215658359]
+layout_mode = 2
+text = "ROOM"

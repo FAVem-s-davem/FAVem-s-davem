@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dom77pyv58dej"]
+
+[ext_resource type="Texture2D" uid="uid://xeobebcpvgfa" path="res://icon.svg" id="1_8ht8g"]
+
+[node name="IconPanel" type="PanelContainer" unique_id=491303333]
+custom_minimum_size = Vector2(32, 32)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=741995270]
+layout_mode = 2
+
+[node name="IconCount" type="Label" parent="VBoxContainer" unique_id=1810099109]
+layout_mode = 2
+text = "2"
+horizontal_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer" unique_id=1232652654]
+layout_mode = 2
+texture = ExtResource("1_8ht8g")
+expand_mode = 5
