@@ -70,448 +70,471 @@ polygon = PackedVector2Array(74161, 82178, 74351, 82379, 73863, 82855, 74748, 83
 
 [node name="Rooms" type="Node2D" parent="Areas" unique_id=1632413633]
 
-[node name="Room" type="Area2D" parent="Areas/Rooms" unique_id=799165988]
+[node name="A203" type="Area2D" parent="Areas/Rooms" unique_id=1408496100]
 collision_layer = 2
 script = ExtResource("2_paxxb")
+room_number = 3
 metadata/_custom_type_script = "uid://ca45jaiqace5r"
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room" unique_id=195089290]
-polygon = PackedVector2Array(22443, 61016, 22442, 57325, 27389, 57301, 27460, 60993)
-
-[node name="Room2" type="Area2D" parent="Areas/Rooms" unique_id=223783774]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room2" unique_id=22563413]
-position = Vector2(0, -6789)
-polygon = PackedVector2Array(22443, 61016, 22442, 57325, 27389, 57301, 27460, 60993)
-
-[node name="Room3" type="Area2D" parent="Areas/Rooms" unique_id=480782466]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room3" unique_id=1725028692]
-position = Vector2(0, -13516)
-polygon = PackedVector2Array(22443, 61016, 22442, 57325, 27389, 57301, 27460, 60993)
-
-[node name="Room4" type="Area2D" parent="Areas/Rooms" unique_id=1831820504]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room4" unique_id=1046236724]
-position = Vector2(-15861, 0)
-polygon = PackedVector2Array(22443, 61016, 22442, 57325, 27389, 57301, 27460, 60993)
-
-[node name="Room5" type="Area2D" parent="Areas/Rooms" unique_id=906903771]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room5" unique_id=1167871857]
-position = Vector2(-15882, -6809)
-polygon = PackedVector2Array(22443, 61016, 22442, 57325, 27389, 57301, 27460, 60993)
-
-[node name="Room6" type="Area2D" parent="Areas/Rooms" unique_id=1238355826]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room6" unique_id=2111107033]
-position = Vector2(-15939, -13519)
-polygon = PackedVector2Array(22443, 61016, 22442, 57325, 27389, 57301, 27460, 60993)
-
-[node name="Room7" type="Area2D" parent="Areas/Rooms" unique_id=2010940753]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room7" unique_id=354145942]
-position = Vector2(0, 26916)
-polygon = PackedVector2Array(22443, 61016, 22442, 57325, 27389, 57301, 27460, 60993)
-
-[node name="Room8" type="Area2D" parent="Areas/Rooms" unique_id=1598614503]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room8" unique_id=578181590]
-position = Vector2(0, 20208)
-polygon = PackedVector2Array(22443, 61016, 22442, 57325, 27389, 57301, 27460, 60993)
-
-[node name="Room9" type="Area2D" parent="Areas/Rooms" unique_id=323471099]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room9" unique_id=651281220]
-position = Vector2(0, 13373)
-polygon = PackedVector2Array(22443, 61016, 22442, 57325, 27389, 57301, 27460, 60993)
-
-[node name="Room10" type="Area2D" parent="Areas/Rooms" unique_id=1629599664]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room10" unique_id=1869716420]
-
-[node name="Room11" type="Area2D" parent="Areas/Rooms" unique_id=1908134164]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room11" unique_id=1062194278]
-polygon = PackedVector2Array(22380, 54646, 27479, 54614, 27515, 56857, 22411, 56884)
-
-[node name="Room12" type="Area2D" parent="Areas/Rooms" unique_id=627067104]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room12" unique_id=89053057]
-polygon = PackedVector2Array(22401, 47887, 27508, 47887, 27513, 50207, 22382, 50192)
-
-[node name="Room13" type="Area2D" parent="Areas/Rooms" unique_id=946182563]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room13" unique_id=2034233027]
-polygon = PackedVector2Array(22399, 41175, 27499, 41129, 27486, 43378, 22412, 43384)
-
-[node name="Room14" type="Area2D" parent="Areas/Rooms" unique_id=2586343]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room14" unique_id=1091229672]
-polygon = PackedVector2Array(22491, 40714, 22352, 37302, 20825, 37363, 20845, 34508, 27391, 34528, 27410, 40574)
-
-[node name="Room15" type="Area2D" parent="Areas/Rooms" unique_id=290677054]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room15" unique_id=1704680816]
-polygon = PackedVector2Array(13676, 39356, 13663, 47404, 20319, 47455, 20357, 39356)
-
-[node name="Room16" type="Area2D" parent="Areas/Rooms" unique_id=1995159709]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room16" unique_id=827878219]
-polygon = PackedVector2Array(6557, 34478, 6503, 40682, 11635, 40706, 11627, 37335, 13142, 37335, 13095, 34376)
-
-[node name="Room17" type="Area2D" parent="Areas/Rooms" unique_id=1322693153]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room17" unique_id=1629742902]
-polygon = PackedVector2Array(17223, 47937, 17244, 54070, 20358, 54028, 20295, 47884)
-
-[node name="Room18" type="Area2D" parent="Areas/Rooms" unique_id=930189205]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room18" unique_id=1449559305]
-polygon = PackedVector2Array(13697, 47895, 16779, 47895, 16822, 50038, 13655, 50048)
-
-[node name="Room19" type="Area2D" parent="Areas/Rooms" unique_id=2037110179]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room19" unique_id=1129518892]
-polygon = PackedVector2Array(13697, 50492, 13686, 54039, 16737, 54028, 16779, 50449)
-
-[node name="Room20" type="Area2D" parent="Areas/Rooms" unique_id=2000746463]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room20" unique_id=1467226306]
-polygon = PackedVector2Array(4432, 68120, 4430, 74375, 11571, 74344, 11571, 68192)
-
-[node name="Room21" type="Area2D" parent="Areas/Rooms" unique_id=794432773]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room21" unique_id=1103249381]
-polygon = PackedVector2Array(4755, 95068, 13275, 95055, 13288, 99501, 4755, 101021)
-
-[node name="Room22" type="Area2D" parent="Areas/Rooms" unique_id=1880577307]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room22" unique_id=1127172415]
-position = Vector2(-15882, -16)
-polygon = PackedVector2Array(22380, 54646, 27479, 54614, 27515, 56857, 22411, 56884)
-
-[node name="Room23" type="Area2D" parent="Areas/Rooms" unique_id=1800364937]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room23" unique_id=47892422]
-position = Vector2(-15882, 16)
-polygon = PackedVector2Array(22401, 47887, 27508, 47887, 27513, 50207, 22382, 50192)
-
-[node name="Room24" type="Area2D" parent="Areas/Rooms" unique_id=1703639430]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room24" unique_id=594856939]
-position = Vector2(-15882, -16)
-polygon = PackedVector2Array(22399, 41175, 27499, 41129, 27486, 43378, 22412, 43384)
-
-[node name="Room25" type="Area2D" parent="Areas/Rooms" unique_id=1603203040]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room25" unique_id=1313908833]
-position = Vector2(10, 26897)
-polygon = PackedVector2Array(22380, 54646, 27479, 54614, 27515, 56857, 22411, 56884)
-
-[node name="Room26" type="Area2D" parent="Areas/Rooms" unique_id=1995877256]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room26" unique_id=1141742694]
-position = Vector2(10, 26970)
-polygon = PackedVector2Array(22401, 47887, 27508, 47887, 27513, 50207, 22382, 50192)
-
-[node name="Room27" type="Area2D" parent="Areas/Rooms" unique_id=1331403514]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room27" unique_id=412165857]
-position = Vector2(10, 26846)
-polygon = PackedVector2Array(22399, 41175, 27499, 41129, 27486, 43378, 22412, 43384)
-
-[node name="Room28" type="Area2D" parent="Areas/Rooms" unique_id=1066566626]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room28" unique_id=1263629620]
-position = Vector2(-16, 6693)
-polygon = PackedVector2Array(4432, 68120, 4430, 74375, 11571, 74344, 11571, 68192)
-
-[node name="Room29" type="Area2D" parent="Areas/Rooms" unique_id=1573434384]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room29" unique_id=820828623]
-position = Vector2(10, 33647)
-polygon = PackedVector2Array(22380, 54646, 27479, 54614, 27515, 56857, 22411, 56884)
-
-[node name="Room30" type="Area2D" parent="Areas/Rooms" unique_id=254837565]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room30" unique_id=933127100]
-position = Vector2(10, 13422)
-polygon = PackedVector2Array(4432, 68120, 4430, 74375, 11571, 74344, 11571, 68192)
-
-[node name="Room31" type="Area2D" parent="Areas/Rooms" unique_id=1747199383]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room31" unique_id=360692711]
-position = Vector2(36, 20151)
-polygon = PackedVector2Array(4432, 68120, 4430, 74375, 11571, 74344, 11571, 68192)
-
-[node name="Room32" type="Area2D" parent="Areas/Rooms" unique_id=712740425]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room32" unique_id=1140837776]
-position = Vector2(10, 33587)
-polygon = PackedVector2Array(22443, 61016, 22442, 57325, 27389, 57301, 27460, 60993)
-
-[node name="Room33" type="Area2D" parent="Areas/Rooms" unique_id=1799957654]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room33" unique_id=450538342]
-polygon = PackedVector2Array(27513, 95003, 27513, 96919, 20627, 98174, 20638, 94968)
-
-[node name="Room34" type="Area2D" parent="Areas/Rooms" unique_id=1191789033]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room34" unique_id=781726549]
-polygon = PackedVector2Array(20243, 98225, 20275, 91912, 13677, 91859, 13729, 99418)
-
-[node name="Room35" type="Area2D" parent="Areas/Rooms" unique_id=1436166394]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room35" unique_id=1079470856]
-polygon = PackedVector2Array(13729, 81592, 13712, 86132, 20308, 86132, 20291, 81524)
-
-[node name="Room36" type="Area2D" parent="Areas/Rooms" unique_id=745547272]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room36" unique_id=1303299577]
-polygon = PackedVector2Array(13732, 74943, 13702, 81141, 20348, 81079, 20240, 74943)
-
-[node name="Room37" type="Area2D" parent="Areas/Rooms" unique_id=1739296774]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room37" unique_id=668866558]
-polygon = PackedVector2Array(60339, 53769, 60908, 57009, 65960, 56104, 65391, 52910)
-
-[node name="Room38" type="Area2D" parent="Areas/Rooms" unique_id=151386378]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room38" unique_id=1788929328]
-polygon = PackedVector2Array(65236, 52472, 64815, 49994, 59845, 50813, 60294, 53375)
-
-[node name="Room39" type="Area2D" parent="Areas/Rooms" unique_id=2111615222]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Areas/Rooms/Room39" unique_id=1028831157]
-position = Vector2(-17995, -10494)
-polygon = PackedVector2Array(65236, 52472, 64815, 49994, 59845, 50813, 60294, 53375)
-
-[node name="Room40" type="Area2D" parent="Areas/Rooms" unique_id=1361414396]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room40" unique_id=1067803904]
-position = Vector2(-18064, -10430)
-polygon = PackedVector2Array(60339, 53769, 60908, 57009, 65960, 56104, 65391, 52910)
-
-[node name="Room41" type="Area2D" parent="Areas/Rooms" unique_id=1247604573]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room41" unique_id=2029009047]
-position = Vector2(-16845, -3806)
-polygon = PackedVector2Array(60339, 53769, 60908, 57009, 65960, 56104, 65391, 52910)
-
-[node name="Room42" type="Area2D" parent="Areas/Rooms" unique_id=65381322]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Areas/Rooms/Room42" unique_id=1960488392]
-position = Vector2(-16786, -3847)
-polygon = PackedVector2Array(65236, 52472, 64815, 49994, 59845, 50813, 60294, 53375)
-
-[node name="Room43" type="Area2D" parent="Areas/Rooms" unique_id=525703974]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room43" unique_id=719609120]
-position = Vector2(-2306, -13195)
-polygon = PackedVector2Array(60339, 53769, 60908, 57009, 65960, 56104, 65391, 52910)
-
-[node name="Room44" type="Area2D" parent="Areas/Rooms" unique_id=845760859]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Areas/Rooms/Room44" unique_id=1865843238]
-position = Vector2(-2283, -13218)
-polygon = PackedVector2Array(65236, 52472, 64815, 49994, 59845, 50813, 60294, 53375)
-
-[node name="Room45" type="Area2D" parent="Areas/Rooms" unique_id=460322998]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="Areas/Rooms/Room45" unique_id=1681026617]
-position = Vector2(-15579, 2841)
-polygon = PackedVector2Array(65236, 52472, 64815, 49994, 59845, 50813, 60294, 53375)
-
-[node name="Room46" type="Area2D" parent="Areas/Rooms" unique_id=1408496100]
-collision_layer = 2
-script = ExtResource("2_paxxb")
-metadata/_custom_type_script = "uid://ca45jaiqace5r"
-
-[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="Areas/Rooms/Room46" unique_id=1652238053]
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="Areas/Rooms/A203" unique_id=1652238053]
 position = Vector2(-15707, 2813)
 polygon = PackedVector2Array(60339, 53769, 60908, 57009, 65960, 56104, 65391, 52910)
 
-[node name="Room47" type="Area2D" parent="Areas/Rooms" unique_id=128049817]
+[node name="A204" type="Area2D" parent="Areas/Rooms" unique_id=460322998]
 collision_layer = 2
 script = ExtResource("2_paxxb")
 metadata/_custom_type_script = "uid://ca45jaiqace5r"
 
-[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Areas/Rooms/Room47" unique_id=316362715]
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="Areas/Rooms/A204" unique_id=1681026617]
+position = Vector2(-15579, 2841)
+polygon = PackedVector2Array(65236, 52472, 64815, 49994, 59845, 50813, 60294, 53375)
+
+[node name="A205" type="Area2D" parent="Areas/Rooms" unique_id=1247604573]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/A205" unique_id=2029009047]
+position = Vector2(-16845, -3806)
+polygon = PackedVector2Array(60339, 53769, 60908, 57009, 65960, 56104, 65391, 52910)
+
+[node name="A206" type="Area2D" parent="Areas/Rooms" unique_id=65381322]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Areas/Rooms/A206" unique_id=1960488392]
+position = Vector2(-16786, -3847)
+polygon = PackedVector2Array(65236, 52472, 64815, 49994, 59845, 50813, 60294, 53375)
+
+[node name="A207" type="Area2D" parent="Areas/Rooms" unique_id=1361414396]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/A207" unique_id=1067803904]
+position = Vector2(-18064, -10430)
+polygon = PackedVector2Array(60339, 53769, 60908, 57009, 65960, 56104, 65391, 52910)
+
+[node name="A208" type="Area2D" parent="Areas/Rooms" unique_id=2111615222]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Areas/Rooms/A208" unique_id=1028831157]
+position = Vector2(-17995, -10494)
+polygon = PackedVector2Array(65236, 52472, 64815, 49994, 59845, 50813, 60294, 53375)
+
+[node name="A209" type="Area2D" parent="Areas/Rooms" unique_id=1487818944]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/A209" unique_id=1604309121]
+polygon = PackedVector2Array(40648, 33736, 41818, 39993, 46800, 39128, 46236, 35707, 47705, 35497, 47193, 32547)
+
+[node name="A210" type="Area2D" parent="Areas/Rooms" unique_id=155379166]
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/A210" unique_id=97004074]
+polygon = PackedVector2Array(48647, 37272, 50006, 45342, 53083, 44727, 51655, 36761)
+
+[node name="A211" type="Area2D" parent="Areas/Rooms" unique_id=1629599664]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/A211" unique_id=1869716420]
+polygon = PackedVector2Array(55127, 36152, 56532, 44118, 53478, 44687, 52061, 36686)
+
+[node name="A212" type="Area2D" parent="Areas/Rooms" unique_id=1942301689]
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/A212" unique_id=378769769]
+polygon = PackedVector2Array(50083, 45676, 51181, 51731, 54234, 51220, 53148, 45178)
+
+[node name="A213" type="Area2D" parent="Areas/Rooms" unique_id=1015660244]
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/A213" unique_id=1058763169]
+polygon = PackedVector2Array(53659, 45191, 54643, 51105, 57734, 50581, 56610, 44527)
+
+[node name="A224" type="Area2D" parent="Areas/Rooms" unique_id=1387840695]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/A224" unique_id=973211469]
+polygon = PackedVector2Array(54823, 31211, 55311, 34143, 56829, 33872, 57423, 37118, 62422, 36289, 61314, 30077)
+
+[node name="A225" type="Area2D" parent="Areas/Rooms" unique_id=845760859]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Areas/Rooms/A225" unique_id=1865843238]
+position = Vector2(-2283, -13218)
+polygon = PackedVector2Array(65236, 52472, 64815, 49994, 59845, 50813, 60294, 53375)
+
+[node name="A226" type="Area2D" parent="Areas/Rooms" unique_id=525703974]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/A226" unique_id=719609120]
+position = Vector2(-2306, -13195)
+polygon = PackedVector2Array(60339, 53769, 60908, 57009, 65960, 56104, 65391, 52910)
+
+[node name="A227" type="Area2D" parent="Areas/Rooms" unique_id=128049817]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Areas/Rooms/A227" unique_id=316362715]
 position = Vector2(-1123, -6579)
 polygon = PackedVector2Array(65236, 52472, 64815, 49994, 59845, 50813, 60294, 53375)
 
-[node name="Room48" type="Area2D" parent="Areas/Rooms" unique_id=1327529618]
+[node name="A228" type="Area2D" parent="Areas/Rooms" unique_id=1327529618]
 collision_layer = 2
 script = ExtResource("2_paxxb")
 metadata/_custom_type_script = "uid://ca45jaiqace5r"
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room48" unique_id=794412497]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/A228" unique_id=794412497]
 position = Vector2(-1143.6992, -6599.699)
 polygon = PackedVector2Array(60339, 53769, 60908, 57009, 65960, 56104, 65391, 52910)
 
-[node name="Room49" type="Area2D" parent="Areas/Rooms" unique_id=1487818944]
+[node name="A229" type="Area2D" parent="Areas/Rooms" unique_id=151386378]
 collision_layer = 2
 script = ExtResource("2_paxxb")
 metadata/_custom_type_script = "uid://ca45jaiqace5r"
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room49" unique_id=1604309121]
-polygon = PackedVector2Array(40648, 33736, 41818, 39993, 46800, 39128, 46236, 35707, 47705, 35497, 47193, 32547)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/A229" unique_id=1788929328]
+polygon = PackedVector2Array(65236, 52472, 64815, 49994, 59845, 50813, 60294, 53375)
 
-[node name="Room50" type="Area2D" parent="Areas/Rooms" unique_id=1387840695]
+[node name="A230" type="Area2D" parent="Areas/Rooms" unique_id=1739296774]
 collision_layer = 2
 script = ExtResource("2_paxxb")
 metadata/_custom_type_script = "uid://ca45jaiqace5r"
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room50" unique_id=973211469]
-polygon = PackedVector2Array(54823, 31211, 55311, 34143, 56829, 33872, 57423, 37118, 62422, 36289, 61314, 30077)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/A230" unique_id=668866558]
+polygon = PackedVector2Array(60339, 53769, 60908, 57009, 65960, 56104, 65391, 52910)
 
-[node name="Room51" type="Area2D" parent="Areas/Rooms" unique_id=608923153]
+[node name="B203" type="Area2D" parent="Areas/Rooms" unique_id=799165988]
 collision_layer = 2
 script = ExtResource("2_paxxb")
 metadata/_custom_type_script = "uid://ca45jaiqace5r"
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room51" unique_id=535890039]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/B203" unique_id=195089290]
+polygon = PackedVector2Array(22443, 61016, 22442, 57325, 27389, 57301, 27460, 60993)
+
+[node name="B204" type="Area2D" parent="Areas/Rooms" unique_id=1908134164]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/B204" unique_id=1062194278]
+polygon = PackedVector2Array(22380, 54646, 27479, 54614, 27515, 56857, 22411, 56884)
+
+[node name="B205" type="Area2D" parent="Areas/Rooms" unique_id=223783774]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/B205" unique_id=22563413]
+position = Vector2(0, -6791)
+polygon = PackedVector2Array(22443, 61016, 22442, 57325, 27389, 57301, 27460, 60993)
+
+[node name="B206" type="Area2D" parent="Areas/Rooms" unique_id=627067104]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/B206" unique_id=89053057]
+polygon = PackedVector2Array(22401, 47887, 27508, 47887, 27513, 50207, 22382, 50192)
+
+[node name="B207" type="Area2D" parent="Areas/Rooms" unique_id=480782466]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/B207" unique_id=1725028692]
+position = Vector2(0, -13516)
+polygon = PackedVector2Array(22443, 61016, 22442, 57325, 27389, 57301, 27460, 60993)
+
+[node name="B208" type="Area2D" parent="Areas/Rooms" unique_id=946182563]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/B208" unique_id=2034233027]
+polygon = PackedVector2Array(22399, 41175, 27499, 41129, 27486, 43378, 22412, 43384)
+
+[node name="B209" type="Area2D" parent="Areas/Rooms" unique_id=2586343]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/B209" unique_id=1091229672]
+polygon = PackedVector2Array(22491, 40714, 22352, 37302, 20825, 37363, 20845, 34508, 27391, 34528, 27410, 40574)
+
+[node name="B210" type="Area2D" parent="Areas/Rooms" unique_id=290677054]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/B210" unique_id=1704680816]
+polygon = PackedVector2Array(13676, 39356, 13663, 47404, 20319, 47455, 20357, 39356)
+
+[node name="B211" type="Area2D" parent="Areas/Rooms" unique_id=1322693153]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/B211" unique_id=1629742902]
+polygon = PackedVector2Array(17223, 47937, 17244, 54070, 20358, 54028, 20295, 47884)
+
+[node name="B212" type="Area2D" parent="Areas/Rooms" unique_id=930189205]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/B212" unique_id=1449559305]
+polygon = PackedVector2Array(13697, 47895, 16779, 47895, 16822, 50038, 13655, 50048)
+
+[node name="B213" type="Area2D" parent="Areas/Rooms" unique_id=2037110179]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/B213" unique_id=1129518892]
+polygon = PackedVector2Array(13697, 50492, 13686, 54039, 16737, 54028, 16779, 50449)
+
+[node name="B224" type="Area2D" parent="Areas/Rooms" unique_id=1995159709]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/B224" unique_id=827878219]
+polygon = PackedVector2Array(6557, 34478, 6503, 40682, 11635, 40706, 11627, 37335, 13142, 37335, 13095, 34376)
+
+[node name="B225" type="Area2D" parent="Areas/Rooms" unique_id=1703639430]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/B225" unique_id=594856939]
+position = Vector2(-15882, -16)
+polygon = PackedVector2Array(22399, 41175, 27499, 41129, 27486, 43378, 22412, 43384)
+
+[node name="B226" type="Area2D" parent="Areas/Rooms" unique_id=1238355826]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/B226" unique_id=2111107033]
+position = Vector2(-15939, -13519)
+polygon = PackedVector2Array(22443, 61016, 22442, 57325, 27389, 57301, 27460, 60993)
+
+[node name="B227" type="Area2D" parent="Areas/Rooms" unique_id=1800364937]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/B227" unique_id=47892422]
+position = Vector2(-15882, 16)
+polygon = PackedVector2Array(22401, 47887, 27508, 47887, 27513, 50207, 22382, 50192)
+
+[node name="B228" type="Area2D" parent="Areas/Rooms" unique_id=906903771]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/B228" unique_id=1167871857]
+position = Vector2(-15882, -6809)
+polygon = PackedVector2Array(22443, 61016, 22442, 57325, 27389, 57301, 27460, 60993)
+
+[node name="B229" type="Area2D" parent="Areas/Rooms" unique_id=1880577307]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/B229" unique_id=1127172415]
+position = Vector2(-15882, -16)
+polygon = PackedVector2Array(22380, 54646, 27479, 54614, 27515, 56857, 22411, 56884)
+
+[node name="B230" type="Area2D" parent="Areas/Rooms" unique_id=1831820504]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/B230" unique_id=1046236724]
+position = Vector2(-15861, 0)
+polygon = PackedVector2Array(22443, 61016, 22442, 57325, 27389, 57301, 27460, 60993)
+
+[node name="B233" type="Area2D" parent="Areas/Rooms" unique_id=2000746463]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/B233" unique_id=1467226306]
+polygon = PackedVector2Array(4432, 68120, 4430, 74375, 11571, 74344, 11571, 68192)
+
+[node name="B234" type="Area2D" parent="Areas/Rooms" unique_id=1066566626]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/B234" unique_id=1263629620]
+position = Vector2(-16, 6693)
+polygon = PackedVector2Array(4432, 68120, 4430, 74375, 11571, 74344, 11571, 68192)
+
+[node name="B235" type="Area2D" parent="Areas/Rooms" unique_id=254837565]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/B235" unique_id=933127100]
+position = Vector2(10, 13422)
+polygon = PackedVector2Array(4432, 68120, 4430, 74375, 11571, 74344, 11571, 68192)
+
+[node name="B236" type="Area2D" parent="Areas/Rooms" unique_id=1747199383]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/B236" unique_id=360692711]
+position = Vector2(36, 20151)
+polygon = PackedVector2Array(4432, 68120, 4430, 74375, 11571, 74344, 11571, 68192)
+
+[node name="B237" type="Area2D" parent="Areas/Rooms" unique_id=794432773]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/B237" unique_id=1103249381]
+polygon = PackedVector2Array(4755, 95068, 13275, 95055, 13288, 99501, 4755, 101021)
+
+[node name="B238" type="Area2D" parent="Areas/Rooms" unique_id=1191789033]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/B238" unique_id=781726549]
+polygon = PackedVector2Array(20243, 98225, 20275, 91912, 13677, 91859, 13729, 99418)
+
+[node name="B240" type="Area2D" parent="Areas/Rooms" unique_id=1436166394]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/B240" unique_id=1079470856]
+polygon = PackedVector2Array(13729, 81592, 13712, 86132, 20308, 86132, 20291, 81524)
+
+[node name="B241" type="Area2D" parent="Areas/Rooms" unique_id=745547272]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/B241" unique_id=1303299577]
+polygon = PackedVector2Array(13732, 74943, 13702, 81141, 20348, 81079, 20240, 74943)
+
+[node name="B252" type="Area2D" parent="Areas/Rooms" unique_id=1799957654]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/B252" unique_id=450538342]
+polygon = PackedVector2Array(27513, 95003, 27513, 96919, 20627, 98174, 20638, 94968)
+
+[node name="B253" type="Area2D" parent="Areas/Rooms" unique_id=712740425]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/B253" unique_id=1140837776]
+position = Vector2(10, 33587)
+polygon = PackedVector2Array(22443, 61016, 22442, 57325, 27389, 57301, 27460, 60993)
+
+[node name="B254" type="Area2D" parent="Areas/Rooms" unique_id=1573434384]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/B254" unique_id=820828623]
+position = Vector2(10, 33647)
+polygon = PackedVector2Array(22380, 54646, 27479, 54614, 27515, 56857, 22411, 56884)
+
+[node name="B255" type="Area2D" parent="Areas/Rooms" unique_id=2010940753]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/B255" unique_id=354145942]
+position = Vector2(0, 26916)
+polygon = PackedVector2Array(22443, 61016, 22442, 57325, 27389, 57301, 27460, 60993)
+
+[node name="B256" type="Area2D" parent="Areas/Rooms" unique_id=1603203040]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/B256" unique_id=1313908833]
+position = Vector2(10, 26897)
+polygon = PackedVector2Array(22380, 54646, 27479, 54614, 27515, 56857, 22411, 56884)
+
+[node name="B257" type="Area2D" parent="Areas/Rooms" unique_id=1598614503]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/B257" unique_id=578181590]
+position = Vector2(0, 20208)
+polygon = PackedVector2Array(22443, 61016, 22442, 57325, 27389, 57301, 27460, 60993)
+
+[node name="B258" type="Area2D" parent="Areas/Rooms" unique_id=1995877256]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/B258" unique_id=1141742694]
+position = Vector2(10, 26970)
+polygon = PackedVector2Array(22401, 47887, 27508, 47887, 27513, 50207, 22382, 50192)
+
+[node name="B259" type="Area2D" parent="Areas/Rooms" unique_id=323471099]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/B259" unique_id=651281220]
+position = Vector2(0, 13373)
+polygon = PackedVector2Array(22443, 61016, 22442, 57325, 27389, 57301, 27460, 60993)
+
+[node name="B260" type="Area2D" parent="Areas/Rooms" unique_id=1331403514]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/B260" unique_id=412165857]
+position = Vector2(10, 26846)
+polygon = PackedVector2Array(22399, 41175, 27499, 41129, 27486, 43378, 22412, 43384)
+
+[node name="C207" type="Area2D" parent="Areas/Rooms" unique_id=608923153]
+collision_layer = 2
+script = ExtResource("2_paxxb")
+metadata/_custom_type_script = "uid://ca45jaiqace5r"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/C207" unique_id=535890039]
 polygon = PackedVector2Array(69101, 84860, 68188, 84074, 67417, 83631, 66594, 83557, 65865, 83641, 65897, 83873, 49952, 86662, 51055, 92944, 66968, 94897, 67639, 92277, 68452, 92137, 69718, 87295, 69648, 85797)
 
-[node name="Room52" type="Area2D" parent="Areas/Rooms" unique_id=310049199]
+[node name="C217" type="Area2D" parent="Areas/Rooms" unique_id=310049199]
 collision_layer = 2
 script = ExtResource("2_paxxb")
 metadata/_custom_type_script = "uid://ca45jaiqace5r"
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/Room52" unique_id=1010015794]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Areas/Rooms/C217" unique_id=1010015794]
 polygon = PackedVector2Array(76339, 80552, 73983, 82853, 74095, 83114, 68790, 102829, 69368, 104852, 72033, 104871, 75925, 104969, 80183, 105250, 84440, 105812, 89210, 88600, 86541, 87504, 84054, 86225, 81047, 84455, 78317, 82340)
 
 [node name="Spawners" type="Node2D" parent="Areas" unique_id=1235513280]
