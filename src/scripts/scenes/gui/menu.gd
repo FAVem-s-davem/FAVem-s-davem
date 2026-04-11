@@ -12,8 +12,7 @@ func _ready():
 	$MainMenu/VBoxContainer/Settings.pressed.connect(_on_settings_pressed)
 	$MainMenu/VBoxContainer/About.pressed.connect(_on_about_pressed)
 	$MainMenu/VBoxContainer/Quit.pressed.connect(_on_quit_pressed)
-	if has_node("MainMenu/VBoxContainer/Restart"):
-		$MainMenu/VBoxContainer/Restart.pressed.connect(_on_restart_pressed)
+	$MainMenu/VBoxContainer/Restart.pressed.connect(_on_restart_pressed)
 
 	$About/Back.pressed.connect(_on_back_pressed)
 	$Settings/VBoxContainer/Back.pressed.connect(_on_back_pressed)
