@@ -4,8 +4,9 @@ extends Node2D
 
 class_name GameScene
 
-const MARKER_RADIUS: float = 132.0
-const MARKER_FONT_SIZE: int = 154
+const MARKER_RADIUS: float = 300.0
+const MARKER_FONT_SIZE: int = 350
+const MARKER_OUTLINE = 20
 const BUFFER_FONT_SIZE: int = 264
 const BUFFER_TEXT_OFFSET: float = 1100.0
 
@@ -31,6 +32,9 @@ var markers: Array = []
 var input: InputHandler
 var parser: CommandParser
 var dispatcher: CommandDispatcher
+
+func _process(delta: float) -> void:
+	queue_redraw()
 
 func _ready() -> void:
 	_initialize_input_parser()
@@ -150,15 +154,32 @@ func _draw():
 		if pos == null:
 			continue
 		
-		var local_pos = to_local(pos)
-		draw_circle(local_pos, MARKER_RADIUS, Color.BLUE)
+		var local_pos = pos
+		draw_circle(local_pos, MARKER_RADIUS, Color.RED)
+		draw_circle(local_pos, MARKER_RADIUS, Color.BLACK, false, MARKER_OUTLINE)
 
 		var font = ThemeDB.fallback_font
 		var font_size = MARKER_FONT_SIZE
-		
+
 		var text = str(i)
 		var text_size = font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)
-		draw_string(font, local_pos - text_size / 2, text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, Color.WHITE)
+		var ascent = font.get_ascent(font_size)
+		var descent = font.get_descent(font_size)
+
+		var text_height = ascent + descent
+		var text_pos = local_pos - Vector2(text_size.x / 2.0, text_height / 2.0 - ascent)
+
+		var outline_size = MARKER_OUTLINE
+
+		# --- Draw outline (8 directions) ---
+		for x in range(-outline_size, outline_size + 1):
+			for y in range(-outline_size, outline_size + 1):
+				if x == 0 and y == 0:
+					continue
+				draw_string(font, text_pos + Vector2(x, y), text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, Color.BLACK)
+
+		# --- Draw main text ---
+		draw_string(font, text_pos, text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, Color.WHITE)
 
 	if input == null or player == null:
 		return
