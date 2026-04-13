@@ -29,6 +29,7 @@ position = Vector2(24151, 64484)
 
 [node name="GameLoopManager" type="Node" parent="GameScene" unique_id=401730751]
 script = ExtResource("4_loop")
+quest_phase_duration = 60.0
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=1919133619]
 scroll_scale = Vector2(0.98, 0.98)
