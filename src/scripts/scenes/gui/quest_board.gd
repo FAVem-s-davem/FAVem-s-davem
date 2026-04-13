@@ -97,7 +97,7 @@ func _apply_quest_to_icon_panel(panel: PanelContainer, quest) -> void:
 		icon_count.text = str(quest.required_count)
 
 	if icon != null:
-		icon.texture = _get_texture_for_type(quest.required_student_type)
+		icon.texture = _get_texture_for_type(quest.required_student_type, quest.required_student_number)
 
 	_set_panel_completed_style(panel, quest.is_completed)
 
@@ -116,9 +116,9 @@ func _apply_empty_panel(panel: PanelContainer) -> void:
 	_set_panel_background_color(panel, Color(0.35, 0.35, 0.35, 0.8))
 
 
-func _get_texture_for_type(student_type: int) -> Texture2D:
+func _get_texture_for_type(student_type: int, student_number: int = -1) -> Texture2D:
 	# Type-to-icon mapping policy used by the board.
-	var info := StudentTypes.get_type_info(student_type, 1)
+	var info := StudentTypes.get_type_info(student_type, student_number)
 	if info == null:
 		return null
 	return load(info.icon_path) as Texture2D

@@ -28,6 +28,8 @@ var game_loop_manager: GameLoopManager
 var rooms: Array[Room] = []
 var spawners: Array[Spawner] = []
 
+var to_spawn: Array[int]
+
 var markers: Array = []
 var input: InputHandler
 var parser: CommandParser
@@ -130,7 +132,12 @@ func spawn_students_for_active_quests() -> void:
 		push_warning("GameScene: No spawners available for quest spawning")
 		return
 
-	var spawner_index := 0
+	
+	var prep_spawners: Array[Spawner] = []
+	
+	for spawner in spawners:
+		for i in range(spawner.weight):
+			prep_spawners.append(spawner)
 
 	for timetable in quest_manager.timetables:
 		var quest = timetable.get_active_quest()
@@ -138,9 +145,8 @@ func spawn_students_for_active_quests() -> void:
 			continue
 
 		for _i in range(quest.required_count):
-			var spawner := spawners[spawner_index % spawners.size()]
-			spawner.spawn_student(quest.required_student_type)
-			spawner_index += 1
+			var spawner: Spawner = prep_spawners.pick_random()
+			spawner.spawn_student(quest.required_student_type, quest.required_student_number)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.is_echo():

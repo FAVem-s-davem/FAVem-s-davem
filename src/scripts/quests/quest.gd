@@ -6,6 +6,7 @@ signal completed_changed(quest: Quest, is_completed: bool)
 
 # Required student type for this quest (StudentTypes.Type value).
 var required_student_type: int = -1
+var required_student_number: int = -1
 
 # Required exact number of students.
 var required_count: int = 0
@@ -14,8 +15,9 @@ var required_count: int = 0
 var is_completed: bool = false
 
 
-func _init(student_type: int = -1, count: int = 0) -> void:
+func _init(student_type: int = -1, student_number: int = -1, count: int = 0) -> void:
 	required_student_type = student_type
+	required_student_number = student_number
 	required_count = max(0, count)
 
 
@@ -29,6 +31,8 @@ func matches_students(students: Array[Student]) -> bool:
 		if student == null:
 			return false
 		if student.student_type != required_student_type:
+			return false
+		if required_student_number != -1 and student.type_number != required_student_number:
 			return false
 
 	return true

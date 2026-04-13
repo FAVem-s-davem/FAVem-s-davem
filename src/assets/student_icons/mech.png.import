@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://boog0sx5gpw6i"
-path="res://.godot/imported/math.png-e64121bd5aebf23416e8f10431011205.ctex"
+uid="uid://dh757ymc028wu"
+path="res://.godot/imported/mech.png-c546eec74c36cbffd7d07a890b8a7bb1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/student_icons/math.png"
-dest_files=["res://.godot/imported/math.png-e64121bd5aebf23416e8f10431011205.ctex"]
+source_file="res://assets/student_icons/mech.png"
+dest_files=["res://.godot/imported/mech.png-c546eec74c36cbffd7d07a890b8a7bb1.ctex"]
 
 [params]
 

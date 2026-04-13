@@ -7,13 +7,15 @@ const MAX_POINT_ATTEMPTS: int = 20
 
 var game_scene: GameScene
 
+@export var weight: int = 1
+
 
 func _ready() -> void:
 	_resolve_game_scene()
 
 
 # Spawns one student of requested type from this spawner.
-func spawn_student(student_type: int):
+func spawn_student(student_type: int, student_number: int = -1):
 	if game_scene == null:
 		_resolve_game_scene()
 	if game_scene == null:
@@ -29,7 +31,7 @@ func spawn_student(student_type: int):
 		push_error("Spawner: student_scene root is not Student")
 		return null
 
-	student.set_student_type(student_type)
+	student.set_student_type(student_type, student_number)
 	student.global_position = _get_spawn_position()
 	game_scene.add_child(student)
 
