@@ -27,9 +27,12 @@ func initialize_for_rooms(rooms: Array[Room]) -> void:
 		return
 
 	var count: int = min(number_of_timetables, rooms.size())
+	
+	var picked_rooms: Array[Room] = rooms.duplicate()
+	picked_rooms.shuffle()
 
 	for i in range(count):
-		var room := rooms[i]
+		var room := picked_rooms[i]
 		var timetable = TimetableScript.new(quests_in_timetable)
 		timetable.assign_room(room)
 
@@ -64,7 +67,7 @@ func _generate_default_quests(timetable, room: Room) -> void:
 	for _i in range(quests_in_timetable):
 		var required_type: int = type_values[randi() % type_values.size()]
 		var required_count: int = randi_range(1, 4 * room.room_size)
-    
+	
 		var quest = QuestScript.new(required_type, required_count)
 		timetable.add_quest(quest)
 
