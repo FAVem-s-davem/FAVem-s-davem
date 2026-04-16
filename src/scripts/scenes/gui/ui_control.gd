@@ -12,7 +12,7 @@ func _ready():
 	# Ensure UI nodes process during pause
 	self.process_mode = Control.ProcessMode.PROCESS_MODE_ALWAYS
 
-	$Menu/MainMenu/VBoxContainer/Start.pressed.connect(_on_start_button_pressed)
+	$Menu/MainMenu/PanelContainer/VBoxContainer/Start.pressed.connect(_on_start_button_pressed)
 	$Menu.restart_requested.connect(_on_restart_requested)
 	$Menu.set_restart_visible(false)
 
@@ -21,11 +21,12 @@ func _ready():
 func _on_start_button_pressed():
 	has_started_game = true
 	_menu_bg.stop()
+	_menu_bg.visible = false
 	$Menu.visible = false
 	$Hud.visible = true
 	get_node("/root/Main/GameScene").visible = true
 	get_tree().paused = false
-	$Menu/MainMenu/VBoxContainer/Start.text = "CONTINUE"
+	$Menu/MainMenu/PanelContainer/VBoxContainer/Start.text = "CONTINUE"
 	$Menu.set_restart_visible(false)
 	# Hand camera back to the player
 	var player_cam := get_node_or_null("/root/Main/GameScene/Player/Camera2D") as Camera2D
@@ -52,6 +53,7 @@ func _input(event):
 		get_node("/root/Main/GameScene").visible = false
 		get_tree().paused = true
 		$Menu.set_restart_visible(has_started_game)
+		_menu_bg.visible = true
 		_menu_bg.start()
 
-		$Menu/MainMenu/VBoxContainer/Start.grab_focus()
+		$Menu/MainMenu/PanelContainer/VBoxContainer/Start.grab_focus()

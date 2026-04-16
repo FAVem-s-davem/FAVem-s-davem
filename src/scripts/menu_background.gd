@@ -56,6 +56,10 @@ func stop() -> void:
 	if _tween != null and _tween.is_valid():
 		_tween.kill()
 	_tween = null
+	for child in get_children():
+		if child is CharacterBody2D:
+			child.queue_free()
+	_students_spawned = false
 
 
 func _spawn_students() -> void:

@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://b6cb54hrx1884" path="res://scenes/gui/about.tscn" id="2_cav3j"]
 [ext_resource type="PackedScene" uid="uid://cvmtu2i7recfl" path="res://scenes/gui/settings.tscn" id="3_uak7f"]
 [ext_resource type="PackedScene" uid="uid://c5u8u2sh8hjww" path="res://scenes/gui/game_end.tscn" id="5_26ofl"]
+[ext_resource type="Theme" path="res://assets/menu_theme.tres" id="6_menu"]
 
 [node name="Menu" type="Control" unique_id=278537481]
 layout_mode = 3
@@ -25,39 +26,40 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu" unique_id=1107631674]
+[node name="PanelContainer" type="PanelContainer" parent="MainMenu" unique_id=1107631675]
+theme = ExtResource("6_menu")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = -110.0
-offset_right = 150.0
-offset_bottom = 110.0
 grow_horizontal = 2
 grow_vertical = 2
-alignment = 1
 
-[node name="Start" type="Button" parent="MainMenu/VBoxContainer" unique_id=746065157]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/PanelContainer" unique_id=1107631674]
+theme = ExtResource("6_menu")
+layout_mode = 2
+custom_minimum_size = Vector2(260, 0)
+
+[node name="Start" type="Button" parent="MainMenu/PanelContainer/VBoxContainer" unique_id=746065157]
 layout_mode = 2
 text = "START"
 
-[node name="Restart" type="Button" parent="MainMenu/VBoxContainer" unique_id=909223411]
+[node name="Restart" type="Button" parent="MainMenu/PanelContainer/VBoxContainer" unique_id=909223411]
 visible = false
 layout_mode = 2
 text = "RESTART"
 
-[node name="Settings" type="Button" parent="MainMenu/VBoxContainer" unique_id=16790211]
+[node name="Settings" type="Button" parent="MainMenu/PanelContainer/VBoxContainer" unique_id=16790211]
 layout_mode = 2
 text = "SETTINGS"
 
-[node name="About" type="Button" parent="MainMenu/VBoxContainer" unique_id=1586294169]
+[node name="About" type="Button" parent="MainMenu/PanelContainer/VBoxContainer" unique_id=1586294169]
 layout_mode = 2
 text = "ABOUT"
 
-[node name="Quit" type="Button" parent="MainMenu/VBoxContainer" unique_id=2137973757]
+[node name="Quit" type="Button" parent="MainMenu/PanelContainer/VBoxContainer" unique_id=2137973757]
 layout_mode = 2
 text = "QUIT"
 
