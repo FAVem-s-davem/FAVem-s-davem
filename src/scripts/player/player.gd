@@ -6,6 +6,8 @@ class_name Player
 
 const StudentTypesDb = preload("res://scripts/student/student_types.gd")
 
+const OUTLINE = 40
+
 @export var max_speed: float = 3000.0
 @export var acceleration: float = 22000.0
 @export var friction: float = 8800.0
@@ -20,7 +22,7 @@ const COLLISION_PUSH_FORCE: float = 2200.0
 
 var selection: SelectionManager
 
-var parent: GameScene
+var parent: Node2D
 
 func _enter_tree() -> void:
 	selection = SelectionManager.new(self)
@@ -71,6 +73,17 @@ func _physics_process(delta: float) -> void:
 
 func _draw() -> void:
 	var center = Vector2.ZERO
+	
+	var mask = get_node_or_null("mask") as Sprite2D
+	if mask != null and mask.texture != null:
+		var tex_size = mask.texture.get_size()
+		var scale = mask.scale
+		
+		# Assuming circular sprite → use half width
+		var radius = (tex_size.x * scale.x) / 2.0
+		
+		# Draw outline slightly bigger than sprite
+		draw_circle(center, radius, Color.BLACK, false, OUTLINE)
 	
 	# Draw selection rings
 	draw_circle(center, select_ring, Color(0.6, 0.9, 1.0), false, 6.0, true)

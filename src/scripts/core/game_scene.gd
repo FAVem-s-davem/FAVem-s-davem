@@ -4,8 +4,9 @@ extends Node2D
 
 class_name GameScene
 
-const MARKER_RADIUS: float = 132.0
-const MARKER_FONT_SIZE: int = 154
+const MARKER_RADIUS: float = 300.0
+const MARKER_FONT_SIZE: int = 350
+const MARKER_OUTLINE = 20
 const BUFFER_FONT_SIZE: int = 264
 const BUFFER_TEXT_OFFSET: float = 1100.0
 
@@ -27,10 +28,15 @@ var game_loop_manager: GameLoopManager
 var rooms: Array[Room] = []
 var spawners: Array[Spawner] = []
 
+var to_spawn: Array[int]
+
 var markers: Array = []
 var input: InputHandler
 var parser: CommandParser
 var dispatcher: CommandDispatcher
+
+func _process(delta: float) -> void:
+	queue_redraw()
 
 func _ready() -> void:
 	_initialize_input_parser()
@@ -45,15 +51,19 @@ func _initialize_input_parser() -> void:
 
 	parser.actions_updated.connect(hint_menu.update_actions)
 	parser.buffer_updated.connect(command_buffer.update_buffer)
+	
 	parser.reset()
 
 	dispatcher = CommandDispatcher.new(self)
+	dispatcher.macro_toggle.connect(command_buffer.set_macro)
 
 	markers.resize(10)
 	for i in range(markers.size()):
 		markers[i] = null
 
 	input = InputHandler.new(self)
+	input.key_pressed.connect(command_buffer.command_clear)
+	input.valid_command.connect(command_buffer.command_success)
 	add_child(input)
 
 
@@ -126,7 +136,12 @@ func spawn_students_for_active_quests() -> void:
 		push_warning("GameScene: No spawners available for quest spawning")
 		return
 
-	var spawner_index := 0
+	
+	var prep_spawners: Array[Spawner] = []
+	
+	for spawner in spawners:
+		for i in range(spawner.weight):
+			prep_spawners.append(spawner)
 
 	for timetable in quest_manager.timetables:
 		var quest = timetable.get_active_quest()
@@ -134,9 +149,8 @@ func spawn_students_for_active_quests() -> void:
 			continue
 
 		for _i in range(quest.required_count):
-			var spawner := spawners[spawner_index % spawners.size()]
-			spawner.spawn_student(quest.required_student_type)
-			spawner_index += 1
+			var spawner: Spawner = prep_spawners.pick_random()
+			spawner.spawn_student(quest.required_student_type, quest.required_student_number)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.is_echo():
@@ -150,36 +164,35 @@ func _draw():
 		if pos == null:
 			continue
 		
-		var local_pos = to_local(pos)
-		draw_circle(local_pos, MARKER_RADIUS, Color.BLUE)
+		var local_pos = pos
+		draw_circle(local_pos, MARKER_RADIUS, Color.RED)
+		draw_circle(local_pos, MARKER_RADIUS, Color.BLACK, false, MARKER_OUTLINE)
 
 		var font = ThemeDB.fallback_font
 		var font_size = MARKER_FONT_SIZE
-		
+
 		var text = str(i)
 		var text_size = font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)
-		draw_string(font, local_pos - text_size / 2, text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, Color.WHITE)
+		var ascent = font.get_ascent(font_size)
+		var descent = font.get_descent(font_size)
+
+		var text_height = ascent + descent
+		var text_pos = local_pos - Vector2(text_size.x / 2.0, text_height / 2.0 - ascent)
+
+		var outline_size = MARKER_OUTLINE
+
+		# --- Draw outline (8 directions) ---
+		for x in range(-outline_size, outline_size + 1):
+			for y in range(-outline_size, outline_size + 1):
+				if x == 0 and y == 0:
+					continue
+				draw_string(font, text_pos + Vector2(x, y), text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, Color.BLACK)
+
+		# --- Draw main text ---
+		draw_string(font, text_pos, text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, Color.WHITE)
 
 	if input == null or player == null:
 		return
-
-	# --- draw input buffer ---
-	var buffer_text = input.input_buffer
-	
-	if buffer_text != "":
-		var font = ThemeDB.fallback_font
-		var font_size = BUFFER_FONT_SIZE
-
-		var padding = 50
-		var pos = player.global_position + Vector2(0, BUFFER_TEXT_OFFSET)
-
-		var text_size = font.get_string_size(buffer_text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)
-		var ascent = font.get_ascent(font_size)
-		var rect = Rect2(pos - Vector2(padding / 2.0, ascent + padding / 2.0), text_size + Vector2(padding, padding))
-
-		draw_rect(rect, Color(0, 0, 0, 0.6))
-
-		draw_string(font, pos, buffer_text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, Color.WHITE)
 
 ## Spawn a single student at the given position
 func spawn_student_at(position_arg: Vector2) -> void:

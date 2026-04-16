@@ -1,8 +1,14 @@
 [gd_scene format=3 uid="uid://40vcm5law3oe"]
 
 [ext_resource type="Script" uid="uid://mhu2crqmqoh3" path="res://scripts/scenes/gui/hint_menu.gd" id="1_55e23"]
-[ext_resource type="Script" uid="uid://by3t1bpqrdd38" path="res://scenes/gui/command_buffer.gd" id="2_hukx1"]
+[ext_resource type="Script" uid="uid://cmxnx8kqwx123" path="res://scripts/scenes/gui/commnad_buffer.gd" id="3_dj63r"]
 [ext_resource type="PackedScene" uid="uid://c31kik4aepidy" path="res://scenes/gui/hud/quest_board/quest_board.tscn" id="3_vxsoq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_dj63r"]
+font_size = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_tap4b"]
+font_size = 25
 
 [node name="Hud" type="Control" unique_id=217947933]
 layout_mode = 3
@@ -27,18 +33,6 @@ layout_mode = 2
 text = "possible future ui stuff"
 autowrap_mode = 2
 
-[node name="CommandBuffer" type="HBoxContainer" parent="." unique_id=1108330777]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -60.0
-grow_horizontal = 2
-grow_vertical = 0
-alignment = 1
-script = ExtResource("2_hukx1")
-
 [node name="QuestBoard" parent="." unique_id=1970252661 instance=ExtResource("3_vxsoq")]
 layout_mode = 0
 
@@ -54,3 +48,57 @@ grow_horizontal = 2
 theme_override_colors/font_color = Color(1, 0.18039216, 0.17254902, 1)
 theme_override_font_sizes/font_size = 32
 text = "Game phase"
+
+[node name="CommandBuffer" type="Panel" parent="." unique_id=483771273]
+z_index = -1
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("3_dj63r")
+
+[node name="ColorRect" type="ColorRect" parent="CommandBuffer" unique_id=1292553292]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="CommandBuffer" unique_id=1846888034]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CommandBuffer/MarginContainer" unique_id=1236331249]
+layout_mode = 2
+alignment = 1
+
+[node name="Command" type="Label" parent="CommandBuffer/MarginContainer/HBoxContainer" unique_id=332264516]
+layout_mode = 2
+size_flags_vertical = 1
+label_settings = SubResource("LabelSettings_dj63r")
+horizontal_alignment = 3
+vertical_alignment = 3
+
+[node name="Spacer" type="Control" parent="CommandBuffer/MarginContainer/HBoxContainer" unique_id=178162639]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Macro" type="Label" parent="CommandBuffer/MarginContainer/HBoxContainer" unique_id=195986471]
+layout_mode = 2
+size_flags_vertical = 1
+label_settings = SubResource("LabelSettings_tap4b")
+horizontal_alignment = 3
+vertical_alignment = 3

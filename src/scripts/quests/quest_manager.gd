@@ -27,9 +27,12 @@ func initialize_for_rooms(rooms: Array[Room]) -> void:
 		return
 
 	var count: int = min(number_of_timetables, rooms.size())
+	
+	var picked_rooms: Array[Room] = rooms.duplicate()
+	picked_rooms.shuffle()
 
 	for i in range(count):
-		var room := rooms[i]
+		var room := picked_rooms[i]
 		var timetable = TimetableScript.new(quests_in_timetable)
 		timetable.assign_room(room)
 
@@ -60,12 +63,16 @@ func get_active_quest(timetable_index: int):
 # Creates starter quests for a timetable.
 func _generate_default_quests(timetable, room: Room) -> void:
 	var type_values: Array = StudentTypes.Type.values()
+	var numbers_copy = StudentTypes.TYPE_NUMBERS.duplicate()
+	numbers_copy.append(-1)
 
 	for _i in range(quests_in_timetable):
 		var required_type: int = type_values[randi() % type_values.size()]
 		var required_count: int = randi_range(1, 4 * room.room_size)
-    
-		var quest = QuestScript.new(required_type, required_count)
+		#var required_count: int = 1
+		var required_number: int = numbers_copy.pick_random()
+	
+		var quest = QuestScript.new(required_type, required_number, required_count)
 		timetable.add_quest(quest)
 
 
@@ -82,9 +89,10 @@ func _print_quests_by_room() -> void:
 		for i in range(timetable.quests.size()):
 			var quest = timetable.quests[i]
 			var type_name := StudentTypes.type_name_to_string(quest.required_student_type)
-			print("  - Q%d: type=%s, count=%d, completed=%s" % [
+			print("  - Q%d: type=%s, number=%d, count=%d, completed=%s" % [
 				i,
 				type_name,
+				quest.required_student_number,
 				quest.required_count,
 				str(quest.is_completed)
 			])

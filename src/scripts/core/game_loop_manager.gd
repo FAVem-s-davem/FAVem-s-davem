@@ -10,7 +10,7 @@ enum LoopPhase {
 }
 
 @export var preparation_duration: float = 15.0
-@export var quest_phase_duration: float = 30.0
+@export var quest_phase_duration: float = 45.0
 @export var end_countdown_duration: float = 5.0
 
 # References resolved from the running scene.

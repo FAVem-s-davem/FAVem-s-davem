@@ -18,16 +18,18 @@ shader_parameter/tint = Color(0.62763566, 0.6276353, 0.62763536, 1)
 [node name="Main" type="Node2D" unique_id=1180620180]
 
 [node name="GameScene" type="Node2D" parent="." unique_id=1408850278]
+z_index = 2
 script = ExtResource("4_jyhfs")
 
 [node name="Map" parent="GameScene" unique_id=2120066609 instance=ExtResource("2_tipki")]
+z_index = -2
 
 [node name="Player" parent="GameScene" unique_id=214270766 instance=ExtResource("8_tipki")]
 position = Vector2(24151, 64484)
 
 [node name="GameLoopManager" type="Node" parent="GameScene" unique_id=401730751]
 script = ExtResource("4_loop")
-quest_phase_duration = 30.0
+quest_phase_duration = 60.0
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=1919133619]
 scroll_scale = Vector2(0.98, 0.98)
