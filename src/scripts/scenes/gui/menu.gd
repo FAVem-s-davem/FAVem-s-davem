@@ -6,13 +6,13 @@ signal restart_requested
 
 func _ready():
 	# grab focus for keyboard navigation
-	$MainMenu/VBoxContainer/Start.grab_focus()
+	$MainMenu/PanelContainer/VBoxContainer/Start.grab_focus()
 
 	# Connect menu navigation buttons
-	$MainMenu/VBoxContainer/Settings.pressed.connect(_on_settings_pressed)
-	$MainMenu/VBoxContainer/About.pressed.connect(_on_about_pressed)
-	$MainMenu/VBoxContainer/Quit.pressed.connect(_on_quit_pressed)
-	$MainMenu/VBoxContainer/Restart.pressed.connect(_on_restart_pressed)
+	$MainMenu/PanelContainer/VBoxContainer/Settings.pressed.connect(_on_settings_pressed)
+	$MainMenu/PanelContainer/VBoxContainer/About.pressed.connect(_on_about_pressed)
+	$MainMenu/PanelContainer/VBoxContainer/Quit.pressed.connect(_on_quit_pressed)
+	$MainMenu/PanelContainer/VBoxContainer/Restart.pressed.connect(_on_restart_pressed)
 	$GameEnd/BackToMenu.pressed.connect(_on_restart_pressed)
 
 	$About/Back.pressed.connect(_on_back_pressed)
@@ -42,10 +42,10 @@ func _on_back_pressed():
 	$Settings.visible = false
 	$MainMenu.visible = true
 	await get_tree().process_frame
-	$MainMenu/VBoxContainer/Start.grab_focus()
+	$MainMenu/PanelContainer/VBoxContainer/Start.grab_focus()
 
 
 # Controls visibility of Restart button in main menu.
 func set_restart_visible(value: bool) -> void:
-	if has_node("MainMenu/VBoxContainer/Restart"):
-		$MainMenu/VBoxContainer/Restart.visible = value
+	if has_node("MainMenu/PanelContainer/VBoxContainer/Restart"):
+		$MainMenu/PanelContainer/VBoxContainer/Restart.visible = value
