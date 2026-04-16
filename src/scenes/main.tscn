@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://chy0y8pbsesk8" path="res://scripts/core/game_loop_manager.gd" id="4_loop"]
 [ext_resource type="PackedScene" uid="uid://cnk2kwqnsjwma" path="res://scenes/gui/menu.tscn" id="5_tefeu"]
 [ext_resource type="PackedScene" uid="uid://btj2uvic5xmbn" path="res://scenes/Player.tscn" id="8_tipki"]
+[ext_resource type="Script" path="res://scripts/menu_background.gd" id="9_mbg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jyhfs"]
 shader = ExtResource("3_tbgi4")
@@ -30,6 +31,16 @@ position = Vector2(24151, 64484)
 [node name="GameLoopManager" type="Node" parent="GameScene" unique_id=401730751]
 script = ExtResource("4_loop")
 quest_phase_duration = 60.0
+
+[node name="MenuBackground" type="Node2D" parent="." unique_id=3001000001]
+process_mode = 3
+script = ExtResource("9_mbg")
+
+[node name="Camera2D" type="Camera2D" parent="MenuBackground" unique_id=3001000002]
+position_smoothing_enabled = true
+
+[node name="Map" parent="MenuBackground" unique_id=3001000003 instance=ExtResource("2_tipki")]
+z_index = -1
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=1919133619]
 scroll_scale = Vector2(0.98, 0.98)
