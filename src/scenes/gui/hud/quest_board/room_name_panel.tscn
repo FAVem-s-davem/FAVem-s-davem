@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://cxc7xxoixo0db"]
 
+[ext_resource type="FontFile" uid="uid://e0f4m4h443xs" path="res://assets/fonts/GohuFont14NerdFontMono-Regular.ttf" id="1_font"]
+
 [node name="RoomNamePanel" type="PanelContainer" unique_id=1080840302]
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -7,3 +9,4 @@ size_flags_vertical = 3
 [node name="Label" type="Label" parent="." unique_id=1215658359]
 layout_mode = 2
 text = "ROOM"
+theme_override_fonts/font = ExtResource("1_font")
