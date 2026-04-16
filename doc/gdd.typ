@@ -17,7 +17,7 @@
     title: "GDD:       \n     FAVem\n s davem",
   subtitle: "Zvládnete ukočírovat dav favíků\n lačnících po vědomostech?",
   author: "studenti FAV",
-  cover: image("../assets/img/gameplay_cover.png", height: 100%,scaling: "pixelated"),
+  cover: image("../assets/img/gameplay_elevator.png", height: 100%,scaling: "pixelated"),
   paper: "a4",
   logo: image("../assets/img/faviik_transparent.png", width: 13%),
   fancy-author: true
@@ -36,18 +36,9 @@ techniky Fakulty aplikovaných věd *Západočeské univerzity v Plzni* v roce 2
 
 = Popis hry
 
-Studenti mnoha oborů přicházejí do školy, ale neví kudy kam. Na různých
-místech školy stojí učitelé potřebující studenty některých oborů na své hodiny.
-Úkolem hráče je chytře si organizovat studenty tak, aby je včas stihl dovést
-k učiteli a zároveň, aby nečekali ve škole moc dlouho.
+Favíci jdou do školy, akorát neví, kde je která učebna. Pomozte favíkům včas dorazit na správné rozvrhové akce.
 
-Za splněné úkoly od učitelů hráč dostává body, kterých se snaží získat co
-nejvíc, než skončí hra. Hra končí ve chvíli, kdy je ve škole až moc studentů,
-anebo jich tam moc čeká už příliš dlouho.
-
-Cílem hráčů je získat co nejvyšší skóre, kterým se pak mohou chlubit před
-kamarády. Druhým cílem může být nalezní všech referencí na FAVku, které se ve
-hře objevují.
+Úkolem hráče je v časovém limitu naplnit požadavky místností na studenty.
 
 = Herní design
 
@@ -66,153 +57,56 @@ Pro projekt podstatnou kapitolou je @ch_proj-mngmnt, kde jsou popsáni všichni
 členi týmu, respektive jejich role a zodpovědnosti - a také důležité termíny.
 
 == Mechaniky <ch_mechanics>
+Celá hra je silně založena na `VIM` keybindings & motions.
 
 === Pohyb
 
-Hráč se pohybuje po mapě pomocí kláves AWSD.
-
-#linebreak()
-TODO:
-- dash?
+Hráč se pohybuje po mapě pomocí kláves `HJKL`.
 
 === Manipulace se studenty
 
-- Vybírání studentů: myší, obdelník
-- Okolo hráče jsou tři kružnice, studenti se musí nacházet v obasti
-  vyznačené největší kružnicí, aby mohli být vybráni.
-- Studenti ve sféře vlivu hráče (největší kružnice) se snaží doběhnout k němu,
-  respektive na úroveň nejmenší kružnice. Pokud se nachází mezi střední a
-  největší kružnicí, zrychlí, aby hráče dostihli.
-- POZOR: Hráč je rychlejší, než studenti - když chce, tak jim uteče.
-
-#linebreak()
-TODO:
-- lepší vybírání, laso?
-- precizní třízení studentů v cílové lokaci, možnost autonomního pohybu?
+- Vybírání studentů pomocí kláves `a`/`A` a následně zkratka pro druh studentů. Například `aM`vybere všechny studenty katedry matematiky.
+- Lze na mapu položit _marker_ pomocí zkratky `m[0-9]`. Na marker se lze teleportovat pomocí zkratky `g[0-9]`, anebo na ně poslat studenty pomocí `s[druh studentů][0-9]`.
 
 === Hlavní herní smyčka <sec_main-loop>
 
-Hráč začíná v prázné škole, kam postupně přicházejí studenti. Na některých
-místech stojí učitelé, kteří mají questy. Všechny jsou typu: "Potřebuju X
-takových, Y takových a Z takových studentů."
+Na začátku hry má hráč čas připravit si na mapě markery, zjistit kde je která třída atd...
 
-Počet questů je fixní, vždy když je jeden splněn, učitel zmizí a nahradí jej
-jiný, potenciálně na jiném místě, s jinými požadavky. Čím delší hra, tím více
-studentů je třeba pro plnění úkolů.
+V hlavní fázi hry je třeba naplnit dané učebny požadovaným počtem studentů.
 
-Předpokládá se, že hráč bude studenty třídit podle jejich oborů (symbolů), aby
-se v nich vyznal a mohl lépe plnit úkoly.
-
-Každý student má pouze omezenou trpělivost, dobu po kterou zvládne být ve škole
-klidný (počítanou v reálnén čase). Pokud mu dojde, naštve se (= bude vizuálně
-odlišený, třeba blikat) a to je problém. Za naštvané studenty je méně bodů
-(TODO: anebo žádné).
-
-Hra končí ve chvíli, kdy je ve škole moc studentů - důvod: hráč se dostatečně
-nevěnoval questům. Druhý konec je, když je ve škole moc naštvaných studentů -
-důvodem je, že chceme hráče donutit pořádně třídit studenty (chodí mu ve
-frontě, ale on by je ideálně potřeboval v zásobníku).
+Hra skončí a hráč vidí skóre.
 
 === Studenti
 
-Každý student studuje nějaký obor, respektive je nějakého typu. To bude
-vyznačené pomocí symbolů - tak, aby bylo na první pohled poznat, o koho se
-jedná.
-
-Zároveň studenti mají různé barvy. Tohle je TODO, mohli by totiž mít nějaké
-vztahy typu: když má vedle sebe červený další červené, trpělivost mu ubývá
-pomaleji; když má vedle sebe modrý žluté, trpělivost mu vyprchává rychleji.
-
-=== Vyučující
-
-Každý vyučující je osobnost, jejíž podobnost se skutečnými postavami je čistě
-náhodná. Každý vyučující zvládá učit pouze některé typy předmětů (studentů).
-
-TODO je třeba rozhodnout jak přesně: asi budou mít seznam povolených předmětů,
-ze kterých se vybere vždy náhodně několik. Počty budou muset také být náhodně
-generované, aby se zohlednila i fáze hry (čím pozdější, tím více).
-
-TODO: Vyučující potřebují nějakým způsobem pronášet hlášky, nebo jinak
-interagovat s hráčem, aby bylo možno přidávat příběhové vtipnosti.
-
-#breakoutbox("Příklad vyučujícího")[
-#align(center,[Profesor Láša])
-Učí: libovolné informatiky, ideálně něco s grafikou nebo VR
-
-Učí (symboly):
-- klávesnice
-- VR brýle
-- matice
-- ...
-]
+Každý student je z dané katedry a studuje konkrétní obor. Katedra je vyznačená barvou, obor symbolem. Tedy je na první pohled poznat o koho se jedná.
 
 == Příběh <ch_story>
 
-TODO: asi jsme starší studenti na favce, kteří pomáhají prvákům dostat se na
-správné předměty?
-
-Příběh bude něco opravdu takhle jednoduchého, každý _run_, tedy jedno spuštění
-hry, bude jeden den ve škole. Cílem je vydržet co nejdéle, pomoci co nejvíce
-učitelům nalézt jejich žáky.
-
-V této sekci časem bude seznam všech hlášek, interakcí vyučujících s hráčem -
-nebo i jenom věty, které občas sami od sebe řeknou. Také zde možná bude seznam
-všech mezistudentských interakcí, hlášek. (Možná včetně vysvětlení pro situace
-neznalé.)
+Pomáháme studentům dorazit na rozvrhovou akci a vyučujícím udělat radost, že jim chodí studenti.
 
 == Výtvarné prvky <ch_arts>
 
-TODO: Vítek (hádám, hodí se na to nejvíc)
-
-Je potřeba vymyslet jak přesně budou vypadat: hráč, studenti, vyučující, mapa
-(nejen podle půdorysu, ale třeba tam zanést pitnou vodu, sloupy, nebo
-srandičky), vytvořit jim assety.
-
-Kromě toho se musí vymyslet sound design, je potřeba navrhnout UI - a to jak
-pro hlavní scénu (kde přesně budou např. questy, skóre, apod.), tak i
-navrhnout scénu pro hlavní menu + nějakou _Credits_ scénu.
+TODO: Víťa
 
 == Obsah hry <ch_level>
 
-Hra se odehrává na FAVce, mapou tedy bude půdorys budovy. TODO: Je třeba ještě
-rozhodnout konkrétnosti - například jestli půdorys trochu neupravit, aby to
-celé byl víc použitelný prostor.
-
-Kdyby se nám chtělo a bylo by třeba přidat více místa na studenty, šlo by jít
-vertikálně = přidávat patra FAVky. Pro to by bylo třeba vymyslet rozumné UI a
-přechod mezi patry (výtahy, schody?) - také další místa pro vyučující, aby byli
-více rozmístěni + jak by při přechodech mezi patry fungovali studenti?
+Hra se odehrává na FAVce, mapou tedy je půdorys budovy. 
 
 == Uživatelské rozhraní <ch_ui>
-Zobrazení studentů:
-- kolečko
-- na kolečku symbol=obor
-- kolečko má barvu
-- okolo kolečka je bar trpělivosti
-#linebreak()
-TODO:
-- zobrazovat questy u učitelů, nebo i někde jinde?
 
-#breakoutbox("Grafický návrh studentů")[
-Na obrázku je pracovní návrh toho, jak by mohli studenti vypadat:
-#image("../assets/img/students_proposal.png",
-  width: 100%,
-  scaling: "smooth",
-  format: "png")
-]
+Jsou použité `VIM` keybindings, takže hlavně se používá `HJKL`. Pokud chcete lépe porozumět, doporujčujeme začít používat PDE#footnote[Personalized Development Environment, pojem stvořil teej_dv: #link("https://youtu.be/QMVIJhC9Veg")[https://youtu.be/QMVIJhC9Veg]] Neovim#footnote[Více info o neovimu zde: #link("https://neovim.io/")[https://neovim.io/]].
 
 = Projektové řízení <ch_proj-mngmnt>
 
+Domluvou.
+
+#figure(
+  caption: "Projektové řízení domluvou.",
+  image("../assets/img/corporate_like.png")
+)
+
+
 == Role v týmu
-TODO:
-- třeba rozdělit role, možná nějaký přidat, ubrat, přejmenovat
-
-#box(block[
-#align(center,[_Nerozdělené role_])
-    *ticho po pěšině...*
-
-    #h(100%)
-])
 
 #box(block[
 #align(center,[_Láďa_])
@@ -262,7 +156,7 @@ dodržování termínů.
   hp: [20],
   speed: [20ft],
   // dohromady můžeš rozdělit 60 do statů
-  stats: (CHAT: 7, ARTS: 5, PLAY: 15, ENGN: 10, GIT: 10, ".NET": 13),
+  stats: (CHAT: 7, ARTS: 5, PLAY: 15, ENGN: 10, GIT: 10, "NVIM": 13),
   skillblock: (
     Dovednosti: [Refaktorace +7, Code Review +6],
     Smysly: [Code Radar 60ft – dokáže odhalit chyby a merge konflikty dřív,
@@ -286,7 +180,7 @@ dodržování termínů.
   hp: [14],
   speed: [10ft, climbing 30ft],
   // dohromady můžeš rozdělit 60 do statů
-  stats: (CHAT: 8, ARTS: 9, PLAY: 15, ENGN: 7, GIT: 11, ".NET": 10),
+  stats: (CHAT: 8, ARTS: 9, PLAY: 15, ENGN: 7, GIT: 11, "NVIM": 10),
   skillblock: (
     Dovednosti: [Endless Gaming +7, Chill Mode +6],
     Smysly: [Endless Focus 30ft – dokáže vnímat detaily i při multitaskingu.],
@@ -311,7 +205,7 @@ dodržování termínů.
   hp: [15],
   speed: [20ft],
   // dohromady můžeš rozdělit 60 do statů
-  stats: (CHAT: 8, ARTS: 14, PLAY: 15, ENGN: 5, GIT: 8, ".NET": 10),
+  stats: (CHAT: 8, ARTS: 14, PLAY: 15, ENGN: 5, GIT: 8, "NVIM": 10),
   skillblock: (
     Dovednosti: [Vibe-coding +7, Color Sense +6],
     Smysly: [Art Vision 40ft – dokáže rychle odhalit vizuální nesrovnalosti
@@ -337,7 +231,7 @@ dodržování termínů.
   hp: [10],
   speed: [30ft (dlouhé nohy)],
   // dohromady můžeš rozdělit 60 do statů
-  stats: (CHAT: 17, ARTS: 4, PLAY: 5, ENGN: 7, GIT: 12, ".NET": 15),
+  stats: (CHAT: 17, ARTS: 4, PLAY: 5, ENGN: 7, GIT: 12, "NVIM": 15),
   skillblock: (
     Dovednosti: [Debug +6, Prokrastinace +5],
     Smysly: [Team Vibe 50ft – cítí náladu týmu a dokáže rozpoznat, kdy někdo
@@ -351,10 +245,8 @@ dodržování termínů.
   ),
   Actions: (
     ("Coding Spree", [Každý Vokyho commit je příležitost učit se a zlepšovat –
-    tým získává +1 k .NET.]),
+    tým získává +1 k NVIM.]),
     ("Renaming Fun", [Přehledně přejmenuje funkce, aby kód byl zábavnější,
     např. malloc → jalloc.]),
   )
 ))
-
-== Termíny
