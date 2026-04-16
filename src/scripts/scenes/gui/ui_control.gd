@@ -21,6 +21,7 @@ func _ready():
 func _on_start_button_pressed():
 	has_started_game = true
 	_menu_bg.stop()
+	_menu_bg.visible = false
 	$Menu.visible = false
 	$Hud.visible = true
 	get_node("/root/Main/GameScene").visible = true
@@ -52,6 +53,7 @@ func _input(event):
 		get_node("/root/Main/GameScene").visible = false
 		get_tree().paused = true
 		$Menu.set_restart_visible(has_started_game)
+		_menu_bg.visible = true
 		_menu_bg.start()
 
 		$Menu/MainMenu/PanelContainer/VBoxContainer/Start.grab_focus()
