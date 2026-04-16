@@ -22,7 +22,7 @@ const COLLISION_PUSH_FORCE: float = 2200.0
 
 var selection: SelectionManager
 
-var parent: GameScene
+var parent: Node2D
 
 func _enter_tree() -> void:
 	selection = SelectionManager.new(self)
