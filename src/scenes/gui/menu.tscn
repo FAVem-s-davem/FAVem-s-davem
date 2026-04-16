@@ -71,6 +71,7 @@ visible = false
 layout_mode = 1
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=706392951]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

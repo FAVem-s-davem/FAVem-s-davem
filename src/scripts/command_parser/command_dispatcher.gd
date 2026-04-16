@@ -2,6 +2,8 @@ class_name CommandDispatcher
 
 var parent: GameScene
 
+signal macro_toggle(macro_key: String)
+
 var current_macro_key = ""
 var current_macro_commands: Array[Command] = []
 var is_running_macro = false
@@ -67,6 +69,8 @@ func handle_macro_record(key: String):
 		macros[current_macro_key] = current_macro_commands.duplicate()
 		current_macro_commands.clear()
 		current_macro_key = key
+		
+	emit_signal("macro_toggle", current_macro_key)
 		
 func handle_macro_run(key: String):
 	if macros.has(key):

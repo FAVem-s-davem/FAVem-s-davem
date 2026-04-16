@@ -51,15 +51,19 @@ func _initialize_input_parser() -> void:
 
 	parser.actions_updated.connect(hint_menu.update_actions)
 	parser.buffer_updated.connect(command_buffer.update_buffer)
+	
 	parser.reset()
 
 	dispatcher = CommandDispatcher.new(self)
+	dispatcher.macro_toggle.connect(command_buffer.set_macro)
 
 	markers.resize(10)
 	for i in range(markers.size()):
 		markers[i] = null
 
 	input = InputHandler.new(self)
+	input.key_pressed.connect(command_buffer.command_clear)
+	input.valid_command.connect(command_buffer.command_success)
 	add_child(input)
 
 
@@ -189,24 +193,6 @@ func _draw():
 
 	if input == null or player == null:
 		return
-
-	# --- draw input buffer ---
-	var buffer_text = input.input_buffer
-	
-	if buffer_text != "":
-		var font = ThemeDB.fallback_font
-		var font_size = BUFFER_FONT_SIZE
-
-		var padding = 50
-		var pos = player.global_position + Vector2(0, BUFFER_TEXT_OFFSET)
-
-		var text_size = font.get_string_size(buffer_text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)
-		var ascent = font.get_ascent(font_size)
-		var rect = Rect2(pos - Vector2(padding / 2.0, ascent + padding / 2.0), text_size + Vector2(padding, padding))
-
-		draw_rect(rect, Color(0, 0, 0, 0.6))
-
-		draw_string(font, pos, buffer_text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, Color.WHITE)
 
 ## Spawn a single student at the given position
 func spawn_student_at(position_arg: Vector2) -> void:
