@@ -3,6 +3,8 @@ extends Node
 class_name InputHandler
 
 signal command_executed(command)
+signal key_pressed()
+signal valid_command()
 
 var input_buffer := ""
 var buffer_timer := 0.0
@@ -25,6 +27,8 @@ func _input(event):
 		if not (is_letter or is_number or is_at):
 			return
 
+		emit_signal("key_pressed")        
+		
 		var key = OS.get_keycode_string(keycode)
 
 		if is_letter:
@@ -51,6 +55,7 @@ func _input(event):
 		# 🔥 THIS IS THE MISSING PIECE
 		if result.status == "complete":
 			var cmd: Command = result.command
+			emit_signal("valid_command")
 			
 			parent.dispatcher.process_command(cmd)
 			
@@ -72,6 +77,7 @@ func _process(delta):
 
 func clear_buffer():
 	input_buffer = ""
+	emit_signal("key_pressed")
 	parent.queue_redraw()
 	parser.reset()
 	
