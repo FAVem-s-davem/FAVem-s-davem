@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dom77pyv58dej"]
 
 [ext_resource type="Texture2D" uid="uid://xeobebcpvgfa" path="res://icon.svg" id="1_st8oh"]
+[ext_resource type="FontFile" uid="uid://e0f4m4h443xs" path="res://assets/fonts/GohuFont14NerdFontMono-Regular.ttf" id="2_font"]
 
 [node name="IconPanel" type="PanelContainer" unique_id=491303333]
 custom_minimum_size = Vector2(32, 32)
@@ -13,6 +14,7 @@ layout_mode = 2
 [node name="IconCount" type="Label" parent="VBoxContainer" unique_id=1810099109]
 layout_mode = 2
 text = "2"
+theme_override_fonts/font = ExtResource("2_font")
 horizontal_alignment = 1
 
 [node name="Icon" type="TextureRect" parent="VBoxContainer" unique_id=1232652654]

@@ -1,0 +1,7 @@
+[gd_resource type="Theme" format=3 uid="uid://chas4grqi1mo1"]
+
+[ext_resource type="FontFile" uid="uid://e0f4m4h443xs" path="res://assets/fonts/GohuFont14NerdFontMono-Regular.ttf" id="1_font"]
+
+[resource]
+Label/font_sizes/font_size = 25
+Label/fonts/font = ExtResource("1_font")

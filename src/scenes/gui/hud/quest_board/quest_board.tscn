@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cpmxfa187mj8a" path="res://scripts/scenes/gui/quest_board.gd" id="1_mu0bm"]
 [ext_resource type="PackedScene" uid="uid://cxc7xxoixo0db" path="res://scenes/gui/hud/quest_board/room_name_panel.tscn" id="2_4ohca"]
 [ext_resource type="PackedScene" uid="uid://dom77pyv58dej" path="res://scenes/gui/hud/quest_board/icon_panel.tscn" id="3_sy5el"]
+[ext_resource type="FontFile" uid="uid://e0f4m4h443xs" path="res://assets/fonts/GohuFont14NerdFontMono-Regular.ttf" id="4_font"]
 
 [node name="QuestBoard" type="PanelContainer" unique_id=1970252661]
 offset_right = 274.0
@@ -15,6 +16,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="VBoxContainer" unique_id=359644706]
 layout_mode = 2
 text = "Rozvrh"
+theme_override_fonts/font = ExtResource("4_font")
 horizontal_alignment = 1
 
 [node name="quest_grid" type="GridContainer" parent="VBoxContainer" unique_id=758674025]

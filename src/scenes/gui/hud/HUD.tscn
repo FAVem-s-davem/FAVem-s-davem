@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://40vcm5law3oe"]
 
 [ext_resource type="Script" uid="uid://mhu2crqmqoh3" path="res://scripts/scenes/gui/hint_menu.gd" id="1_55e23"]
-[ext_resource type="Script" uid="uid://cmxnx8kqwx123" path="res://scripts/scenes/gui/commnad_buffer.gd" id="3_dj63r"]
+[ext_resource type="Script" path="res://scripts/scenes/gui/commnad_buffer.gd" id="3_dj63r"]
 [ext_resource type="PackedScene" uid="uid://c31kik4aepidy" path="res://scenes/gui/hud/quest_board/quest_board.tscn" id="3_vxsoq"]
+[ext_resource type="Theme" uid="uid://chas4grqi1mo1" path="res://assets/hud_theme.tres" id="4_hudtheme"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_dj63r"]
 font_size = 25
@@ -17,6 +18,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("4_hudtheme")
 
 [node name="HintMenu" type="VBoxContainer" parent="." unique_id=429231294]
 layout_mode = 1
@@ -46,6 +48,8 @@ offset_right = 20.0
 offset_bottom = 23.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(1, 0.18039216, 0.17254902, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 32
 text = "Game phase"
 
