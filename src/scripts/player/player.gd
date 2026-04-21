@@ -128,27 +128,24 @@ func _get_units_inside() -> Array[Student]:
 	
 	return units
 
-func select_by_type(type_name: String, type_number: String, count: int, append: bool):
+func select_by_type(type_name: String, type_number: String, count: int, all: bool):
 	var type_value = StudentTypesDb.parse_type(type_name)
 	var students = _get_units_inside()
 	var type_number_value = StudentTypesDb.parse_type_number(type_number)
 	var to_select: Array[Student] = []
 	
-	if not append:
-		selection.clear()
-	
-	for student in students:
-		if student.student_type == type_value and (type_number_value == -1 or student.type_number == type_number_value):
-			to_select.append(student)
+	if all:
+		to_select = students.duplicate()
+	else:
+		for student in students:
+			if student.student_type == type_value and (type_number_value == -1 or student.type_number == type_number_value):
+				to_select.append(student)
 			
 	if count != -1:
 		to_select = to_select.slice(0, count)
 		
-	if append:
-		selection.add(to_select)
-	else:
-		selection.select(to_select)
-		
+	selection.add(to_select)
+	
 	print("selected: ", selection.get_selected().size())
 	
 
@@ -172,7 +169,7 @@ func deselect_by_type(type_name: String, type_number: String, count: int):
 	print("selected: ", selection.get_selected().size())
 	
 	
-func send_students(type_name: String, type_number: String, count: int, marker: int):
+func send_students(type_name: String, type_number: String, count: int, marker: int, all: bool = false):
 	if parent.markers[marker] == null:
 		return
 		
@@ -181,10 +178,12 @@ func send_students(type_name: String, type_number: String, count: int, marker: i
 	var type_number_value = StudentTypesDb.parse_type_number(type_number)
 	var to_deselect: Array[Student] = []
 	
-	
-	for student in students:
-		if student.student_type == type_value and (type_number_value == -1 or student.type_number == type_number_value):
-			to_deselect.append(student)
+	if all:
+		to_deselect = students.duplicate()
+	else:
+		for student in students:
+			if student.student_type == type_value and (type_number_value == -1 or student.type_number == type_number_value):
+				to_deselect.append(student)
 			
 	if count != -1:
 		to_deselect = to_deselect.slice(0, count)
