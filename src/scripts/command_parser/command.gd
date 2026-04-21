@@ -8,10 +8,11 @@ enum OpType {
 	SET_MARKER,
 	GOTO_MARKER,
 	SELECT,
-	APPEND,
+	SELECT_ALL,
 	DESELECT,
 	DESELECT_ALL,
 	SEND,
+	SEND_ALL,
 }
 
 static var OP_KEY_TO_TYPE = {
@@ -20,10 +21,11 @@ static var OP_KEY_TO_TYPE = {
 	"m": Command.OpType.SET_MARKER,
 	"g": Command.OpType.GOTO_MARKER,
 	"a": Command.OpType.SELECT,
-	"A": Command.OpType.APPEND,
+	"A": Command.OpType.SELECT_ALL,
 	"d": Command.OpType.DESELECT,
 	"D": Command.OpType.DESELECT_ALL,
 	"s": Command.OpType.SEND,
+	"S": Command.OpType.SEND_ALL,
 }
 
 static var OPS = {
@@ -54,9 +56,9 @@ static var OPS = {
 		"takes_args": true
 	},
 	"A": {
-		"type": "append_students",
+		"type": "select_all",
 		"needs_marker": false,
-		"takes_args": true
+		"takes_args": false
 	},
 	"d": {
 		"type": "deselect_students",
@@ -72,6 +74,11 @@ static var OPS = {
 		"type": "send_students",
 		"needs_marker": true,
 		"takes_args": true
+	},
+	"S": {
+		"type": "send_all",
+		"needs_marker": true,
+		"takes_args": false
 	},
 }
 
