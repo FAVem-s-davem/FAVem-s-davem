@@ -11,7 +11,7 @@ enum State {
 	READING_MARKER
 }
 
-signal actions_updated(actions: Dictionary)
+signal actions_updated(actions: Array[CommandHint])
 signal buffer_updated(buffer: String)
 
 var state = State.IDLE
@@ -239,8 +239,8 @@ func _is_type_number(k: String) -> bool:
 
 # =================== Hints ========================
 
-func get_available_actions() -> Dictionary:
-	var result := {}
+func get_available_actions() -> Array[CommandHint]:
+	var result := []
 	
 	match state:
 
@@ -265,62 +265,61 @@ func get_available_actions() -> Dictionary:
 	print(result)
 	return result
 	
-func _actions_after_op() -> Dictionary:
-	var result := {}
+func _actions_after_op() -> Array[CommandHint]:
+	var result: Array[CommandHint] = []
 	
-	result["0-9"] = "Set count"
+	result.append(CommandHint.new("0-9", "Set count"))
 	
 	# uppercase = all type numbers for the type
-	for student_type in StudentTypesDb.TypeShortcuts:
-		var key = StudentTypesDb.TypeShortcuts[student_type]
-		var name = StudentTypesDb.type_name_to_string(student_type)
+	for student_type in StudentTypesDb.TYPE_NAME_STRINGS:
+		var type_enum = StudentTypesDb.TYPE_NAME_STRINGS.find(student_type)
+		var type_info = StudentTypesDb.get_type_info(type_enum, -1)
 		
-		result[key.to_upper()] = "Select ALL " + name
-		result[key] = "Select from " + name
+		result.append(CommandHint.new(StudentTypesDb.TypeShortcuts[type_info.student_type], StudentTypesDb.type_name_to_string(type_info.student_type), "", type_info.color))
+		result.append(CommandHint.new(StudentTypesDb.TypeShortcuts[type_info.student_type].to_upper(), "All " + StudentTypesDb.type_name_to_string(type_info.student_type), "", type_info.color))
 	
 	return result
 	
-func _actions_after_count() -> Dictionary:
+func _actions_after_count() -> Array[CommandHint]:
 	return _actions_after_op()
 	
-func _actions_arg2() -> Dictionary:
-	var result := {}
+func _actions_arg2() -> Array[CommandHint]:
+	var result: Array[CommandHint] = []
 	
 	var student_type = StudentTypesDb.parse_type(arg1)
 	
 	for type_number in StudentTypesDb.get_numbers_for_type(student_type):
-		var key = str(type_number)
-		var name = "Type " + key
+		var type_info = StudentTypesDb.get_type_info(student_type, type_number)
 		
-		result[key] = name
+		result.append(CommandHint.new(str(type_info.number), StudentTypesDb.type_name_to_string(type_info.student_type), type_info.icon_path, type_info.color))
 	
 	return result
 	
-func _actions_marker() -> Dictionary:
-	var result := {}
+func _actions_marker() -> Array[CommandHint]:
+	var result: Array[CommandHint] = []
 	
-	for i in range(10):
-		result[str(i)] = "Marker " + str(i)
+	for i in range(GameScene.MARKER_COUNT):
+		result.append(CommandHint.new(str(i), "Marker " + str(i)))
 	
 	return result
 	
-func _actions_arg1() -> Dictionary:
-	var result := {}
+func _actions_arg1() -> Array[CommandHint]:
+	var result: Array[CommandHint] = []
 	
 	var op_data = Command.OPS.get(op, {})
 	
 	if op_data.get("mode") == "single_arg":
 		for c in "abcdefghijklmnopqrstuvwxyz":
-			result[c] = "Register " + c
+			result.append(CommandHint.new(c, "Register " + c))
 		return result
 	
 	# fallback
 	return _actions_after_op()
 	
-func _actions_idle() -> Dictionary:
-	var result := {}
+func _actions_idle() -> Array[CommandHint]:
+	var result: Array[CommandHint] = []
 	
 	for key in Command.OPS:
-		result[key] = Command.OPS[key].get("type", "")
+		result.append(CommandHint.new(key, Command.OPS[key].get("type", "")))
 	
 	return result
