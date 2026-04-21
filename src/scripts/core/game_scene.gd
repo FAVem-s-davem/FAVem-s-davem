@@ -21,6 +21,8 @@ const BUFFER_TEXT_OFFSET: float = 1100.0
 
 const QuestManagerScript = preload("res://scripts/quests/quest_manager.gd")
 
+static var MARKER_COUNT = 4
+
 var player: Player
 var quest_manager
 var game_loop_manager: GameLoopManager
@@ -57,7 +59,7 @@ func _initialize_input_parser() -> void:
 	dispatcher = CommandDispatcher.new(self)
 	dispatcher.macro_toggle.connect(command_buffer.set_macro)
 
-	markers.resize(10)
+	markers.resize(MARKER_COUNT)
 	for i in range(markers.size()):
 		markers[i] = null
 
