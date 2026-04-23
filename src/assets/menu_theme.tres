@@ -75,4 +75,6 @@ Button/styles/focus = SubResource("StyleBoxFlat_hover")
 Button/styles/hover = SubResource("StyleBoxFlat_hover")
 Button/styles/normal = SubResource("StyleBoxFlat_normal")
 Button/styles/pressed = SubResource("StyleBoxFlat_pressed")
+Label/font_sizes/font_size = 25
+Label/fonts/font = ExtResource("1_tf8oi")
 Panel/styles/panel = SubResource("StyleBoxFlat_panel")

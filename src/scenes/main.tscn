@@ -2,14 +2,14 @@
 
 [ext_resource type="Script" uid="uid://b0ftyr0dy57u7" path="res://scripts/scenes/gui/ui_control.gd" id="2_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://40vcm5law3oe" path="res://scenes/gui/hud/HUD.tscn" id="2_sugp2"]
-[ext_resource type="PackedScene" uid="uid://bm3h87a5n7kle" path="res://scenes/map.tscn" id="2_tipki"]
+[ext_resource type="PackedScene" path="res://scenes/map.tscn" id="2_tipki"]
 [ext_resource type="Texture2D" uid="uid://dc1kks7gsymcg" path="res://assets/blueprint_bg.svg" id="3_jyhfs"]
 [ext_resource type="Shader" uid="uid://d20gs1xumbkij" path="res://assets/shaders/blur_ahader.gdshader" id="3_tbgi4"]
 [ext_resource type="Script" uid="uid://bqngw0mvpsuf5" path="res://scripts/core/game_scene.gd" id="4_jyhfs"]
 [ext_resource type="Script" uid="uid://chy0y8pbsesk8" path="res://scripts/core/game_loop_manager.gd" id="4_loop"]
 [ext_resource type="PackedScene" uid="uid://cnk2kwqnsjwma" path="res://scenes/gui/menu.tscn" id="5_tefeu"]
 [ext_resource type="PackedScene" uid="uid://btj2uvic5xmbn" path="res://scenes/Player.tscn" id="8_tipki"]
-[ext_resource type="Script" path="res://scripts/menu_background.gd" id="9_mbg"]
+[ext_resource type="Script" uid="uid://rxwbp2qy47t4" path="res://scripts/menu_background.gd" id="9_mbg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jyhfs"]
 shader = ExtResource("3_tbgi4")
@@ -32,14 +32,14 @@ position = Vector2(24151, 64484)
 script = ExtResource("4_loop")
 quest_phase_duration = 60.0
 
-[node name="MenuBackground" type="Node2D" parent="." unique_id=3001000001]
+[node name="MenuBackground" type="Node2D" parent="." unique_id=-1293967295]
 process_mode = 3
 script = ExtResource("9_mbg")
 
-[node name="Camera2D" type="Camera2D" parent="MenuBackground" unique_id=3001000002]
+[node name="Camera2D" type="Camera2D" parent="MenuBackground" unique_id=-1293967294]
 position_smoothing_enabled = true
 
-[node name="Map" parent="MenuBackground" unique_id=3001000003 instance=ExtResource("2_tipki")]
+[node name="Map" parent="MenuBackground" unique_id=-1293967293 instance=ExtResource("2_tipki")]
 z_index = -1
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=1919133619]
