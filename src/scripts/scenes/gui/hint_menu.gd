@@ -28,10 +28,7 @@ func _update_display():
 	
 	for hint in hints:
 		var panel = PanelContainer.new()
-		var label = Label.new()
-		label.text = "[ %s ]: %s" % [key, hints[key]]
-		label.autowrap_mode = TextServer.AUTOWRAP_WORD
-		label.add_theme_font_size_override("font_size", 24)
+		var hbox = HBoxContainer.new()
 
 		# Background
 		var style = StyleBoxFlat.new()

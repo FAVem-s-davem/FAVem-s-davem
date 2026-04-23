@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://40vcm5law3oe"]
 
 [ext_resource type="Script" uid="uid://mhu2crqmqoh3" path="res://scripts/scenes/gui/hint_menu.gd" id="1_55e23"]
-[ext_resource type="Script" path="res://scripts/scenes/gui/commnad_buffer.gd" id="3_dj63r"]
+[ext_resource type="Script" uid="uid://cmxnx8kqwx123" path="res://scripts/scenes/gui/commnad_buffer.gd" id="3_dj63r"]
 [ext_resource type="PackedScene" uid="uid://c31kik4aepidy" path="res://scenes/gui/hud/quest_board/quest_board.tscn" id="3_vxsoq"]
 [ext_resource type="Theme" path="res://assets/menu_theme.tres" id="4_hudtheme"]
 
