@@ -26,6 +26,11 @@ func command_clear():
 	print("clear")
 	if background != null:
 		background.color = Color.BLACK
+		
+func command_invalid():
+	print("invalid")
+	if background != null:
+		background.color = Color.RED
 	
 func set_macro(m):
 	if m == "":

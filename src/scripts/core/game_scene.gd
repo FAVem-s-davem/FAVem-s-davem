@@ -21,6 +21,8 @@ const BUFFER_TEXT_OFFSET: float = 1100.0
 
 const QuestManagerScript = preload("res://scripts/quests/quest_manager.gd")
 
+static var MARKER_COUNT = 4
+
 var player: Player
 var quest_manager
 var game_loop_manager: GameLoopManager
@@ -57,13 +59,14 @@ func _initialize_input_parser() -> void:
 	dispatcher = CommandDispatcher.new(self)
 	dispatcher.macro_toggle.connect(command_buffer.set_macro)
 
-	markers.resize(10)
+	markers.resize(MARKER_COUNT + 1)
 	for i in range(markers.size()):
 		markers[i] = null
 
 	input = InputHandler.new(self)
 	input.key_pressed.connect(command_buffer.command_clear)
 	input.valid_command.connect(command_buffer.command_success)
+	input.invalid_command.connect(command_buffer.command_invalid)
 	add_child(input)
 
 
@@ -215,12 +218,14 @@ func spawn_students(count: int) -> void:
 		spawn_student_at(random_pos)
 
 func create_marker(number: int):
+	if number > MARKER_COUNT or number <= 0:
+		return
 	print("Create marker ", number, " at ", player.global_position)
 	markers[number] = player.global_position
 	queue_redraw()
 
 func send_player_to_marker(number: int):
-	if number < 0 or number >= markers.size():
+	if number <= 0 or number > MARKER_COUNT:
 		return
 	if markers[number] != null and player != null:
 		player.global_position = markers[number]
