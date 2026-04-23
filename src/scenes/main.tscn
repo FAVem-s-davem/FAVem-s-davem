@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b0ftyr0dy57u7" path="res://scripts/scenes/gui/ui_control.gd" id="2_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://40vcm5law3oe" path="res://scenes/gui/hud/HUD.tscn" id="2_sugp2"]
-[ext_resource type="PackedScene" path="res://scenes/map.tscn" id="2_tipki"]
+[ext_resource type="PackedScene" uid="uid://ddaiwib604g4d" path="res://scenes/map.tscn" id="2_tipki"]
 [ext_resource type="Texture2D" uid="uid://dc1kks7gsymcg" path="res://assets/blueprint_bg.svg" id="3_jyhfs"]
 [ext_resource type="Shader" uid="uid://d20gs1xumbkij" path="res://assets/shaders/blur_ahader.gdshader" id="3_tbgi4"]
 [ext_resource type="Script" uid="uid://bqngw0mvpsuf5" path="res://scripts/core/game_scene.gd" id="4_jyhfs"]
@@ -13,7 +13,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jyhfs"]
 shader = ExtResource("3_tbgi4")
-shader_parameter/blur_amount = 1.570000074575
+shader_parameter/blur_amount = 0.0
 shader_parameter/tint = Color(0.62763566, 0.6276353, 0.62763536, 1)
 
 [node name="Main" type="Node2D" unique_id=1180620180]
@@ -43,7 +43,8 @@ position_smoothing_enabled = true
 z_index = -1
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=1919133619]
-scroll_scale = Vector2(0.98, 0.98)
+scale = Vector2(1.3, 1.3)
+scroll_scale = Vector2(0.88, 0.88)
 
 [node name="Background" type="Node2D" parent="Parallax2D" unique_id=2127156716]
 
@@ -51,10 +52,11 @@ scroll_scale = Vector2(0.98, 0.98)
 modulate = Color(0.50140655, 0.5014065, 0.5014065, 1)
 z_index = -4096
 material = SubResource("ShaderMaterial_jyhfs")
-offset_left = -148416.0
-offset_top = -94321.0
-offset_right = 167149.0
-offset_bottom = 122378.0
+offset_left = -29920.771
+offset_top = -2121.5386
+offset_right = -14172.173
+offset_bottom = 11676.84
+scale = Vector2(7.68, 7.68)
 texture = ExtResource("3_jyhfs")
 stretch_mode = 1
 
