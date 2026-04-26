@@ -30,7 +30,7 @@ func initialize_for_rooms(rooms: Array[Room]) -> void:
 	
 	var picked_rooms: Array[Room] = rooms.duplicate()
 	picked_rooms.shuffle()
-
+   
 	for i in range(count):
 		var room := picked_rooms[i]
 		var timetable = TimetableScript.new(quests_in_timetable)
