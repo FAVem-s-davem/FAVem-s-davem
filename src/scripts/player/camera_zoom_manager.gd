@@ -6,6 +6,7 @@ const ZOOM_MIN: float = 0.04
 const ZOOM_MAX: float = 0.5
 const ZOOM_SPEED: float = 10.0
 const HOLD_SPEED: float = 0.05  # jak rychle se posouvá target při držení
+var prev_zoom: float
 
 @export var camera_zoom: float = DEFAULT_ZOOM
 var target_zoom: float = DEFAULT_ZOOM
@@ -14,6 +15,13 @@ func _ready() -> void:
 	zoom = Vector2(camera_zoom, camera_zoom)
 
 func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("Camera_hold_zoom_out"):
+		prev_zoom = target_zoom
+		target_zoom = ZOOM_MIN
+	elif event.is_action_released("Camera_hold_zoom_out"):
+		target_zoom = prev_zoom
+
+		
 	if event.is_action_pressed("Camera_Zoom_In"):
 		target_zoom = clamp(target_zoom + ZOOM_STEP, ZOOM_MIN, ZOOM_MAX)
 	
