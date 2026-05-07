@@ -86,10 +86,10 @@ func _draw() -> void:
 		draw_circle(center, radius, Color.BLACK, false, OUTLINE)
 	
 	# Draw selection rings
-	draw_circle(center, select_ring, Color(0.6, 0.9, 1.0), false, 6.0, true)
-	draw_circle(center, deselect_ring, Color(0.9, 0.9, 0.9), false, 8.0, true)
-	draw_circle(center, catchup_ring, Color(0.3, 0.3, 0.3), false, 4.0, true)
-	draw_circle(center, stop_ring, Color(0.3, 0.3, 0.3), false, 8.0, true)
+	draw_circle(center, select_ring, Color(0.6, 0.9, 1.0), false, 6.0, false)
+	#draw_circle(center, deselect_ring, Color(0.9, 0.9, 0.9), false, 8.0, false)
+	#draw_circle(center, catchup_ring, Color(0.3, 0.3, 0.3), false, 4.0, false)
+	#draw_circle(center, stop_ring, Color(0.3, 0.3, 0.3), false, 8.0, false)
 
 
 # Getters for student reference
