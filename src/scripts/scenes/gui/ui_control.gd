@@ -20,7 +20,7 @@ func _ready():
 	$Menu.set_restart_visible(false)
 
 	_music = AudioStreamPlayer.new()
-	_music.stream = load("res://assets/music/game_loop_music.mp3")
+	_music.stream = load("res://assets/music/game_loop_music_v2.mp3")
 	_music.autoplay = false
 	add_child(_music)
 	_music.finished.connect(_on_music_finished)
