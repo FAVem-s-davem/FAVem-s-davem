@@ -78,9 +78,14 @@ func _add_quest_cells_for_timetable(timetable) -> void:
 			# Bound quest slot: reflects live quest state.
 			var quest = timetable.quests[i]
 			_apply_quest_to_icon_panel(panel, quest)
-			var callback := _on_quest_completed_changed.bind(panel)
-			if not quest.completed_changed.is_connected(callback):
-				quest.completed_changed.connect(callback)
+
+			var status_callback := _on_quest_completed_changed.bind(panel)
+			if not quest.completed_changed.is_connected(status_callback):
+				quest.completed_changed.connect(status_callback)
+
+			var count_callback := _on_quest_count_changed.bind(panel)
+			if not quest.count_changed.is_connected(count_callback):
+				quest.count_changed.connect(count_callback)
 		else:
 			# Structural placeholder to keep rows visually consistent.
 			_apply_empty_panel(panel)
@@ -94,7 +99,7 @@ func _apply_quest_to_icon_panel(panel: PanelContainer, quest) -> void:
 	var icon := panel.get_node_or_null("VBoxContainer/Icon") as TextureRect
 
 	if icon_count != null:
-		icon_count.text = str(quest.required_count)
+		_set_updated_panel_count(panel, quest.current_count, quest.required_count)
 
 	if icon != null:
 		icon.texture = _get_texture_for_type(quest.required_student_type, quest.required_student_number)
@@ -127,6 +132,11 @@ func _get_texture_for_type(student_type: int, student_number: int = -1) -> Textu
 func _on_quest_completed_changed(_quest, is_completed: bool, panel: PanelContainer) -> void:
 	# Keeps UI synchronized with quest lifecycle transitions.
 	_set_panel_completed_style(panel, is_completed)
+	
+
+func _on_quest_count_changed(quest: Quest, panel: PanelContainer) -> void:
+	_set_updated_panel_count(panel, quest.current_count, quest.required_count)
+
 
 
 func _set_panel_completed_style(panel: PanelContainer, is_completed: bool) -> void:
@@ -136,6 +146,12 @@ func _set_panel_completed_style(panel: PanelContainer, is_completed: bool) -> vo
 	else:
 		# Theme fallback is the neutral "active but incomplete" look.
 		panel.remove_theme_stylebox_override("panel")
+		
+
+func _set_updated_panel_count(panel: PanelContainer, current_count: int, complete_count: int) -> void:
+	var icon_count := panel.get_node_or_null("VBoxContainer/IconCount") as Label
+	
+	icon_count.text = "%d/%d" % [current_count, complete_count]
 
 
 func _set_panel_background_color(panel: PanelContainer, color: Color) -> void:

@@ -30,9 +30,9 @@ func process_command(command: Command):
 			print("Select students:", command)
 			parent.player.select_by_type(command.arg1, command.arg2, command.count, false)
 
-		Command.OpType.APPEND:
+		Command.OpType.SELECT_ALL:
 			print("Append students:", command)
-			parent.player.select_by_type(command.arg1, command.arg2, command.count, true)
+			parent.player.select_by_type("" ,"", -1, true)
 
 
 		Command.OpType.DESELECT:
@@ -51,6 +51,9 @@ func process_command(command: Command):
 			
 		Command.OpType.SEND:
 			parent.player.send_students(command.arg1, command.arg2, command.count, command.marker)
+			
+		Command.OpType.SEND_ALL:
+			parent.player.send_students("", "", -1, command.marker, true)
 		
 
 func handle_macro_record(key: String):

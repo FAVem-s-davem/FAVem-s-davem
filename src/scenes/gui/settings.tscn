@@ -28,7 +28,7 @@ size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=1053004572]
 layout_mode = 2
-text = "volume?"
+text = "Music volume"
 
 [node name="HSlider" type="HSlider" parent="VBoxContainer/HBoxContainer" unique_id=351753572]
 layout_mode = 2
