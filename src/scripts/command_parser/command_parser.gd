@@ -314,7 +314,6 @@ func _actions_arg2() -> Array[CommandHint]:
 	
 	for type_number in StudentTypesDb.get_numbers_for_type(student_type):
 		var type_info = StudentTypesDb.get_type_info(student_type, type_number)
-		
 		result.append(CommandHint.new(str(type_info.number), StudentTypesDb.type_name_to_string(type_info.student_type), type_info.icon_path, type_info.color))
 	
 	return result
