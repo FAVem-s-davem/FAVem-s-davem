@@ -82,7 +82,7 @@ func _input(event):
 			key = "@" if event.shift_pressed else "2"
 
 		# movement (optional later)
-		if parser.is_idle() and key in ["h", "j", "k", "l"]:
+		if key in ["h", "j", "k", "l"]:
 			return
 
 		if parser.is_idle():
