@@ -32,7 +32,8 @@ const TYPE_COLORS := [
 	Color(0.0, 0.667, 0.83), # mech -> blue
 ]
 # indices to specializations
-const TYPE_NUMBERS: Array[int] = [1, 2, 3, 4, 5, 6]
+#const TYPE_NUMBERS: Array[int] = [1, 2, 3, 4, 5, 6]
+const TYPE_NUMBERS: Array[int] = [1, 2, 3, 4]
 
 # shortcuts for departments
 static var TypeShortcuts := {
@@ -51,8 +52,8 @@ static var TYPE_INFOS: Array[StudentTypeInfo] = [
 	StudentTypeInfo.new(Type.INF, 2, "res://assets/student_icons/inf_02.png", TYPE_COLORS[0]),
 	StudentTypeInfo.new(Type.INF, 3, "res://assets/student_icons/inf_03.svg", TYPE_COLORS[0]),
 	StudentTypeInfo.new(Type.INF, 4, "res://assets/student_icons/inf_04.png", TYPE_COLORS[0]),
-	StudentTypeInfo.new(Type.INF, 5, "res://assets/student_icons/inf_05.svg", TYPE_COLORS[0]),
-	StudentTypeInfo.new(Type.INF, 6, "res://assets/student_icons/inf_06.png", TYPE_COLORS[0]),
+	#StudentTypeInfo.new(Type.INF, 5, "res://assets/student_icons/inf_05.svg", TYPE_COLORS[0]),
+	#StudentTypeInfo.new(Type.INF, 6, "res://assets/student_icons/inf_06.png", TYPE_COLORS[0]),
 
 	# math
 	StudentTypeInfo.new(Type.MATH, -1, "res://assets/student_icons/math.png", TYPE_COLORS[1]),
@@ -61,8 +62,8 @@ static var TYPE_INFOS: Array[StudentTypeInfo] = [
 	StudentTypeInfo.new(Type.MATH, 2, "res://assets/student_icons/math_02.png", TYPE_COLORS[1]),
 	StudentTypeInfo.new(Type.MATH, 3, "res://assets/student_icons/math_03.svg", TYPE_COLORS[1]),
 	StudentTypeInfo.new(Type.MATH, 4, "res://assets/student_icons/math_04.svg", TYPE_COLORS[1]),
-	StudentTypeInfo.new(Type.MATH, 5, "res://icon.svg", TYPE_COLORS[1]),
-	StudentTypeInfo.new(Type.MATH, 6, "res://icon.svg", TYPE_COLORS[1]),
+#	StudentTypeInfo.new(Type.MATH, 5, "res://icon.svg", TYPE_COLORS[1]),
+	#StudentTypeInfo.new(Type.MATH, 6, "res://icon.svg", TYPE_COLORS[1]),
 
 	# geo
 	StudentTypeInfo.new(Type.GEO, -1, "res://assets/student_icons/geo.png", TYPE_COLORS[2]),
@@ -71,8 +72,8 @@ static var TYPE_INFOS: Array[StudentTypeInfo] = [
 	StudentTypeInfo.new(Type.GEO, 2, "res://assets/student_icons/geo_02.png", TYPE_COLORS[2]),
 	StudentTypeInfo.new(Type.GEO, 3, "res://assets/student_icons/geo_03.png", TYPE_COLORS[2]),
 	StudentTypeInfo.new(Type.GEO, 4, "res://assets/student_icons/geo_04.svg", TYPE_COLORS[2]),
-	StudentTypeInfo.new(Type.GEO, 5, "res://icon.svg", TYPE_COLORS[2]),
-	StudentTypeInfo.new(Type.GEO, 6, "res://icon.svg", TYPE_COLORS[2]),
+#	StudentTypeInfo.new(Type.GEO, 5, "res://icon.svg", TYPE_COLORS[2]),
+#	StudentTypeInfo.new(Type.GEO, 6, "res://icon.svg", TYPE_COLORS[2]),
 
 	# mech
 	StudentTypeInfo.new(Type.MECH, -1, "res://assets/student_icons/mech.png", TYPE_COLORS[3]),
@@ -81,8 +82,8 @@ static var TYPE_INFOS: Array[StudentTypeInfo] = [
 	StudentTypeInfo.new(Type.MECH, 2, "res://assets/student_icons/mech_02.png", TYPE_COLORS[3]),
 	StudentTypeInfo.new(Type.MECH, 3, "res://assets/student_icons/mech_03.png", TYPE_COLORS[3]),
 	StudentTypeInfo.new(Type.MECH, 4, "res://assets/student_icons/mech_04.svg", TYPE_COLORS[3]),
-	StudentTypeInfo.new(Type.MECH, 5, "res://icon.svg", TYPE_COLORS[3]),
-	StudentTypeInfo.new(Type.MECH, 6, "res://icon.svg", TYPE_COLORS[3]),
+#	StudentTypeInfo.new(Type.MECH, 5, "res://icon.svg", TYPE_COLORS[3]),
+#	StudentTypeInfo.new(Type.MECH, 6, "res://icon.svg", TYPE_COLORS[3]),
 ]
 
 # get student name from type
