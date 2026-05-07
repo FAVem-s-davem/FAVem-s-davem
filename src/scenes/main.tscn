@@ -30,7 +30,8 @@ position = Vector2(24151, 64484)
 
 [node name="GameLoopManager" type="Node" parent="GameScene" unique_id=401730751]
 script = ExtResource("4_loop")
-quest_phase_duration = 60.0
+preparation_duration = 40.0
+quest_phase_duration = 180.0
 
 [node name="MenuBackground" type="Node2D" parent="." unique_id=-1293967295]
 process_mode = 3
