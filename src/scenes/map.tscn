@@ -20,7 +20,6 @@ texture = ExtResource("1_4xfga")
 metadata/_edit_lock_ = true
 
 [node name="Areas" type="Node2D" parent="." unique_id=1798918764]
-visible = false
 
 [node name="NavRegion" type="NavigationRegion2D" parent="Areas" unique_id=729228779]
 visible = false
