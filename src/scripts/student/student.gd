@@ -196,7 +196,7 @@ func _on_deselected() -> void:
 
 
 func move_toward_target(pos: Vector2) -> void:
-	player = null  # 👈 THIS IS CRITICAL
+	player = null  # THIS IS CRITICAL
 	idle_anchor_position = pos
 	idle_wait_timer = 0.0
 	nav_agent.target_position = pos
