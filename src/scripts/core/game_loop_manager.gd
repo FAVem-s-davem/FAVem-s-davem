@@ -29,7 +29,7 @@ func initialize(scene: GameScene) -> void:
 	# Bind scene references and start from preparation.
 	game_scene = scene
 	quest_manager = scene.quest_manager as QuestManager
-	phase_label = scene.get_node_or_null("../CanvasLayer/Control/Hud/GamePhase") as Label
+	phase_label = scene.get_node_or_null("../CanvasLayer/Control/Hud/VBoxContainer/Control/GamePhase") as Label
 
 	if quest_manager == null:
 		push_error("GameLoopManager: QuestManager not available")

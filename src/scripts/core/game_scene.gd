@@ -16,8 +16,8 @@ const BUFFER_TEXT_OFFSET: float = 1100.0
 @export_node_path() var room_path: NodePath = NodePath("Map/Areas/Rooms")
 @export_node_path() var spawner_path: NodePath = NodePath("Map/Areas/Spawners")
 
-@onready var hint_menu = $"../CanvasLayer/Control/Hud/HintMenu"
-@onready var command_buffer = $"../CanvasLayer/Control/Hud/CommandBuffer"
+@onready var hint_menu = $"../CanvasLayer/Control/Hud/VBoxContainer/HBoxContainer/HintMenu"
+@onready var command_buffer = $"../CanvasLayer/Control/Hud/VBoxContainer/CommandBuffer"
 
 const QuestManagerScript = preload("res://scripts/quests/quest_manager.gd")
 
