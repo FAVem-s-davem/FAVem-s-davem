@@ -15,8 +15,8 @@ func _ready():
 	$MainMenu/PanelContainer/VBoxContainer/Restart.pressed.connect(_on_restart_pressed)
 	$GameEnd/BackToMenu.pressed.connect(_on_restart_pressed)
 
-	$About/Back.pressed.connect(_on_back_pressed)
-	$Settings/VBoxContainer/Back.pressed.connect(_on_back_pressed)
+	$About/PanelContainer/MarginContainer/VBoxContainer/Back.pressed.connect(_on_back_pressed)
+	$Settings.back_pressed.connect(_on_back_pressed)
 
 func _on_quit_pressed():
 	get_tree().quit()
@@ -29,13 +29,13 @@ func _on_about_pressed():
 	$MainMenu.visible = false
 	$About.visible = true
 	await get_tree().process_frame
-	$About/Back.grab_focus()
+	$About/PanelContainer/MarginContainer/VBoxContainer/Back.grab_focus()
 
 func _on_settings_pressed():
 	$MainMenu.visible = false
 	$Settings.visible = true
 	await get_tree().process_frame
-	$Settings/VBoxContainer/Back.grab_focus()
+	$Settings/PanelContainer/MarginContainer/VBoxContainer/Back.grab_focus()
 
 func _on_back_pressed():
 	$About.visible = false

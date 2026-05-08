@@ -1,6 +1,8 @@
 extends Node
 class_name GameLoopManager
 
+signal day_finished
+
 # Main day loop phases.
 enum LoopPhase {
 	PREPARATION,
@@ -103,6 +105,7 @@ func _finish_day() -> void:
 	current_phase = LoopPhase.FINISHED
 	phase_time_left = 0.0
 	_update_phase_label()
+	day_finished.emit()
 	_show_game_end_screen()
 
 
