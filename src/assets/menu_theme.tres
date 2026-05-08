@@ -4,9 +4,9 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_disabled"]
 content_margin_left = 30.0
-content_margin_top = 13.0
+content_margin_top = 17.0
 content_margin_right = 30.0
-content_margin_bottom = 13.0
+content_margin_bottom = 17.0
 bg_color = Color(0.04, 0.06, 0.12, 0.42)
 border_width_left = 1
 border_width_top = 1
@@ -16,9 +16,9 @@ border_color = Color(0.28, 0.42, 0.58, 0.42)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hover"]
 content_margin_left = 30.0
-content_margin_top = 13.0
+content_margin_top = 17.0
 content_margin_right = 30.0
-content_margin_bottom = 13.0
+content_margin_bottom = 17.0
 bg_color = Color(0.08, 0.14, 0.28, 0.94)
 border_width_left = 2
 border_width_top = 2
@@ -28,9 +28,9 @@ border_color = Color(0.62, 0.84, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_normal"]
 content_margin_left = 30.0
-content_margin_top = 13.0
+content_margin_top = 17.0
 content_margin_right = 30.0
-content_margin_bottom = 13.0
+content_margin_bottom = 17.0
 bg_color = Color(0.04, 0.06, 0.12, 0.82)
 border_width_left = 2
 border_width_top = 2
@@ -40,15 +40,17 @@ border_color = Color(0.42, 0.62, 0.88, 0.85)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pressed"]
 content_margin_left = 30.0
-content_margin_top = 13.0
+content_margin_top = 17.0
 content_margin_right = 30.0
-content_margin_bottom = 13.0
+content_margin_bottom = 17.0
 bg_color = Color(0.14, 0.24, 0.46, 0.98)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.82, 0.95, 1, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_plain"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
 content_margin_left = 28.0
@@ -68,13 +70,23 @@ Button/colors/font_disabled_color = Color(0.42, 0.52, 0.62, 0.58)
 Button/colors/font_focus_color = Color(1, 1, 1, 1)
 Button/colors/font_hover_color = Color(1, 1, 1, 1)
 Button/colors/font_pressed_color = Color(1, 1, 1, 1)
-Button/font_sizes/font_size = 18
+Button/font_sizes/font_size = 24
 Button/fonts/font = ExtResource("1_tf8oi")
 Button/styles/disabled = SubResource("StyleBoxFlat_disabled")
 Button/styles/focus = SubResource("StyleBoxFlat_hover")
 Button/styles/hover = SubResource("StyleBoxFlat_hover")
 Button/styles/normal = SubResource("StyleBoxFlat_normal")
 Button/styles/pressed = SubResource("StyleBoxFlat_pressed")
-Label/font_sizes/font_size = 25
+CheckBox/styles/disabled = SubResource("StyleBoxEmpty_plain")
+CheckBox/styles/focus = SubResource("StyleBoxEmpty_plain")
+CheckBox/styles/hover = SubResource("StyleBoxEmpty_plain")
+CheckBox/styles/normal = SubResource("StyleBoxEmpty_plain")
+CheckBox/styles/pressed = SubResource("StyleBoxEmpty_plain")
+Label/font_sizes/font_size = 24
 Label/fonts/font = ExtResource("1_tf8oi")
+OptionButton/styles/disabled = SubResource("StyleBoxEmpty_plain")
+OptionButton/styles/focus = SubResource("StyleBoxEmpty_plain")
+OptionButton/styles/hover = SubResource("StyleBoxEmpty_plain")
+OptionButton/styles/normal = SubResource("StyleBoxEmpty_plain")
+OptionButton/styles/pressed = SubResource("StyleBoxEmpty_plain")
 Panel/styles/panel = SubResource("StyleBoxFlat_panel")

@@ -1,5 +1,8 @@
 [gd_scene format=3 uid="uid://cvmtu2i7recfl"]
 
+[ext_resource type="Theme" uid="uid://be3x1assoqtog" path="res://assets/menu_theme.tres" id="1_theme"]
+[ext_resource type="Script" uid="uid://8paysmumqrg" path="res://scripts/scenes/gui/settings.gd" id="2_settings"]
+
 [node name="Settings" type="Control" unique_id=1896592881]
 layout_mode = 3
 anchors_preset = 15
@@ -7,36 +10,94 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_theme")
+script = ExtResource("2_settings")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=586208763]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=100]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -145.0
-offset_top = -41.0
-offset_right = 145.0
-offset_bottom = 41.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=950899783]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=114]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=586208763]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="HBoxFullscreen" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=101]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxFullscreen" unique_id=102]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Fullscreen"
+
+[node name="FullscreenToggle" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxFullscreen" unique_id=103]
+layout_mode = 2
+
+[node name="HBoxVSync" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=104]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxVSync" unique_id=105]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "VSync"
+
+[node name="VSyncToggle" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxVSync" unique_id=106]
+layout_mode = 2
+button_pressed = true
+
+[node name="HBoxMSAA" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=107]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxMSAA" unique_id=108]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Antialiasing"
+
+[node name="AntialiasingOption" type="OptionButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxMSAA" unique_id=109]
+layout_mode = 2
+
+[node name="HBoxResolution" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=110]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxResolution" unique_id=111]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Resolution"
+
+[node name="ResolutionOption" type="OptionButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxResolution" unique_id=112]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=113]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=950899783]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=1053004572]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1053004572]
 layout_mode = 2
 text = "Music volume"
 
-[node name="HSlider" type="HSlider" parent="VBoxContainer/HBoxContainer" unique_id=351753572]
+[node name="HSlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=351753572]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 step = 5.0
 value = 100.0
 
-[node name="Back" type="Button" parent="VBoxContainer" unique_id=1679566705]
+[node name="Back" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1679566705]
 layout_mode = 2
 text = "BACK"

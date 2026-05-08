@@ -33,12 +33,17 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+offset_left = -193.0
+offset_top = -157.99997
+offset_right = 117.0
+offset_bottom = 90.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.25, 1.25)
 theme = ExtResource("6_menu")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/PanelContainer" unique_id=1107631674]
-custom_minimum_size = Vector2(260, 0)
+custom_minimum_size = Vector2(310, 0)
 layout_mode = 2
 theme = ExtResource("6_menu")
 
