@@ -58,6 +58,8 @@ func _initialize_input_parser() -> void:
 
 	dispatcher = CommandDispatcher.new(self)
 	dispatcher.macro_toggle.connect(command_buffer.set_macro)
+	
+	parser.dispatcher = dispatcher
 
 	markers.resize(MARKER_COUNT + 1)
 	for i in range(markers.size()):

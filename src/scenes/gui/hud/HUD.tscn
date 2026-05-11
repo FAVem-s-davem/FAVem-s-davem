@@ -5,6 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://c31kik4aepidy" path="res://scenes/gui/hud/quest_board/quest_board.tscn" id="3_vxsoq"]
 [ext_resource type="Theme" uid="uid://be3x1assoqtog" path="res://assets/menu_theme.tres" id="4_hudtheme"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tap4b"]
+bg_color = Color(0.60038817, 0.60038817, 0.60038817, 0)
+
 [sub_resource type="LabelSettings" id="LabelSettings_dj63r"]
 font_size = 25
 
@@ -34,6 +37,7 @@ custom_minimum_size = Vector2(0, 29)
 layout_direction = 3
 layout_mode = 2
 size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_tap4b")
 script = ExtResource("3_dj63r")
 
 [node name="ColorRect" type="ColorRect" parent="VBoxContainer/CommandBuffer" unique_id=1292553292]
@@ -44,7 +48,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
+color = Color(0, 0, 0, 0.8)
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/CommandBuffer" unique_id=1846888034]
 layout_mode = 1
@@ -86,6 +90,7 @@ alignment = 1
 [node name="QuestBoard" parent="VBoxContainer/HBoxContainer" unique_id=1970252661 instance=ExtResource("3_vxsoq")]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
+size_flags_vertical = 0
 
 [node name="Control" type="Control" parent="VBoxContainer/HBoxContainer" unique_id=1034135386]
 layout_mode = 2
@@ -94,6 +99,7 @@ size_flags_horizontal = 3
 [node name="HintMenu" type="VBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=429231294]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
+size_flags_vertical = 0
 script = ExtResource("1_55e23")
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/HintMenu" unique_id=58811232]

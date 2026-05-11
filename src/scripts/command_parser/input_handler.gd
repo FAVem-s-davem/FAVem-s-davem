@@ -96,7 +96,7 @@ func _input(event):
 
 		var result = parser.feed(key)
 
-		# 🔥 NO MORE AUTO-EXECUTION
+		# NO MORE AUTO-EXECUTION
 		if result.status == "invalid":
 			print("INVALID COMMAND")
 			clear_buffer()

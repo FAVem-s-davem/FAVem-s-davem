@@ -32,53 +32,63 @@ static var OPS = {
 	"q": {
 		"type": "record_macro",
 		"mode": "single_arg",
+		"desc": "Record macro"
 	},
 	"@": {
 		"type": "run_macro",
 		"mode": "single_arg",
+		"desc": "Run macro"
 	},
 	# marker commands (special, no args)
 	"m": {
 		"type": "set_marker",
 		"needs_marker": true,
-		"takes_args": false
+		"takes_args": false,
+		"desc": "Set marker"
 	},
 	"g": {
 		"type": "goto_marker",
 		"needs_marker": true,
-		"takes_args": false
+		"takes_args": false,
+		"desc": "Go to marker"
 	},
 
 	# generic object operations
 	"a": {
 		"type": "select_students",
 		"needs_marker": false,
-		"takes_args": true
+		"takes_args": true,
+		"desc": "Select type"
 	},
 	"A": {
 		"type": "select_all",
 		"needs_marker": false,
-		"takes_args": false
+		"takes_args": false,
+		"desc": "Select all"
 	},
 	"d": {
 		"type": "deselect_students",
 		"needs_marker": false,
-		"takes_args": true
+		"takes_args": true,
+		"desc": "Deselect type"
 	},
 	"D": {
 		"type": "deselect_all_students",
 		"needs_marker": false,
-		"takes_args": false
+		"takes_args": false,
+		"desc": "Deselect all"
 	},
 	"s": {
 		"type": "send_students",
 		"needs_marker": true,
-		"takes_args": true
+		"takes_args": true,
+		"desc": "Send type"
 	},
 	"S": {
 		"type": "send_all",
 		"needs_marker": true,
-		"takes_args": false
+		"takes_args": false,
+		"desc": "Send all"
 	},
 }
 
