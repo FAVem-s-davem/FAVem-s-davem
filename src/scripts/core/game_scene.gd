@@ -157,10 +157,10 @@ func spawn_students_for_active_quests() -> void:
 			var spawner: Spawner = prep_spawners.pick_random()
 			spawner.spawn_student(quest.required_student_type, quest.required_student_number)
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed and not event.is_echo():
-		if event.keycode == KEY_G:
-			spawn_student_at(get_global_mouse_position())
+#func _input(event: InputEvent) -> void:
+	#if event is InputEventKey and event.pressed and not event.is_echo():
+		#if event.keycode == KEY_G:
+			#spawn_student_at(get_global_mouse_position())
 
 func _draw():
 	# --- existing marker drawing ---
