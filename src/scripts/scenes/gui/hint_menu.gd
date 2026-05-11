@@ -33,6 +33,7 @@ func _update_display():
 		# Background
 		var style = StyleBoxFlat.new()
 		style.bg_color = hint.color
+		style.bg_color.a = 0.8
 		style.border_color = Color.BLACK if hint.color.get_luminance() > 0.5 else Color.WHITE
 		style.corner_radius_top_left = 6
 		style.corner_radius_top_right = 6
@@ -77,7 +78,7 @@ func _update_display():
 		else:
 			var label = Label.new()
 			label.text = hint.description
-			label.autowrap_mode = TextServer.AUTOWRAP_WORD
+			label.autowrap_mode = TextServer.AUTOWRAP_OFF
 			label.add_theme_font_size_override("font_size", 32)
 
 			# Match contrast

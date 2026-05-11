@@ -1,6 +1,6 @@
 extends Panel
 
-var buffer = "commandqwertyuiop[asghkl"
+var buffer = ""
 var macro = ""
 var command_lbl: Label
 var macro_lbl: Label
@@ -21,16 +21,19 @@ func command_success():
 	print("success")
 	if background != null:
 		background.color = Color.GREEN
+		background.color.a = 0.8
 		
 func command_clear():
 	print("clear")
 	if background != null:
 		background.color = Color.BLACK
+		background.color.a = 0.8
 		
 func command_invalid():
 	print("invalid")
 	if background != null:
 		background.color = Color.RED
+		background.color.a = 0.8
 	
 func set_macro(m):
 	if m == "":

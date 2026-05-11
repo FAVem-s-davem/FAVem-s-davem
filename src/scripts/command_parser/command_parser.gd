@@ -8,7 +8,8 @@ enum State {
 	READING_COUNT,
 	READING_ARG1,
 	READING_ARG2,
-	READING_MARKER
+	READING_MARKER,
+	COMMAND_COMPLETE
 }
 
 signal actions_updated(actions: Array[CommandHint])
@@ -26,6 +27,7 @@ var arg1: String = ""
 var arg2: String = ""
 var marker: int = -1
 
+var dispatcher: CommandDispatcher
 
 # =========================
 # Public API
@@ -73,6 +75,8 @@ func feed(key: String) -> Dictionary:
 			result = _handle_arg2(key)
 		State.READING_MARKER:
 			result = _handle_marker(key)
+		State.COMMAND_COMPLETE:
+			result = _handle_complete(key)
 
 	# 🔥 IMPORTANT: do NOT auto-complete anymore
 	if result.get("status") == "complete":
@@ -126,6 +130,9 @@ func _handle_idle(key):
 		if op_data.get("mode", "") == "single_arg":
 			state = State.READING_ARG1
 		
+		elif not op_data.get("needs_marker", false) and not op_data.get("takes_args", false):
+			state = State.COMMAND_COMPLETE
+			
 		elif not op_data.get("takes_args", true):
 			state = State.READING_MARKER
 		
@@ -136,6 +143,8 @@ func _handle_idle(key):
 
 	return _invalid()
 
+func _handle_complete(key):
+	return {"status": "incomplete"}
 
 func _handle_after_op(key):
 	if key.is_valid_int():
@@ -285,6 +294,9 @@ func get_available_actions() -> Array[CommandHint]:
 
 		State.READING_MARKER:
 			return _actions_marker()
+		
+		State.COMMAND_COMPLETE:
+			return []
 
 	print(result)
 	return result
@@ -314,6 +326,8 @@ func _actions_arg2() -> Array[CommandHint]:
 	
 	for type_number in StudentTypesDb.get_numbers_for_type(student_type):
 		var type_info = StudentTypesDb.get_type_info(student_type, type_number)
+		if type_info == null:
+			continue
 		result.append(CommandHint.new(str(type_info.number), StudentTypesDb.type_name_to_string(type_info.student_type), type_info.icon_path, type_info.color))
 	
 	return result
@@ -330,12 +344,16 @@ func _actions_arg1() -> Array[CommandHint]:
 	var result: Array[CommandHint] = []
 	
 	var op_data = Command.OPS.get(op, {})
-	
-	if op_data.get("mode") == "single_arg":
-		for c in "abcdefghijklmnopqrstuvwxyz":
-			result.append(CommandHint.new(c, "Register " + c))
+
+	if op_data.get("type") == "record_macro":
+		result.append(CommandHint.new("a-z", "Register macro"))
 		return result
-	
+		
+	if dispatcher != null and op_data.get("type") == "run_macro":
+		for key in dispatcher.macros.keys():
+			result.append(CommandHint.new(key, "Run macro " + key))
+		return result
+		
 	# fallback
 	return _actions_after_op()
 	
@@ -343,6 +361,6 @@ func _actions_idle() -> Array[CommandHint]:
 	var result: Array[CommandHint] = []
 	
 	for key in Command.OPS:
-		result.append(CommandHint.new(key, Command.OPS[key].get("type", "")))
+		result.append(CommandHint.new(key, Command.OPS[key].get("desc", "")))
 	
 	return result

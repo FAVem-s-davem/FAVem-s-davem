@@ -34,6 +34,8 @@ var is_idle_target: bool = false
 var idle_anchor_position: Vector2 = Vector2.ZERO
 var idle_wait_timer: float = 0.0
 
+var is_in_room: bool = false
+
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 
 func _ready() -> void:
@@ -87,7 +89,10 @@ func _physics_process(delta: float) -> void:
 	_handle_collisions()
 
 
-func _get_idle_direction(delta: float) -> Vector2:
+func _get_idle_direction(delta: float):
+	if is_in_room:
+		return Vector2.ZERO
+
 	if idle_wait_timer > 0.0:
 		idle_wait_timer -= delta
 		return Vector2.ZERO
@@ -309,3 +314,7 @@ func _load_random_icon() -> void:
 		# Scale to roughly 32x32
 		var scale_factor = SPRITE_SIZE / maxf(tex.get_width(), tex.get_height())
 		sprite.scale = Vector2(scale_factor, scale_factor)
+
+func remove():
+	self._on_deselected()
+	self.queue_free()
