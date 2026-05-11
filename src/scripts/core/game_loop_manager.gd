@@ -53,6 +53,8 @@ func _process(delta: float) -> void:
 
 	if phase_time_left > 0.0:
 		return
+	
+	_end_phase()
 
 	match current_phase:
 		LoopPhase.PREPARATION:
@@ -65,6 +67,10 @@ func _process(delta: float) -> void:
 		LoopPhase.END_COUNTDOWN:
 			_finish_day()
 
+func _end_phase() -> void:
+	if current_phase == LoopPhase.QUEST:
+		for timetable in quest_manager.timetables:
+			timetable.get_active_quest().complete();
 
 func _start_preparation_phase() -> void:
 	# Intro window before quests start.

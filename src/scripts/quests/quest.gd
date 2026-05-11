@@ -16,6 +16,8 @@ var current_count: int = 0
 # Whether quest is currently fulfilled.
 var is_completed: bool = false
 
+var active_students: Array[Student] = []
+
 
 func _init(student_type: int = -1, student_number: int = -1, count: int = 0) -> void:
 	required_student_type = student_type
@@ -28,6 +30,7 @@ func _init(student_type: int = -1, student_number: int = -1, count: int = 0) -> 
 func matches_students(students: Array[Student]) -> bool:
 	var matches := true
 	var count := 0
+	active_students.clear()
 
 	if students.size() != required_count:
 		matches = false
@@ -44,6 +47,8 @@ func matches_students(students: Array[Student]) -> bool:
 			continue
 			
 		count += 1
+		active_students.append(student)
+
 
 	current_count = count
 	count_changed.emit(self)
@@ -57,3 +62,9 @@ func set_completed(value: bool) -> void:
 
 	is_completed = value
 	completed_changed.emit(self, is_completed)
+
+func complete():
+	if is_completed:
+		print("quest complete")
+		for student in active_students:
+			student.remove()

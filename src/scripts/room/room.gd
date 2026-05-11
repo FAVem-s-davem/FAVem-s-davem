@@ -86,6 +86,7 @@ func _on_body_entered(body: Node2D) -> void:
 
 	if not students_inside.has(student):
 		students_inside.append(student)
+		student.is_in_room = true
 
 	_recheck_assigned_quest()
 
@@ -95,6 +96,7 @@ func _on_body_exited(body: Node2D) -> void:
 		return
 
 	students_inside.erase(student)
+	student.is_in_room = false
 	_recheck_assigned_quest()
 
 
