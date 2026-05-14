@@ -18,11 +18,18 @@ const OUTLINE = 40
 @export var catchup_ring: float = 1650.0
 @export var stop_ring: float = 1100.0
 
+var ring_spin := 0.0
+@export var ring_spin_speed := 0.067
+@export var ring_dash_count := 48
+@export var ring_dash_width := 35.0
+@export var ring_dash_length := 0.55
+
 const COLLISION_PUSH_FORCE: float = 2200.0
 
 var selection: SelectionManager
 
 var parent: Node2D
+
 
 func _enter_tree() -> void:
 	selection = SelectionManager.new(self)
@@ -36,6 +43,9 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	# Spin the dashed selection ring
+	ring_spin += delta * ring_spin_speed
+
 	# Get input direction
 	var dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	
@@ -85,11 +95,49 @@ func _draw() -> void:
 		# Draw outline slightly bigger than sprite
 		draw_circle(center, radius, Color.BLACK, false, OUTLINE)
 	
-	# Draw selection rings
-	draw_circle(center, select_ring, Color(0.6, 0.9, 1.0), false, 6.0, false)
+	# Draw dashed spinning selection ring
+	draw_dashed_ring(
+		center,
+		select_ring,
+		Color(0, 0, 0, 0.8),
+		ring_dash_count,
+		ring_dash_width,
+		ring_dash_length,
+		ring_spin
+	)
+
+	# Optional extra rings
 	#draw_circle(center, deselect_ring, Color(0.9, 0.9, 0.9), false, 8.0, false)
 	#draw_circle(center, catchup_ring, Color(0.3, 0.3, 0.3), false, 4.0, false)
 	#draw_circle(center, stop_ring, Color(0.3, 0.3, 0.3), false, 8.0, false)
+
+
+func draw_dashed_ring(
+	center: Vector2,
+	radius: float,
+	color: Color,
+	dash_count: int,
+	width: float,
+	dash_length: float,
+	rotation_offset: float
+) -> void:
+	var angle_step := TAU / float(dash_count)
+	var dash_angle := angle_step * dash_length
+
+	for i in range(dash_count):
+		var start_angle := float(i) * angle_step + rotation_offset
+		var end_angle := start_angle + dash_angle
+
+		draw_arc(
+			center,
+			radius,
+			start_angle,
+			end_angle,
+			8,
+			color,
+			width,
+			false
+		)
 
 
 # Getters for student reference
@@ -127,6 +175,7 @@ func _get_units_inside() -> Array[Student]:
 				units.append(node)
 	
 	return units
+
 
 func select_by_type(type_name: String, type_number: String, count: int, all: bool):
 	var type_value = StudentTypesDb.parse_type(type_name)
@@ -193,3 +242,4 @@ func send_students(type_name: String, type_number: String, count: int, marker: i
 		student.move_toward_target(parent.markers[marker])
 		
 	print("selected: ", selection.get_selected().size())
+	
