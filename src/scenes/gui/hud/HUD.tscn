@@ -4,14 +4,17 @@
 [ext_resource type="Script" uid="uid://cmxnx8kqwx123" path="res://scripts/scenes/gui/commnad_buffer.gd" id="3_dj63r"]
 [ext_resource type="PackedScene" uid="uid://c31kik4aepidy" path="res://scenes/gui/hud/quest_board/quest_board.tscn" id="3_vxsoq"]
 [ext_resource type="Theme" uid="uid://be3x1assoqtog" path="res://assets/menu_theme.tres" id="4_hudtheme"]
+[ext_resource type="FontFile" uid="uid://e0f4m4h443xs" path="res://assets/fonts/GohuFont14NerdFontMono-Regular.ttf" id="5_font"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tap4b"]
 bg_color = Color(0.60038817, 0.60038817, 0.60038817, 0)
 
 [sub_resource type="LabelSettings" id="LabelSettings_dj63r"]
+font = ExtResource("5_font")
 font_size = 25
 
 [sub_resource type="LabelSettings" id="LabelSettings_tap4b"]
+font = ExtResource("5_font")
 font_size = 25
 
 [node name="Hud" type="Control" unique_id=217947933]
@@ -108,30 +111,27 @@ layout_mode = 2
 text = "possible future ui stuff"
 autowrap_mode = 2
 
-[node name="Control" type="Control" parent="VBoxContainer" unique_id=258322035]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="GamePhase" type="Label" parent="VBoxContainer/Control" unique_id=1689789340]
+[node name="GamePhase" type="Label" parent="." unique_id=1689789340]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -91.5
+offset_left = -200.0
 offset_top = -36.0
-offset_right = 91.5
+offset_right = 200.0
+offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 0
-size_flags_vertical = 8
 theme_override_colors/font_color = Color(1, 0.18039216, 0.17254902, 1)
-theme_override_colors/font_shadow_color = Color(0.99999994, 0.34265363, 0.1917763, 1)
-theme_override_colors/font_outline_color = Color(0.68307734, 0.6830774, 0.68307734, 1)
-theme_override_font_sizes/font_size = 32
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 28
 text = "Game phase"
+horizontal_alignment = 1
 
-[node name="ColorRect" type="ColorRect" parent="VBoxContainer/Control/GamePhase" unique_id=703114917]
+[node name="ColorRect" type="ColorRect" parent="GamePhase" unique_id=703114917]
 z_index = -1
 layout_mode = 1
 anchors_preset = 15

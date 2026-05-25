@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cvmtu2i7recfl"]
 
-[ext_resource type="Theme" uid="uid://be3x1assoqtog" path="res://assets/menu_theme.tres" id="1_theme"]
-[ext_resource type="Script" uid="uid://8paysmumqrg" path="res://scripts/scenes/gui/settings.gd" id="2_settings"]
+[ext_resource type="Theme" uid="uid://djnetntpxosym" path="res://assets/menu_ui_theme.tres" id="1_theme"]
+[ext_resource type="Script" path="res://scripts/scenes/gui/settings.gd" id="2_settings"]
 
 [node name="Settings" type="Control" unique_id=1896592881]
 layout_mode = 3
@@ -33,7 +33,7 @@ theme_override_constants/margin_bottom = 16
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=586208763]
 custom_minimum_size = Vector2(380, 0)
 layout_mode = 2
-theme_override_constants/separation = 12
+theme_override_constants/separation = 20
 
 [node name="HBoxFullscreen" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=101]
 layout_mode = 2
@@ -41,6 +41,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxFullscreen" unique_id=102]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.78, 0.9, 1, 1)
 text = "Fullscreen"
 
 [node name="FullscreenToggle" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxFullscreen" unique_id=103]
@@ -52,11 +53,11 @@ layout_mode = 2
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxVSync" unique_id=105]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.78, 0.9, 1, 1)
 text = "VSync"
 
 [node name="VSyncToggle" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxVSync" unique_id=106]
 layout_mode = 2
-button_pressed = true
 
 [node name="HBoxMSAA" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=107]
 layout_mode = 2
@@ -64,6 +65,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxMSAA" unique_id=108]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.78, 0.9, 1, 1)
 text = "Antialiasing"
 
 [node name="AntialiasingOption" type="OptionButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxMSAA" unique_id=109]
@@ -75,6 +77,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxResolution" unique_id=111]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.78, 0.9, 1, 1)
 text = "Resolution"
 
 [node name="ResolutionOption" type="OptionButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxResolution" unique_id=112]
@@ -89,6 +92,7 @@ size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1053004572]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.78, 0.9, 1, 1)
 text = "Music volume"
 
 [node name="HSlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=351753572]

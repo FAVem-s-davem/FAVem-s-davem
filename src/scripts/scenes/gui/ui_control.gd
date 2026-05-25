@@ -108,6 +108,7 @@ func _on_start_button_pressed():
 	get_tree().paused = false
 	$Menu/MainMenu/PanelContainer/VBoxContainer/Start.text = "CONTINUE"
 	$Menu.set_restart_visible(false)
+	$Menu.set_pause_mode(false)
 	var player_cam := get_node_or_null("/root/Main/GameScene/Player/Camera2D") as Camera2D
 	if player_cam != null:
 		player_cam.make_current()
@@ -177,6 +178,7 @@ func _input(event):
 	$Menu/MainMenu.visible = true
 	$Menu/About.visible = false
 	$Menu/Settings.visible = false
+	$Menu.set_pause_mode(true)
 	get_node("/root/Main/GameScene").visible = false
 	get_tree().paused = true
 	$Menu.set_restart_visible(has_started_game)

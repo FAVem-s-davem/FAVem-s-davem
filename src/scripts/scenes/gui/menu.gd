@@ -49,3 +49,7 @@ func _on_back_pressed():
 func set_restart_visible(value: bool) -> void:
 	if has_node("MainMenu/PanelContainer/VBoxContainer/Restart"):
 		$MainMenu/PanelContainer/VBoxContainer/Restart.visible = value
+
+func set_pause_mode(paused: bool) -> void:
+	$MainMenu/LogoContainer.visible = not paused
+	$MainMenu/PauzaLabel.visible = paused

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0oh0h42j1gil"
-path="res://.godot/imported/kma_calculus.png-2e2050a00464d419222357e7c00adc3a.ctex"
+uid="uid://dn875nkmkk45r"
+path="res://.godot/imported/checkbox_checked.svg-44ee319c8a66a1a715cd1773a13349e4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/student_icons/kma_calculus.png"
-dest_files=["res://.godot/imported/kma_calculus.png-2e2050a00464d419222357e7c00adc3a.ctex"]
+source_file="res://assets/checkbox_checked.svg"
+dest_files=["res://.godot/imported/checkbox_checked.svg-44ee319c8a66a1a715cd1773a13349e4.ctex"]
 
 [params]
 
@@ -37,4 +37,7 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

@@ -3,8 +3,10 @@
 [ext_resource type="Script" uid="uid://7fgmuaau0mtu" path="res://scripts/scenes/gui/menu.gd" id="1_yqeox"]
 [ext_resource type="PackedScene" uid="uid://b6cb54hrx1884" path="res://scenes/gui/about.tscn" id="2_cav3j"]
 [ext_resource type="PackedScene" uid="uid://cvmtu2i7recfl" path="res://scenes/gui/settings.tscn" id="3_uak7f"]
-[ext_resource type="PackedScene" path="res://scenes/gui/game_end.tscn" id="5_26ofl"]
-[ext_resource type="Theme" uid="uid://be3x1assoqtog" path="res://assets/menu_theme.tres" id="6_menu"]
+[ext_resource type="PackedScene" uid="uid://c5u8u2sh8hjww" path="res://scenes/gui/game_end.tscn" id="5_26ofl"]
+[ext_resource type="Theme" uid="uid://djnetntpxosym" path="res://assets/menu_ui_theme.tres" id="6_menu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nopanel"]
 
 [node name="Menu" type="Control" unique_id=278537481]
 layout_mode = 3
@@ -26,6 +28,62 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="LogoContainer" type="VBoxContainer" parent="MainMenu" unique_id=999000001]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -432.0
+offset_top = -377.0
+offset_right = 62.0
+offset_bottom = -255.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.7600049, 1.7600049)
+theme = ExtResource("6_menu")
+alignment = 1
+
+[node name="Title" type="Label" parent="MainMenu/LogoContainer" unique_id=999000002]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.80784315, 0.12156863, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 66
+text = "FAVEM S DAVEM"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="MainMenu/LogoContainer" unique_id=999000003]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9764706, 0.41568628, 0.5372549, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7411765)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "by Favem s Davem"
+horizontal_alignment = 1
+
+[node name="PauzaLabel" type="Label" parent="MainMenu" unique_id=999000010]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -432.0
+offset_top = -377.0
+offset_right = 62.0
+offset_bottom = -255.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.7600049, 1.7600049)
+theme = ExtResource("6_menu")
+theme_override_colors/font_color = Color(1, 0.80784315, 0.12156863, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 66
+text = "Pause"
+horizontal_alignment = 1
+
 [node name="PanelContainer" type="PanelContainer" parent="MainMenu" unique_id=1107631675]
 layout_mode = 1
 anchors_preset = 8
@@ -33,14 +91,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -193.0
-offset_top = -157.99997
+offset_left = -192.99994
+offset_top = -101.0
 offset_right = 117.0
-offset_bottom = 90.0
+offset_bottom = 155.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.25, 1.25)
 theme = ExtResource("6_menu")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_nopanel")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/PanelContainer" unique_id=1107631674]
 custom_minimum_size = Vector2(310, 0)
